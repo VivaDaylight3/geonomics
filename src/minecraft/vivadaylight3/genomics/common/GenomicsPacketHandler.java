@@ -1,4 +1,4 @@
-package vivadaylight3.geoponics.common;
+package vivadaylight3.genomics.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -15,13 +15,13 @@ import cpw.mods.fml.common.network.Player;
  *
  */
 
-public class GeoponicsPacketHandler implements IPacketHandler{
+public class GenomicsPacketHandler implements IPacketHandler{
 
 	@Override
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
 
-		if(packet.channel.equals(Geoponics.MOD_CHANNEL)){
+		if(packet.channel.equals(Genomics.MOD_CHANNEL)){
 			
 			handlePacket(packet);
 			

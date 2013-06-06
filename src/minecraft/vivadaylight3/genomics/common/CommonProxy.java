@@ -1,4 +1,4 @@
-package vivadaylight3.geoponics.common;
+package vivadaylight3.genomics.common;
 
 public class CommonProxy {
         public static String ITEMS_PNG = "/vivadaylight3/geoponics/items.png";
@@ -8,4 +8,16 @@ public class CommonProxy {
         public void registerRenderers() {
                 // Nothing here as the server doesn't render graphics!
         }
+
+		public void preInit()
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void init()
+		{
+			// TODO Auto-generated method stub
+			
+		}
 }

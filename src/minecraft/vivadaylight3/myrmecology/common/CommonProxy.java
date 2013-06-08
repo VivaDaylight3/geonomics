@@ -1,4 +1,4 @@
-package vivadaylight3.genomics.common;
+package vivadaylight3.myrmecology.common;
 
 public class CommonProxy {
         public static String ITEMS_PNG = "/vivadaylight3/geoponics/items.png";

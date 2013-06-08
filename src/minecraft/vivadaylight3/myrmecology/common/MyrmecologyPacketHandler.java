@@ -1,4 +1,4 @@
-package vivadaylight3.genomics.common;
+package vivadaylight3.myrmecology.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -15,13 +15,13 @@ import cpw.mods.fml.common.network.Player;
  *
  */
 
-public class GenomicsPacketHandler implements IPacketHandler{
+public class MyrmecologyPacketHandler implements IPacketHandler{
 
 	@Override
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
 
-		if(packet.channel.equals(Genomics.MOD_CHANNEL)){
+		if(packet.channel.equals(Myrmecology.MOD_CHANNEL)){
 			
 			handlePacket(packet);
 			

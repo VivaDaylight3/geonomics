@@ -7,8 +7,11 @@ import vivadaylight3.myrmecology.common.blocks.BlockAntFarm;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 import net.minecraftforge.common.Configuration;
 
@@ -46,6 +49,10 @@ public class Myrmecology
 	public static int blockAntFarmID;
 	public static final String BLOCK_ANTFARM_NAME = "antFarm";
 	
+	public static Block blockAntHill;
+	public static int blockAntHillID;
+	public static final String BLOCK_ANTHILL_NAME = "antHill";
+	
 	@SidedProxy(clientSide = "vivadaylight3." + Myrmecology.MOD_ID_LOWER + ".client.ClientProxy", serverSide = "vivadaylight3." + Myrmecology.MOD_ID_LOWER + ".common.CommonProxy")
 	public static final String MOD_CHANNEL = Myrmecology.MOD_ID;
 	
@@ -77,10 +84,12 @@ public class Myrmecology
 		config.load();
 		
 		blockAntFarmID = config.get(config.CATEGORY_BLOCK, BLOCK_ANTFARM_NAME, ID_BLOCK).getInt();
+		blockAntHillID = config.get(config.CATEGORY_BLOCK, BLOCK_ANTFARM_NAME, ID_BLOCK + 1).getInt();
 		
 		config.save();
 		
 		blockAntFarm = new BlockAntFarm(blockAntFarmID, BLOCK_ANTFARM_NAME);
+		blockAntHill = new BlockAntHill(blockAntHillID, BLOCK_ANTHILL_NAME);
 		
 		proxy.preInit();
 		
@@ -113,6 +122,44 @@ public class Myrmecology
 				
 		LanguageRegistry.instance().addStringLocalization("itemGroup.tab" + MOD_ID, "en_GB", MOD_NAME);
 				
+	}
+	
+	/**
+	 * Returns the appropriate metadata change and block orientation depending on entity facing
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param entity
+	 * @return
+	 */
+	
+	public static int getBlockOrientation(int x, int y, int z, EntityLiving entity){
+		
+		int angle = MathHelper.floor_double((entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		int change = 0;
+		
+		switch(angle){
+			
+			case 0:
+				change = 0;
+				break;
+
+			case 1:
+				change = 1;
+				break;
+
+			case 2:
+				change = 2;
+				break;
+
+			case 3:
+				change = 3;
+				break;
+			
+		}
+		
+		return change;
+		
 	}
 	
 	/**

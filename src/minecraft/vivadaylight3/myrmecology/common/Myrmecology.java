@@ -4,15 +4,18 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Random;
 
+import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockAntHill;
-import vivadaylight3.myrmecology.common.blocks.BlockAntFarm;
+import vivadaylight3.myrmecology.common.item.ItemAnt;
 import vivadaylight3.myrmecology.common.item.ItemExtractor;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -36,7 +39,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 /**
  * Myrmecology main class
  * @author VivaDaylight3
- *
  */
 
 @Mod(modid=Myrmecology.MOD_ID, name=Myrmecology.MOD_NAME, version=Myrmecology.MOD_VERSION, dependencies = Myrmecology.MOD_DEPENDENCIES)
@@ -65,10 +67,45 @@ public class Myrmecology
 	public static final String ITEM_EXTRACTOR_NAME = "extractor";
 	public static final String ITEM_EXTRACTOR_NAME_HUMAN = "Ant Extractor";
 	
-	public static Item itemLarva;
-	public static int itemLarvaID;
-	public static final String ITEM_LARVA_NAME = "itemLarva";
-	public static final String ITEM_LARVA_NAME_HUMAN = "Ant Larva";
+	public static Item itemAnt;
+	public static int itemAntID;
+	public static final String ITEM_ANT_NAME = "ant";
+	
+	public static Item antForestQueen;
+	public static Item antForestDrone;
+	public static Item antForestWorker;
+	public static Item antForestSoldier;
+	public static Item antForestLarva;
+	
+	public static Item antHillsQueen;
+	public static Item antHillsDrone;
+	public static Item antHillsWorker;
+	public static Item antHillsSoldier;
+	public static Item antHillsLarva;
+	
+	public static Item antDesertQueen;
+	public static Item antDesertDrone;
+	public static Item antDesertWorker;
+	public static Item antDesertSoldier;
+	public static Item antDesertLarva;
+	
+	public static Item antSwampQueen;
+	public static Item antSwampDrone;
+	public static Item antSwampWorker;
+	public static Item antSwampSoldier;
+	public static Item antSwampLarva;
+	
+	public static Item antPlainsQueen;
+	public static Item antPlainsDrone;
+	public static Item antPlainsWorker;
+	public static Item antPlainsSoldier;
+	public static Item antPlainsLarva;
+	
+	public static Item antJungleQueen;
+	public static Item antJungleDrone;
+	public static Item antJungleWorker;
+	public static Item antJungleSoldier;
+	public static Item antJungleLarva;
 	
 	@SidedProxy(clientSide = "vivadaylight3." + Myrmecology.MOD_ID_LOWER + ".client.ClientProxy", serverSide = "vivadaylight3." + Myrmecology.MOD_ID_LOWER + ".common.CommonProxy")
 	public static final String MOD_CHANNEL = Myrmecology.MOD_ID;
@@ -102,14 +139,50 @@ public class Myrmecology
 		blockAntHillID = config.get(config.CATEGORY_BLOCK, BLOCK_ANTFARM_NAME, ID_BLOCK + 1).getInt();
 		
 		itemExtractorID = config.get(config.CATEGORY_ITEM, ITEM_EXTRACTOR_NAME, ID_ITEM).getInt();
-		itemLarvaID = config.get(config.CATEGORY_ITEM, ITEM_LARVA_NAME, ID_ITEM+1).getInt();
+		itemAntID = config.get(config.CATEGORY_ITEM, ITEM_ANT_NAME, ID_ITEM+2).getInt();
 		
 		config.save();
 		
 		blockAntFarm = new BlockAntFarm(blockAntFarmID, BLOCK_ANTFARM_NAME);
 		blockAntHill = new BlockAntHill(blockAntHillID, BLOCK_ANTHILL_NAME);
-		itemLarva = new ItemLarva(itemlarvaID, ITEM_LARVA_NAME);
+		
 		itemExtractor = new ItemExtractor(itemExtractorID, ITEM_EXTRACTOR_NAME);
+		
+		antForestQueen = new ItemAnt(itemAntID, ItemAnt.FOREST_ANT+" "+ItemAnt.QUEEN_ANT, antForestQueen);
+		antForestDrone = new ItemAnt(itemAntID, ItemAnt.FOREST_ANT+" "+ItemAnt.DRONE_ANT, antForestDrone);
+		antForestWorker = new ItemAnt(itemAntID, ItemAnt.FOREST_ANT+" "+ItemAnt.WORKER_ANT, antForestWorker);
+		antForestSoldier = new ItemAnt(itemAntID, ItemAnt.FOREST_ANT+" "+ItemAnt.SOLDIER_ANT, antForestSoldier);
+		antForestLarva = new ItemAnt(itemAntID, ItemAnt.FOREST_ANT+" "+ItemAnt.LARVA_ANT, antForestLarva);
+		
+		antHillsQueen = new ItemAnt(itemAntID, ItemAnt.HILLS_ANT+" "+ItemAnt.QUEEN_ANT, antHillsQueen);
+		antHillsDrone = new ItemAnt(itemAntID, ItemAnt.HILLS_ANT+" "+ItemAnt.DRONE_ANT, antHillsDrone);
+		antHillsWorker = new ItemAnt(itemAntID, ItemAnt.HILLS_ANT+" "+ItemAnt.WORKER_ANT, antHillsWorker);
+		antHillsSoldier = new ItemAnt(itemAntID, ItemAnt.HILLS_ANT+" "+ItemAnt.SOLDIER_ANT, antHillsSoldier);
+		antHillsLarva = new ItemAnt(itemAntID, ItemAnt.HILLS_ANT+" "+ItemAnt.LARVA_ANT, antHillsLarva);
+		
+		antDesertQueen = new ItemAnt(itemAntID, ItemAnt.DESERT_ANT+" "+ItemAnt.QUEEN_ANT, antDesertQueen);
+		antDesertDrone = new ItemAnt(itemAntID, ItemAnt.DESERT_ANT+" "+ItemAnt.DRONE_ANT, antDesertDrone);
+		antDesertWorker = new ItemAnt(itemAntID, ItemAnt.DESERT_ANT+" "+ItemAnt.WORKER_ANT, antDesertWorker);
+		antDesertSoldier = new ItemAnt(itemAntID, ItemAnt.DESERT_ANT+" "+ItemAnt.SOLDIER_ANT, antDesertSoldier);
+		antDesertLarva = new ItemAnt(itemAntID, ItemAnt.DESERT_ANT+" "+ItemAnt.LARVA_ANT, antDesertLarva);
+		
+		antSwampQueen = new ItemAnt(itemAntID, ItemAnt.SWAMP_ANT+" "+ItemAnt.QUEEN_ANT, antSwampQueen);
+		antSwampDrone = new ItemAnt(itemAntID, ItemAnt.SWAMP_ANT+" "+ItemAnt.DRONE_ANT, antSwampDrone);
+		antSwampWorker = new ItemAnt(itemAntID, ItemAnt.SWAMP_ANT+" "+ItemAnt.WORKER_ANT, antSwampWorker);
+		antSwampSoldier = new ItemAnt(itemAntID, ItemAnt.SWAMP_ANT+" "+ItemAnt.SOLDIER_ANT, antSwampWorker);
+		antSwampLarva = new ItemAnt(itemAntID, ItemAnt.SWAMP_ANT+" "+ItemAnt.LARVA_ANT, antSwampLarva);
+		
+		antPlainsQueen = new ItemAnt(itemAntID, ItemAnt.PLAINS_ANT+" "+ItemAnt.QUEEN_ANT, antPlainsQueen);
+		antPlainsDrone = new ItemAnt(itemAntID, ItemAnt.PLAINS_ANT+" "+ItemAnt.DRONE_ANT, antPlainsDrone);
+		antPlainsWorker = new ItemAnt(itemAntID, ItemAnt.PLAINS_ANT+" "+ItemAnt.WORKER_ANT, antPlainsWorker);
+		antPlainsSoldier = new ItemAnt(itemAntID, ItemAnt.PLAINS_ANT+" "+ItemAnt.SOLDIER_ANT, antPlainsSoldier);
+		antPlainsLarva = new ItemAnt(itemAntID, ItemAnt.PLAINS_ANT+" "+ItemAnt.LARVA_ANT, antPlainsLarva);
+		
+		antJungleQueen = new ItemAnt(itemAntID, ItemAnt.JUNGLE_ANT+" "+ItemAnt.QUEEN_ANT, antJungleQueen);
+		antJungleDrone = new ItemAnt(itemAntID, ItemAnt.JUNGLE_ANT+" "+ItemAnt.DRONE_ANT, antJungleDrone);
+		antJungleWorker = new ItemAnt(itemAntID, ItemAnt.JUNGLE_ANT+" "+ItemAnt.WORKER_ANT, antJungleWorker);
+		antJungleSoldier = new ItemAnt(itemAntID, ItemAnt.JUNGLE_ANT+" "+ItemAnt.SOLDIER_ANT, antJungleSoldier);
+		antJungleLarva = new ItemAnt(itemAntID, ItemAnt.JUNGLE_ANT+" "+ItemAnt.LARVA_ANT, antJungleLarva);
 				
 	}
 	
@@ -301,6 +374,20 @@ public class Myrmecology
 		BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(x, z);
 		
 		return biome;
+		
+	}
+	
+	public static Icon[] iconsToArray(IconRegister iconRegister, String ... icons){
+		
+		Icon[] iconArray = null;
+		
+		for(int k = 0; k < icons.length + 1; k++){
+			
+			iconArray[k] = iconRegister.registerIcon(icons[k]);
+			
+		}
+		
+		return iconArray;
 		
 	}
 	

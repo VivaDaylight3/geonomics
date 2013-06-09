@@ -73,7 +73,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 		
 		if (biome instanceof BiomeGenForest){
 			
-			meta = BlockAntHill.BLOCK_ANTHILL_METADATA + BlockAntHill.FOREST_METADATA;
+			meta = BlockAntHill.FOREST_METADATA;
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.wood.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.leaves.blockID)){
 				
@@ -84,7 +84,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenHills){
 			
-			meta = BlockAntHill.BLOCK_ANTHILL_METADATA + BlockAntHill.HILLS_METADATA;
+			meta = BlockAntHill.HILLS_METADATA;
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
 				
@@ -95,7 +95,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenDesert){
 			
-			meta = BlockAntHill.BLOCK_ANTHILL_METADATA + BlockAntHill.DESERT_METADATA;
+			meta = BlockAntHill.DESERT_METADATA;
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.sand.blockID)){
 				
@@ -106,7 +106,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenSwamp){
 			
-			meta = BlockAntHill.BLOCK_ANTHILL_METADATA + BlockAntHill.SWAMP_METADATA;
+			meta = BlockAntHill.SWAMP_METADATA;
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
 				
@@ -117,7 +117,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenPlains){
 			
-			meta = BlockAntHill.BLOCK_ANTHILL_METADATA + BlockAntHill.PLAINS_METADATA;
+			meta = BlockAntHill.PLAINS_METADATA;
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
 				
@@ -128,7 +128,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenJungle){
 			
-			meta = BlockAntHill.BLOCK_ANTHILL_METADATA + BlockAntHill.JUNGLE_METADATA;
+			meta = BlockAntHill.JUNGLE_METADATA;
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
 				

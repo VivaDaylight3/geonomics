@@ -1,4 +1,4 @@
-package vivadaylight3.myrmecology.common.blocks;
+package vivadaylight3.myrmecology.common.block;
 
 import java.util.Random;
 

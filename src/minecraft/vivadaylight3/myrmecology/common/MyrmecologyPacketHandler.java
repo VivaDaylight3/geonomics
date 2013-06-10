@@ -10,7 +10,7 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
 /**
- * Handles packet interation
+ * Handles packet interaction
  * @author VivaDaylight3
  *
  */

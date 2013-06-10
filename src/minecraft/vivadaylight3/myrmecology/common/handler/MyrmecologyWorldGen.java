@@ -4,6 +4,8 @@ import java.util.Random;
 
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.block.BlockAntHill;
+import vivadaylight3.myrmecology.common.lib.Blocks;
+import vivadaylight3.myrmecology.common.lib.Maths;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -14,7 +16,9 @@ import net.minecraft.world.biome.BiomeGenForest;
 import net.minecraft.world.biome.BiomeGenHills;
 import net.minecraft.world.biome.BiomeGenJungle;
 import net.minecraft.world.biome.BiomeGenPlains;
+import net.minecraft.world.biome.BiomeGenSnow;
 import net.minecraft.world.biome.BiomeGenSwamp;
+import net.minecraft.world.biome.BiomeGenTaiga;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -48,9 +52,9 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 	
 	private void generateSurface(World world, Random random, int i, int j){
 		
-		int chance = Myrmecology.getChance(9);
+		int chance = Maths.getChance(9);
 		
-		if (chance < 3){
+		if (chance < 11){
 			
 			generateAntHill(world, random, i, j);
 			
@@ -68,12 +72,12 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 		int blockZ = j + random.nextInt(16);
 		int blockY = world.getHeightValue(blockX, blockZ) + 1;
 		
-		BiomeGenBase biome = Myrmecology.getBiome(world, i, j);
+		BiomeGenBase biome = Blocks.getBiome(world, i, j);
 		int meta = 0;
 		
 		if (biome instanceof BiomeGenForest){
 			
-			meta = BlockAntHill.FOREST_METADATA;
+			meta = BlockAntHill.hillMeta[0];
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.wood.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.leaves.blockID)){
 				
@@ -84,7 +88,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenHills){
 			
-			meta = BlockAntHill.HILLS_METADATA;
+			meta = BlockAntHill.hillMeta[1];
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
 				
@@ -95,7 +99,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenDesert){
 			
-			meta = BlockAntHill.DESERT_METADATA;
+			meta = BlockAntHill.hillMeta[2];
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.sand.blockID)){
 				
@@ -106,7 +110,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenSwamp){
 			
-			meta = BlockAntHill.SWAMP_METADATA;
+			meta = BlockAntHill.hillMeta[3];
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
 				
@@ -117,7 +121,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenPlains){
 			
-			meta = BlockAntHill.PLAINS_METADATA;
+			meta = BlockAntHill.hillMeta[4];
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
 				
@@ -128,9 +132,20 @@ public class MyrmecologyWorldGen implements IWorldGenerator
 			
 		}else if (biome instanceof BiomeGenJungle){
 			
-			meta = BlockAntHill.JUNGLE_METADATA;
+			meta = BlockAntHill.hillMeta[5];
 			
 			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID)){
+				
+				world.setBlock(blockX, blockY, blockZ, Myrmecology.blockAntHillID);
+				world.setBlockMetadataWithNotify(blockX, blockY, blockZ, meta, 3);
+				
+			}
+			
+		}else if (biome instanceof BiomeGenSnow || biome instanceof BiomeGenTaiga){
+			
+			meta = BlockAntHill.hillMeta[6];
+			
+			if (isBlockTouching(world, blockX, blockY, blockZ, Block.dirt.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.grass.blockID) || isBlockTouching(world, blockX, blockY, blockZ, Block.snow.blockID)){
 				
 				world.setBlock(blockX, blockY, blockZ, Myrmecology.blockAntHillID);
 				world.setBlockMetadataWithNotify(blockX, blockY, blockZ, meta, 3);

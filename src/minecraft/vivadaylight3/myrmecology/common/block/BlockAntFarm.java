@@ -5,27 +5,27 @@ import java.util.Random;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.item.Item;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class BlockAntFarm extends Block
+public class BlockAntFarm extends BlockContainer
 {
 	
 	public final int BLOCK_ANTFARM_METADATA = 0;
 	
 	private String name;
+
+	private Icon blockIcon;
 	
-	private Icon iconFront;
-	private Icon iconBack;
-	private Icon iconSide;
-	private Icon iconOther;
+	private final Random random = new Random();
 
 	public BlockAntFarm(int par1, String par2Name)
 	{
@@ -38,23 +38,17 @@ public class BlockAntFarm extends Block
 		name = par2Name;
 	}
 	
+	@Override
 	public void registerIcons(IconRegister iconRegister){
 		
-		iconFront = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Front");
-		iconBack = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Back");
-		iconSide = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Side");
-		iconOther = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Other");
+		blockIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name);
 		
 	}
 	
+	@Override
 	public Icon getIcon(int side, int metadata){
 		
-		String which = Myrmecology.getBlockSide(side, metadata, BLOCK_ANTFARM_METADATA);
-		
-		if (which == "front") return iconFront;
-		else if (which == "back") return iconBack;
-		else if (which == "input" || which == "output") return iconSide;
-		else return iconOther;
+		return blockIcon;
 		
 	}
 	
@@ -68,49 +62,76 @@ public class BlockAntFarm extends Block
 	@Override
 	public boolean renderAsNormalBlock(){
 
-		return false;
+		return true;
 
-	}
-	
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack){
-		
-		world.setBlockMetadataWithNotify(x, y, z, BLOCK_ANTFARM_METADATA + Myrmecology.getBlockOrientation(x, y, z, entityLiving), 3);
-		
 	}
 	
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
 	{
-		int id = idPicked(world, x, y, z);
 
-		if (id == 0)
-		{
-			return null;
-		}
-
-		Item item = Item.itemsList[id];
-
-		if (item == null)
-		{
-			return null;
-		}
-
-		int metadata = getDamageValue(world, x, y, z);
-
-		return new ItemStack(id, 1, metadata);
+		return new ItemStack(Myrmecology.blockAntFarm, 1);
+		
 	}
 
+	@Override
 	public int idDropped(int par1, Random random, int zero){
     	
     	return Myrmecology.blockAntFarm.blockID;
     	
     }
 	
+	@Override
 	public TileEntity createNewTileEntity(World par1World)
     {
         return new TileEntityAntFarm();
     }
 	
-	
+    @Override
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+        TileEntityAntFarm tileEntity = (TileEntityAntFarm)par1World.getBlockTileEntity(par2, par3, par4);
+
+        if (tileEntity != null)
+        {
+            for (int j1 = 0; j1 < tileEntity.getSizeInventory(); ++j1)
+            {
+                ItemStack itemstack = tileEntity.getStackInSlot(j1);
+
+                if (itemstack != null)
+                {
+                    float f = this.random.nextFloat() * 0.8F + 0.1F;
+                    float f1 = this.random.nextFloat() * 0.8F + 0.1F;
+                    EntityItem entityitem;
+
+                    for (float f2 = this.random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; par1World.spawnEntityInWorld(entityitem))
+                    {
+                        int k1 = this.random.nextInt(21) + 10;
+
+                        if (k1 > itemstack.stackSize)
+                        {
+                            k1 = itemstack.stackSize;
+                        }
+
+                        itemstack.stackSize -= k1;
+                        entityitem = new EntityItem(par1World, par2 + f, par3 + f1, par4 + f2, new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
+                        float f3 = 0.05F;
+                        entityitem.motionX = (float)this.random.nextGaussian() * f3;
+                        entityitem.motionY = (float)this.random.nextGaussian() * f3 + 0.2F;
+                        entityitem.motionZ = (float)this.random.nextGaussian() * f3;
+
+                        if (itemstack.hasTagCompound())
+                        {
+                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+                        }
+                    }
+                }
+            }
+
+            par1World.func_96440_m(par2, par3, par4, par5);
+        }
+
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
 
 }

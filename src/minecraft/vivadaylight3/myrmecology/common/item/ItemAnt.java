@@ -1,78 +1,32 @@
 package vivadaylight3.myrmecology.common.item;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.lib.Variables;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAnt extends Item
 {
 	
 	private final static String NAME = Myrmecology.ITEM_ANT_NAME;
-		
-	private Icon forestQueen;
-	private Icon forestDrone;
-	private Icon forestWorker;
-	private Icon forestSoldier;
-	private Icon forestLarva;
 	
-	private Icon hillsQueen;
-	private Icon hillsDrone;
-	private Icon hillsWorker;
-	private Icon hillsSoldier;
-	private Icon hillsLarva;
+	public final static String[] antNames = {"Carpenter Ant", "Hillside Ant", "Desert Ant", "Argentine Ant", "Red Ant", 
+		"Fire Ant", "Hibernus Ant"};
 	
-	private Icon desertQueen;
-	private Icon desertDrone;
-	private Icon desertWorker;
-	private Icon desertSoldier;
-	private Icon desertLarva;
+	public final static String[] typeNames = {"Queen", "Drone", "Worker", "Soldier", "Larva"};
 	
-	private Icon swampQueen;
-	private Icon swampDrone;
-	private Icon swampWorker;
-	private Icon swampSoldier;
-	private Icon swampLarva;
+	public final static int[] antMeta = {0, 5, 10, 15, 20, 25, 30};
 	
-	private Icon plainsQueen;
-	private Icon plainsDrone;
-	private Icon plainsWorker;
-	private Icon plainsSoldier;
-	private Icon plainsLarva;
-	
-	private Icon jungleQueen;
-	private Icon jungleDrone;
-	private Icon jungleWorker;
-	private Icon jungleSoldier;
-	private Icon jungleLarva;
-	
-	public final static String FOREST_ANT = "Carpenter Ant";
-	public final static String HILLS_ANT = "Hillside Ant";
-	public final static String DESERT_ANT = "Desert Ant";
-	public final static String SWAMP_ANT = "Argentine Ant";
-	public final static String PLAINS_ANT = "Red Ant";
-	public final static String JUNGLE_ANT = "Fire Ant";
-	
-	public final static String QUEEN_ANT = "Queen";
-	public final static String DRONE_ANT = "Drone";
-	public final static String WORKER_ANT = "Worker";
-	public final static String SOLDIER_ANT = "Soldier";
-	public final static String LARVA_ANT = "Larva";
-	
-	public final static int FOREST_METADATA = 0;
-	public final static int HILLS_METADATA = 5;
-	public final static int DESERT_METADATA = 10;
-	public final static int SWAMP_METADATA = 15;
-	public final static int PLAINS_METADATA = 20;
-	public final static int JUNGLE_METADATA = 25;
-	
-	public final static int QUEEN_METADATA = 0;
-	public final static int DRONE_METADATA = 1;
-	public final static int WORKER_METADATA = 2;
-	public final static int SOLDIER_METADATA = 3;
-	public final static int LARVA_METADATA = 4;
+	public final static int[] typeMeta = {0, 1, 2, 3, 4};
 	
 	public static final String ANT_PATH = Myrmecology.TEXTURE_PREFIX+"ants/";
 	
@@ -86,178 +40,63 @@ public class ItemAnt extends Item
 		ANT_PATH+NAME+"_plainsQueen", ANT_PATH+NAME+"_plainsDrone", ANT_PATH+NAME+"_plainsWorker", 
 		ANT_PATH+NAME+"_plainsSoldier", ANT_PATH+NAME+"_plainsLarva", ANT_PATH+NAME+"_jungleQueen", 
 		ANT_PATH+NAME+"_jungleDrone", ANT_PATH+NAME+"_jungleWorker", ANT_PATH+NAME+"_jungleSoldier", 
-		ANT_PATH+NAME+"_jungleLarva"};
-
-	private Icon[] icons;
+		ANT_PATH+NAME+"_jungleLarva", ANT_PATH+NAME+"_snowQueen", ANT_PATH+NAME+"_snowDrone", 
+		ANT_PATH+NAME+"_snowWorker", ANT_PATH+NAME+"_snowSoldier", ANT_PATH+NAME+"_snowLarva"};
 	
-	public ItemAnt(int par1, String name, Item item)
+	private static Icon[] icons;
+	
+	public static final String[] names = Variables.antNamesAndTypesToArray(antNames, typeNames);
+	
+		/*{FOREST_ANT+" "+QUEEN_ANT, FOREST_ANT+" "+DRONE_ANT, FOREST_ANT+" "+WORKER_ANT, 
+		FOREST_ANT+" "+SOLDIER_ANT, FOREST_ANT+" "+LARVA_ANT, HILLS_ANT+" "+QUEEN_ANT, HILLS_ANT+" "+DRONE_ANT, 
+		HILLS_ANT+" "+WORKER_ANT, HILLS_ANT+" "+SOLDIER_ANT, HILLS_ANT+" "+LARVA_ANT, DESERT_ANT+" "+QUEEN_ANT, 
+		DESERT_ANT+" "+DRONE_ANT, DESERT_ANT+" "+WORKER_ANT, DESERT_ANT+" "+SOLDIER_ANT, DESERT_ANT+" "+LARVA_ANT, 
+		SWAMP_ANT+" "+QUEEN_ANT, SWAMP_ANT+" "+DRONE_ANT, SWAMP_ANT+" "+WORKER_ANT, SWAMP_ANT+" "+SOLDIER_ANT, 
+		SWAMP_ANT+" "+LARVA_ANT, PLAINS_ANT+" "+QUEEN_ANT, PLAINS_ANT+" "+DRONE_ANT, PLAINS_ANT+" "+WORKER_ANT, 
+		PLAINS_ANT+" "+SOLDIER_ANT, PLAINS_ANT+" "+LARVA_ANT, JUNGLE_ANT+" "+QUEEN_ANT, JUNGLE_ANT+" "+DRONE_ANT, 
+		JUNGLE_ANT+" "+WORKER_ANT, JUNGLE_ANT+" "+SOLDIER_ANT, JUNGLE_ANT+" "+LARVA_ANT, SNOW_ANT+" "+QUEEN_ANT, 
+		SNOW_ANT+" "+DRONE_ANT, SNOW_ANT+" "+WORKER_ANT, SNOW_ANT+" "+SOLDIER_ANT, SNOW_ANT+" "+LARVA_ANT};*/
+	
+	public ItemAnt(int par1)
 	{
 		super(par1);
 		setHasSubtypes(true);
-		setMaxDamage(0);
-		LanguageRegistry.addName(item, name);
-		GameRegistry.registerItem(item, name);
+		setMaxDamage(antMeta[6] + typeMeta[4]);
 		setCreativeTab(Myrmecology.tabMyrmecology);
 		setMaxStackSize(1);
 	}
 	
+	@Override
 	public void registerIcons(IconRegister iconRegister){
 		
-		this.icons = Myrmecology.iconsToArray(iconRegister, iconNames);
-		
-		/*
-		int length = iconNames.length + 1;
-		
-		for(int k = 0; k < length; k++){
-			
-			icons[k] = iconRegister.registerIcon(iconNames[k]);
-			
-		}
-		*/
+		ItemAnt.icons = Variables.iconsToArray(iconRegister, iconNames);
 		
 	}
+	
+	@Override
+    public String getUnlocalizedName(ItemStack itemStack)
+    {
+		
+    	return this.getUnlocalizedName() + names[itemStack.getItemDamage()];
+    
+    }
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void getSubItems(int itemID, CreativeTabs tabs, List list){
+		
+            for(int i = 0; i < iconNames.length + 1; ++i){
+            	
+                    list.add(new ItemStack(itemID, 1, i));
+                    
+             }
+            
+     }
 	
 	@Override
 	public Icon getIconFromDamage(int meta){
 							
 			return icons[meta];
-			
-		/*
-		int forest = FOREST_METADATA;
-		int hills = HILLS_METADATA;
-		int desert = DESERT_METADATA;
-		int swamp = SWAMP_METADATA;
-		int plains = PLAINS_METADATA;
-		int jungle = JUNGLE_METADATA;
-		
-		int queen = QUEEN_METADATA;
-		int drone = DRONE_METADATA;
-		int worker = WORKER_METADATA;
-		int soldier = SOLDIER_METADATA;
-		int larva = LARVA_METADATA;
-		
-		if(meta == forest + queen){
-			
-			return forestQueen;
-			
-		}else if(meta == forest + drone){
-			
-			return forestDrone;
-			
-		}else if(meta == forest + worker){
-			
-			return forestWorker;
-			
-		}else if(meta == forest + soldier){
-			
-			return forestSoldier;
-			
-		}else if(meta == forest + larva){
-			
-			return forestLarva;
-			
-		}else if(meta == hills + queen){
-			
-			return hillsDrone;
-			
-		}else if(meta == hills + drone){
-			
-			return hillsDrone;
-			
-		}else if(meta == hills + worker){
-			
-			return hillsWorker;
-			
-		}else if(meta == hills + soldier){
-			
-			return hillsSoldier;
-			
-		}else if(meta == hills + larva){
-			
-			return hillsLarva;
-			
-		}else if(meta == desert + queen){
-			
-			return desertQueen;
-			
-		}else if(meta == desert + drone){
-			
-			return desertDrone;
-			
-		}else if(meta == desert + worker){
-			
-			return desertWorker;
-			
-		}else if(meta == desert + soldier){
-			
-			return desertSoldier;
-			
-		}else if(meta == desert + larva){
-			
-			return desertLarva;
-			
-		}else if(meta == swamp + queen){
-			
-			return swampQueen;
-			
-		}else if(meta == swamp + drone){
-			
-			return swampDrone;
-			
-		}else if(meta == swamp + worker){
-			
-			return swampWorker;
-			
-		}else if(meta == swamp + soldier){
-			
-			return swampSoldier;
-			
-		}else if(meta == swamp + larva){
-			
-			return swampLarva;
-			
-		}else if(meta == plains + queen){
-			
-			return plainsQueen;
-			
-		}else if(meta == plains + drone){
-			
-			return plainsDrone;
-			
-		}else if(meta == plains + worker){
-			
-			return plainsWorker;
-			
-		}else if(meta == plains + soldier){
-			
-			return plainsSoldier;
-			
-		}else if(meta == plains + larva){
-			
-			return plainsLarva;
-			
-		}else if(meta == jungle + queen){
-			
-			return jungleQueen;
-			
-		}else if(meta == jungle + drone){
-			
-			return jungleDrone;
-			
-		}else if(meta == jungle + worker){
-			
-			return jungleWorker;
-			
-		}else if(meta == jungle + soldier){
-			
-			return jungleSoldier;
-			
-		}else{
-			
-			return jungleLarva;
-			
-		}*/
-		
 		
 	}
 

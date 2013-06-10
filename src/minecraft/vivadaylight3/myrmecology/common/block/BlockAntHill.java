@@ -1,11 +1,14 @@
 package vivadaylight3.myrmecology.common.block;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.item.ItemAnt;
 import vivadaylight3.myrmecology.common.item.ItemExtractor;
+import vivadaylight3.myrmecology.common.lib.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -19,83 +22,72 @@ import net.minecraft.world.World;
 public class BlockAntHill extends Block
 {
 	
-	public final static int FOREST_METADATA = 0;
-	public final static int HILLS_METADATA = 1;
-	public final static int DESERT_METADATA = 2;
-	public final static int SWAMP_METADATA = 3;
-	public final static int PLAINS_METADATA = 4;
-	public final static int JUNGLE_METADATA = 5;
+	public static final int[] hillMeta = {0, 1, 2, 3, 4, 5, 6};
 	
-	private String name;
+	private static final String NAME = "Ant Hill";
 	
-	private Icon baseIcon;
-	private Icon forestIcon;
-	private Icon hillsIcon;
-	private Icon desertIcon;
-	private Icon swampIcon;
-	private Icon plainsIcon;
-	private Icon jungleIcon;
-
-	public BlockAntHill(int par1, String par2Name)
+	public static final String[] hillNames = {"Forest "+NAME, "Hillside "+NAME, "Desert "+NAME, "Swamp "+NAME, 
+		"Plains "+NAME, "Jungle "+NAME, "Snowy "+NAME};
+		
+	private static Icon[] icons;
+	
+	private final String[] iconNames = {Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME, 
+			Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME+"_Forest", 
+			Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME+"_Hills", 
+			Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME+"_Desert",
+			Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME+"_Swamp", 
+			Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME+"_Plains", 
+			Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME+"_Jungle", 
+			Myrmecology.TEXTURE_PREFIX+Myrmecology.ITEM_ANT_NAME+"_Snow"};
+	
+	public BlockAntHill(int par1)
 	{
 		super(par1, Material.ground);
-		setUnlocalizedName(par2Name);
+		setUnlocalizedName("antHill");
 		setCreativeTab(Myrmecology.tabMyrmecology);
 		setStepSound(Block.soundGrassFootstep);
 		setHardness(1.0F);
 		setResistance(1.0F);
-		name = par2Name;
 	}
 	
+	@Override
 	public void registerIcons(IconRegister iconRegister){
 		
-		baseIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name);
-		forestIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Forest");
-		hillsIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Hills");
-		desertIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Desert");
-		swampIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Swamp");
-		plainsIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Plains");
-		jungleIcon = iconRegister.registerIcon(Myrmecology.TEXTURE_PREFIX+name+"_Jungle");
+		icons = Variables.iconsToArray(iconRegister, iconNames);
 		
 	}
 	
 	@Override
 	public Icon getIcon(int side, int metadata){
 		
-		switch(metadata){
+		return icons[metadata];
 				
-			case FOREST_METADATA:
-				return forestIcon;
-				
-			case HILLS_METADATA:
-				return hillsIcon;
-				
-			case DESERT_METADATA:
-				return desertIcon;
-			
-			case SWAMP_METADATA:
-				return swampIcon;
-				
-			case PLAINS_METADATA:
-				return plainsIcon;
-			
-			default:
-				return jungleIcon;
-		}
-		
 	}
 	
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+	public String getUnlocalizedName(ItemStack itemStack)
     {
-        par3List.add(new ItemStack(par1, 1, 0));
-        par3List.add(new ItemStack(par1, 1, 1));
-        par3List.add(new ItemStack(par1, 1, 2));
+		
+    	return this.getUnlocalizedName() + hillNames[itemStack.getItemDamage()];
+    
     }
 	
-	public int quantityDropped(Random par1Random)
+	@Override
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        return 2;
+		
+		for (int k = 0; k < hillMeta.length; k++){
+		
+			par3List.add(new ItemStack(this, 1, k));
+			
+		}
     }
+
+	@Override
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9){
+		
+		return true;
+		
+	}
 
 	public void harvestBlock(World world, EntityPlayer entity, int x, int y, int z){
 		
@@ -104,17 +96,69 @@ public class BlockAntHill extends Block
 			ItemStack tool = entity.getCurrentEquippedItem();
 			ItemStack extractor = new ItemStack(Myrmecology.itemExtractor);
 		
-			if(tool == extractor){
+			if(tool != null && tool == extractor){
 			
 				int meta = world.getBlockMetadata(x, y, z);
-			
+				
+				for(int k = 0; k < hillMeta.length * 5 + 1; k++){
+					
+					if(meta == k){
+						
+						ItemStack drone = new ItemStack(Myrmecology.itemAnt, k + ItemAnt.typeMeta[1], 1);
+						ItemStack queen = new ItemStack(Myrmecology.itemAnt, k + ItemAnt.typeMeta[0], 1);
+						entity.dropPlayerItem(drone);
+						entity.dropPlayerItem(queen);
+						
+					}
+					
+				}
+			/*
 				switch(meta){
 				
 					case FOREST_METADATA:
-						entity.dropItem(Myrmecology.itemAnt.itemID, 1);
-						entity.dropItem(Myrmecology.itemAnt.itemID, 1);
+						ItemStack drone = new ItemStack(Myrmecology.itemAnt, ItemAnt.FOREST_METADATA + ItemAnt.DRONE_METADATA, 1);
+						ItemStack queen = new ItemStack(Myrmecology.itemAnt, ItemAnt.FOREST_METADATA + ItemAnt.QUEEN_METADATA, 1);
+						entity.dropPlayerItem(drone);
+						entity.dropPlayerItem(queen);
 						break;
+						
+					case HILLS_METADATA:
+						ItemStack drone2 = new ItemStack(Myrmecology.itemAnt, ItemAnt.HILLS_METADATA + ItemAnt.DRONE_METADATA, 1);
+						ItemStack queen2 = new ItemStack(Myrmecology.itemAnt, ItemAnt.HILLS_METADATA + ItemAnt.QUEEN_METADATA, 1);
+						entity.dropPlayerItem(drone2);
+						entity.dropPlayerItem(queen2);
+						break;
+						
+					case DESERT_METADATA:
+						ItemStack drone3 = new ItemStack(Myrmecology.itemAnt, ItemAnt.DESERT_METADATA + ItemAnt.DRONE_METADATA, 1);
+						ItemStack queen3 = new ItemStack(Myrmecology.itemAnt, ItemAnt.DESERT_METADATA + ItemAnt.QUEEN_METADATA, 1);
+						entity.dropPlayerItem(drone3);
+						entity.dropPlayerItem(queen3);
+						break;
+						
+					case SWAMP_METADATA:
+						ItemStack drone4 = new ItemStack(Myrmecology.itemAnt, ItemAnt.SWAMP_METADATA + ItemAnt.DRONE_METADATA, 1);
+						ItemStack queen4 = new ItemStack(Myrmecology.itemAnt, ItemAnt.SWAMP_METADATA + ItemAnt.QUEEN_METADATA, 1);
+						entity.dropPlayerItem(drone4);
+						entity.dropPlayerItem(queen4);
+						break;
+						
+					case PLAINS_METADATA:
+						ItemStack drone5 = new ItemStack(Myrmecology.itemAnt, ItemAnt.PLAINS_METADATA + ItemAnt.DRONE_METADATA, 1);
+						ItemStack queen5 = new ItemStack(Myrmecology.itemAnt, ItemAnt.PLAINS_METADATA + ItemAnt.QUEEN_METADATA, 1);
+						entity.dropPlayerItem(drone5);
+						entity.dropPlayerItem(queen5);
+						break;
+						
+					case JUNGLE_METADATA:
+						ItemStack drone6 = new ItemStack(Myrmecology.itemAnt, ItemAnt.JUNGLE_METADATA + ItemAnt.DRONE_METADATA, 1);
+						ItemStack queen6 = new ItemStack(Myrmecology.itemAnt, ItemAnt.JUNGLE_METADATA + ItemAnt.QUEEN_METADATA, 1);
+						entity.dropPlayerItem(drone6);
+						entity.dropPlayerItem(queen6);
+						break;
+						
 				}
+				*/
 			
 			}
 		}

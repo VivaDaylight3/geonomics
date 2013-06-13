@@ -9,6 +9,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -36,6 +37,20 @@ public class BlockAntFarm extends BlockContainer
 		setHardness(1.0F);
 		setResistance(1.0F);
 		name = par2Name;
+	}
+	
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9){
+		
+		if(!player.isSneaking()){
+			
+			player.openGui(Myrmecology.instance, 1, world, x, y, z);
+			
+			return true;
+			
+		}
+		
+		return false;
+		
 	}
 	
 	@Override

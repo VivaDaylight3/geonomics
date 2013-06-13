@@ -20,9 +20,11 @@ import net.minecraftforge.common.Configuration;
 import scala.collection.generic.BitOperations.Int;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockAntHill;
+import vivadaylight3.myrmecology.common.handler.MyrmecologyGuiHandler;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
 import vivadaylight3.myrmecology.common.item.ItemAnt;
 import vivadaylight3.myrmecology.common.item.ItemExtractor;
+import vivadaylight3.myrmecology.common.itemblock.ItemBlockAntHill;
 import vivadaylight3.myrmecology.common.lib.Variables;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -35,6 +37,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -44,7 +47,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  */
 
 @Mod(modid=Myrmecology.MOD_ID, name=Myrmecology.MOD_NAME, version=Myrmecology.MOD_VERSION, dependencies = Myrmecology.MOD_DEPENDENCIES)
-@NetworkMod(channels = "Myrmecology", clientSideRequired=true, serverSideRequired=false, packetHandler = MyrmecologyPacketHandler.class)
+@NetworkMod(channels = Myrmecology.MOD_CHANNEL, clientSideRequired=true, serverSideRequired=false, packetHandler = MyrmecologyPacketHandler.class)
 public class Myrmecology
 {
 	
@@ -57,6 +60,21 @@ public class Myrmecology
 	public static final String MOD_NAME = "Myrmecology";
 	public static final String MOD_VERSION = "0.0.1";
 	public static final String MOD_DEPENDENCIES = "";
+	
+	public final static String[] antNames = {"Black Ant", "Hillside Ant", "Desert Ant", "Argentine Ant", "Field Ant", 
+		"Red Ant", "Hibernus Ant", "Amber Ant"};
+	
+	public final static String[] typeNames = {"Queen", "Drone", "Worker", "Larva"};
+		
+	public final static String[] biomeSubNames = {"forest", "hills", "desert", "swamp", "plains", "jungle", "snow", 
+		"rock"};
+	
+	public final static String[] biomeNames = {"Forest", "Hillside", "Desert", "Swamp", "Flatland", "Jungle", "Snowy", 
+		"Amber"};
+	
+	public final static int[] typeMeta = {0, 1, 2, 3};
+	
+	public final static int[] antMeta = Variables.antMeta();
 	
 	public static Block blockAntFarm;
 	public static int blockAntFarmID;
@@ -89,6 +107,8 @@ public class Myrmecology
 	public static final String ITEM_PATH = TEXTURE_PATH + "items/";
 	public static final String GUI_PATH = TEXTURE_PATH + "gui/";
 	public static final String LANG_PATH = RESOURCE_PATH + "langauges/";
+	public static final String ANT_PATH = "ants/";
+	public static final String HILL_PATH = "hills/";
 	public static final String TEXTURE_PREFIX = Myrmecology.MOD_ID_LOWER + ":";
 	
 	private static Configuration config = new Configuration(new File(Loader.instance().getConfigDir(), MOD_ID + ".cfg"));
@@ -144,13 +164,15 @@ public class Myrmecology
 				
 		proxy.registerRenderers();
 		
-		LanguageRegistry.instance().addStringLocalization("itemGroup.tabMyrmecology", "en_GB", MOD_NAME);
-		GameRegistry.registerBlock(blockAntHill, "antHill");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.tabMyrmecology", "en_US", MOD_NAME);
+				
+		GameRegistry.registerBlock(blockAntHill, ItemBlockAntHill.class, "antHill");
+		GameRegistry.registerItem(itemAnt, "itemAnt");
 		
 		LanguageRegistry.addName(blockAntFarm, BLOCK_ANTFARM_NAME_HUMAN);
 		LanguageRegistry.addName(itemExtractor, ITEM_EXTRACTOR_NAME_HUMAN);
 		
-		for (int k = 0; k < Variables.getLastInt(ItemAnt.antMeta) + Variables.getLastInt(ItemAnt.typeMeta); k++){
+		for (int k = 0; k < Variables.getLastInt(Myrmecology.antMeta) + Variables.getLastInt(Myrmecology.typeMeta) + 1; k++){
 										
 			ItemStack ant = new ItemStack(itemAnt, 1, k);
 			
@@ -158,21 +180,30 @@ public class Myrmecology
 						
 		}
 		
-		for (int i = 0; i < Variables.getLastInt(BlockAntHill.hillMeta) + 1; i++){
+		for (int k = 0; k < Variables.getLastInt(BlockAntHill.hillMeta) + 1; k++){
 			
-			ItemStack hill = new ItemStack(blockAntHill, 1, i);
-							
-			LanguageRegistry.addName(hill, BlockAntHill.hillNames[i]);
+			ItemStack hill = new ItemStack(blockAntHill, 1, k);
+			
+			LanguageRegistry.addName(hill, BlockAntHill.hillNames[k]);
 						
 		}
-
 		
-		GameRegistry.registerItem(itemAnt, "itemAnt");
-		
+		/*
+		ItemBlockAntHill itemBlockAntHill = new ItemBlockAntHill(0, blockAntHill);
+			
+		ItemStack hill = new ItemStack(itemBlockAntHill, 1, 0);
+							
+		LanguageRegistry.addName(hill, BlockAntHill.hillNames[0]);
+		*/
+				
 		GameRegistry.registerBlock(blockAntFarm, BLOCK_ANTFARM_NAME);
 		GameRegistry.registerItem(itemExtractor, ITEM_EXTRACTOR_NAME);
 		
 		GameRegistry.registerWorldGenerator(new MyrmecologyWorldGen());
+		
+		MyrmecologyGuiHandler guiHandler = new MyrmecologyGuiHandler();
+		
+		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
 				
 	}
 	

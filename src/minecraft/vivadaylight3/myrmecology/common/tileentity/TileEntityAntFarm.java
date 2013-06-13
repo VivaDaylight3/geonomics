@@ -1,6 +1,11 @@
 package vivadaylight3.myrmecology.common.tileentity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.lib.Properties;
+import vivadaylight3.myrmecology.common.lib.Variables;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,12 +22,68 @@ public class TileEntityAntFarm extends TileEntity
 	
 	private String field_94045_s;
 	
-	public int numUsingPlayers;
+	public final Set<EntityPlayer> playersUsing = new HashSet<EntityPlayer>();
+	
+	public int numPlayersUsing;
+	
+	private int breedTimeComplete = 0;
+	
+	private int breedTimeTotal = 0;
+	
+	private int stackLimit;
 	
 	public int getSizeInventory()
     {
         return 11;
     }
+	
+	public boolean isBreeding()
+    {
+        return (this.breedTimeComplete > 0 && this.canBreed());
+    }
+	
+	public boolean canBreed(){
+		
+		if(this.contents[getQueenSlot()] != null){
+		
+			ItemStack queen = this.contents[getQueenSlot()];
+			
+			for(int k = 0; k < Myrmecology.antMeta.length; k++){
+				
+				if(queen.getItemDamage() == Myrmecology.antMeta[k] + Myrmecology.typeMeta[0]){
+					
+					return true;
+					
+				}
+				
+				
+			}
+			
+			return false;
+		
+		}
+		
+		return false;
+		
+	}
+	
+    /**
+     * Returns an integer between 0 and the passed value representing how much burn time is left on the current fuel
+     * item, where 0 means that the item is exhausted and the passed value means that the item is fresh
+     */
+    public int getBurnTimeRemaining()
+    {
+       
+    	if (this.breedTimeTotal == 0){
+    		
+    		return 0;
+    		
+    	}
+    	
+    	return this.breedTimeTotal - this.breedTimeComplete;
+        
+    }
+    
 	
 	public ItemStack getStackInSlot(int par1)
 	    {
@@ -108,6 +169,8 @@ public class TileEntityAntFarm extends TileEntity
 	        {
 	            this.field_94045_s = par1NBTTagCompound.getString("CustomName");
 	        }
+	        
+	        this.breedTimeComplete = par1NBTTagCompound.getInteger("TimeComplete");
 
 	        for (int i = 0; i < nbttaglist.tagCount(); ++i)
 	        {
@@ -148,7 +211,7 @@ public class TileEntityAntFarm extends TileEntity
 	    
 	    public int getInventoryStackLimit()
 	    {
-	        return 1;
+	        return 64;
 	    }
 	    
 	    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
@@ -166,7 +229,7 @@ public class TileEntityAntFarm extends TileEntity
 	    {
 	        if (par1 == 1)
 	        {
-	            this.numUsingPlayers = par2;
+	            this.numPlayersUsing = par2;
 	            return true;
 	        }
 	        else
@@ -177,13 +240,16 @@ public class TileEntityAntFarm extends TileEntity
 	 
 	 public void openChest()
 	    {
-	        if (this.numUsingPlayers < 0)
-	        {
-	            this.numUsingPlayers = 0;
-	        }
+		 
+		 if(numPlayersUsing < 0){
+			 
+			 numPlayersUsing = 0;
+			 
+		 }
 
-	        ++this.numUsingPlayers;
-	        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.numUsingPlayers);
+	        ++this.numPlayersUsing;
+	        
+	        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.numPlayersUsing);
 	        this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
 	        this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType().blockID);
 	    }
@@ -192,8 +258,8 @@ public class TileEntityAntFarm extends TileEntity
 	    {
 	        if (this.getBlockType() != null && this.getBlockType() instanceof BlockChest)
 	        {
-	            --this.numUsingPlayers;
-	            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.numUsingPlayers);
+	            --this.numPlayersUsing;
+	            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.numPlayersUsing);
 	            this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
 	            this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType().blockID);
 	        }
@@ -238,6 +304,26 @@ public class TileEntityAntFarm extends TileEntity
 	    		return false;
 	    		
 	    	}
+	    }
+	    
+	    public int getTotalBreedingTime(){
+	    	
+	    	ItemStack queen = null;
+	    	
+	    	if(this.isBreeding() && this.contents[this.getQueenSlot()] != null){
+	    	
+	    		queen = this.contents[this.getQueenSlot()];
+	    	
+	    	}
+	    	
+	    	return Properties.getLifetime(queen);
+	    	
+	    }
+	    
+	    public int getQueenSlot(){
+	    	
+	    	return 9;
+	    	
 	    }
 	    
 }

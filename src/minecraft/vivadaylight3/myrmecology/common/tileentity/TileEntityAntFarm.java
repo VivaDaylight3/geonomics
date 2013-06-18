@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.lib.Ants;
+import vivadaylight3.myrmecology.common.lib.Breeding;
 import vivadaylight3.myrmecology.common.lib.Properties;
 import vivadaylight3.myrmecology.common.lib.Variables;
 
@@ -32,9 +34,11 @@ public class TileEntityAntFarm extends TileEntity
 	
 	private int stackLimit;
 	
+	Ants ants = new Ants();
+	
 	public int getSizeInventory()
     {
-        return 11;
+        return 19;
     }
 	
 	public boolean isBreeding()
@@ -48,14 +52,9 @@ public class TileEntityAntFarm extends TileEntity
 		
 			ItemStack queen = this.contents[getQueenSlot()];
 			
-			for(int k = 0; k < Myrmecology.antMeta.length; k++){
+			if(ants.antIsType(queen, Ants.getQueenMeta())){
 				
-				if(queen.getItemDamage() == Myrmecology.antMeta[k] + Myrmecology.typeMeta[0]){
-					
-					return true;
-					
-				}
-				
+				return true;
 				
 			}
 			

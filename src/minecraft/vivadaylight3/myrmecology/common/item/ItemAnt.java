@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.lib.Ants;
 import vivadaylight3.myrmecology.common.lib.Variables;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -64,7 +65,7 @@ public class ItemAnt extends Item{
 	@SideOnly(Side.CLIENT)
     public void getSubItems(int itemID, CreativeTabs tabs, List list){
 		
-            for(int i = 0; i < iconNames.length; ++i){
+            for(int i = 0; i < names.length; ++i){
             	
                     list.add(new ItemStack(itemID, 1, i));
                     

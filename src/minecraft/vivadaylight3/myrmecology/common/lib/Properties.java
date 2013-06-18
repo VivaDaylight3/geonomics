@@ -23,12 +23,30 @@ public class Properties
 	private boolean[] eatsLarva = {false, false, true, false, true, false, false, false};
 	
 	private static List<String> dietList = new ArrayList<String>();
+	
+	Ants ants = new Ants();
+	
+	public int getAntMeta(String name){
+		
+		for (int k = 0; k < Ants.antMeta.length; k++){
+			
+			if(Ants.antNames[k] == name){
+				
+				return Ants.antMeta[k];
+				
+			}
+			
+		}
+		
+		return 0;
+		
+	}
 
 	public static int getLifetime(ItemStack queen)
 	{
 		int meta = queen.getItemDamage();
 		
-		for(int k = 0; k < Myrmecology.antMeta.length; k++){
+		for(int k = 0; k < Ants.antMeta.length; k++){
 			
 			if(meta == k){
 				
@@ -95,7 +113,7 @@ public class Properties
 		
 		int meta = ant.getItemDamage();
 		
-		for(int k = 0; k < Myrmecology.antMeta.length; k++){
+		for(int k = 0; k < Ants.antMeta.length; k++){
 			
 			if(k == meta){
 				
@@ -113,7 +131,7 @@ public class Properties
 		
 		int meta = ant.getItemDamage();
 		
-		for(int k = 0; k < Myrmecology.antMeta.length; k++){
+		for(int k = 0; k < Ants.antMeta.length; k++){
 			
 			if(k == meta){
 				
@@ -131,7 +149,7 @@ public class Properties
 		
 		int meta = ant.getItemDamage();
 		
-		for(int k = 0; k < Myrmecology.antMeta.length; k++){
+		for(int k = 0; k < Ants.antMeta.length; k++){
 			
 			if(k == meta){
 				
@@ -149,7 +167,7 @@ public class Properties
 		
 		int meta = ant.getItemDamage();
 		
-		for(int k = 0; k < Myrmecology.antMeta.length; k++){
+		for(int k = 0; k < Ants.antMeta.length; k++){
 			
 			if(k == meta){
 				

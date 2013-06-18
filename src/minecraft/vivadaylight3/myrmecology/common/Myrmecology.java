@@ -25,6 +25,8 @@ import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
 import vivadaylight3.myrmecology.common.item.ItemAnt;
 import vivadaylight3.myrmecology.common.item.ItemExtractor;
 import vivadaylight3.myrmecology.common.itemblock.ItemBlockAntHill;
+import vivadaylight3.myrmecology.common.lib.Ants;
+import vivadaylight3.myrmecology.common.lib.Breeding;
 import vivadaylight3.myrmecology.common.lib.Variables;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -51,6 +53,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class Myrmecology
 {
 	
+	Ants ants = new Ants();
+	
 	public static final int ID_BLOCK = 1551;
 	public static final int ID_ITEM = 3853;
 	
@@ -60,21 +64,6 @@ public class Myrmecology
 	public static final String MOD_NAME = "Myrmecology";
 	public static final String MOD_VERSION = "0.0.1";
 	public static final String MOD_DEPENDENCIES = "";
-	
-	public final static String[] antNames = {"Black Ant", "Hillside Ant", "Desert Ant", "Argentine Ant", "Field Ant", 
-		"Red Ant", "Hibernus Ant", "Amber Ant"};
-	
-	public final static String[] typeNames = {"Queen", "Drone", "Worker", "Larva"};
-		
-	public final static String[] biomeSubNames = {"forest", "hills", "desert", "swamp", "plains", "jungle", "snow", 
-		"rock"};
-	
-	public final static String[] biomeNames = {"Forest", "Hillside", "Desert", "Swamp", "Flatland", "Jungle", "Snowy", 
-		"Amber"};
-	
-	public final static int[] typeMeta = {0, 1, 2, 3};
-	
-	public final static int[] antMeta = Variables.antMeta();
 	
 	public static Block blockAntFarm;
 	public static int blockAntFarmID;
@@ -172,7 +161,7 @@ public class Myrmecology
 		LanguageRegistry.addName(blockAntFarm, BLOCK_ANTFARM_NAME_HUMAN);
 		LanguageRegistry.addName(itemExtractor, ITEM_EXTRACTOR_NAME_HUMAN);
 		
-		for (int k = 0; k < Variables.getLastInt(Myrmecology.antMeta) + Variables.getLastInt(Myrmecology.typeMeta) + 1; k++){
+		for (int k = 0; k < Variables.getLastInt(ants.antMeta) + Variables.getLastInt(ants.typeMeta) + 1; k++){
 										
 			ItemStack ant = new ItemStack(itemAnt, 1, k);
 			

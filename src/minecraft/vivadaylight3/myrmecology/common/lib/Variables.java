@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import vivadaylight3.myrmecology.common.Myrmecology;
-import vivadaylight3.myrmecology.common.block.BlockAntHill;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
+import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.block.BlockAntHill;
 
 public class Variables
 {
@@ -24,6 +23,8 @@ public class Variables
 	private static List<String> hillList = new ArrayList<String>();
 	
 	private static List<Integer> metaList = new ArrayList<Integer>();
+	
+	//private static int[] metaArray = new int[Ants.antNames.length];
 		
 	public static int getLastInt(int[] array){
 		
@@ -44,31 +45,29 @@ public class Variables
 		return a;
 		
 	}
-	
-	private static int[] metaArray = new int[Myrmecology.antNames.length];
-	
+		
 	public static int[] antMeta(){
+		
+		int[] array = new int[Ants.antNames.length];
 		
 		int i = 0;
 		
-		for (int k = 0; k < Myrmecology.antNames.length; k++){
+		for (int k = 0; k < Ants.antNames.length; k++){
 						
-			metaArray[k] = i;
+			array[k] = i;
 			
-			i = i + Variables.getLastInt(Myrmecology.typeMeta) + 1;
+			i = i + Variables.getLastInt(Ants.typeMeta) + 1;
 			
 		}
 		
-		return metaArray;
+		return array;
 		
 	}
 	
 	public static Icon[] iconsToArray(IconRegister iconRegister, String[] icons){
 		
 		for(int k = 0; k < icons.length; k++){
-			
-			System.out.println("Icon "+k+": "+icons[k]);
-						
+									
 			iconList.add(iconRegister.registerIcon(icons[k]));
 			
 		}
@@ -81,11 +80,11 @@ public class Variables
 	
 	public static String[] antNames(){
 						
-		for (int k = 0; k < Myrmecology.antNames.length; k++){
+		for (int k = 0; k < Ants.antNames.length; k++){
 			
-			for (int i = 0; i < Myrmecology.typeNames.length; i++){
+			for (int i = 0; i < Ants.typeNames.length; i++){
 				
-				nameList.add(Myrmecology.antNames[k] + " " + Myrmecology.typeNames[i]);
+				nameList.add(Ants.antNames[k] + " Ant " + Ants.typeNames[i]);
 				
 			}
 			
@@ -103,9 +102,21 @@ public class Variables
 		
 	}
 	
+	public static String arrayToString(int[][] array){
+		
+		return Arrays.toString(array);
+		
+	}
+	
+	public static String arrayToString(int[] array){
+		
+		return Arrays.toString(array);
+		
+	}
+	
 	public static String[] hillNames(){
 		
-		String[] name = Myrmecology.biomeNames;
+		String[] name = Ants.biomeNames;
 		
 		for (int k = 0; k < name.length; k++){
 						
@@ -121,11 +132,11 @@ public class Variables
 	
 	public static String[] antIconNames(){
 		
-		for (int k = 0; k < Myrmecology.biomeSubNames.length; k++){
+		for (int k = 0; k < Ants.biomeSubNames.length; k++){
 			
-			for(int i = 0; i < Myrmecology.typeNames.length; i++){
+			for(int i = 0; i < Ants.typeNames.length; i++){
 			
-				antIconNameList.add(Myrmecology.TEXTURE_PREFIX + Myrmecology.ANT_PATH + Myrmecology.ITEM_ANT_NAME + "_" + Myrmecology.biomeSubNames[k] + Myrmecology.typeNames[i]);
+				antIconNameList.add(Myrmecology.TEXTURE_PREFIX + Myrmecology.ANT_PATH + Myrmecology.ITEM_ANT_NAME + "_" + Ants.biomeSubNames[k] + Ants.typeNames[i]);
 			}
 				
 		}
@@ -140,13 +151,73 @@ public class Variables
 		
 		for (int k = 0; k < BlockAntHill.hillNames.length; k++){
 			
-			hillIconNameList.add(Myrmecology.TEXTURE_PREFIX + /*Myrmecology.HILL_PATH + */Myrmecology.BLOCK_ANTHILL_NAME + "_" + Myrmecology.biomeSubNames[k]);
+			hillIconNameList.add(Myrmecology.TEXTURE_PREFIX + /*Myrmecology.HILL_PATH + */Myrmecology.BLOCK_ANTHILL_NAME + "_" + Ants.biomeSubNames[k]);
 			
 		}
 		
 		String[] result = hillIconNameList.toArray(new String[0]);
 		
 		return result;
+		
+	}
+	
+	public static int getLastSetInt(int[] array){
+		
+		for(int k = 0; k < array.length; k++){
+			
+			if (array[k] != 0 && !(array[k] > 0) && !(array[k] < 0)){
+				
+				return array[k - 1];
+				
+			}
+			
+		}
+		
+		return getLastInt(array);
+		
+	}
+	
+	public static int getLastSetIndex(int[][] combinations){
+		
+		for(int k = 0; k < combinations.length; k++){
+			
+			if (combinations[k][0] != 0 && !(combinations[k][0] > 0) && !(combinations[k][0] < 0)){
+				
+				return k-1;
+				
+			}
+			
+		}
+		
+		return combinations.length - 1;
+		
+	}
+	
+	public static boolean arrayIndexIsInt(int[][] combinations, int index){
+		
+		if(combinations[index][0] != 0 && combinations[index][1] != 0 && !(combinations[index][0] > 0) && !(combinations[index][1] > 0) && !(combinations[index][0] < 0) && !(combinations[index][1] < 0)){
+			
+			return true;
+			
+		}else{
+			
+			return false;
+			
+		}
+		
+	}
+	
+	public static boolean intIsSet(int[][] array, int index1, int index2){
+		
+		if (array[index1][index2] != 0 && !(array[index1][index2] > 0) && !(array[index1][index2] < 0)){
+			
+			return false;
+			
+		}else{
+			
+			return true;
+			
+		}
 		
 	}
 

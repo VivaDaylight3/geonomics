@@ -1,7 +1,7 @@
 package vivadaylight3.myrmecology.common.handler;
 
+import vivadaylight3.myrmecology.client.gui.GuiAntFarm;
 import vivadaylight3.myrmecology.common.container.ContainerAntFarm;
-import vivadaylight3.myrmecology.common.gui.GuiAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

@@ -41,7 +41,7 @@ public class BlockAntFarm extends BlockContainer
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9){
 		
-		if(!player.isSneaking()){
+		if(!player.isSneaking() && world.isRemote){
 			
 			player.openGui(Myrmecology.instance, 1, world, x, y, z);
 			

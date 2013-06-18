@@ -2,13 +2,14 @@ package vivadaylight3.myrmecology.common.itemblock;
 
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.item.ItemAnt;
+import vivadaylight3.myrmecology.common.lib.Ants;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class ItemBlockAntHill extends ItemBlock {
 
-	public static final String[] subName = Myrmecology.biomeSubNames;
+	public static final String[] subName = Ants.biomeSubNames;
 
 	public ItemBlockAntHill(int par1) {
 		super(par1);

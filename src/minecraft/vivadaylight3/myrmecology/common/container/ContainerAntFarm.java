@@ -13,22 +13,34 @@ public class ContainerAntFarm extends Container
 	public ContainerAntFarm(InventoryPlayer par1InventoryPlayer, TileEntityAntFarm tile)
 	{
 		this.tileEntity = tile;
-		// Bottom slot for battery input
-		this.addSlotToContainer(new Slot(par1InventoryPlayer, 1, 33, 48));
+		// 0, horisontal, vertical. 9 pixels between each slot
+		// Top row
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 0, 5, 13));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 1, 24, 13));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 2, 42, 13));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 3, 60, 13));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 4, 78, 13));
+		
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 5, 6, 31));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 6, 24, 31));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 7, 42, 31));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 8, 60, 31));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 9, 78, 31));
+
+		// Bottom row
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 10, 6, 48));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 11, 24, 48));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 12, 42, 48));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 13, 60, 48));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 14, 78, 48));
+		
+		// ant and food slots
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 15, 111, 31));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 16, 147, 31));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 17, 129, 10));
+		this.addSlotToContainer(new Slot(par1InventoryPlayer, 18, 129, 60));
+
 		int var3;
-
-		for (var3 = 0; var3 < 3; ++var3)
-		{
-			for (int var4 = 0; var4 < 9; ++var4)
-			{
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
-			}
-		}
-
-		for (var3 = 0; var3 < 9; ++var3)
-		{
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 142));
-		}
 
 		tileEntity.playersUsing.add(par1InventoryPlayer.player);
 	}

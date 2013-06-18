@@ -11,6 +11,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.item.ItemAnt;
 import vivadaylight3.myrmecology.common.item.ItemExtractor;
+import vivadaylight3.myrmecology.common.lib.Ants;
+import vivadaylight3.myrmecology.common.lib.Breeding;
+import vivadaylight3.myrmecology.common.lib.Breeding;
 import vivadaylight3.myrmecology.common.lib.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,9 +33,6 @@ public class BlockAntHill extends Block
 	public static final String[] hillNames = Variables.hillNames();
 	
 	public static final int[] hillMeta = {0, 1, 2, 3, 4, 5, 6};
-			/*
-			{"Forest "+NAME, "Hillside "+NAME, "Desert "+NAME, "Swamp "+NAME, 
-		"Plains "+NAME, "Jungle "+NAME, "Snowy "+NAME}; */
 		
 	private static Icon[] icons;
 	
@@ -80,10 +80,19 @@ public class BlockAntHill extends Block
     }
 
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9){
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer player, int par6, float par7, float par8, float par9){
 		
-		par5EntityPlayer.sendChatToPlayer("Icons are: "+Variables.arrayToString(this.iconNames));
+		Breeding breeding = new Breeding();
 		
+		if(breeding.getBreedingResult(0, 1) != null || breeding.getBreedingResult(1, 0) != null){
+			
+			ItemStack ant = breeding.getBreedingResult(0, 1);
+			
+			player.sendChatToPlayer("Have breeding result: "+ItemAnt.names[ant.getItemDamage()]);
+			player.sendChatToPlayer("Damage is: "+ant.getItemDamage());
+			
+		}
+				
 		return true;
 		
 	}
@@ -103,8 +112,8 @@ public class BlockAntHill extends Block
 					
 					if(meta == k){
 						
-						ItemStack drone = new ItemStack(Myrmecology.itemAnt, k + Myrmecology.typeMeta[1], 1);
-						ItemStack queen = new ItemStack(Myrmecology.itemAnt, k + Myrmecology.typeMeta[0], 1);
+						ItemStack drone = new ItemStack(Myrmecology.itemAnt, k + Ants.typeMeta[Ants.getDroneMeta()], 1);
+						ItemStack queen = new ItemStack(Myrmecology.itemAnt, k + Ants.typeMeta[Ants.getQueenMeta()], 1);
 						entity.dropPlayerItem(drone);
 						entity.dropPlayerItem(queen);
 						

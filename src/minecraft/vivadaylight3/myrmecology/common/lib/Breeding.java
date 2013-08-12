@@ -1,233 +1,77 @@
 package vivadaylight3.myrmecology.common.lib;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
-import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.item.ItemAnt;
 
-public class Breeding
-{
+public class Breeding {
+    
+    private static ArrayList<BreedingRecipe> breedingList = new ArrayList<BreedingRecipe>();
+    
+    /**
+     * Adds a new ant breeding recipe
+     * 
+     * @param ant1
+     * @param ant2
+     * @param antOutput
+     */
+    public void addBreeding(ItemAnt ant1, ItemAnt ant2, ItemAnt antOutput) {
 	
-	private static Map breedingList = new HashMap();
-	static Ants ants = new Ants();
-	private static int[][] combinations = new int[ants.getNumAntsOfType(ants.getQueenMeta())][2];
-		/*
-	public static void register(){
-		
-		int[] allBasicDrones = ants.getAllBasicAntsOfType(ants.getDroneMeta());
-		int[] allBasicQueens = ants.getAllBasicAntsOfType(ants.getQueenMeta());
-		System.out.println("Drones: "+Variables.arrayToString(allBasicDrones));
-		System.out.println("Queens: "+Variables.arrayToString(allBasicQueens));
-		
-		for(int k = 0; k < allBasicQueens.length; k++){
-			
-			for(int i = 0; i < allBasicDrones.length; i++){
-				
-				ItemStack common = new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getCommonAntMeta());
-								
-				addBreeding(allBasicQueens[k], allBasicDrones[i], common);
-				System.out.println("Queen: "+allBasicQueens[k]);
-				System.out.println("Drone: "+allBasicDrones[i]);
-				System.out.println("Common: "+common);
-				
-			}
-			
-		}
-		
-		ItemStack result = new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Harvester"));
-		addBreeding(ants.getAntMetaFromString("Common"), ants.getAntMetaFromString("Black"), result);
-		addBreeding(ants.getAntMetaFromString("Common"), ants.getAntMetaFromString("Field"), result);
-				
-	}
+	BreedingRecipe recipe = new BreedingRecipe(ant1, ant2, antOutput);
+	BreedingRecipe recipe2 = new BreedingRecipe(ant2, ant1, antOutput);
 	
-	private static int newQueenDroneCombination(int queen, int drone)
-	{
-		
-		int a = 0;
-		
-		if(!Variables.arrayIndexIsInt(combinations, a)){
-			
-			combinations[a][0] = queen;
-			combinations[a][1] = drone;
-						
-		}else{
-			
-			a = Variables.getLastSetIndex(combinations) + 1;
-			
-			combinations[a][0] = queen;
-			combinations[a][1] = drone;
-			
-		}
-		
-		return a;
-	}
-
-	public static void addBreeding(int queen, int drone, ItemStack result){
-		
-		int a = newQueenDroneCombination(queen, drone);
-		
-		getBreedingList().put(Integer.valueOf(a), result);
-		
-		System.out.println("Added new breeding option: "+combinations[a][0]+", "+combinations[a][1]+"-->"+result);
-		
-	}
-	*/
+	getBreedingList().add(recipe);
+	getBreedingList().add(recipe2);
 	
-	public static Map getBreedingList(){
+    }
+    
+    public static ArrayList<BreedingRecipe> getBreedingList() {
+	
+	return breedingList;
+	
+    }
+    
+    /**
+     * Returns the breeding result from two ants or null if there is no result
+     * 
+     * @param ant1
+     * @param ant2
+     * @return ItemAnt / null
+     */
+    public static ItemStack getBreedingResult(ItemAnt ant1, ItemAnt ant2) {
+	
+	Object[] breedingArray = getBreedingList().toArray();
+	
+	ItemStack item1 = new ItemStack(ant1, 1);
+	ItemStack item2 = new ItemStack(ant2, 1);
+	
+	if (ant1.isHillAnt() && ant2.isHillAnt()) {
+	    
+	    int quantity = Properties.calculateFertility(item1, item2);
 		
-		return breedingList;
-		
+		return new ItemStack(Register.antCommon, quantity, 3);
+	    
 	}
 	
-	public int getQueen(int a){
+	for (int k = 0; k < breedingArray.length; k++) {
+	    
+	    if (((BreedingRecipe) breedingArray[k]).getAnt1() == ant1
+		    && ((BreedingRecipe) breedingArray[k]).getAnt2() == ant2
+		    && ((BreedingRecipe) breedingArray[k]).getAntOutput() != null) {
 		
-		return combinations[a][0];
+		int quantity = Properties.calculateFertility(item1, item2);
 		
+		return new ItemStack(((BreedingRecipe) breedingArray[k]).getAntOutput(), quantity, 3);
+		
+		//return ((BreedingRecipe) breedingArray[k]).getAntOutput();
+		
+	    }
+	    
 	}
 	
-	public int getDrone(int a){
-		
-		return combinations[a][1];
-		
-	}
-		
-	public boolean antsCanBreed(ItemStack queen, ItemStack drone){
-		
-		if(ants.antIsType(queen, ants.getQueenMeta()) && ants.antIsType(drone, ants.getDroneMeta())){
-			
-			int queenMeta = queen.getItemDamage();
-			int droneMeta = drone.getItemDamage();
-			
-			if(getBreedingResult(queenMeta, droneMeta) != null || getBreedingResult(droneMeta, queenMeta) != null){
-				
-				return true;
-				
-			}
-			
-		}
-		
-		return false;
-		
-	}
+	return null;
 	
-	/*
-	public ItemStack getBreedingResult(int queen, int drone){
-		
-		if(haveBreedingResult(queen, drone)){
-		
-			int[][] comb = combinations;
-		
-			for(int k = 0; k < comb.length; k++){
-							
-				if(comb[k][0] == queen && comb[k][1] == drone){
-				
-					return (ItemStack) getBreedingList().get(k);
-									
-				}
-			
-			}
-		
-		}
-		
-		return null;
-		
-	}
-	public boolean haveBreedingResult(int queen, int drone){
-		
-		//int[][] comb = combinations;
-		
-		//System.out.println("Comb is: "+Variables.arrayToString(comb));
-		
-		for(int k = 0; k < combinations.length; k++){
-		
-			System.out.println("Comb["+k+"][0] is: "+combinations[k][0]);
-			System.out.println("Comb["+k+"][1] is: "+combinations[k][1]);
-							
-			if(combinations[k][0] == queen && combinations[k][1] == drone){
-				
-				return true;
-			}
-			
-		}
-		
-		return false;
-		
-	}
-	*/
-	
-	public ItemStack getBreedingResult(int ant1, int ant2){
-		
-		for(int k = 0; k < ants.getAllBasicAntsOfType(ant1).length; k++){
-			
-			for(int i = 0; i < ants.getAllBasicAntsOfType(ant2).length; i++){
-				
-				if(ant1 == ants.getAllBasicAntsOfType(ant1)[k] && ant2 == ants.getAllBasicAntsOfType(ant2)[k]){
-					
-					System.out.println("Common: "+ants.getAntMetaFromString("Common"));
-					return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Common"));
-					
-				}
-				
-			}
-						
-		}
-		
-		if(ant1 == ants.getAntMetaFromString("Common") && (ant2 == ants.getAntMetaFromString("Black") || ant2 == ants.getAntMetaFromString("Field"))){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Harvester"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Harvester") && ant2 == ants.getAntMetaFromString("Black")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Carpenter"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Harvester") && ant2 == ants.getAntMetaFromString("Field")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Mound"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Common") && (ant2 == ants.getAntMetaFromString("Red") || ant2 == ants.getAntMetaFromString("Desert"))){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Barbaric"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Barbaric") && ant2 == ants.getAntMetaFromString("Desert")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Odorous"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Barbaric") && ant2 == ants.getAntMetaFromString("Red")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Hostile"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Common") && (ant2 == ants.getAntMetaFromString("Hibernus") || ant2 == ants.getAntMetaFromString("Amber"))){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Plentiful"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Plentiful") && ant2 == ants.getAntMetaFromString("Amber")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Dredger"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Plentiful") && ant2 == ants.getAntMetaFromString("Hibernus")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Scavenger"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Common") && (ant2 == ants.getAntMetaFromString("Argentine") || ant2 == ants.getAntMetaFromString("Hillside"))){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Cultivator"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Cultivator") && ant2 == ants.getAntMetaFromString("Hillside")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Sprouter"));
-			
-		}else if(ant1 == ants.getAntMetaFromString("Cultivator") && ant2 == ants.getAntMetaFromString("Argentine")){
-			
-			return new ItemStack(Myrmecology.itemAnt.itemID, 1, ants.getAntMetaFromString("Fungal"));
-			
-		}else{
-			
-			return null;
-			
-		}
-		
-	}
-
-	
+    }
+    
 }

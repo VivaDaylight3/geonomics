@@ -4,26 +4,25 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import vivadaylight3.myrmecology.api.BlockAntHill;
+import vivadaylight3.myrmecology.api.Breeding;
+import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
-import vivadaylight3.myrmecology.common.block.BlockAntHill;
-import vivadaylight3.myrmecology.common.block.BlockAntNest;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
-import vivadaylight3.myrmecology.common.block.hills.AntHillForest;
-import vivadaylight3.myrmecology.common.block.hills.AntHillJungle;
+import vivadaylight3.myrmecology.common.block.anthill.AntHillForest;
+import vivadaylight3.myrmecology.common.block.anthill.AntHillJungle;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
-import vivadaylight3.myrmecology.common.item.ItemAnt;
-import vivadaylight3.myrmecology.common.item.ItemExtractor;
-import vivadaylight3.myrmecology.common.item.ants.AntCommon;
-import vivadaylight3.myrmecology.common.item.ants.AntDesert;
-import vivadaylight3.myrmecology.common.item.ants.AntForest;
-import vivadaylight3.myrmecology.common.item.ants.AntSwamp;
-import vivadaylight3.myrmecology.common.item.ants.AntWater;
+import vivadaylight3.myrmecology.common.item.ToolExtractor;
+import vivadaylight3.myrmecology.common.item.ant.AntCommon;
+import vivadaylight3.myrmecology.common.item.ant.AntDesert;
+import vivadaylight3.myrmecology.common.item.ant.AntForest;
+import vivadaylight3.myrmecology.common.item.ant.AntSwamp;
+import vivadaylight3.myrmecology.common.item.ant.AntWater;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -125,9 +124,9 @@ public class Register {
 	
 	config.load();
 	
-	itemExtractor = new ItemExtractor(config.get(
+	itemExtractor = new ToolExtractor(config.get(
 		Configuration.CATEGORY_ITEM, ITEM_EXTRACTOR_NAME, ID_ITEM)
-		.getInt(), ITEM_EXTRACTOR_NAME);
+		.getInt());
 	
 	antForest = new AntForest(config.get(Configuration.CATEGORY_ITEM,
 		"antForest", ID_ITEM + getNewID()).getInt());

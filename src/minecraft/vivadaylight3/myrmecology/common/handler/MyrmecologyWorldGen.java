@@ -2,23 +2,13 @@ package vivadaylight3.myrmecology.common.handler;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenDesert;
-import net.minecraft.world.biome.BiomeGenForest;
-import net.minecraft.world.biome.BiomeGenHills;
-import net.minecraft.world.biome.BiomeGenJungle;
-import net.minecraft.world.biome.BiomeGenPlains;
-import net.minecraft.world.biome.BiomeGenSnow;
-import net.minecraft.world.biome.BiomeGenSwamp;
-import net.minecraft.world.biome.BiomeGenTaiga;
 import net.minecraft.world.chunk.IChunkProvider;
-import vivadaylight3.myrmecology.common.block.BlockAntHill;
+import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Maths;
 import vivadaylight3.myrmecology.common.lib.Register;
-import vivadaylight3.myrmecology.common.lib.Variables;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class MyrmecologyWorldGen implements IWorldGenerator {

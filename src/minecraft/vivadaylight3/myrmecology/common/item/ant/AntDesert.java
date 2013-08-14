@@ -1,29 +1,25 @@
-package vivadaylight3.myrmecology.common.item.ants;
+package vivadaylight3.myrmecology.common.item.ant;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Myrmecology;
-import vivadaylight3.myrmecology.common.item.ItemAnt;
 
-public class AntSwamp extends ItemAnt {
+public class AntDesert extends ItemAnt {
         
-    public AntSwamp(int par1) {
+    public AntDesert(int par1) {
 	super(par1, Myrmecology.MOD_ID);
-	// TODO Auto-generated constructor stub
     }
     
     @Override
     public String getSpeciesName() {
 	// TODO Auto-generated method stub
-	return "Argentine Ant";
+	return "Saharan Ant";
     }
     
     @Override
     public String getSpeciesSubName() {
-	return "antSwamp";
+	return "antDesert";
     }
     
     @Override
@@ -36,12 +32,6 @@ public class AntSwamp extends ItemAnt {
     public int getFertility() {
 	// TODO Auto-generated method stub
 	return 2;
-    }
-    
-    @Override
-    public int getFertilityChance() {
-	// TODO Auto-generated method stub
-	return 0;
     }
     
     @Override
@@ -83,13 +73,14 @@ public class AntSwamp extends ItemAnt {
     @Override
     public String getSpeciesBinomialName() {
 	// TODO Auto-generated method stub
-	return "Antus Swampus";
+	return "Antus Desertus";
     }
     
     @Override
     public BiomeGenBase[] getAntBiomes() {
 	
-	BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBase.swampland };
+	BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBase.desert,
+		BiomeGenBase.desertHills };
 	
 	return biomes;
     }

@@ -1,5 +1,7 @@
-package vivadaylight3.myrmecology.common.lib;
+package vivadaylight3.myrmecology.api;
 
+import vivadaylight3.myrmecology.common.lib.Maths;
+import vivadaylight3.myrmecology.common.lib.Nbt;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

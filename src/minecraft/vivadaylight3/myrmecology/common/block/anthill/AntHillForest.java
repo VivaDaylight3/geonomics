@@ -1,10 +1,9 @@
-package vivadaylight3.myrmecology.common.block.hills;
+package vivadaylight3.myrmecology.common.block.anthill;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import vivadaylight3.myrmecology.common.block.BlockAntHill;
-import vivadaylight3.myrmecology.common.item.ItemAnt;
+import vivadaylight3.myrmecology.api.BlockAntHill;
+import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.lib.Register;
 
 public class AntHillForest extends BlockAntHill{
@@ -30,7 +29,7 @@ public class AntHillForest extends BlockAntHill{
     }
     
     @Override
-    public int getDropQuantity(World world, int x, int y, int z) {
+    public int getDropQuantity() {
 	// TODO Auto-generated method stub
 	return 2;
     }

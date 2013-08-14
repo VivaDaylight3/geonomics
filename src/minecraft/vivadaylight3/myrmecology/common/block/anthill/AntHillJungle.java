@@ -1,11 +1,10 @@
-package vivadaylight3.myrmecology.common.block.hills;
+package vivadaylight3.myrmecology.common.block.anthill;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.common.block.BlockAntHill;
-import vivadaylight3.myrmecology.common.lib.AntDamageSource;
+import vivadaylight3.myrmecology.api.AntDamageSource;
+import vivadaylight3.myrmecology.api.BlockAntHill;
 
 public class AntHillJungle extends BlockAntHill {
 

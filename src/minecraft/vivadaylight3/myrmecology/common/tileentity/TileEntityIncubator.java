@@ -5,16 +5,11 @@ import java.util.Set;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import vivadaylight3.myrmecology.common.container.ContainerAntFarm;
-import vivadaylight3.myrmecology.common.lib.Ants;
-import vivadaylight3.myrmecology.common.lib.Environment;
-import vivadaylight3.myrmecology.common.lib.Properties;
-import vivadaylight3.myrmecology.common.lib.Register;
+import vivadaylight3.myrmecology.api.Metadata;
 
 public class TileEntityIncubator extends TileEntity {
     
@@ -34,7 +29,7 @@ public class TileEntityIncubator extends TileEntity {
     
     private int stackLimit;
     
-    Ants ants = new Ants();
+    Metadata ants = new Metadata();
     
     public int getSizeInventory() {
 	return 19;

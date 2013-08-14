@@ -1,25 +1,27 @@
-package vivadaylight3.myrmecology.common.block;
+package vivadaylight3.myrmecology.api;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import vivadaylight3.myrmecology.common.item.ItemAnt;
-import vivadaylight3.myrmecology.common.item.ItemExtractor;
-import vivadaylight3.myrmecology.common.lib.Ants;
-import vivadaylight3.myrmecology.common.lib.IAntHill;
+import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.lib.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public class BlockAntHill extends Block implements IAntHill{
+/**
+ * Extend this class to create a new ant hill, it is suggested that you override prepareBlock() if you want to 
+ * set a non-standard unlocalised name, creative tab, step sound, hardness, resistance and resource location.
+ * @author samueltebbs
+ */
+public class BlockAntHill extends Block{
+	
+	private Icon icon;
     
     public BlockAntHill(int par1, Material material) {
 	super(par1, material);
@@ -41,12 +43,26 @@ public class BlockAntHill extends Block implements IAntHill{
 	
     }
     
+    @Override
+    public void registerIcons(IconRegister register){
+    	
+    	this.icon = register.registerIcon(Resources.TEXTURE_PREFIX+"antHill_"+this.getHillSubName());
+    	
+    }
+    
+    @Override
+    public Icon getIcon(int par1, int par2)
+    {
+        return this.icon;
+    }
+    
     public String getUnlocalizedName(ItemStack itemStack) {
 	
 	return this.getUnlocalizedName() + getHillSubName();
 	
     }
     
+    @Override
     public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata){
 	
 	return false;
@@ -60,7 +76,7 @@ public class BlockAntHill extends Block implements IAntHill{
 	
 	if(tool != null){
 	
-	    if(tool.getItem() instanceof ItemExtractor){
+	    if(tool.getItem() instanceof ToolExtractor){
 	    
 		return true;
 	    
@@ -81,34 +97,49 @@ public class BlockAntHill extends Block implements IAntHill{
     @Override
     public int damageDropped(int par1)
     {
-        return Ants.getMetaLarva();
+        return Metadata.getMetaLarva();
     }
     
     @Override
     public int quantityDropped(int meta, int fortune, Random random){
 	
-	return this.getDropQuantity(null, 0, 0, 0);
+	return this.getDropQuantity();
 	
     }
     
+    /**
+     * Gets the ant that belongs to this ant hill
+     * 
+     * @return extends ItemAnt
+     */
     public ItemAnt getAnt() {
 	return Register.antForest;
     }
     
+    /**
+     * Gets the in-game name used for the ant hill
+     * 
+     * @return String
+     */
     public String getHillName() {
 	// TODO Auto-generated method stub
 	return "Default";
     }
     
+    /**
+     * Gets the internal name used for the ant hill
+     * 
+     * @return String
+     */
     public String getHillSubName() {
 	return "default";
     }
     
-    public int getDropQuantity(World world, int x, int y, int z) {
-	// TODO Auto-generated method stub
-	return 2;
-    }
-    
+    /**
+     * Gets the biomes in which this hill can generate.
+     * 
+     * @return BiomeGenBase[]
+     */
     public BiomeGenBase[] getHillBiomes() {
 	
 	BiomeGenBase[] biomes = new BiomeGenBase[1];
@@ -119,16 +150,36 @@ public class BlockAntHill extends Block implements IAntHill{
 	
     }
     
+    /**
+     * Returns true if the hill uses Myrmecology's own world generator
+     * 
+     * @param meta
+     * @return boolean
+     */
     public boolean usesNativeGeneration() {
 	// TODO Auto-generated method stub
 	return false;
     }
     
+    /**
+     * Returns the block IDs that need to be touching the hill in order for it
+     * to be generated (only use if usesNativeGenerartion returns true)
+     * 
+     * @return int[] (null if none are required)
+     */
     public int[] getRequiredTouchingBlocks() {
 	return null;
     }
 
-    @Override
+    /**
+     * Gets the amount of larvae to drop when extracting from the ant hill
+     * 
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return int
+     */
     public int getDropQuantity() {
 	// TODO Auto-generated method stub
 	return 0;

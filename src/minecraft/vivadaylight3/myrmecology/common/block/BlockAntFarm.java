@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.lib.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
-import vivadaylight3.myrmecology.common.lib.Variables;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 
 public class BlockAntFarm extends BlockContainer {
@@ -41,6 +40,7 @@ public class BlockAntFarm extends BlockContainer {
 	func_111022_d(Myrmecology.MOD_ID_LOWER + name);
     }
     
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
 	    EntityPlayer player, int par6, float par7, float par8, float par9) {
 	

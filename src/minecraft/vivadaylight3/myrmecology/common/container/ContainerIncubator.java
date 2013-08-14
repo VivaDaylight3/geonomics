@@ -1,6 +1,5 @@
 package vivadaylight3.myrmecology.common.container;
 
-import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

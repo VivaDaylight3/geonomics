@@ -1,9 +1,9 @@
-package vivadaylight3.myrmecology.common.lib;
+package vivadaylight3.myrmecology.api;
 
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
-import vivadaylight3.myrmecology.common.item.ItemAnt;
+import vivadaylight3.myrmecology.common.lib.Register;
 
 public class Breeding {
     
@@ -11,7 +11,6 @@ public class Breeding {
     
     /**
      * Adds a new ant breeding recipe
-     * 
      * @param ant1
      * @param ant2
      * @param antOutput
@@ -37,7 +36,7 @@ public class Breeding {
      * 
      * @param ant1
      * @param ant2
-     * @return ItemAnt / null
+     * @return ItemStack / null
      */
     public static ItemStack getBreedingResult(ItemAnt ant1, ItemAnt ant2) {
 	
@@ -63,9 +62,7 @@ public class Breeding {
 		int quantity = Properties.calculateFertility(item1, item2);
 		
 		return new ItemStack(((BreedingRecipe) breedingArray[k]).getAntOutput(), quantity, 3);
-		
-		//return ((BreedingRecipe) breedingArray[k]).getAntOutput();
-		
+				
 	    }
 	    
 	}

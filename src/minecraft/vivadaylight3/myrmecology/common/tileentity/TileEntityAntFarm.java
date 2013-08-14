@@ -11,10 +11,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.biome.BiomeGenBase;
-import vivadaylight3.myrmecology.common.item.ItemAnt;
-import vivadaylight3.myrmecology.common.lib.Breeding;
+import vivadaylight3.myrmecology.api.Breeding;
+import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.Properties;
 import vivadaylight3.myrmecology.common.lib.Environment;
-import vivadaylight3.myrmecology.common.lib.Properties;
 import vivadaylight3.myrmecology.common.lib.Time;
 import vivadaylight3.myrmecology.common.lib.Variables;
 
@@ -38,6 +38,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	
     }
     
+    @Override
     public int getSizeInventory() {
 	
 	return 19;
@@ -333,10 +334,12 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	
     }
     
+    @Override
     public ItemStack getStackInSlot(int par1) {
 	return this.contents[par1];
     }
     
+    @Override
     public ItemStack decrStackSize(int par1, int par2) {
 	if (this.contents[par1] != null) {
 	    ItemStack itemstack;
@@ -361,6 +364,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	}
     }
     
+    @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
 	if (this.contents[par1] != null) {
 	    ItemStack itemstack = this.contents[par1];
@@ -371,6 +375,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	}
     }
     
+    @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
 	this.contents[par1] = par2ItemStack;
 	
@@ -382,10 +387,12 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	this.onInventoryChanged();
     }
     
+    @Override
     public String getInvName() {
 	return "Ant Farm";
     }
     
+    @Override
     public boolean isInvNameLocalized() {
 	return false;
     }
@@ -433,10 +440,12 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	}
     }
     
+    @Override
     public int getInventoryStackLimit() {
 	return 64;
     }
     
+    @Override
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 	return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
 		this.zCoord) != this ? false
@@ -458,6 +467,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	}
     }
     
+    @Override
     public void openChest() {
 	
 	if (numPlayersUsing < 0) {
@@ -476,6 +486,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 		this.yCoord - 1, this.zCoord, this.getBlockType().blockID);
     }
     
+    @Override
     public void closeChest() {
 	if (this.getBlockType() != null
 		&& this.getBlockType() instanceof BlockChest) {

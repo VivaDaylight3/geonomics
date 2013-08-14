@@ -3,7 +3,6 @@ package vivadaylight3.myrmecology.common.block;
 import java.util.Random;
 
 import net.minecraft.block.BlockMushroom;
-import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
 public class BlockFungi extends BlockMushroom {

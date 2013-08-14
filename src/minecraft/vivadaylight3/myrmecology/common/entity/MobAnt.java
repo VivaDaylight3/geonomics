@@ -14,7 +14,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -36,6 +35,7 @@ public class MobAnt extends EntityTameable{
 	this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, moveSpeed));
     }
     
+    @Override
     public void onLivingUpdate()
     {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote)
@@ -51,31 +51,37 @@ public class MobAnt extends EntityTameable{
         super.onLivingUpdate();
     }
     
+    @Override
     protected int getDropItemId()
     {
         return -1;
     }
     
+    @Override
     protected void dropRareDrop(int par1)
     {
 	//this.dropItem(Item.cake.itemID, 1);
     }
     
+    @Override
     protected String getLivingSound()
     {
         return "mob.zombie.say";
     }
  
+    @Override
     protected String getHurtSound()
     {
         return "mob.zombie.hurt";
     }
     
+    @Override
     protected String getDeathSound()
     {
         return "mob.zombie.death";
     }
     
+    @Override
     protected void playStepSound(int par1, int par2, int par3, int par4)
     {
         this.worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
@@ -86,6 +92,7 @@ public class MobAnt extends EntityTameable{
 	return null;
     }
     
+    @Override
     public EnumCreatureAttribute getCreatureAttribute()
     {
         return EnumCreatureAttribute.ARTHROPOD;
@@ -96,6 +103,7 @@ public class MobAnt extends EntityTameable{
      return 4;
     }
     
+    @Override
     protected boolean isAIEnabled()
     {
         return true;
@@ -108,6 +116,7 @@ public class MobAnt extends EntityTameable{
 	
     }
     
+    @Override
     public int getTotalArmorValue()
     {
 	

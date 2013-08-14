@@ -2,7 +2,6 @@ package vivadaylight3.myrmecology.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -28,6 +27,7 @@ public class GuiAntFarm extends GuiContainer {
      * Draw the foreground layer for the GuiContainer (everything in front of
      * the items)
      */
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 	String s = this.tile.isInvNameLocalized() ? this.tile.getInvName()
 		: StatCollector.translateToLocal(this.tile.getInvName());
@@ -43,6 +43,7 @@ public class GuiAntFarm extends GuiContainer {
      * Draw the background layer for the GuiContainer (everything behind the
      * items)
      */
+    @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2,
 	    int par3) {
 	

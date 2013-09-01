@@ -4,6 +4,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Time;
 
@@ -22,7 +23,7 @@ public class AntWater extends ItemAnt {
 
     @Override
     public String getSpeciesSubName() {
-	return "antWater";
+	return Reference.ANT_WATER_NAME;
     }
 
     @Override
@@ -86,12 +87,6 @@ public class AntWater extends ItemAnt {
 		BiomeGenBase.frozenRiver, BiomeGenBase.ocean };
 
 	return biomes;
-    }
-
-    @Override
-    public String[] getTypeNames() {
-
-	return Register.standardTypeNames;
     }
 
     @Override

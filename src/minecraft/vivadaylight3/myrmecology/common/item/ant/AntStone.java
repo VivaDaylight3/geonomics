@@ -4,6 +4,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntStone extends ItemAnt {
@@ -21,7 +22,7 @@ public class AntStone extends ItemAnt {
 
     @Override
     public String getSpeciesSubName() {
-	return "antStone";
+	return Reference.ANT_STONE_NAME;
     }
 
     @Override

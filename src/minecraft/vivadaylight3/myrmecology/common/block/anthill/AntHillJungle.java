@@ -8,6 +8,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.AntDamageSource;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 
 public class AntHillJungle extends BlockAntHill {
@@ -33,7 +34,7 @@ public class AntHillJungle extends BlockAntHill {
     @Override
     public String getHillName() {
 	// TODO Auto-generated method stub
-	return "Jungle Ant Hill";
+	return Reference.HILL_JUNGLE_NAME;
     }
 
     @Override

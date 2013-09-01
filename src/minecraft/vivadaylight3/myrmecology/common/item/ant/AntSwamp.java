@@ -4,6 +4,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Time;
 
@@ -22,7 +23,7 @@ public class AntSwamp extends ItemAnt {
 
     @Override
     public String getSpeciesSubName() {
-	return "antSwamp";
+	return Reference.ANT_SWAMP_NAME;
     }
 
     @Override
@@ -85,12 +86,6 @@ public class AntSwamp extends ItemAnt {
 	BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBase.swampland };
 
 	return biomes;
-    }
-
-    @Override
-    public String[] getTypeNames() {
-
-	return Register.standardTypeNames;
     }
 
     @Override

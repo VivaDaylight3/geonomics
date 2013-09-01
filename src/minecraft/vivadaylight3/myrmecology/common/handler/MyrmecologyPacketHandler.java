@@ -4,10 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import vivadaylight3.myrmecology.common.Myrmecology;
-
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import vivadaylight3.myrmecology.common.Reference;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
@@ -24,7 +23,7 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
     public void onPacketData(INetworkManager manager,
 	    Packet250CustomPayload packet, Player player) {
 
-	if (packet.channel.equals(Myrmecology.MOD_CHANNEL)) {
+	if (packet.channel.equals(Reference.MOD_CHANNEL)) {
 
 	    handlePacket(packet);
 

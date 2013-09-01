@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 
 public class AntHillSwamp extends BlockAntHill {
@@ -27,7 +28,7 @@ public class AntHillSwamp extends BlockAntHill {
 
     @Override
     public String getHillSubName() {
-	return "antHillSwamp";
+	return Reference.HILL_SWAMP_NAME;
     }
 
     @Override

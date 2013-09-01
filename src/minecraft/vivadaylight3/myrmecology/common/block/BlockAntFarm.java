@@ -15,6 +15,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
@@ -38,7 +39,7 @@ public class BlockAntFarm extends BlockContainer {
 	setResistance(1.0F);
 	name = par2Name;
 	this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.9F, 0.9F);
-	func_111022_d(Myrmecology.MOD_ID_LOWER + name);
+	func_111022_d(Reference.MOD_ID.toLowerCase() + name);
     }
 
     @Override

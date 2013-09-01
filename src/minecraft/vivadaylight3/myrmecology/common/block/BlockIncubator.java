@@ -9,6 +9,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
@@ -26,23 +27,23 @@ public class BlockIncubator extends Block {
     public BlockIncubator(int par1, String par2Name) {
 	super(par1, Material.wood);
 	setStepSound(Block.soundWoodFootstep);
-	setUnlocalizedName(Register.BLOCK_INCUBATOR_NAME);
+	setUnlocalizedName(Reference.BLOCK_INCUBATOR_NAME);
 	setCreativeTab(Register.tabMyrmecology);
 	setHardness(1.0F);
 	setResistance(1.0F);
 	name = par2Name;
-	func_111022_d(Myrmecology.MOD_ID_LOWER + name);
+	func_111022_d(Reference.MOD_ID.toLowerCase() + name);
     }
 
     @Override
     public void registerIcons(IconRegister iconRegister) {
 
 	iconTop = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Register.BLOCK_INCUBATOR_NAME + "_Top");
+		+ Reference.BLOCK_INCUBATOR_NAME + "_Top");
 	iconSideOn = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Register.BLOCK_INCUBATOR_NAME + "_Side_On");
+		+ Reference.BLOCK_INCUBATOR_NAME + "_Side_On");
 	iconSideOff = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Register.BLOCK_INCUBATOR_NAME + "_Side_Off");
+		+ Reference.BLOCK_INCUBATOR_NAME + "_Side_Off");
 
     }
 

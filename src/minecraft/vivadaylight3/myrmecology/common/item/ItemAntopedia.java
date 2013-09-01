@@ -1,6 +1,7 @@
 package vivadaylight3.myrmecology.common.item;
 
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,8 +16,8 @@ public class ItemAntopedia extends Item {
 	super(par1);
 	setCreativeTab(CreativeTabs.tabRedstone);
 	setMaxStackSize(1);
-	setUnlocalizedName(Register.ITEM_ANTOPEDIA_NAME);
-	func_111206_d(Resources.TEXTURE_PREFIX + Register.ITEM_ANTOPEDIA_NAME);
+	setUnlocalizedName(Reference.ITEM_ANTOPEDIA_NAME);
+	func_111206_d(Resources.TEXTURE_PREFIX + Reference.ITEM_ANTOPEDIA_NAME);
     }
 
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player,

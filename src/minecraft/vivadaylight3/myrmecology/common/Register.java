@@ -68,25 +68,16 @@ public class Register {
 
     public static int latestID = 0;
 
-    public static final String[] standardTypeNames = new String[] { "Queen",
-	    "Drone", "Worker", "Larva" };
-
-    public static final String BLOCK_ANTFARM_NAME = "antFarm";
     public static Block blockAntFarm;
 
-    public static final String BLOCK_ANTHILL_NAME = "antHill";
     public static Block blockAntHill;
 
-    public static final String BLOCK_INCUBATOR_NAME = "incubator";
     public static Block blockIncubator;
 
-    public static final String BLOCK_FUNGI_NAME = "fungi";
     public static Block blockFungi;
 
-    public static final String ITEM_EXTRACTOR_NAME = "extractor";
     public static Item itemExtractor;
 
-    public static final String ITEM_ANTOPEDIA_NAME = "antopedia";
     public static ItemAntopedia itemAntopedia;
 
     public static AntHillForest hillForest;
@@ -141,51 +132,46 @@ public class Register {
 	config.load();
 
 	blockAntFarm = new BlockAntFarm(config.get(
-		Configuration.CATEGORY_BLOCK, BLOCK_ANTFARM_NAME, ID_BLOCK)
-		.getInt(), BLOCK_ANTFARM_NAME);
+		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTFARM_NAME, ID_BLOCK)
+		.getInt(), Reference.BLOCK_ANTFARM_NAME);
 
 	blockIncubator = new BlockIncubator(config.get(
-		Configuration.CATEGORY_BLOCK, BLOCK_INCUBATOR_NAME,
-		ID_BLOCK + 2).getInt(), BLOCK_INCUBATOR_NAME);
+		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INCUBATOR_NAME,
+		ID_BLOCK + 2).getInt(), Reference.BLOCK_INCUBATOR_NAME);
 
-	blockFungi = new BlockFungi(config.get(Configuration.CATEGORY_BLOCK,
-		BLOCK_FUNGI_NAME, ID_BLOCK + 3).getInt());
+	/*blockFungi = new BlockFungi(config.get(Configuration.CATEGORY_BLOCK,
+		Reference.BLOCK_FUNGI_NAME, ID_BLOCK + 3).getInt());
+		*/
 
 	hillForest = new AntHillForest(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillForest", ID_BLOCK + 4).getInt());
+		Reference.HILL_FOREST_NAME, ID_BLOCK + 4).getInt());
 
 	hillDesert = new AntHillDesert(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillDesert", ID_BLOCK + 5).getInt());
+		Reference.HILL_DESERT_NAME, ID_BLOCK + 5).getInt());
 
 	hillJungle = new AntHillJungle(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillJungle", ID_BLOCK + 6).getInt());
+		Reference.HILL_JUNGLE_NAME, ID_BLOCK + 6).getInt());
 
 	hillPlains = new AntHillPlains(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillPlains", ID_BLOCK + 7).getInt(), Material.ground);
+		Reference.HILL_PLAINS_NAME, ID_BLOCK + 7).getInt(), Material.ground);
 
 	hillSnow = new AntHillSnow(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillSnow", ID_BLOCK + 8).getInt(), Material.ground);
+		Reference.HILL_SNOW_NAME, ID_BLOCK + 8).getInt(), Material.ground);
 
 	hillStone = new AntHillStone(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillStone", ID_BLOCK + 9).getInt(), Material.ground);
+		Reference.HILL_STONE_NAME, ID_BLOCK + 9).getInt(), Material.ground);
 
 	hillSwamp = new AntHillSwamp(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillSwamp", ID_BLOCK + 10).getInt(), Material.ground);
+		Reference.HILL_SWAMP_NAME, ID_BLOCK + 10).getInt(), Material.ground);
 
 	hillWater = new AntHillWater(config.get(Configuration.CATEGORY_BLOCK,
-		"antHillWater", ID_BLOCK + 11).getInt(), Material.ground);
-
-	/*
-	 * hillJungle = new
-	 * AntHillJungle(config.get(Configuration.CATEGORY_BLOCK,
-	 * "antHillJungle", ID_BLOCK + 5).getInt());
-	 */
+		Reference.HILL_WATER_NAME, ID_BLOCK + 11).getInt(), Material.ground);
 
 	config.save();
 
-	addBlock(blockIncubator, "Ant Incubator", "antIncubator");
-	addBlock(blockAntFarm, "Ant Farm", "antFarm");
-	addBlock(blockFungi, "Agaricus Fungi", "antFungi");
+	addBlock(blockIncubator, "Ant Incubator", Reference.BLOCK_INCUBATOR_NAME);
+	addBlock(blockAntFarm, "Ant Farm", Reference.BLOCK_ANTFARM_NAME);
+	addBlock(blockFungi, "Agaricus Fungi", Reference.BLOCK_FUNGI_NAME);
 	addBlock(hillForest, hillForest.getHillName(),
 		hillForest.getHillSubName());
 	addBlock(hillDesert, hillDesert.getHillName(),
@@ -206,147 +192,147 @@ public class Register {
 	config.load();
 
 	itemExtractor = new ToolExtractor(config.get(
-		Configuration.CATEGORY_ITEM, ITEM_EXTRACTOR_NAME, ID_ITEM)
+		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME, ID_ITEM)
 		.getInt());
 
 	itemAntopedia = new ItemAntopedia(config.get(
-		Configuration.CATEGORY_ITEM, ITEM_EXTRACTOR_NAME, ID_ITEM + 1)
+		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME, ID_ITEM + 1)
 		.getInt());
 
 	antForest = new AntForest(config.get(Configuration.CATEGORY_ITEM,
-		"antForest", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_FOREST_NAME, ID_ITEM + getNewID()).getInt());
 
 	antDesert = new AntDesert(config.get(Configuration.CATEGORY_ITEM,
-		"antDesert", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_DESERT_NAME, ID_ITEM + getNewID()).getInt());
 
 	antCommon = new AntCommon(config.get(Configuration.CATEGORY_ITEM,
-		"antCommon", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_COMMON_NAME, ID_ITEM + getNewID()).getInt());
 
 	antWater = new AntWater(config.get(Configuration.CATEGORY_ITEM,
-		"antWater", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_WATER_NAME, ID_ITEM + getNewID()).getInt());
 
 	antSwamp = new AntSwamp(config.get(Configuration.CATEGORY_ITEM,
 		"antSwamp", ID_ITEM + getNewID()).getInt());
 
 	antJungle = new AntJungle(config.get(Configuration.CATEGORY_ITEM,
-		"antJungle", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_JUNGLE_NAME, ID_ITEM + getNewID()).getInt());
 
 	antPlains = new AntPlains(config.get(Configuration.CATEGORY_ITEM,
-		"antPlains", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_PLAINS_NAME, ID_ITEM + getNewID()).getInt());
 
 	antSnow = new AntSnow(config.get(Configuration.CATEGORY_ITEM,
-		"antSnow", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_SNOW_NAME, ID_ITEM + getNewID()).getInt());
 
 	antStone = new AntStone(config.get(Configuration.CATEGORY_ITEM,
-		"antStone", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_STONE_NAME, ID_ITEM + getNewID()).getInt());
 
 	antHarvester = new AntHarvester(config.get(Configuration.CATEGORY_ITEM,
-		"antHarvester", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_HARVESTER_NAME, ID_ITEM + getNewID()).getInt());
 
 	antCarpenter = new AntCarpenter(config.get(Configuration.CATEGORY_ITEM,
-		"antCarpenter", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_CARPENTER_NAME, ID_ITEM + getNewID()).getInt());
 
 	antMound = new AntMound(config.get(Configuration.CATEGORY_ITEM,
-		"antMound", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_MOUND_NAME, ID_ITEM + getNewID()).getInt());
 
 	antBarbaric = new AntBarbaric(config.get(Configuration.CATEGORY_ITEM,
-		"antBarbaric", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_BARBARIC_NAME, ID_ITEM + getNewID()).getInt());
 
 	antOdourous = new AntOdourous(config.get(Configuration.CATEGORY_ITEM,
-		"antOdourous", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_ODOUROUS_NAME, ID_ITEM + getNewID()).getInt());
 
 	antHostile = new AntHostile(config.get(Configuration.CATEGORY_ITEM,
-		"antHostile", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_HOSTILE_NAME, ID_ITEM + getNewID()).getInt());
 
 	antPlentiful = new AntPlentiful(config.get(Configuration.CATEGORY_ITEM,
-		"antPlentiful", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_PLENTIFUL_NAME, ID_ITEM + getNewID()).getInt());
 
 	antDredger = new AntDredger(config.get(Configuration.CATEGORY_ITEM,
-		"antDredger", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_DREDGER_NAME, ID_ITEM + getNewID()).getInt());
 
 	antScavenger = new AntScavenger(config.get(Configuration.CATEGORY_ITEM,
-		"antScavenger", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_SCAVENGER_NAME, ID_ITEM + getNewID()).getInt());
 
 	antCultivator = new AntCultivator(config.get(
-		Configuration.CATEGORY_ITEM, "antCultivator",
+		Configuration.CATEGORY_ITEM, Reference.ANT_CULTIVATOR_NAME,
 		ID_ITEM + getNewID()).getInt());
 
 	antSprouter = new AntSprouter(config.get(Configuration.CATEGORY_ITEM,
-		"antSprouter", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_SPROUTER_NAME, ID_ITEM + getNewID()).getInt());
 
 	antFungal = new AntFungal(config.get(Configuration.CATEGORY_ITEM,
-		"antFungal", ID_ITEM + getNewID()).getInt());
+		Reference.ANT_FUNGAL_NAME, ID_ITEM + getNewID()).getInt());
 
 	config.save();
 
 	// TODO
 
-	addItem(itemExtractor, "Ant Extractor", "antExtractor");
+	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
-	addItem(itemAntopedia, "Antopedia", "antopedia");
+	addItem(itemAntopedia, "Antopedia", Reference.ITEM_ANTOPEDIA_NAME);
 
 	addItem(antForest, antForest.getNames(),
-		Myrmecology.MOD_ID + antForest.getSpeciesSubName());
+		Reference.MOD_ID + antForest.getSpeciesSubName());
 
 	addItem(antDesert, antDesert.getNames(),
-		Myrmecology.MOD_ID + antDesert.getSpeciesSubName());
+		Reference.MOD_ID + antDesert.getSpeciesSubName());
 
 	addItem(antCommon, antCommon.getNames(),
-		Myrmecology.MOD_ID + antCommon.getSpeciesSubName());
+		Reference.MOD_ID + antCommon.getSpeciesSubName());
 
 	addItem(antWater, antWater.getNames(),
-		Myrmecology.MOD_ID + antWater.getSpeciesSubName());
+		Reference.MOD_ID + antWater.getSpeciesSubName());
 
 	addItem(antSwamp, antSwamp.getNames(),
-		Myrmecology.MOD_ID + antSwamp.getSpeciesSubName());
+		Reference.MOD_ID + antSwamp.getSpeciesSubName());
 
 	addItem(antJungle, antJungle.getNames(),
-		Myrmecology.MOD_ID + antJungle.getSpeciesSubName());
+		Reference.MOD_ID + antJungle.getSpeciesSubName());
 
 	addItem(antPlains, antPlains.getNames(),
-		Myrmecology.MOD_ID + antPlains.getSpeciesSubName());
+		Reference.MOD_ID + antPlains.getSpeciesSubName());
 
 	addItem(antSnow, antSnow.getNames(),
-		Myrmecology.MOD_ID + antSnow.getSpeciesSubName());
+		Reference.MOD_ID + antSnow.getSpeciesSubName());
 
 	addItem(antStone, antStone.getNames(),
-		Myrmecology.MOD_ID + antStone.getSpeciesSubName());
+		Reference.MOD_ID + antStone.getSpeciesSubName());
 
-	addItem(antHarvester, antHarvester.getNames(), Myrmecology.MOD_ID
+	addItem(antHarvester, antHarvester.getNames(), Reference.MOD_ID
 		+ antHarvester.getSpeciesSubName());
 
-	addItem(antCarpenter, antCarpenter.getNames(), Myrmecology.MOD_ID
+	addItem(antCarpenter, antCarpenter.getNames(), Reference.MOD_ID
 		+ antCarpenter.getSpeciesSubName());
 
 	addItem(antMound, antMound.getNames(),
-		Myrmecology.MOD_ID + antMound.getSpeciesSubName());
+		Reference.MOD_ID + antMound.getSpeciesSubName());
 
-	addItem(antBarbaric, antBarbaric.getNames(), Myrmecology.MOD_ID
+	addItem(antBarbaric, antBarbaric.getNames(), Reference.MOD_ID
 		+ antBarbaric.getSpeciesSubName());
 
-	addItem(antOdourous, antOdourous.getNames(), Myrmecology.MOD_ID
+	addItem(antOdourous, antOdourous.getNames(), Reference.MOD_ID
 		+ antOdourous.getSpeciesSubName());
 
-	addItem(antHostile, antHostile.getNames(), Myrmecology.MOD_ID
+	addItem(antHostile, antHostile.getNames(), Reference.MOD_ID
 		+ antHostile.getSpeciesSubName());
 
-	addItem(antPlentiful, antPlentiful.getNames(), Myrmecology.MOD_ID
+	addItem(antPlentiful, antPlentiful.getNames(), Reference.MOD_ID
 		+ antPlentiful.getSpeciesSubName());
 
-	addItem(antDredger, antDredger.getNames(), Myrmecology.MOD_ID
+	addItem(antDredger, antDredger.getNames(), Reference.MOD_ID
 		+ antDredger.getSpeciesSubName());
 
-	addItem(antScavenger, antScavenger.getNames(), Myrmecology.MOD_ID
+	addItem(antScavenger, antScavenger.getNames(), Reference.MOD_ID
 		+ antScavenger.getSpeciesSubName());
 
-	addItem(antCultivator, antCultivator.getNames(), Myrmecology.MOD_ID
+	addItem(antCultivator, antCultivator.getNames(), Reference.MOD_ID
 		+ antCultivator.getSpeciesSubName());
 
-	addItem(antSprouter, antSprouter.getNames(), Myrmecology.MOD_ID
+	addItem(antSprouter, antSprouter.getNames(), Reference.MOD_ID
 		+ antSprouter.getSpeciesSubName());
 
 	addItem(antFungal, antFungal.getNames(),
-		Myrmecology.MOD_ID + antFungal.getSpeciesSubName());
+		Reference.MOD_ID + antFungal.getSpeciesSubName());
 
     }
 
@@ -379,11 +365,11 @@ public class Register {
 
     public static void registerCreativeTab() {
 
-	tabMyrmecology = new CreativeTabs("tab" + Myrmecology.MOD_ID);
+	tabMyrmecology = new CreativeTabs("tab" + Reference.MOD_ID);
 
 	LanguageRegistry.instance().addStringLocalization(
-		"itemGroup." + "tab" + Myrmecology.MOD_ID, "en_US",
-		Myrmecology.MOD_NAME);
+		"itemGroup." + "tab" + Reference.MOD_ID, "en_US",
+		Reference.MOD_NAME);
 
     }
 
@@ -403,7 +389,7 @@ public class Register {
     public static void registerTileEntities() {
 
 	GameRegistry.registerTileEntity(TileEntityAntFarm.class,
-		BLOCK_ANTFARM_NAME);
+		Reference.BLOCK_ANTFARM_NAME);
 
     }
 

@@ -1,6 +1,7 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.common.Reference;
 
 public class AntCultivator extends ItemAnt {
 
@@ -19,7 +20,7 @@ public class AntCultivator extends ItemAnt {
     @Override
     public String getSpeciesSubName() {
 
-	return "antCultivator";
+	return Reference.ANT_CULTIVATOR_NAME;
 
     }
 

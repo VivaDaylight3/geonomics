@@ -2,6 +2,7 @@ package vivadaylight3.myrmecology.common.item.ant;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntCarpenter extends ItemAnt {
@@ -20,7 +21,7 @@ public class AntCarpenter extends ItemAnt {
     @Override
     public String getSpeciesSubName() {
 
-	return "antCarpenter";
+	return Reference.ANT_CARPENTER_NAME;
 
     }
 

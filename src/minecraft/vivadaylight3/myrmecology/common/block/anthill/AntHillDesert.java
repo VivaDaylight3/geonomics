@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 
 public class AntHillDesert extends BlockAntHill {
@@ -26,7 +27,7 @@ public class AntHillDesert extends BlockAntHill {
 
     @Override
     public String getHillSubName() {
-	return "antHillDesert";
+	return Reference.HILL_DESERT_NAME;
     }
 
     @Override

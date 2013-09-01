@@ -4,6 +4,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Myrmecology;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Time;
 
@@ -21,7 +22,7 @@ public class AntDesert extends ItemAnt {
 
     @Override
     public String getSpeciesSubName() {
-	return "antDesert";
+	return Reference.ANT_DESERT_NAME;
     }
 
     @Override
@@ -84,14 +85,6 @@ public class AntDesert extends ItemAnt {
 		BiomeGenBase.desertHills };
 
 	return biomes;
-    }
-
-    @Override
-    public String[] getTypeNames() {
-
-	String[] names = new String[] { "Queen", "Drone", "Worker", "Larva" };
-
-	return Register.standardTypeNames;
     }
 
 }

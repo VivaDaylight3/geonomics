@@ -2,12 +2,6 @@ package vivadaylight3.myrmecology.api;
 
 public class Metadata {
 
-    public static final String[] antNames = { "Black", "Mangrove", "Desert",
-	    "Argentine", "Field", "Red", "Hibernus", "Amber", "Common",
-	    "Harvester", "Carpenter", "Mound", "Barbaric", "Odorous",
-	    "Hostile", "Plentiful", "Dredger", "Scavenger", "Cultivator",
-	    "Sprouter", "Fungal" };
-
     /**
      * Holds the metadata values for each type of ant
      */

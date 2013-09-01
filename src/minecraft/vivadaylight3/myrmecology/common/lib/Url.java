@@ -27,13 +27,7 @@ public class Url {
 
     public static String getLatestVersion() throws IOException {
 
-	String parameters = "http://login.minecraft.net/?user="
-		+ URLEncoder.encode("samuel.tebbs@yahoo.com", "UTF-8")
-		+ "&password=" + URLEncoder.encode("Pears33", "UTF-8")
-		+ "&version=" + 13;
-	String result = openUrl(parameters);
-
-	return result;
+	return null;
 
     }
 

@@ -49,12 +49,6 @@ public class Myrmecology {
 	Configuration config = new Configuration(
 		event.getSuggestedConfigurationFile());
 
-	try {
-	    System.out.println("###VERSION### = " + Url.getLatestVersion());
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-
 	Register.setConfig(config);
 
 	Register.registerCreativeTab();

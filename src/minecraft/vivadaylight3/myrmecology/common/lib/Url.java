@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+@Deprecated
 public class Url {
 
     public static String openUrl(String par) throws IOException {

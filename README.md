@@ -21,7 +21,10 @@ The file names for GUIs should look like this: <item/block's subname>.png
 Example: antFarm.png
 If you look at the BLOCK_ANTFARM_NAME variable, its value is "antFarm".
 
-All block textures should go in "myrmecology / resources / assets / myrmecology / textures / blocks /"
-All GUI textures should go in "myrmecology / resources / assets / myrmecology / textures / gui /"
-All item textures (except ants) should go in "myrmecology / resources / assets / myrmecology / textures / items /"
-All ant textures should go in "myrmecology / resources / assets / myrmecology / textures / items / ant /"
+All block textures should go in "myrmecology / resources / assets / myrmecology / textures / blocks /".
+
+All GUI textures should go in "myrmecology / resources / assets / myrmecology / textures / gui /".
+
+All item textures (except ants) should go in "myrmecology / resources / assets / myrmecology / textures / items /".
+
+All ant textures should go in "myrmecology / resources / assets / myrmecology / textures / items / ant /".

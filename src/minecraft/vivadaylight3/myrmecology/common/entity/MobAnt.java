@@ -17,7 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class MobAnt extends EntityTameable{
+public class MobAnt extends EntityTameable {
 
     private float moveSpeed;
 
@@ -25,103 +25,98 @@ public class MobAnt extends EntityTameable{
 	super(par1World);
 	this.moveSpeed = 0.25F;
 	this.tasks.addTask(0, new EntityAISwimming(this));
-	this.tasks.addTask(1, new EntityAIFollowOwner(this, field_110152_bk, 40, 2));
+	this.tasks.addTask(1, new EntityAIFollowOwner(this, field_110152_bk,
+		40, 2));
 	this.tasks.addTask(4, new EntityAILeapAtTarget(this, moveSpeed));
-	this.tasks.addTask(7, new EntityAIMoveThroughVillage(this, moveSpeed, true));
-	this.tasks.addTask(4, new EntityAIMoveTowardsTarget(this, field_110152_bk, moveSpeed));
+	this.tasks.addTask(7, new EntityAIMoveThroughVillage(this, moveSpeed,
+		true));
+	this.tasks.addTask(4, new EntityAIMoveTowardsTarget(this,
+		field_110152_bk, moveSpeed));
 	this.tasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
 	this.tasks.addTask(3, new EntityAIOwnerHurtTarget(this));
 	this.tasks.addTask(6, new EntityAISit(this));
-	this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, moveSpeed));
+	this.tasks.addTask(5, new EntityAIWatchClosest(this,
+		EntityPlayer.class, moveSpeed));
     }
-    
-    @Override
-    public void onLivingUpdate()
-    {
-        if (this.worldObj.isDaytime() && !this.worldObj.isRemote)
-        {
-            float var1 = this.getBrightness(1.0F);
 
-            if (var1 > 0.5F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F)
-            {
-                this.setFire(8);
-            }
-        }
+    @Override
+    public void onLivingUpdate() {
+	if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
+	    float var1 = this.getBrightness(1.0F);
 
-        super.onLivingUpdate();
+	    if (var1 > 0.5F
+		    && this.worldObj.canBlockSeeTheSky(
+			    MathHelper.floor_double(this.posX),
+			    MathHelper.floor_double(this.posY),
+			    MathHelper.floor_double(this.posZ))
+		    && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
+		this.setFire(8);
+	    }
+	}
+
+	super.onLivingUpdate();
     }
-    
+
     @Override
-    protected int getDropItemId()
-    {
-        return -1;
+    protected int getDropItemId() {
+	return -1;
     }
-    
+
     @Override
-    protected void dropRareDrop(int par1)
-    {
-	//this.dropItem(Item.cake.itemID, 1);
+    protected void dropRareDrop(int par1) {
+	// this.dropItem(Item.cake.itemID, 1);
     }
-    
+
     @Override
-    protected String getLivingSound()
-    {
-        return "mob.zombie.say";
+    protected String getLivingSound() {
+	return "mob.zombie.say";
     }
- 
+
     @Override
-    protected String getHurtSound()
-    {
-        return "mob.zombie.hurt";
+    protected String getHurtSound() {
+	return "mob.zombie.hurt";
     }
-    
+
     @Override
-    protected String getDeathSound()
-    {
-        return "mob.zombie.death";
+    protected String getDeathSound() {
+	return "mob.zombie.death";
     }
-    
+
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4)
-    {
-        this.worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+    protected void playStepSound(int par1, int par2, int par3, int par4) {
+	this.worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
     }
 
     @Override
     public EntityAgeable createChild(EntityAgeable entityageable) {
 	return null;
     }
-    
+
     @Override
-    public EnumCreatureAttribute getCreatureAttribute()
-    {
-        return EnumCreatureAttribute.ARTHROPOD;
+    public EnumCreatureAttribute getCreatureAttribute() {
+	return EnumCreatureAttribute.ARTHROPOD;
     }
-    
-    public int getAttackStrength(Entity par1Entity)
-    {
-     return 4;
+
+    public int getAttackStrength(Entity par1Entity) {
+	return 4;
     }
-    
+
     @Override
-    protected boolean isAIEnabled()
-    {
-        return true;
+    protected boolean isAIEnabled() {
+	return true;
     }
-    
-    public String getTexture()
-    {
-	
+
+    public String getTexture() {
+
 	return "/Tutorial/Tutorialmob.png";
-	
+
     }
-    
+
     @Override
-    public int getTotalArmorValue()
-    {
-	
-        return 2;
-        
+    public int getTotalArmorValue() {
+
+	return 2;
+
     }
-    
+
 }

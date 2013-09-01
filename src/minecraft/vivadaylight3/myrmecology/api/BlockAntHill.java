@@ -10,103 +10,105 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
-import vivadaylight3.myrmecology.common.lib.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 
 /**
- * Extend this class to create a new ant hill, it is suggested that you override prepareBlock() if you want to 
- * set a non-standard unlocalised name, creative tab, step sound, hardness, resistance and resource location.
+ * Extend this class to create a new ant hill, it is suggested that you override
+ * prepareBlock() if you want to set a non-standard unlocalised name, creative
+ * tab, step sound, hardness, resistance and resource location.
+ * 
  * @author samueltebbs
  */
-public class BlockAntHill extends Block{
-	
-	private Icon icon;
-    
+public class BlockAntHill extends Block {
+
+    private Icon icon;
+
     public BlockAntHill(int par1, Material material) {
 	super(par1, material);
-	
+
 	prepareBlock();
-	
+
 	Register.addHill(this);
-	
+
     }
-    
-    private void prepareBlock(){
-	
+
+    private void prepareBlock() {
+
 	setUnlocalizedName(this.getHillSubName());
 	setCreativeTab(Register.tabMyrmecology);
 	setStepSound(Block.soundGrassFootstep);
 	setHardness(1.0F);
 	setResistance(1.0F);
-	func_111022_d(Resources.TEXTURE_PREFIX+this.getHillSubName());
-	
+	func_111022_d(Resources.TEXTURE_PREFIX + this.getHillSubName());
+
     }
-    
+
     @Override
-    public void registerIcons(IconRegister register){
-    	
-    	this.icon = register.registerIcon(Resources.TEXTURE_PREFIX+"antHill_"+this.getHillSubName());
-    	
+    public void registerIcons(IconRegister register) {
+
+	this.icon = register.registerIcon(Resources.TEXTURE_PREFIX
+		+ this.getHillSubName());
+
     }
-    
+
     @Override
-    public Icon getIcon(int par1, int par2)
-    {
-        return this.icon;
+    public Icon getIcon(int par1, int par2) {
+	return this.icon;
     }
-    
+
     public String getUnlocalizedName(ItemStack itemStack) {
-	
+
 	return this.getUnlocalizedName() + getHillSubName();
-	
+
     }
-    
+
     @Override
-    public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata){
-	
+    public boolean canSilkHarvest(World world, EntityPlayer player, int x,
+	    int y, int z, int metadata) {
+
 	return false;
-	
+
     }
-    
+
     @Override
-    public boolean canHarvestBlock(EntityPlayer player, int meta){
-	
+    public boolean canHarvestBlock(EntityPlayer player, int meta) {
+
 	ItemStack tool = player.getCurrentEquippedItem();
-	
-	if(tool != null){
-	
-	    if(tool.getItem() instanceof ToolExtractor){
-	    
+
+	if (tool != null) {
+
+	    if (tool.getItem() instanceof ToolExtractor) {
+
 		return true;
-	    
+
 	    }
-	    
+
 	}
-	
+
 	return false;
     }
-    
+
     @Override
-    public int idDropped(int par1, Random par2Random, int par3){
-	
-	return this.getAnt().itemID;
-	
+    public int idDropped(int par1, Random par2Random, int par3) {
+
+	return this.getAnt().getAntID();
+
     }
-    
+
     @Override
-    public int damageDropped(int par1)
-    {
-        return Metadata.getMetaLarva();
+    public int damageDropped(int par1) {
+	return Metadata.getMetaLarva();
     }
-    
+
     @Override
-    public int quantityDropped(int meta, int fortune, Random random){
-	
+    public int quantityDropped(int meta, int fortune, Random random) {
+
 	return this.getDropQuantity();
-	
+
     }
-    
+
     /**
      * Gets the ant that belongs to this ant hill
      * 
@@ -115,7 +117,7 @@ public class BlockAntHill extends Block{
     public ItemAnt getAnt() {
 	return Register.antForest;
     }
-    
+
     /**
      * Gets the in-game name used for the ant hill
      * 
@@ -125,7 +127,7 @@ public class BlockAntHill extends Block{
 	// TODO Auto-generated method stub
 	return "Default";
     }
-    
+
     /**
      * Gets the internal name used for the ant hill
      * 
@@ -134,22 +136,22 @@ public class BlockAntHill extends Block{
     public String getHillSubName() {
 	return "default";
     }
-    
+
     /**
      * Gets the biomes in which this hill can generate.
      * 
      * @return BiomeGenBase[]
      */
     public BiomeGenBase[] getHillBiomes() {
-	
+
 	BiomeGenBase[] biomes = new BiomeGenBase[1];
-	
+
 	biomes[0] = BiomeGenBase.forest;
-	
+
 	return biomes;
-	
+
     }
-    
+
     /**
      * Returns true if the hill uses Myrmecology's own world generator
      * 
@@ -160,7 +162,19 @@ public class BlockAntHill extends Block{
 	// TODO Auto-generated method stub
 	return false;
     }
-    
+
+    /**
+     * Returns true if the ant hill should generate underground (only used if
+     * usesNativeGeneration == true)
+     * 
+     * @return boolean
+     */
+    public boolean isUnderground() {
+
+	return false;
+
+    }
+
     /**
      * Returns the block IDs that need to be touching the hill in order for it
      * to be generated (only use if usesNativeGenerartion returns true)
@@ -184,5 +198,5 @@ public class BlockAntHill extends Block{
 	// TODO Auto-generated method stub
 	return 0;
     }
-    
+
 }

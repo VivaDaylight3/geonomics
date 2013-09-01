@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import vivadaylight3.myrmecology.common.container.ContainerIncubator;
+import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.relauncher.Side;
@@ -16,13 +16,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiIncubator extends GuiContainer {
     public TileEntityIncubator tile;
-    
+
     public GuiIncubator(InventoryPlayer playerInventory,
 	    TileEntityIncubator tileEntity, World world, int x, int y, int z) {
 	super(new ContainerIncubator(playerInventory, tileEntity));
 	this.tile = tileEntity;
     }
-    
+
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of
      * the items)
@@ -38,7 +38,7 @@ public class GuiIncubator extends GuiContainer {
 		StatCollector.translateToLocal("container.inventory"), 8,
 		this.ySize - 96 + 2, 4210752);
     }
-    
+
     /**
      * Draw the background layer for the GuiContainer (everything behind the
      * items)

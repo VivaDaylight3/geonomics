@@ -1,0 +1,104 @@
+package vivadaylight3.myrmecology.common.item.ant;
+
+import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.common.lib.Time;
+
+public class AntBarbaric extends ItemAnt {
+
+    public AntBarbaric(int par1) {
+	super(par1);
+    }
+
+    @Override
+    public String getSpeciesName() {
+
+	return "Barbaric Ant";
+
+    }
+
+    @Override
+    public String getSpeciesSubName() {
+
+	return "antBarbaric";
+
+    }
+
+    @Override
+    public String getSpeciesBinomialName() {
+
+	return "Eciton burchellii";
+
+    }
+
+    @Override
+    public boolean eatsSweet() {
+	// TODO Auto-generated method stub
+	return true;
+    }
+
+    @Override
+    public boolean eatsSavoury() {
+	// TODO Auto-generated method stub
+	return true;
+    }
+
+    @Override
+    public boolean eatsMeat() {
+	// TODO Auto-generated method stub
+	return true;
+    }
+
+    @Override
+    public boolean eatsLarvae() {
+	// TODO Auto-generated method stub
+	return true;
+    }
+
+    @Override
+    public int getFertility() {
+
+	return 2;
+
+    }
+
+    @Override
+    public int getMaturingTime() {
+
+	return Time.getTicksFromMinutes(10);
+
+    }
+
+    @Override
+    public boolean getWinged() {
+
+	return true;
+
+    }
+
+    @Override
+    public BiomeGenBase[] getAntBiomes() {
+
+	BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBase.desert,
+		BiomeGenBase.desertHills, BiomeGenBase.jungle,
+		BiomeGenBase.jungleHills };
+
+	return biomes;
+
+    }
+
+    @Override
+    public int getLifetime() {
+
+	return Time.getTicksFromMinutes(10);
+
+    }
+
+    @Override
+    public boolean getNocturnal() {
+
+	return true;
+
+    }
+
+}

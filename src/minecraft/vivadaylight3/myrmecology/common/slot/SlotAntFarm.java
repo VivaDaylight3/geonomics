@@ -8,10 +8,10 @@ public class SlotAntFarm extends Slot {
     /** The player that is using the GUI where this slot resides. */
     private EntityPlayer thePlayer;
     private int field_75228_b;
-    
+
     public SlotAntFarm(EntityPlayer par1EntityPlayer,
 	    IInventory par2IInventory, int par3, int par4, int par5) {
 	super(par2IInventory, par3, par4, par5);
     }
-    
+
 }

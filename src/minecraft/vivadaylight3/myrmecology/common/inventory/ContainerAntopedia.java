@@ -16,15 +16,13 @@ public class ContainerAntopedia extends Container {
 
     public InventoryItem inventory;
 
-    private ItemStack containerStack;
+    public ItemStack containerStack;
 
     private int slotID;
     
     public static int numRows = 3;
     public static int numColumns = 1;
-    
-    public static final String REGISTERED_ANTS_KEY = "registeredAnts";
-    
+        
     private ArrayList<ItemAnt> registerAntList = new ArrayList<ItemAnt>();
 
     public ContainerAntopedia(InventoryItem inventoryItem, EntityPlayer player) {

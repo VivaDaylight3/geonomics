@@ -67,9 +67,9 @@ public class InventoryItem implements IInventory {
 
     @Override
     public ItemStack getStackInSlotOnClosing(int i) {
-		
+
 	return this.getStackInSlot(i);
-	
+
     }
 
     @Override
@@ -108,7 +108,7 @@ public class InventoryItem implements IInventory {
 
     @Override
     public void onInventoryChanged() {
-	
+
 	for (int i = 0; i < this.getSizeInventory(); ++i) {
 	    if (this.getStackInSlot(i) != null
 		    && this.getStackInSlot(i).stackSize == 0)

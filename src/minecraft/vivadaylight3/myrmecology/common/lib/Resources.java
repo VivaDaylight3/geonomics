@@ -10,7 +10,8 @@ public class Resources {
 
     public static final String FORMAT = ".png";
 
-    public static final String TEXTURE_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
+    public static final String TEXTURE_PREFIX = Reference.MOD_ID.toLowerCase()
+	    + ":";
 
     public static final String TEXTURE_LOCATION = "textures/";
 

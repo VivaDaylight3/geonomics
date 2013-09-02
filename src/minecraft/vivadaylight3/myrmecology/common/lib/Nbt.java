@@ -4,6 +4,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class Nbt {
+    
+    public static boolean hasTag(ItemStack itemStack){
+	
+	return itemStack.hasTagCompound();
+	
+    }
 
     public static void setTag(ItemStack itemStack) {
 

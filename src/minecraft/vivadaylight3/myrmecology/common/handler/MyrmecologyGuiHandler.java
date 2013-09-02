@@ -33,7 +33,7 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 		    (TileEntityIncubator) tileEntity);
 
 	case Register.GUI_ID_ANTOPEDIA:
-	    return null;
+	    return new ContainerAntopedia(new InventoryItem(player.getHeldItem()), player);
 
 	}
 

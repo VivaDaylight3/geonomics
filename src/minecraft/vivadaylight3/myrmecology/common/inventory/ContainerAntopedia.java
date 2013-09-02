@@ -1,12 +1,11 @@
 package vivadaylight3.myrmecology.common.inventory;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import vivadaylight3.myrmecology.api.ItemAnt;
@@ -19,14 +18,21 @@ public class ContainerAntopedia extends Container {
 
     private ItemStack containerStack;
 
-    public boolean needsUpdate;
-
     private int slotID;
+    
+    public static int numRows = 3;
+    public static int numColumns = 1;
+    
+    public static final String REGISTERED_ANTS_KEY = "registeredAnts";
+    
+    private ArrayList<ItemAnt> registerAntList = new ArrayList<ItemAnt>();
 
     public ContainerAntopedia(InventoryItem inventoryItem, EntityPlayer player) {
 
 	this.inventory = inventoryItem;
 	this.containerStack = player.getHeldItem();
+	
+	Nbt.setTag(this.containerStack);
 
 	int slotID = 0;
 
@@ -39,9 +45,21 @@ public class ContainerAntopedia extends Container {
 	    antIDs[k] = ((ItemAnt) ants[k]).getAntID();
 
 	}
+	
+	addSlotToContainer(new SlotInventoryItem(this.inventory, antIDs, slotID, 62,
+		17));
 
-	addSlotToContainer(new SlotInventoryItem(this.inventory, antIDs,
-		slotID, 26, 17 + 2 * 18));
+	/*
+	for (int i = 0; i < numRows; i++) {
+	    for (int j = 0; j < numColumns; j++) {
+
+		addSlotToContainer(new SlotInventoryItem(this.inventory, antIDs, slotID, 62 + j * 18,
+			17 + i * 18));
+		slotID++;
+
+	    }
+	}
+	*/
 
 	bindPlayerInventory(player.inventory);
     }
@@ -84,7 +102,7 @@ public class ContainerAntopedia extends Container {
 	    }
 	}
     }
-    
+
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
 
@@ -122,108 +140,98 @@ public class ContainerAntopedia extends Container {
 	}
 	return stack;
     }
-    
+
     @Override
-    protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
-    {
-             boolean flag1 = false;
-             int k = par2;
+    protected boolean mergeItemStack(ItemStack par1ItemStack, int par2,
+	    int par3, boolean par4) {
+	boolean flag1 = false;
+	int k = par2;
 
-             if (par4)
-             {
-                     k = par3 - 1;
-             }
+	if (par4) {
+	    k = par3 - 1;
+	}
 
-             Slot slot;
-             ItemStack itemstack1;
+	Slot slot;
+	ItemStack itemstack1;
 
-             if (par1ItemStack.isStackable())
-             {
-                     while (par1ItemStack.stackSize > 0 && (!par4 && k < par3 || par4 && k >= par2))
-                     {
-                             slot = (Slot) this.inventorySlots.get(k);
-                             itemstack1 = slot.getStack();
+	if (par1ItemStack.isStackable()) {
+	    while (par1ItemStack.stackSize > 0
+		    && (!par4 && k < par3 || par4 && k >= par2)) {
+		slot = (Slot) this.inventorySlots.get(k);
+		itemstack1 = slot.getStack();
 
-                             if (itemstack1 != null && itemstack1.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1))
-                             {
-                                     int l = itemstack1.stackSize + par1ItemStack.stackSize;
+		if (itemstack1 != null
+			&& itemstack1.itemID == par1ItemStack.itemID
+			&& (!par1ItemStack.getHasSubtypes() || par1ItemStack
+				.getItemDamage() == itemstack1.getItemDamage())
+			&& ItemStack.areItemStackTagsEqual(par1ItemStack,
+				itemstack1)) {
+		    int l = itemstack1.stackSize + par1ItemStack.stackSize;
 
-                                     if (l <= par1ItemStack.getMaxStackSize() && l <= slot.getSlotStackLimit())
-                                     {
-                                             par1ItemStack.stackSize = 0;
-                                             itemstack1.stackSize = l;
-                                             this.inventory.onInventoryChanged();
-                                             flag1 = true;
-                                     }
-                                     else if (itemstack1.stackSize < par1ItemStack.getMaxStackSize() && l < slot.getSlotStackLimit())
-                                     {
-                                             par1ItemStack.stackSize -= par1ItemStack.getMaxStackSize() - itemstack1.stackSize;
-                                             itemstack1.stackSize = par1ItemStack.getMaxStackSize();
-                                             this.inventory.onInventoryChanged();
-                                             flag1 = true;
-                                     }
-                             }
+		    if (l <= par1ItemStack.getMaxStackSize()
+			    && l <= slot.getSlotStackLimit()) {
+			par1ItemStack.stackSize = 0;
+			itemstack1.stackSize = l;
+			this.inventory.onInventoryChanged();
+			flag1 = true;
+		    } else if (itemstack1.stackSize < par1ItemStack
+			    .getMaxStackSize() && l < slot.getSlotStackLimit()) {
+			par1ItemStack.stackSize -= par1ItemStack
+				.getMaxStackSize() - itemstack1.stackSize;
+			itemstack1.stackSize = par1ItemStack.getMaxStackSize();
+			this.inventory.onInventoryChanged();
+			flag1 = true;
+		    }
+		}
 
-                             if (par4)
-                             {
-                                     --k;
-                             }
-                             else
-                             {
-                                     ++k;
-                             }
-                     }
-             }
+		if (par4) {
+		    --k;
+		} else {
+		    ++k;
+		}
+	    }
+	}
 
-             if (par1ItemStack.stackSize > 0)
-             {
-                     if (par4)
-                     {
-                             k = par3 - 1;
-                     }
-                     else
-                     {
-                             k = par2;
-                     }
+	if (par1ItemStack.stackSize > 0) {
+	    if (par4) {
+		k = par3 - 1;
+	    } else {
+		k = par2;
+	    }
 
-                     while (!par4 && k < par3 || par4 && k >= par2)
-                     {
-                     slot = (Slot)this.inventorySlots.get(k);
-                             itemstack1 = slot.getStack();
-                    
-                             if (itemstack1 == null)
-                             {
-                             int l = par1ItemStack.stackSize;
+	    while (!par4 && k < par3 || par4 && k >= par2) {
+		slot = (Slot) this.inventorySlots.get(k);
+		itemstack1 = slot.getStack();
 
-                                     if (l <= slot.getSlotStackLimit())
-                                     {
-                                             slot.putStack(par1ItemStack.copy());
-                                             par1ItemStack.stackSize = 0;
-                                             this.inventory.onInventoryChanged();
-                                             flag1 = true;
-                                             break;
-                                     }
-                                     else
-                                     {
-                                     this.putStackInSlot(k, new ItemStack(par1ItemStack.getItem(), slot.getSlotStackLimit()));
-                                             par1ItemStack.stackSize -= slot.getSlotStackLimit();
-                                             this.inventory.onInventoryChanged();
-                                             flag1 = true;
-                                     }
-                             }
+		if (itemstack1 == null) {
+		    int l = par1ItemStack.stackSize;
 
-                             if (par4)
-                             {
-                                     --k;
-                             }
-                             else
-                             {
-                                     ++k;
-                             }
-                     }
-             }
+		    if (l <= slot.getSlotStackLimit()) {
+			slot.putStack(par1ItemStack.copy());
+			par1ItemStack.stackSize = 0;
+			this.inventory.onInventoryChanged();
+			flag1 = true;
+			break;
+		    } else {
+			this.putStackInSlot(
+				k,
+				new ItemStack(par1ItemStack.getItem(), slot
+					.getSlotStackLimit()));
+			par1ItemStack.stackSize -= slot.getSlotStackLimit();
+			this.inventory.onInventoryChanged();
+			flag1 = true;
+		    }
+		}
 
-             return flag1;
+		if (par4) {
+		    --k;
+		} else {
+		    ++k;
+		}
+	    }
+	}
+
+	return flag1;
     }
 
     @Override

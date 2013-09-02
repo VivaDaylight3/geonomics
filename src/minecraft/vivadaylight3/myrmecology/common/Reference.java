@@ -2,32 +2,33 @@ package vivadaylight3.myrmecology.common;
 
 /**
  * This class holds the names of blocks, items and mod details
+ * 
  * @author samueltebbs
- *
+ * 
  */
 public class Reference {
-    
+
     public static final String MOD_ID = "Myrmecology";
     public static final String MOD_CHANNEL = MOD_ID;
     public static final String MOD_NAME = MOD_ID;
     public static final String MOD_VERSION = "0.0.2";
     public static final String MOD_DEPENDENCIES = "";
-    
+
     // Ant types
     public static final String[] standardTypeNames = new String[] { "Queen",
 	    "Drone", "Worker", "Larva" };
-    
-    //Blocks
+
+    // Blocks
     public static final String BLOCK_ANTFARM_NAME = "antFarm";
     public static final String BLOCK_ANTHILL_NAME = "antHill";
     public static final String BLOCK_INCUBATOR_NAME = "incubator";
     public static final String BLOCK_FUNGI_NAME = "fungi";
-    
-    //Items
+
+    // Items
     public static final String ITEM_EXTRACTOR_NAME = "extractor";
     public static final String ITEM_ANTOPEDIA_NAME = "antopedia";
-    
-    //Ant hills
+
+    // Ant hills
     public static final String HILL_FOREST_NAME = "antHillForest";
     public static final String HILL_DESERT_NAME = "antHillDesert";
     public static final String HILL_JUNGLE_NAME = "antHillJungle";
@@ -36,8 +37,8 @@ public class Reference {
     public static final String HILL_STONE_NAME = "antHillStone";
     public static final String HILL_SWAMP_NAME = "antHillSwamp";
     public static final String HILL_WATER_NAME = "antHillWater";
-    
-    //Ants
+
+    // Ants
     public static final String ANT_BARBARIC_NAME = "antBarbaric";
     public static final String ANT_CARPENTER_NAME = "antCarpenter";
     public static final String ANT_COMMON_NAME = "antCommon";
@@ -59,5 +60,5 @@ public class Reference {
     public static final String ANT_STONE_NAME = "antStone";
     public static final String ANT_SWAMP_NAME = "antSwamp";
     public static final String ANT_WATER_NAME = "antWater";
-    
+
 }

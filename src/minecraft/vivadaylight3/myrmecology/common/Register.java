@@ -12,7 +12,6 @@ import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.Breeding;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
-import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillDesert;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillForest;
@@ -74,8 +73,6 @@ public class Register {
 
     public static Block blockIncubator;
 
-    public static Block blockFungi;
-
     public static Item itemExtractor;
 
     public static ItemAntopedia itemAntopedia;
@@ -132,16 +129,12 @@ public class Register {
 	config.load();
 
 	blockAntFarm = new BlockAntFarm(config.get(
-		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTFARM_NAME, ID_BLOCK)
-		.getInt(), Reference.BLOCK_ANTFARM_NAME);
+		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTFARM_NAME,
+		ID_BLOCK).getInt(), Reference.BLOCK_ANTFARM_NAME);
 
 	blockIncubator = new BlockIncubator(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INCUBATOR_NAME,
 		ID_BLOCK + 2).getInt(), Reference.BLOCK_INCUBATOR_NAME);
-
-	/*blockFungi = new BlockFungi(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.BLOCK_FUNGI_NAME, ID_BLOCK + 3).getInt());
-		*/
 
 	hillForest = new AntHillForest(config.get(Configuration.CATEGORY_BLOCK,
 		Reference.HILL_FOREST_NAME, ID_BLOCK + 4).getInt());
@@ -153,25 +146,30 @@ public class Register {
 		Reference.HILL_JUNGLE_NAME, ID_BLOCK + 6).getInt());
 
 	hillPlains = new AntHillPlains(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_PLAINS_NAME, ID_BLOCK + 7).getInt(), Material.ground);
+		Reference.HILL_PLAINS_NAME, ID_BLOCK + 7).getInt(),
+		Material.ground);
 
 	hillSnow = new AntHillSnow(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_SNOW_NAME, ID_BLOCK + 8).getInt(), Material.ground);
+		Reference.HILL_SNOW_NAME, ID_BLOCK + 8).getInt(),
+		Material.ground);
 
 	hillStone = new AntHillStone(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_STONE_NAME, ID_BLOCK + 9).getInt(), Material.ground);
+		Reference.HILL_STONE_NAME, ID_BLOCK + 9).getInt(),
+		Material.ground);
 
 	hillSwamp = new AntHillSwamp(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_SWAMP_NAME, ID_BLOCK + 10).getInt(), Material.ground);
+		Reference.HILL_SWAMP_NAME, ID_BLOCK + 10).getInt(),
+		Material.ground);
 
 	hillWater = new AntHillWater(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_WATER_NAME, ID_BLOCK + 11).getInt(), Material.ground);
+		Reference.HILL_WATER_NAME, ID_BLOCK + 11).getInt(),
+		Material.ground);
 
 	config.save();
 
-	addBlock(blockIncubator, "Ant Incubator", Reference.BLOCK_INCUBATOR_NAME);
+	addBlock(blockIncubator, "Ant Incubator",
+		Reference.BLOCK_INCUBATOR_NAME);
 	addBlock(blockAntFarm, "Ant Farm", Reference.BLOCK_ANTFARM_NAME);
-	addBlock(blockFungi, "Agaricus Fungi", Reference.BLOCK_FUNGI_NAME);
 	addBlock(hillForest, hillForest.getHillName(),
 		hillForest.getHillSubName());
 	addBlock(hillDesert, hillDesert.getHillName(),
@@ -192,12 +190,12 @@ public class Register {
 	config.load();
 
 	itemExtractor = new ToolExtractor(config.get(
-		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME, ID_ITEM)
-		.getInt());
+		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
+		ID_ITEM).getInt());
 
 	itemAntopedia = new ItemAntopedia(config.get(
-		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME, ID_ITEM + 1)
-		.getInt());
+		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
+		ID_ITEM + 1).getInt());
 
 	antForest = new AntForest(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_FOREST_NAME, ID_ITEM + getNewID()).getInt());

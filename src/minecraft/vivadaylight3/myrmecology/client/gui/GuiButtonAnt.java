@@ -23,5 +23,11 @@ public class GuiButtonAnt extends GuiButtonSizeable {
 	}
 	
     }
+    
+    public ItemAnt getAnt(){
+	
+	return this.ant;
+	
+    }
 
 }

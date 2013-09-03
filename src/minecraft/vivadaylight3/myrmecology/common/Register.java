@@ -267,7 +267,7 @@ public class Register {
 
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
-	addItem(itemAntopedia, "Antopedia", Reference.ITEM_ANTOPEDIA_NAME);
+	addItem(itemAntopedia, "Myrmopedia", Reference.ITEM_ANTOPEDIA_NAME);
 
 	addItem(antForest, antForest.getNames(),
 		Reference.MOD_ID + antForest.getSpeciesSubName());

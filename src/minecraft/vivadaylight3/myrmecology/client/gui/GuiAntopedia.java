@@ -7,6 +7,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 
 import org.lwjgl.opengl.GL11;
 
@@ -23,6 +24,9 @@ public class GuiAntopedia extends GuiContainer {
     private ContainerAntopedia container;
     private ItemStack antopedia;
     
+    //protected int xSize = 200; //From 176
+   // protected int ySize = 250; //From 166
+    
     public static final String REGISTERED_ANTS_KEY = "registeredAnts";
     
     private GuiButtonSizeable button1Names;
@@ -35,10 +39,12 @@ public class GuiAntopedia extends GuiContainer {
     
     private String selectedScreen = "ants";
         
-    private int infoButtonWidth = 76;
-    private int infoButtonHeight = 20;
+    private int infoButtonWidth = 20;
+    private int infoButtonHeight = 15;
     
     private int buttonID;
+    
+    private ItemAnt selectedAnt;
 
     public GuiAntopedia(ContainerAntopedia parcontainer, EntityPlayer player) {
 
@@ -46,6 +52,8 @@ public class GuiAntopedia extends GuiContainer {
 	this.inventory = parcontainer.inventory;
 	this.container = parcontainer;
 	this.antopedia = parcontainer.containerStack;
+	this.selectedScreen = "ants";
+	selectedAnt = null;
 
     }
     
@@ -55,35 +63,12 @@ public class GuiAntopedia extends GuiContainer {
         super.initGui();
         
         this.buttonList.clear();
-        this.buttonList.add(this.button1Names = new GuiButtonSizeable(0, this.width / 3 - 150, 47, "Names", infoButtonWidth, infoButtonHeight));
-        this.buttonList.add(this.button2Info = new GuiButtonSizeable(1, this.width / 3 - 150, 70, "Info", infoButtonWidth, infoButtonHeight));
-        this.buttonList.add(this.button3Breeding = new GuiButtonSizeable(2, this.width / 3 - 150, 93, "Breeding", infoButtonWidth, infoButtonHeight));
-        this.buttonList.add(this.button4Ants = new GuiButtonSizeable(3, this.width / 3 - 150, 116, "Ants", infoButtonWidth, infoButtonHeight));
+        this.buttonList.add(this.button1Names = new GuiButtonSizeable(0, 277, 64, "1", infoButtonWidth, infoButtonHeight));
+        this.buttonList.add(this.button2Info = new GuiButtonSizeable(1, 277, 80, "2", infoButtonWidth, infoButtonHeight));
+        this.buttonList.add(this.button3Breeding = new GuiButtonSizeable(2, 277, 96, "3", infoButtonWidth, infoButtonHeight));
+        //this.buttonList.add(this.button4Ants = new GuiButtonSizeable(3, this.width / 3 + 110, 98, "4", infoButtonWidth, infoButtonHeight));
 
-        this.buttonID = 3;
-        
-        for(int k = 0; k < Register.getAntList().toArray().length; k++){
-            
-            if(Nbt.hasKey(antopedia, ((ItemAnt) Register.getAntList().toArray()[k]).getSpeciesSubName())){
-        	
-        	this.registeredAnts.add((ItemAnt) Register.getAntList().toArray()[k]);
-        	
-            }
-            
-        }
-        
-        int offset = 23;
-        
-        for(int i = 0; i < this.registeredAnts.toArray().length; i++){
-                        
-            this.buttonList.add(new GuiButtonAnt(this.buttonID, this.width / 3, 24 + offset, 
-        	    ((ItemAnt) this.registeredAnts.toArray()[i]).getSpeciesName(), 100, 20, 
-        	    (ItemAnt) this.registeredAnts.toArray()[i]));
-            this.buttonID++;
-            
-            offset += 23;
-            
-        }
+        this.buttonID = 2;
         
     }
     
@@ -102,9 +87,9 @@ public class GuiAntopedia extends GuiContainer {
 	    
 	    this.selectedScreen = "breeding";
 	    
-	}else{
+	}else if(par1GuiButton instanceof GuiButtonAnt){
 	    
-	    this.selectedScreen = "ants";
+	    this.selectedAnt = ((GuiButtonAnt) par1GuiButton).getAnt();
 	    
 	}
 	
@@ -113,20 +98,31 @@ public class GuiAntopedia extends GuiContainer {
     @Override
     public void drawScreen(int par1, int par2, float par3) {
 	super.drawScreen(par1, par2, par3);
-	this.xSize = (int) par1;
-	this.ySize = (int) par2;
     }
-
+    
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-	String s = this.inventory.isInvNameLocalized() ? this.inventory
+	
+	this.drawString(EnumChatFormatting.WHITE+"Selected Screen: "+selectedScreen, 13, 15);
+	
+	if(this.selectedScreen == "names" && this.selectedAnt != null){
+            
+            //this.drawString(this.selectedAnt.getSpeciesName(), 100, 50, 10526880, false);
+            this.drawString(EnumChatFormatting.WHITE+"Species: "+this.selectedAnt.getSpeciesName(), 13, 30);
+            this.drawString(EnumChatFormatting.WHITE+"Binomial: "+this.selectedAnt.getSpeciesBinomialName(), 13, 45);
+            
+        }
+	
+	/*String s = this.inventory.isInvNameLocalized() ? this.inventory
 		.getInvName() : I18n.func_135053_a(this.inventory.getInvName());
 	this.fontRenderer.drawString(s,
 		this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 0,
 		4210752);
+		
 	this.fontRenderer.drawString(I18n.func_135053_a("container.inventory"),
 		26, this.ySize - 96 + 4, 4210752);
-
+		*/
+	
     }
     
     @Override
@@ -138,21 +134,54 @@ public class GuiAntopedia extends GuiContainer {
             
             Nbt.setTag(this.container.containerStack);
             
+            this.selectedAnt = this.getAnt();
+            
             if(!Nbt.hasKey(this.antopedia,  this.getAnt().getSpeciesSubName())){
         	
         	Nbt.set(this.antopedia, this.getAnt().getSpeciesSubName(), true);
         	
             }
+                        
+        }
+        
+        for(int k = 0; k < Register.getAntList().toArray().length; k++){
             
-            this.inventory.decrStackSize(0, 1);
+            if(Nbt.hasKey(antopedia, ((ItemAnt) Register.getAntList().toArray()[k]).getSpeciesSubName())){
+        	
+        	this.registeredAnts.add((ItemAnt) Register.getAntList().toArray()[k]);
+        	
+            }
             
         }
         
+        int offset = 23;
+        
+        if(this.selectedScreen == "ants"){
+        
+            for(int i = 0; i < this.registeredAnts.toArray().length; i++){
+                        
+        	this.buttonList.add(new GuiButtonAnt(this.buttonID, this.width / 3, 24 + offset, 
+        	    ((ItemAnt) this.registeredAnts.toArray()[i]).getSpeciesName(), 100, 20, 
+        	    (ItemAnt) this.registeredAnts.toArray()[i]));
+        	this.buttonID++;
+            
+        	offset += 23;
+            
+            }
+        
+        }
+                
     }
-
+    
     private void drawString(String string, int posX, int posY) {
 
 	this.fontRenderer.drawString(string, posX, posY, 4210752);
+
+    }
+
+    private void drawString(String string, int posX, int posY, int colour, boolean shadow) {
+
+	this.fontRenderer.drawString(string, posX, posY, colour, shadow);
 
     }
     

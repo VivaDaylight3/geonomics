@@ -22,6 +22,9 @@ public class ContainerAntopedia extends Container {
     
     public static int numRows = 3;
     public static int numColumns = 1;
+    
+   // public static int slotOffsetX = -2;//24;
+    //public static int slotOffsetY = 47;//74;
         
     private ArrayList<ItemAnt> registerAntList = new ArrayList<ItemAnt>();
 
@@ -33,6 +36,8 @@ public class ContainerAntopedia extends Container {
 	Nbt.setTag(this.containerStack);
 
 	int slotID = 0;
+	
+	/*
 
 	Object[] ants = Register.getAntList().toArray();
 
@@ -43,9 +48,10 @@ public class ContainerAntopedia extends Container {
 	    antIDs[k] = ((ItemAnt) ants[k]).getAntID();
 
 	}
+	*/
 	
-	addSlotToContainer(new SlotInventoryItem(this.inventory, antIDs, slotID, 62,
-		17));
+	addSlotToContainer(new SlotInventoryItem(this.inventory, slotID, 152,
+		9));
 
 	/*
 	for (int i = 0; i < numRows; i++) {
@@ -72,12 +78,12 @@ public class ContainerAntopedia extends Container {
 	for (int i = 0; i < 3; i++) {
 	    for (int j = 0; j < 9; j++) {
 		addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,
-			8 + j * 18, 84 + i * 18));
+			8 + j * 18  /*+ slotOffsetX*/, 84 + i * 18  /*+ slotOffsetY*/));
 	    }
 	}
 
 	for (int i = 0; i < 9; i++) {
-	    addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+	    addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18  /*+ slotOffsetX*/, 142  /*+ slotOffsetY*/));
 	}
     }
 

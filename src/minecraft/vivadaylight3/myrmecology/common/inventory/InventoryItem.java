@@ -12,7 +12,7 @@ public class InventoryItem implements IInventory {
 
     private ItemStack[] inventory = new ItemStack[1];
 
-    public static String invName = "Antopedia";
+    public static String invName = "Myrmopedia";
 
     public InventoryItem(ItemStack itemStack) {
 
@@ -138,8 +138,10 @@ public class InventoryItem implements IInventory {
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 
-	return itemstack.getItem() instanceof ItemAnt;
+	//return itemstack.getItem() instanceof ItemAnt;
 
+	return true;
+	
     }
 
     public void readFromNBT(NBTTagCompound tagcompound) {

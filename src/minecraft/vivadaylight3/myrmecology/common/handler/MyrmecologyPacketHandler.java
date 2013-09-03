@@ -1,14 +1,19 @@
 package vivadaylight3.myrmecology.common.handler;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.Random;
 
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import vivadaylight3.myrmecology.common.Reference;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
 
 /**
  * Handles packet interaction
@@ -25,34 +30,64 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 
 	if (packet.channel.equals(Reference.MOD_CHANNEL)) {
 
-	    handlePacket(packet);
+	    handlePacket(packet, player);
 
 	}
 
     }
+    
+    private Side getSide(){
+	
+	return FMLCommonHandler.instance().getEffectiveSide();
+	
+    }
+    
+    private EntityPlayer getSidedPlayer(Player parPlayer){
+	
+	Side side = getSide();
+	
+	EntityPlayer player = null;
+	
+	if(side == Side.SERVER){
+	    
+	    player = (EntityPlayerMP) parPlayer;
+	    
+	}else if(side == Side.CLIENT){
+	    
+	    player = (EntityClientPlayerMP) parPlayer;
+	    
+	}
+	
+	return player;
+	
+    }
 
-    public void handlePacket(Packet250CustomPayload packet) {
+    public void handlePacket(Packet250CustomPayload parPacket, Player parPlayer) {
+	
+	Random random = new Random();
+	int randomInt1 = random.nextInt();
+	int randomInt2 = random.nextInt();
 
-	DataInputStream inputStream = new DataInputStream(
-		new ByteArrayInputStream(packet.data));
-
-	int randomInt1;
-	int randomInt2;
-
+	ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+	DataOutputStream outputStream = new DataOutputStream(bos);
 	try {
-
-	    randomInt1 = inputStream.readInt();
-	    randomInt2 = inputStream.readInt();
-
-	} catch (IOException e) {
-
-	    e.printStackTrace();
-	    return;
-
+	        outputStream.writeInt(randomInt1);
+	        outputStream.writeInt(randomInt2);
+	} catch (Exception ex) {
+	        ex.printStackTrace();
 	}
 
-	System.out.println(randomInt1 + "" + randomInt2);
-
+	Packet250CustomPayload packet = new Packet250CustomPayload();
+	packet.channel = "GenericRandom";
+	packet.data = bos.toByteArray();
+	packet.length = bos.size();
+	
+	if(getSidedPlayer(parPlayer) instanceof EntityClientPlayerMP){
+	    
+	   ((EntityClientPlayerMP) getSidedPlayer(parPlayer)).sendQueue.addToSendQueue(packet);
+	    
+	}
+		
     }
 
 }

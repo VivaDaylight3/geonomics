@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.api.ItemAnt;;
 
 public class Breeding {
 
@@ -30,6 +31,26 @@ public class Breeding {
 
 	return breedingList;
 
+    }
+    
+    public static ArrayList<BreedingRecipe> getAntBreedingOptions(ItemAnt parAnt){
+		
+	ArrayList<BreedingRecipe> result = new ArrayList<BreedingRecipe>();
+	
+	for(int k = 0; k < getBreedingList().toArray().length; k++){
+	    
+	    ItemAnt Ant = parAnt;
+	    
+	    if( ((BreedingRecipe) getBreedingList().toArray()[k]).getAnt1() == Ant || ((BreedingRecipe) getBreedingList().toArray()[k]).getAnt2() == Ant){
+		
+		result.add((BreedingRecipe) getBreedingList().toArray()[k]);
+		
+	    }
+	    
+	}
+	
+	return result;
+	
     }
 
     /**

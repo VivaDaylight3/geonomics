@@ -27,6 +27,7 @@ public class BlockAntFarm extends BlockContainer {
     private String name;
 
     private Icon blockIcon;
+    private Icon topIcon;
 
     private final Random random = new Random();
 
@@ -63,11 +64,18 @@ public class BlockAntFarm extends BlockContainer {
     public void registerIcons(IconRegister iconRegister) {
 
 	blockIcon = iconRegister.registerIcon(Resources.TEXTURE_PREFIX + name);
+	topIcon = iconRegister.registerIcon(Resources.TEXTURE_PREFIX + name+"_Top");
 
     }
 
     @Override
     public Icon getIcon(int side, int metadata) {
+
+	if(side == 1 || side == 0){
+	    
+	    return topIcon;
+	    
+	}
 
 	return blockIcon;
 

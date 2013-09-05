@@ -23,6 +23,9 @@ public class ContainerAntopedia extends Container {
     public static int numRows = 3;
     public static int numColumns = 1;
     
+    private int slotOffsetX = 10;
+    private int slotOffsetY = 90;
+    
    // public static int slotOffsetX = -2;//24;
     //public static int slotOffsetY = 47;//74;
         
@@ -50,8 +53,7 @@ public class ContainerAntopedia extends Container {
 	}
 	*/
 	
-	addSlotToContainer(new SlotInventoryItem(this.inventory, slotID, 152,
-		9));
+	addSlotToContainer(new SlotInventoryItem(this.inventory, slotID, (8 + 0 * 18)  + slotOffsetX, (84 + 0 * 18)  + slotOffsetY + (0 - 27)));
 
 	/*
 	for (int i = 0; i < numRows; i++) {
@@ -78,12 +80,12 @@ public class ContainerAntopedia extends Container {
 	for (int i = 0; i < 3; i++) {
 	    for (int j = 0; j < 9; j++) {
 		addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,
-			8 + j * 18  /*+ slotOffsetX*/, 84 + i * 18  /*+ slotOffsetY*/));
+			(8 + j * 18)  + slotOffsetX, (84 + i * 18)  + slotOffsetY + (i - 5)));
 	    }
 	}
 
 	for (int i = 0; i < 9; i++) {
-	    addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18  /*+ slotOffsetX*/, 142  /*+ slotOffsetY*/));
+	    addSlotToContainer(new Slot(inventoryPlayer, i, (8 + i * 18)  + slotOffsetX, 142  + (slotOffsetY - 1)));
 	}
     }
 

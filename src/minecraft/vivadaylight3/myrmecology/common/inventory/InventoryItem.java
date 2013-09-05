@@ -30,7 +30,6 @@ public class InventoryItem implements IInventory {
 
     @Override
     public ItemStack getStackInSlot(int i) {
-	// TODO Auto-generated method stub
 	return inventory[i];
     }
 

@@ -88,7 +88,7 @@ public class AntStone extends ItemAnt {
     @Override
     public boolean getWinged() {
 
-	return false;
+	return true;
 
     }
 

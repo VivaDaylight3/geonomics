@@ -2,6 +2,7 @@ package vivadaylight3.myrmecology.common.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vivadaylight3.myrmecology.api.AntopediaProperties;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
@@ -35,6 +36,8 @@ public class ItemAntopedia extends Item {
     @Override
     public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 			
+	AntopediaProperties.initiateAntopedia(par1ItemStack);
+	
     }
 
     @Override

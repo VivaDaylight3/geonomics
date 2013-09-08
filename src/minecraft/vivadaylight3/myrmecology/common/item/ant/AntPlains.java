@@ -81,8 +81,7 @@ public class AntPlains extends ItemAnt {
     public BiomeGenBase[] getAntBiomes() {
 
 	BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBase.extremeHills,
-		BiomeGenBase.extremeHillsEdge, BiomeGenBase.plains,
-		BiomeGenBase.forestHills };
+		BiomeGenBase.extremeHillsEdge, BiomeGenBase.plains};
 
 	return biomes;
     }

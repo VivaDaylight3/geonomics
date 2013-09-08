@@ -23,8 +23,11 @@ public class ContainerAntopedia extends Container {
     public static int numRows = 3;
     public static int numColumns = 1;
     
-    private int slotOffsetX = 10;
-    private int slotOffsetY = 90;
+    public int slotOffsetX = 10;
+    public int slotOffsetY = 90;
+    
+    public final int antSlotX = (8 + 0 * 18)  + slotOffsetX;
+    public int antSlotY = (84 + 0 * 18)  + slotOffsetY + (0 - 27);
     
    // public static int slotOffsetX = -2;//24;
     //public static int slotOffsetY = 47;//74;

@@ -246,7 +246,7 @@ public class ItemAnt extends Item {
      * @return int
      */
     public int getLifetime() {
-	return 100;
+	return Time.getTicksFromMinutes(10);
     }
 
     /**

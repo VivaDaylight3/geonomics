@@ -142,6 +142,12 @@ public class Nbt {
     }
 
     public static boolean hasKey(ItemStack itemStack, String key) {
+	
+	if(itemStack.getTagCompound() == null){
+	    
+	    return false;
+	    
+	}
 
 	return itemStack.getTagCompound().hasKey(key);
 

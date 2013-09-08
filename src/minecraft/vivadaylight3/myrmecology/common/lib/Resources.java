@@ -26,6 +26,7 @@ public class Resources {
 
     public static final ResourceLocation GUI_ANTFARM = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_ANTFARM_NAME + FORMAT);
+    
     public static final ResourceLocation GUI_INCUBATOR = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_INCUBATOR_NAME + FORMAT);
 

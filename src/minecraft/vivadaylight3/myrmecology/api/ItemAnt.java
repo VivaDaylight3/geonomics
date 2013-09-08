@@ -203,7 +203,7 @@ public class ItemAnt extends Item {
      * @return String
      */
     public String getSpeciesName() {
-	// TODO Auto-generated method stub
+	
 	return "Default";
     }
 
@@ -214,7 +214,7 @@ public class ItemAnt extends Item {
      * @return String
      */
     public String getSpeciesSubName() {
-	// TODO Auto-generated method stub
+	
 	return "default";
     }
 
@@ -224,7 +224,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean isHillAnt() {
-	// TODO Auto-generated method stub
+	
 	return false;
     }
 
@@ -255,7 +255,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsSweet() {
-	// TODO Auto-generated method stub
+	
 	return true;
     }
 
@@ -266,7 +266,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsSavoury() {
-	// TODO Auto-generated method stub
+	
 	return false;
     }
 
@@ -276,7 +276,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsMeat() {
-	// TODO Auto-generated method stub
+	
 	return false;
     }
 
@@ -286,7 +286,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsLarvae() {
-	// TODO Auto-generated method stub
+	
 	return false;
     }
 
@@ -300,7 +300,6 @@ public class ItemAnt extends Item {
      * @param z
      */
     public void performBehaviour(World world, int x, int y, int z) {
-	// TODO Auto-generated method stub
 
     }
 
@@ -311,7 +310,7 @@ public class ItemAnt extends Item {
      * @return String
      */
     public String getSpeciesBinomialName() {
-	// TODO Auto-generated method stub
+	
 	return "Antus Defaultus";
     }
 
@@ -322,7 +321,7 @@ public class ItemAnt extends Item {
      * @return BiomeGenBase[] (null to use in all biomes)
      */
     public BiomeGenBase[] getAntBiomes() {
-	// TODO Auto-generated method stub
+	
 	return null;
     }
 

@@ -1,15 +1,17 @@
 package vivadaylight3.myrmecology.common.handler;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.Random;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import vivadaylight3.myrmecology.api.AntopediaProperties;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.lib.Nbt;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -30,19 +32,19 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 
 	if (packet.channel.equals(Reference.MOD_CHANNEL)) {
 
-	    handlePacket(packet, player);
+	    handleNBTPacket(packet, player);
 
 	}
 
     }
     
-    private Side getSide(){
+    public static Side getSide(){
 	
 	return FMLCommonHandler.instance().getEffectiveSide();
 	
     }
     
-    private EntityPlayer getSidedPlayer(Player parPlayer){
+    public static EntityPlayer getSidedPlayer(Player parPlayer){
 	
 	Side side = getSide();
 	
@@ -62,32 +64,53 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	
     }
 
-    public void handlePacket(Packet250CustomPayload parPacket, Player parPlayer) {
+    public void handlePacket(Packet250CustomPayload packet, Player parPlayer) {
 	
-	Random random = new Random();
-	int randomInt1 = random.nextInt();
-	int randomInt2 = random.nextInt();
-
-	ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-	DataOutputStream outputStream = new DataOutputStream(bos);
-	try {
-	        outputStream.writeInt(randomInt1);
-	        outputStream.writeInt(randomInt2);
-	} catch (Exception ex) {
-	        ex.printStackTrace();
-	}
-
-	Packet250CustomPayload packet = new Packet250CustomPayload();
-	packet.channel = "GenericRandom";
-	packet.data = bos.toByteArray();
-	packet.length = bos.size();
+	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+        
+        int randomInt1;
+        int randomInt2;
+        
+        try {
+                randomInt1 = inputStream.readInt();
+                randomInt2 = inputStream.readInt();
+        } catch (IOException e) {
+                e.printStackTrace();
+                return;
+        }
+        
+        System.out.println(randomInt1 + " " + randomInt2);
+        
+    }
+    
+    public void handleNBTPacket(Packet250CustomPayload packet, Player player){
 	
-	if(getSidedPlayer(parPlayer) instanceof EntityClientPlayerMP){
+	if(packet != null){
 	    
-	   ((EntityClientPlayerMP) getSidedPlayer(parPlayer)).sendQueue.addToSendQueue(packet);
+	    DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 	    
-	}
+	    String speciesName = null;
+	    int antopediaID = 0;
+	    Object antopedia;
+	    
+	    try{
 		
+		speciesName = inputStream.readUTF();
+		antopediaID = inputStream.readInt();		
+		
+	    }catch (Exception ex){
+		
+		ex.printStackTrace();
+		return;
+		
+	    }
+	    
+	    Nbt.set(AntopediaProperties.getAntopediaFromID(antopediaID), speciesName, true);
+	    
+	   // AntopediaProperties.clearAntopediaID(antopediaID);
+	    
+	}
+	
     }
 
 }

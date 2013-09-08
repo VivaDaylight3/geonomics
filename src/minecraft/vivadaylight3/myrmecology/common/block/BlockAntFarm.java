@@ -1,15 +1,20 @@
 package vivadaylight3.myrmecology.common.block;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
@@ -19,6 +24,8 @@ import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public class BlockAntFarm extends BlockContainer {
 
@@ -45,11 +52,47 @@ public class BlockAntFarm extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
-	    EntityPlayer player, int par6, float par7, float par8, float par9) {
+	    EntityPlayer parPlayer, int par6, float par7, float par8, float par9) {
 
-	if (!player.isSneaking() && !world.isRemote) {
+	if (world.isRemote) {
 
-	    player.openGui(Myrmecology.instance, Register.GUI_ID_ANTFARM,
+	    Random random = new Random();
+	    int randomInt1 = random.nextInt();
+	    int randomInt2 = random.nextInt();
+
+	    ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+	    DataOutputStream outputStream = new DataOutputStream(bos);
+	    try {
+		outputStream.writeInt(randomInt1);
+		outputStream.writeInt(randomInt2);
+	    } catch (Exception ex) {
+		ex.printStackTrace();
+	    }
+
+	    Packet250CustomPayload packet = new Packet250CustomPayload();
+	    packet.channel = "GenericRandom";
+	    packet.data = bos.toByteArray();
+	    packet.length = bos.size();
+
+	    Side side = FMLCommonHandler.instance().getEffectiveSide();
+	    if (side == Side.SERVER) {
+		// We are on the server side.
+		EntityPlayerMP player = (EntityPlayerMP) parPlayer;
+	    } else if (side == Side.CLIENT) {
+
+		EntityClientPlayerMP player = (EntityClientPlayerMP) parPlayer;
+		player.sendQueue.addToSendQueue(packet);
+	    } else {
+
+	    }
+
+	}
+
+	// TODO
+
+	if (!parPlayer.isSneaking() && !world.isRemote) {
+
+	    parPlayer.openGui(Myrmecology.instance, Register.GUI_ID_ANTFARM,
 		    world, x, y, z);
 
 	    return true;
@@ -64,17 +107,18 @@ public class BlockAntFarm extends BlockContainer {
     public void registerIcons(IconRegister iconRegister) {
 
 	blockIcon = iconRegister.registerIcon(Resources.TEXTURE_PREFIX + name);
-	topIcon = iconRegister.registerIcon(Resources.TEXTURE_PREFIX + name+"_Top");
+	topIcon = iconRegister.registerIcon(Resources.TEXTURE_PREFIX + name
+		+ "_Top");
 
     }
 
     @Override
     public Icon getIcon(int side, int metadata) {
 
-	if(side == 1 || side == 0){
-	    
+	if (side == 1 || side == 0) {
+
 	    return topIcon;
-	    
+
 	}
 
 	return blockIcon;

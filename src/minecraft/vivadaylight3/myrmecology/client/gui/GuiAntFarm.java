@@ -32,7 +32,7 @@ public class GuiAntFarm extends GuiContainer {
 	String s = this.tile.isInvNameLocalized() ? this.tile.getInvName()
 		: StatCollector.translateToLocal(this.tile.getInvName());
 	this.fontRenderer.drawString(s,
-		this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+		this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6+2,
 		4210752);
 	this.fontRenderer.drawString(
 		StatCollector.translateToLocal("container.inventory"), 8,

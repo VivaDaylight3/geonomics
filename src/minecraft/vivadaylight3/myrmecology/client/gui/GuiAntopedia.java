@@ -21,6 +21,7 @@ import vivadaylight3.myrmecology.common.inventory.InventoryItem;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Strings;
 import vivadaylight3.myrmecology.common.lib.Time;
+import cpw.mods.fml.common.network.Player;
 
 public class GuiAntopedia extends GuiContainer {
 
@@ -29,6 +30,8 @@ public class GuiAntopedia extends GuiContainer {
     private ItemStack antopedia;
     
     private Icon antIcon;
+    
+    private Player player;
     
     private static final EnumChatFormatting KEY_CHAT_FORMAT = EnumChatFormatting.BLUE;
     private static final EnumChatFormatting VALUE_CHAT_FORMAT = EnumChatFormatting.WHITE;
@@ -47,9 +50,10 @@ public class GuiAntopedia extends GuiContainer {
 
     private ItemAnt selectedAnt;
 
-    public GuiAntopedia(ContainerAntopedia parcontainer, EntityPlayer player) {
+    public GuiAntopedia(ContainerAntopedia parcontainer, EntityPlayer parPlayer) {
 
-	super(new ContainerAntopedia(parcontainer.inventory, player));
+	super(new ContainerAntopedia(parcontainer.inventory, parPlayer));
+	this.player = (Player) parPlayer;
 	this.inventory = parcontainer.inventory;
 	this.container = parcontainer;
 	this.antopedia = parcontainer.containerStack;
@@ -215,7 +219,7 @@ public class GuiAntopedia extends GuiContainer {
 
 	    this.selectedAnt = this.getAnt();
 
-	    AntopediaProperties.addAntToAntopedia(this.container.containerStack, this.selectedAnt);
+	    AntopediaProperties.addAntToAntopedia(this.container.containerStack, this.selectedAnt, this.player);
 	    
 	    this.antIcon = this.getAnt().getIconFromDamage(this.inventory.getStackInSlot(0).getItemDamage());
 	    

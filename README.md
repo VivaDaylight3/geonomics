@@ -3,7 +3,7 @@ myrmecology
 
 The Myrmecology mod for Minecraft
 
-Plans and Fundementalities
+Plans
 ==========================
 
 This will hopefully explain where I'm going with the mod.

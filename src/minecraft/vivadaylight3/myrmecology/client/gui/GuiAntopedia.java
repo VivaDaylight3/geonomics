@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.client.gui;
 import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -42,6 +43,9 @@ public class GuiAntopedia extends GuiContainer {
     private GuiButtonSizeable button4Ants;
 
     private String selectedScreen = "ants";
+    
+    private int buttonXOffset;
+    private int buttonYOffset;
 
     private int infoButtonWidth = 20;
     private int infoButtonHeight = 15;
@@ -49,6 +53,8 @@ public class GuiAntopedia extends GuiContainer {
     private int buttonID;
 
     private ItemAnt selectedAnt;
+    
+    private ScaledResolution scaledRes;
 
     public GuiAntopedia(ContainerAntopedia parcontainer, EntityPlayer parPlayer) {
 
@@ -61,21 +67,24 @@ public class GuiAntopedia extends GuiContainer {
 	selectedAnt = null;
 	
 	xSize = 248;
-        ySize = 255;
+        ySize = 255;        
 	
     }
 
     @Override
     public void initGui() {
 	super.initGui();
+	
+	this.buttonXOffset = this.scaledRes.getScaledWidth();
+	this.buttonYOffset = this.scaledRes.getScaledHeight();
 
 	this.buttonList.clear();
-	this.buttonList.add(this.button1Names = new GuiButtonSizeable(0, 277,
-		64, "1", infoButtonWidth, infoButtonHeight));
-	this.buttonList.add(this.button2Info = new GuiButtonSizeable(1, 277,
-		80, "2", infoButtonWidth, infoButtonHeight));
+	this.buttonList.add(this.button1Names = new GuiButtonSizeable(0, 277 + this.buttonXOffset,
+		64 + this.buttonYOffset, "1", infoButtonWidth, infoButtonHeight));
+	this.buttonList.add(this.button2Info = new GuiButtonSizeable(1, 277 + this.buttonXOffset,
+		80 + this.buttonYOffset, "2", infoButtonWidth, infoButtonHeight));
 	this.buttonList.add(this.button3Breeding = new GuiButtonSizeable(2,
-		277, 96, "3", infoButtonWidth, infoButtonHeight));
+		277 + this.buttonXOffset, 96 + this.buttonYOffset, "3", infoButtonWidth, infoButtonHeight));
 	
 	
 	this.buttonID = 2;

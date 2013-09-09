@@ -66,7 +66,8 @@ public class Register {
     public static final int GUI_ID_ANTOPEDIA = 2;
     public static final int GUI_ID_INCUBATOR = 3;
 
-    public static int latestID = 0;
+    public static int latestItemID = 0;
+    public static int latestBlockID = 0;
 
     public static Block blockAntFarm;
 
@@ -117,12 +118,20 @@ public class Register {
 
     }
 
-    public static int getNewID() {
+    public static int getNewItemID() {
 
-	latestID += 1;
+	latestItemID += 1;
 
-	return latestID;
+	return latestItemID + ID_ITEM;
 
+    }
+    
+    public static int getNewBlockID(){
+	
+	latestBlockID += 1;
+
+	return latestBlockID + ID_ITEM;
+	
     }
 
     public static void registerBlocks() {
@@ -131,39 +140,39 @@ public class Register {
 
 	blockAntFarm = new BlockAntFarm(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTFARM_NAME,
-		ID_BLOCK).getInt(), Reference.BLOCK_ANTFARM_NAME);
+		getNewBlockID()).getInt(), Reference.BLOCK_ANTFARM_NAME);
 
 	blockIncubator = new BlockIncubator(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INCUBATOR_NAME,
-		ID_BLOCK + 2).getInt(), Reference.BLOCK_INCUBATOR_NAME);
+		getNewBlockID()).getInt(), Reference.BLOCK_INCUBATOR_NAME);
 
 	hillForest = new AntHillForest(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_FOREST_NAME, ID_BLOCK + 4).getInt());
+		Reference.HILL_FOREST_NAME, getNewBlockID()).getInt());
 
 	hillDesert = new AntHillDesert(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_DESERT_NAME, ID_BLOCK + 5).getInt());
+		Reference.HILL_DESERT_NAME, getNewBlockID()).getInt());
 
 	hillJungle = new AntHillJungle(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_JUNGLE_NAME, ID_BLOCK + 6).getInt());
+		Reference.HILL_JUNGLE_NAME, getNewBlockID()).getInt());
 
 	hillPlains = new AntHillPlains(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_PLAINS_NAME, ID_BLOCK + 7).getInt(),
+		Reference.HILL_PLAINS_NAME, getNewBlockID()).getInt(),
 		Material.ground);
 
 	hillSnow = new AntHillSnow(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_SNOW_NAME, ID_BLOCK + 8).getInt(),
+		Reference.HILL_SNOW_NAME, getNewBlockID()).getInt(),
 		Material.ground);
 
 	hillStone = new AntHillStone(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_STONE_NAME, ID_BLOCK + 9).getInt(),
+		Reference.HILL_STONE_NAME, getNewBlockID()).getInt(),
 		Material.ground);
 
 	hillSwamp = new AntHillSwamp(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_SWAMP_NAME, ID_BLOCK + 10).getInt(),
+		Reference.HILL_SWAMP_NAME, getNewBlockID()).getInt(),
 		Material.ground);
 
 	hillWater = new AntHillWater(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_WATER_NAME, ID_BLOCK + 11).getInt(),
+		Reference.HILL_WATER_NAME, getNewBlockID()).getInt(),
 		Material.ground);
 
 	config.save();
@@ -192,75 +201,75 @@ public class Register {
 
 	itemExtractor = new ToolExtractor(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
-		ID_ITEM).getInt());
+		getNewItemID()).getInt());
 
 	itemAntopedia = new ItemAntopedia(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ITEM_ANTOPEDIA_NAME,
-		ID_ITEM + 1).getInt());
+		getNewItemID()).getInt());
 
 	antForest = new AntForest(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_FOREST_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_FOREST_NAME, getNewItemID()).getInt());
 
 	antDesert = new AntDesert(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_DESERT_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_DESERT_NAME, getNewItemID()).getInt());
 
 	antWater = new AntWater(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_WATER_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_WATER_NAME, getNewItemID()).getInt());
 
 	antSwamp = new AntSwamp(config.get(Configuration.CATEGORY_ITEM,
-		"antSwamp", ID_ITEM + getNewID()).getInt());
+		"antSwamp", getNewItemID()).getInt());
 
 	antJungle = new AntJungle(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_JUNGLE_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_JUNGLE_NAME, getNewItemID()).getInt());
 
 	antPlains = new AntPlains(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_PLAINS_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_PLAINS_NAME, getNewItemID()).getInt());
 
 	antSnow = new AntSnow(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_SNOW_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_SNOW_NAME, getNewItemID()).getInt());
 
 	antStone = new AntStone(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_STONE_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_STONE_NAME, getNewItemID()).getInt());
 	
 	antCommon = new AntCommon(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_COMMON_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_COMMON_NAME, getNewItemID()).getInt());
 
 	antHarvester = new AntHarvester(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_HARVESTER_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_HARVESTER_NAME, getNewItemID()).getInt());
 	
 	antBarbaric = new AntBarbaric(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_BARBARIC_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_BARBARIC_NAME, getNewItemID()).getInt());
 	
 	antPlentiful = new AntPlentiful(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_PLENTIFUL_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_PLENTIFUL_NAME, getNewItemID()).getInt());
 	
 	antCultivator = new AntCultivator(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ANT_CULTIVATOR_NAME,
-		ID_ITEM + getNewID()).getInt());
+		getNewItemID()).getInt());
 
 	antCarpenter = new AntCarpenter(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_CARPENTER_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_CARPENTER_NAME, getNewItemID()).getInt());
 
 	antMound = new AntMound(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_MOUND_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_MOUND_NAME, getNewItemID()).getInt());
 
 	antOdourous = new AntOdourous(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_ODOUROUS_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_ODOUROUS_NAME, getNewItemID()).getInt());
 
 	antHostile = new AntHostile(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_HOSTILE_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_HOSTILE_NAME, getNewItemID()).getInt());
 
 	antDredger = new AntDredger(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_DREDGER_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_DREDGER_NAME, getNewItemID()).getInt());
 
 	antScavenger = new AntScavenger(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_SCAVENGER_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_SCAVENGER_NAME, getNewItemID()).getInt());
 
 	antSprouter = new AntSprouter(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_SPROUTER_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_SPROUTER_NAME, getNewItemID()).getInt());
 
 	antFungal = new AntFungal(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_FUNGAL_NAME, ID_ITEM + getNewID()).getInt());
+		Reference.ANT_FUNGAL_NAME, getNewItemID()).getInt());
 
 	config.save();
 

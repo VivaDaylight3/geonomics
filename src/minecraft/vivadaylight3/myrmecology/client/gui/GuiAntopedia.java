@@ -44,9 +44,10 @@ public class GuiAntopedia extends GuiContainer {
 
     private String selectedScreen = "ants";
     
+    //TODO
     private int buttonXOffset;
     private int buttonYOffset;
-
+    
     private int infoButtonWidth = 20;
     private int infoButtonHeight = 15;
     
@@ -67,13 +68,19 @@ public class GuiAntopedia extends GuiContainer {
 	selectedAnt = null;
 	
 	xSize = 248;
-        ySize = 255;        
+        ySize = 255;  
 	
     }
 
     @Override
     public void initGui() {
 	super.initGui();
+	
+	//TODO http://www.youtube.com/watch?v=O_3wTGvsewM
+	this.scaledRes = new ScaledResolution(
+        	mc.gameSettings, 
+        	mc.displayWidth, 
+        	mc.displayHeight);
 	
 	this.buttonXOffset = this.scaledRes.getScaledWidth();
 	this.buttonYOffset = this.scaledRes.getScaledHeight();

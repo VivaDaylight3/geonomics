@@ -19,7 +19,7 @@ public class ItemAntopedia extends Item {
 
     public ItemAntopedia(int par1) {
 	super(par1);
-	setCreativeTab(CreativeTabs.tabRedstone);
+	setCreativeTab(Register.tabMyrmecology);
 	setMaxStackSize(1);
 	setUnlocalizedName(Reference.ITEM_ANTOPEDIA_NAME);
 	func_111206_d(Resources.TEXTURE_PREFIX + Reference.ITEM_ANTOPEDIA_NAME);

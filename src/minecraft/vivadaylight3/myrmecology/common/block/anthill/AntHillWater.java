@@ -56,6 +56,8 @@ public class AntHillWater extends BlockAntHill {
 
     @Override
     public int[] getRequiredTouchingBlocks() {
+	
+	/*
 
 	int[] blocks1 = new int[] { Block.sand.blockID,
 		Block.waterStill.blockID };
@@ -80,6 +82,9 @@ public class AntHillWater extends BlockAntHill {
 	    return blocks4;
 
 	}
+	*/
+	
+	return null;
     }
 
 }

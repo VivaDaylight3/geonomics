@@ -49,9 +49,9 @@ public class AntHillDesert extends BlockAntHill {
     @Override
     public int[] getRequiredTouchingBlocks() {
 
-	int[] blocks = new int[] { Block.sand.blockID };
+	//int[] blocks = new int[] { Block.sand.blockID };
 
-	return blocks;
+	return null;
     }
 
     @Override

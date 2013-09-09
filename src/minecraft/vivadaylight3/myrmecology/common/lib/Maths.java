@@ -8,9 +8,9 @@ public class Maths {
 
 	Random num = new Random();
 
-	int i = num.nextInt(max + 1);
+	int i = num.nextInt(max);
 
-	return i + 1;
+	return i;
 
     }
 
@@ -18,7 +18,7 @@ public class Maths {
 
 	Random num = new Random();
 
-	int i = num.nextInt(max + 1);
+	int i = num.nextInt(max);
 
 	if (i <= chance) {
 

@@ -2,6 +2,7 @@ package vivadaylight3.myrmecology.common.handler;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -24,7 +25,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 	    break;
 
 	case 0:
-	    generateSurface(world, random, chunkX * 16, chunkZ * 16);
+	    generateOverworld(world, random, chunkX * 16, chunkZ * 16);
 	    break;
 
 	case 1:
@@ -38,14 +39,12 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 
     }
 
-    private void generateSurface(World world, Random random, int i, int j) {
+    private void generateOverworld(World world, Random random, int i, int j) {
 
-	int chance = Maths.getChance(5);
-
-	if (chance == 1) {
-
+	if(Maths.chanceOf(1, 16)){
+	
 	    generateAntHill(world, random, i, j);
-
+	    
 	}
 
     }
@@ -112,9 +111,10 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 						blockY, blockZ);
 
 			    } else {
+				
+				//(new WorldGenMinable(currentHill.blockID, 1)).generate(world, random, blockX, blockY, blockZ);
 
-				world.setBlock(blockX, blockY, blockZ,
-					currentHill.blockID);
+				world.setBlock(blockX, blockY, blockZ, currentHill.blockID);
 
 			    }
 

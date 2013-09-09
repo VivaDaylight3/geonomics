@@ -34,7 +34,7 @@ public class AntHillJungle extends BlockAntHill {
     @Override
     public String getHillName() {
 	// TODO Auto-generated method stub
-	return Reference.HILL_JUNGLE_NAME;
+	return "Jungle Ant Hill";
     }
 
     @Override
@@ -61,9 +61,9 @@ public class AntHillJungle extends BlockAntHill {
     @Override
     public int[] getRequiredTouchingBlocks() {
 
-	int[] blocks = new int[] { Block.grass.blockID };
+	//int[] blocks = new int[] { Block.grass.blockID };
 
-	return blocks;
+	return null;
     }
 
     @Override

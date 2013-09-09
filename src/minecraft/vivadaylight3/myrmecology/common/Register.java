@@ -46,6 +46,7 @@ import vivadaylight3.myrmecology.common.item.ant.AntStone;
 import vivadaylight3.myrmecology.common.item.ant.AntSwamp;
 import vivadaylight3.myrmecology.common.item.ant.AntWater;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -73,7 +74,7 @@ public class Register {
 
     public static Block blockIncubator;
 
-    public static Item itemExtractor;
+    public static ToolExtractor itemExtractor;
 
     public static ItemAntopedia itemAntopedia;
 
@@ -194,7 +195,7 @@ public class Register {
 		ID_ITEM).getInt());
 
 	itemAntopedia = new ItemAntopedia(config.get(
-		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
+		Configuration.CATEGORY_ITEM, Reference.ITEM_ANTOPEDIA_NAME,
 		ID_ITEM + 1).getInt());
 
 	antForest = new AntForest(config.get(Configuration.CATEGORY_ITEM,
@@ -202,9 +203,6 @@ public class Register {
 
 	antDesert = new AntDesert(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_DESERT_NAME, ID_ITEM + getNewID()).getInt());
-
-	antCommon = new AntCommon(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_COMMON_NAME, ID_ITEM + getNewID()).getInt());
 
 	antWater = new AntWater(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_WATER_NAME, ID_ITEM + getNewID()).getInt());
@@ -223,9 +221,22 @@ public class Register {
 
 	antStone = new AntStone(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_STONE_NAME, ID_ITEM + getNewID()).getInt());
+	
+	antCommon = new AntCommon(config.get(Configuration.CATEGORY_ITEM,
+		Reference.ANT_COMMON_NAME, ID_ITEM + getNewID()).getInt());
 
 	antHarvester = new AntHarvester(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_HARVESTER_NAME, ID_ITEM + getNewID()).getInt());
+	
+	antBarbaric = new AntBarbaric(config.get(Configuration.CATEGORY_ITEM,
+		Reference.ANT_BARBARIC_NAME, ID_ITEM + getNewID()).getInt());
+	
+	antPlentiful = new AntPlentiful(config.get(Configuration.CATEGORY_ITEM,
+		Reference.ANT_PLENTIFUL_NAME, ID_ITEM + getNewID()).getInt());
+	
+	antCultivator = new AntCultivator(config.get(
+		Configuration.CATEGORY_ITEM, Reference.ANT_CULTIVATOR_NAME,
+		ID_ITEM + getNewID()).getInt());
 
 	antCarpenter = new AntCarpenter(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_CARPENTER_NAME, ID_ITEM + getNewID()).getInt());
@@ -233,27 +244,17 @@ public class Register {
 	antMound = new AntMound(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_MOUND_NAME, ID_ITEM + getNewID()).getInt());
 
-	antBarbaric = new AntBarbaric(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_BARBARIC_NAME, ID_ITEM + getNewID()).getInt());
-
 	antOdourous = new AntOdourous(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_ODOUROUS_NAME, ID_ITEM + getNewID()).getInt());
 
 	antHostile = new AntHostile(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_HOSTILE_NAME, ID_ITEM + getNewID()).getInt());
 
-	antPlentiful = new AntPlentiful(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ANT_PLENTIFUL_NAME, ID_ITEM + getNewID()).getInt());
-
 	antDredger = new AntDredger(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_DREDGER_NAME, ID_ITEM + getNewID()).getInt());
 
 	antScavenger = new AntScavenger(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_SCAVENGER_NAME, ID_ITEM + getNewID()).getInt());
-
-	antCultivator = new AntCultivator(config.get(
-		Configuration.CATEGORY_ITEM, Reference.ANT_CULTIVATOR_NAME,
-		ID_ITEM + getNewID()).getInt());
 
 	antSprouter = new AntSprouter(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_SPROUTER_NAME, ID_ITEM + getNewID()).getInt());
@@ -381,6 +382,12 @@ public class Register {
 	GameRegistry.addRecipe(new ItemStack(blockAntFarm, 1), "wgw", "gsg",
 		"wgw", 'w', new ItemStack(Block.woodSingleSlab), 'g',
 		new ItemStack(Block.glass), 's', new ItemStack(Block.sand));
+	
+	GameRegistry.addRecipe(new ItemStack(itemAntopedia, 1), "ggg", "qir", "ggg", 'g', new ItemStack(Block.thinGlass),
+	'q', new ItemStack(Item.netherQuartz), 'i', new ItemStack(Item.dyePowder), 'r', new ItemStack(Item.redstone));
+	
+	GameRegistry.addRecipe(new ItemStack(itemExtractor), " s ", "did", " d ", 's', new ItemStack(Item.shovelIron), 
+		'd', new ItemStack(Item.dyePowder), 'i', new ItemStack(Item.ingotIron));
 
     }
 
@@ -388,6 +395,9 @@ public class Register {
 
 	GameRegistry.registerTileEntity(TileEntityAntFarm.class,
 		Reference.BLOCK_ANTFARM_NAME);
+	
+	GameRegistry.registerTileEntity(TileEntityIncubator.class,
+		Reference.BLOCK_INCUBATOR_NAME);
 
     }
 

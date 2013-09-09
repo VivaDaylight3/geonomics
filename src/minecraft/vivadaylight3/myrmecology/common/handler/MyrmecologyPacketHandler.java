@@ -64,6 +64,12 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	
     }
 
+    /**
+     * Guidance method only used as a guideline, shouldn't be called
+     * @param packet
+     * @param parPlayer
+     */
+    @Deprecated
     public void handlePacket(Packet250CustomPayload packet, Player parPlayer) {
 	
 	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));

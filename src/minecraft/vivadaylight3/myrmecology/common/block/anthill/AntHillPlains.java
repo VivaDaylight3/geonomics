@@ -49,9 +49,9 @@ public class AntHillPlains extends BlockAntHill {
     @Override
     public int[] getRequiredTouchingBlocks() {
 
-	int[] blocks = new int[] { Block.grass.blockID };
+	//int[] blocks = new int[] { Block.grass.blockID };
 
-	return blocks;
+	return null;
     }
 
     @Override

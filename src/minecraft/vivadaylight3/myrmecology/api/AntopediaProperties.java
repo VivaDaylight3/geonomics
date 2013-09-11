@@ -38,8 +38,6 @@ public class AntopediaProperties {
 
 	    if (antopediaIDs[k] == null) {
 
-		System.out.println("ID: " + k);
-
 		antopediaIDs[k] = itemStack;
 
 		return k;
@@ -47,8 +45,6 @@ public class AntopediaProperties {
 	    }
 
 	}
-
-	System.out.println("ID: " + -1);
 
 	return -1;
 
@@ -58,13 +54,9 @@ public class AntopediaProperties {
 
 	if (antopediaIDs[id] != null) {
 
-	    System.out.println("" + id + ", isn't null");
-
 	    return antopediaIDs[id];
 
 	}else{
-
-	    System.out.println("return null");
 
 	    return null;
 	

@@ -152,9 +152,9 @@ public class ItemAnt extends Item {
 
 	if (AntProperties.getMated(par1ItemStack)) {
 
-	    par3List.add("Lifetime left: "
-		    + (this.getLifetime() - AntProperties
-			    .getLifetimeComplete(par1ItemStack)));
+	    par3List.add("Lifetime: "
+		    + (this.getLifetime()/* - AntProperties
+			    .getLifetimeComplete(par1ItemStack)*/));
 
 	}
 

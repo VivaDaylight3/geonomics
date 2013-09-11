@@ -80,8 +80,8 @@ public class Breeding {
 		    && ((BreedingRecipe) breedingArray[k]).getAntOutput() != null) {
 
 		return new ItemStack(
-			((BreedingRecipe) breedingArray[k]).getAntOutput(), 1,
-			3);
+			((BreedingRecipe) breedingArray[k]).getAntOutput(), ((BreedingRecipe) breedingArray[k]).getAntOutput().getFertility(),
+			Metadata.getMetaLarva());
 
 	    }
 

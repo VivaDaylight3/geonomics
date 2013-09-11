@@ -48,7 +48,7 @@ public class GuiAntopedia extends GuiContainer {
     private int buttonXOffset;
     private int buttonYOffset;
     
-    private int infoButtonWidth = 20;
+    private int infoButtonWidth = 45;
     private int infoButtonHeight = 15;
     
     private int buttonID;
@@ -75,23 +75,15 @@ public class GuiAntopedia extends GuiContainer {
     @Override
     public void initGui() {
 	super.initGui();
-	
-	//TODO http://www.youtube.com/watch?v=O_3wTGvsewM
-	this.scaledRes = new ScaledResolution(
-        	mc.gameSettings, 
-        	mc.displayWidth, 
-        	mc.displayHeight);
-	
-	this.buttonXOffset = this.scaledRes.getScaledWidth();
-	this.buttonYOffset = this.scaledRes.getScaledHeight();
 
 	this.buttonList.clear();
-	this.buttonList.add(this.button1Names = new GuiButtonSizeable(0, 277 + this.buttonXOffset,
-		64 + this.buttonYOffset, "1", infoButtonWidth, infoButtonHeight));
-	this.buttonList.add(this.button2Info = new GuiButtonSizeable(1, 277 + this.buttonXOffset,
-		80 + this.buttonYOffset, "2", infoButtonWidth, infoButtonHeight));
+	this.buttonList.add(this.button1Names = new GuiButtonSizeable(0, this.width / 2 - 85,
+		this.height / 2 + 20, "Names", infoButtonWidth - 4, infoButtonHeight));
+	this.buttonList.add(this.button2Info = new GuiButtonSizeable(1, this.width / 2 - 40,
+		this.height / 2 + 20, "Info", infoButtonWidth - 10, infoButtonHeight));
 	this.buttonList.add(this.button3Breeding = new GuiButtonSizeable(2,
-		277 + this.buttonXOffset, 96 + this.buttonYOffset, "3", infoButtonWidth, infoButtonHeight));
+		this.width / 2,
+		this.height / 2 + 20, "Breeding", infoButtonWidth + 8, infoButtonHeight));
 	
 	
 	this.buttonID = 2;
@@ -239,13 +231,15 @@ public class GuiAntopedia extends GuiContainer {
 	    
 	    this.antIcon = this.getAnt().getIconFromDamage(this.inventory.getStackInSlot(0).getItemDamage());
 	    
-	    this.container.inventory.decrStackSize(0, 1);
+	    //this.container.inventory.decrStackSize(0, 1);
 
 	}//TODO	
 
 	int offset = 23;
 
 	if (this.selectedScreen == "ants") {
+	    
+	    /*
 
 	    for (int i = 0; i < AntopediaProperties.getAntopediaAnts(this.container.containerStack).toArray().length; i++) {
 
@@ -260,6 +254,8 @@ public class GuiAntopedia extends GuiContainer {
 		offset += 23;
 
 	    }
+	    
+	    */
 
 	}
 

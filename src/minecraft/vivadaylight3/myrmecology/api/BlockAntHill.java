@@ -80,7 +80,7 @@ public class BlockAntHill extends Block {
 	if (tool != null) {
 
 	    if (tool.getItem() instanceof ToolExtractor) {
-
+		
 		return true;
 
 	    }
@@ -92,8 +92,8 @@ public class BlockAntHill extends Block {
 
     @Override
     public int idDropped(int par1, Random par2Random, int par3) {
-
-	return this.getAnt().getAntID();
+	
+	return this.getAnt().itemID;
 
     }
 
@@ -162,6 +162,20 @@ public class BlockAntHill extends Block {
 	// TODO Auto-generated method stub
 	return false;
     }
+    
+    /**
+     * Returns the Y offset from the height value at the x and z parameters
+     * @param world
+     * @param x
+     * @param currentHeightValue
+     * @param z
+     * @return
+     */
+    public int getGenerationHeightOffset(World world, int x, int currentHeight, int z){
+	
+	return 0;
+	
+    }
 
     /**
      * Returns true if the ant hill should generate underground (only used if
@@ -196,7 +210,7 @@ public class BlockAntHill extends Block {
      */
     public int getDropQuantity() {
 	// TODO Auto-generated method stub
-	return 0;
+	return 2;
     }
 
 }

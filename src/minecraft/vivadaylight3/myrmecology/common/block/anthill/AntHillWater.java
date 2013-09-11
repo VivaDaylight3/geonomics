@@ -2,6 +2,7 @@ package vivadaylight3.myrmecology.common.block.anthill;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.ItemAnt;
@@ -52,6 +53,13 @@ public class AntHillWater extends BlockAntHill {
     public boolean usesNativeGeneration() {
 	// TODO Auto-generated method stub
 	return true;
+    }
+    
+    @Override
+    public int getGenerationHeightOffset(World world, int x, int currentHeight, int z){
+	
+	return -2;
+	
     }
 
     @Override

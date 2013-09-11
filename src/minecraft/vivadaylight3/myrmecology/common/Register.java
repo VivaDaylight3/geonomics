@@ -373,7 +373,13 @@ public class Register {
 
     public static void registerCreativeTab() {
 
-	tabMyrmecology = new CreativeTabs("tab" + Reference.MOD_ID);
+	tabMyrmecology = new CreativeTabs("tab" + Reference.MOD_ID){
+	  
+	    public ItemStack getIconItemStack() {
+                return new ItemStack(antForest, 1, 0);
+	    }
+	    
+	};
 
 	LanguageRegistry.instance().addStringLocalization(
 		"itemGroup." + "tab" + Reference.MOD_ID, "en_US",

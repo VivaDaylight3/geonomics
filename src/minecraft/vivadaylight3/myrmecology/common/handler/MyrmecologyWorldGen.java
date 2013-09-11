@@ -41,7 +41,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 
     private void generateOverworld(World world, Random random, int i, int j) {
 
-	if(Maths.chanceOf(1, 16)){
+	if(Maths.chanceOf(1, 20)){
 	
 	    generateAntHill(world, random, i, j);
 	    
@@ -69,6 +69,8 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 
 	    BlockAntHill currentHill = (BlockAntHill) Register.getHillList()
 		    .toArray()[k];
+	    
+	    blockY += currentHill.getGenerationHeightOffset(world, blockX, blockY, blockZ);
 
 	    if (currentHill.usesNativeGeneration()) {
 

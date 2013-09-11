@@ -33,8 +33,6 @@ public class ItemAnt extends Item {
      */
     private Icon[] icons = new Icon[4];
 
-    private int itemID;
-
     /**
      * Holds the complete set of names for this ant species.
      */
@@ -42,8 +40,6 @@ public class ItemAnt extends Item {
 
     public ItemAnt(int par1) {
 	super(par1);
-
-	this.itemID = par1;
 
 	setHasSubtypes(true);
 

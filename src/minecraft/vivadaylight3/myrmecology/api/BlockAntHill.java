@@ -190,7 +190,7 @@ public class BlockAntHill extends Block {
     }
 
     /**
-     * Returns true if the ant hill can generate at the given coords
+     * Returns true if the ant hill can generate at the given coords, only used if usesNativeGeneration returns true
      * @param world
      * @param x
      * @param y

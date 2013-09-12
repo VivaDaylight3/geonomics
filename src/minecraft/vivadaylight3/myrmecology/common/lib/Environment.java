@@ -22,7 +22,17 @@ public class Environment {
 
     }
 
-    public int[] getBlocksFrom(String axis, int radius, World world, int x, int y, int z){
+    /**
+     * Gets all blocks with negative axis values within a radius from the given coordinates
+     * @param axis
+     * @param radius
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public static int[] getBlocksFrom(String axis, int radius, World world, int x, int y, int z){
 		
 	int[] result = new int[radius + 1];
 			
@@ -30,9 +40,9 @@ public class Environment {
 	    
 	    for(int k = 1; k < result.length; k++){
 		    
-		if(!world.isAirBlock(x + k, y, z)){
+		if(!world.isAirBlock(x - k, y, z)){
 		    
-		    result[k] = world.getBlockId(x + k, y, z);
+		    result[k] = world.getBlockId(x - k, y, z);
 		    
 		}else{
 		    
@@ -46,9 +56,9 @@ public class Environment {
 	    
 	    for(int k = 1; k < result.length; k++){
 		    
-		if(!world.isAirBlock(x, y + k, z)){
+		if(!world.isAirBlock(x, y - k, z)){
 		    
-		    result[k] = world.getBlockId(x, y + k, z);
+		    result[k] = world.getBlockId(x, y - k, z);
 		    
 		}else{
 		    
@@ -62,9 +72,9 @@ public class Environment {
 	    
 	    for(int k = 1; k < result.length; k++){
 		    
-		if(!world.isAirBlock(x, y, z + k)){
+		if(!world.isAirBlock(x, y, z - k)){
 		    
-		    result[k] = world.getBlockId(x, y, z + k);
+		    result[k] = world.getBlockId(x, y, z - k);
 		    
 		}else{
 		    

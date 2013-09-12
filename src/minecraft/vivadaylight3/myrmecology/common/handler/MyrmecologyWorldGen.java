@@ -77,9 +77,13 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 		for (int a = 0; a < currentHill.getHillBiomes().length; a++) {
 
 		    if (currentHill.getHillBiomes()[a] == biome) {
+			
+			if(currentHill.canGenerate(world, blockX, blockY, blockZ)){
 
-			world.setBlock(blockX, blockY, blockZ,
+			    world.setBlock(blockX, blockY, blockZ,
 				currentHill.blockID);
+			
+			}
 
 		    }
 		    
@@ -88,4 +92,13 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 	    
 	}
     }
+    
+    int minY = 3;
+	int maxY = 30;
+
+	blockY = minY + random.nextInt(maxY - minY);
+
+	new WorldGenMinable(currentHill.blockID, 1)
+		.generate(world, random, blockX,
+			blockY, blockZ);
 }

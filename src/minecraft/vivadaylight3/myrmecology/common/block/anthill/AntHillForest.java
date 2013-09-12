@@ -2,11 +2,13 @@ package vivadaylight3.myrmecology.common.block.anthill;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.Environment;
 
 public class AntHillForest extends BlockAntHill {
 
@@ -53,9 +55,22 @@ public class AntHillForest extends BlockAntHill {
     }
 
     @Override
-    public int[] getRequiredTouchingBlocks() {
-
-	return null;
+    public boolean canGenerate(World world, int x, int y, int z){
+	
+	int radius = 1;
+	
+	int[] blocks = new int[radius];
+	
+	blocks = Environment.getBlocksFrom("y", radius, world, x, y, z);
+	
+	if(blocks[0] == Block.grass.blockID || blocks[0] == Block.dirt.blockID || blocks[0] == Block.wood.blockID){
+		
+	    return true;
+		
+	}
+	
+	return false;
+	
     }
 
 }

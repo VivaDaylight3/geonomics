@@ -8,6 +8,7 @@ import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Maths;
 
 public class AntHillWater extends BlockAntHill {
@@ -58,41 +59,50 @@ public class AntHillWater extends BlockAntHill {
     @Override
     public int getGenerationHeightOffset(World world, int x, int currentHeight, int z){
 	
-	return -2;
+	int radius = 1;
+	
+	int[] blocks = new int[radius];
+	
+	blocks = Environment.getBlocksFrom("y", radius, world, x, currentHeight, z);
+	
+	for(int k = 0; k < blocks.length; k++){
+	    
+	    if(k != blocks.length - 1){
+		
+		int blockUnder = world.getBlockId(x, currentHeight - k - 1, z);
+		
+		if(blockUnder == Block.dirt.blockID || blockUnder == Block.sand.blockID || 
+			blockUnder == Block.blockClay.blockID){
+		    
+		    return k;
+		    
+		}
+		
+	    }
+	    
+	}
+	
+	return 0;
 	
     }
 
     @Override
-    public int[] getRequiredTouchingBlocks() {
+    public boolean canGenerate(World world, int x, int y, int z){
 	
-	/*
-
-	int[] blocks1 = new int[] { Block.sand.blockID,
-		Block.waterStill.blockID };
-	int[] blocks2 = new int[] { Block.gravel.blockID,
-		Block.waterStill.blockID };
-	int[] blocks3 = new int[] { Block.blockClay.blockID,
-		Block.waterStill.blockID };
-	int[] blocks4 = new int[] { Block.dirt.blockID,
-		Block.waterStill.blockID };
-
-	int chance = Maths.getChance(3);
-
-	switch (chance) {
-
-	case 1:
-	    return blocks1;
-	case 2:
-	    return blocks2;
-	case 3:
-	    return blocks3;
-	default:
-	    return blocks4;
-
+	int radius = 1;
+	
+	int[] blocks = new int[radius];
+	
+	blocks = Environment.getBlocksFrom("y", radius, world, x, y, z);
+	
+	if(blocks[0] == Block.sand.blockID || blocks[0] == Block.dirt.blockID || blocks[0] == Block.blockClay.blockID){
+		
+	    return true;
+		
 	}
-	*/
 	
-	return null;
+	return false;
+	
     }
 
 }

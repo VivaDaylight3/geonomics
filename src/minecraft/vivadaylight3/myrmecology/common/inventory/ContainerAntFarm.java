@@ -1,13 +1,13 @@
 package vivadaylight3.myrmecology.common.inventory;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerAntFarm extends Container {
 
@@ -15,6 +15,8 @@ public class ContainerAntFarm extends Container {
 
     private static int numRows = 3;
     private static int numColumns = 5;
+    
+    private static int inventorySize  = 0;
 
     public ContainerAntFarm(InventoryPlayer inventoryPlayer,
 	    TileEntityAntFarm te) {
@@ -26,10 +28,12 @@ public class ContainerAntFarm extends Container {
 
 	// Drone Slot
 	addSlotToContainer(new Slot(tileEntity, slotID, 26, 17 + 2 * 18));
+	inventorySize++;
 
 	// Queen Slot
 	slotID++;
 	addSlotToContainer(new Slot(tileEntity, slotID, 26, 17));
+	inventorySize++;
 
 	/*
 	 * Food Slot slotID++; addSlotToContainer(new Slot(tileEntity, slotID,
@@ -45,6 +49,7 @@ public class ContainerAntFarm extends Container {
 		slotID++;
 		addSlotToContainer(new Slot(tileEntity, slotID, 62 + j * 18,
 			17 + i * 18));
+		inventorySize++;
 
 	    }
 	}
@@ -54,8 +59,7 @@ public class ContainerAntFarm extends Container {
 
     public static int getInventorySize() {
 
-	int result = (numRows * numColumns) + 4;
-	return result;
+	return inventorySize;
 
     }
 
@@ -78,40 +82,39 @@ public class ContainerAntFarm extends Container {
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    {
+        ItemStack itemstack = null;
+        Slot slot = (Slot)this.inventorySlots.get(par2);
 
-	ItemStack stack = null;
-	Slot slotObject = (Slot) inventorySlots.get(slot);
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
 
-	// null checks and checks if the item can be stacked (maxStackSize > 1)
-	if (slotObject != null && slotObject.getHasStack()) {
-	    ItemStack stackInSlot = slotObject.getStack();
-	    stack = stackInSlot.copy();
+            if (par2 < this.numRows * 9)
+            {
+                if (!this.mergeItemStack(itemstack1, this.numRows * 9, this.inventorySlots.size(), true))
+                {
+                    return null;
+                }
+            }
+            else if (!this.mergeItemStack(itemstack1, 0, this.numRows * 9, false))
+            {
+                return null;
+            }
 
-	    // merges the item into player inventory since its in the tileEntity
-	    if (slot < 9) {
-		if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
-		    return null;
-		}
-	    }
-	    // places it into the tileEntity is possible since its in the player
-	    // inventory
-	    else if (!this.mergeItemStack(stackInSlot, 0, 9, false)) {
-		return null;
-	    }
+            if (itemstack1.stackSize == 0)
+            {
+                slot.putStack((ItemStack)null);
+            }
+            else
+            {
+                slot.onSlotChanged();
+            }
+        }
 
-	    if (stackInSlot.stackSize == 0) {
-		slotObject.putStack(null);
-	    } else {
-		slotObject.onSlotChanged();
-	    }
-
-	    if (stackInSlot.stackSize == stack.stackSize) {
-		return null;
-	    }
-	    slotObject.onPickupFromSlot(player, stackInSlot);
-	}
-	return stack;
+        return itemstack;
     }
 
 }

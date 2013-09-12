@@ -17,7 +17,7 @@ public class AntHillStone extends BlockAntHill {
 
     @Override
     public ItemAnt getAnt() {
-	return Register.antDesert;
+	return Register.antStone;
     }
 
     @Override

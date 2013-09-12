@@ -78,57 +78,14 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 
 		    if (currentHill.getHillBiomes()[a] == biome) {
 
-			if (currentHill.getRequiredTouchingBlocks() != null) {
-
-			    for (int b = 0; b < currentHill
-				    .getRequiredTouchingBlocks().length; b++) {
-
-				if (Environment
-					.blockIsTouching(
-						world,
-						blockX,
-						blockY,
-						blockZ,
-						currentHill
-							.getRequiredTouchingBlocks()[b])) {
-
-				    world.setBlock(blockX, blockY, blockZ,
-					    currentHill.blockID);
-
-				}
-
-			    }
-
-			} else {
-
-			    if (currentHill.isUnderground()) {
-
-				int minY = 3;
-				int maxY = 30;
-
-				blockY = minY + random.nextInt(maxY - minY);
-
-				new WorldGenMinable(currentHill.blockID, 1)
-					.generate(world, random, blockX,
-						blockY, blockZ);
-
-			    } else {
-				
-				//(new WorldGenMinable(currentHill.blockID, 1)).generate(world, random, blockX, blockY, blockZ);
-
-				world.setBlock(blockX, blockY, blockZ, currentHill.blockID);
-
-			    }
-
-			}
+			world.setBlock(blockX, blockY, blockZ,
+				currentHill.blockID);
 
 		    }
-
+		    
 		}
-
 	    }
-
+	    
 	}
-
     }
 }

@@ -22,6 +22,75 @@ public class Environment {
 
     }
 
+    public int[] getBlocksFrom(String axis, int radius, World world, int x, int y, int z){
+		
+	int[] result = new int[radius + 1];
+			
+	if(axis == "x"){
+	    
+	    for(int k = 1; k < result.length; k++){
+		    
+		if(!world.isAirBlock(x + k, y, z)){
+		    
+		    result[k] = world.getBlockId(x + k, y, z);
+		    
+		}else{
+		    
+		    result[k] = 0;
+		    
+		}
+				    
+	    }
+	    
+	}else if(axis == "y"){
+	    
+	    for(int k = 1; k < result.length; k++){
+		    
+		if(!world.isAirBlock(x, y + k, z)){
+		    
+		    result[k] = world.getBlockId(x, y + k, z);
+		    
+		}else{
+		    
+		    result[k] = 0;
+		    
+		}
+				    
+	    }
+	    
+	}else if(axis == "z"){
+	    
+	    for(int k = 1; k < result.length; k++){
+		    
+		if(!world.isAirBlock(x, y, z + k)){
+		    
+		    result[k] = world.getBlockId(x, y, z + k);
+		    
+		}else{
+		    
+		    result[k] = 0;
+		    
+		}
+				    
+	    }
+	    
+	}else{
+	    
+	// To prevent null pointer exceptions when using the returned array + an invalid axis is provided
+	    
+	    for(int k = 0; k < result.length; k++){
+		
+		result[k] = 0;
+		
+	    }
+	    
+	}
+	
+	return result;
+	
+    }
+    
+    // TODO
     public int[][] getBlocksInRadius(World world, int x, int y, int z,
 	    int radius) {
 

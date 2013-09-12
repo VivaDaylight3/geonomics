@@ -190,13 +190,17 @@ public class BlockAntHill extends Block {
     }
 
     /**
-     * Returns the block IDs that need to be touching the hill in order for it
-     * to be generated (only use if usesNativeGenerartion returns true)
-     * 
-     * @return int[] (null if none are required)
+     * Returns true if the ant hill can generate at the given coords
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
      */
-    public int[] getRequiredTouchingBlocks() {
-	return null;
+    public boolean canGenerate(World world, int x, int y, int z){
+	
+	return true;
+	
     }
 
     /**

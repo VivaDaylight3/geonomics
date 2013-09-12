@@ -219,7 +219,7 @@ public class GuiAntopedia extends GuiContainer {
 	
 	if(this.antIcon != null){
 	    	    
-	    drawIcon(this.antIcon, this.container.antSlotX + 15, this.container.antSlotY);
+	    //drawIcon(this.antIcon, this.container.antSlotX + 15, this.container.antSlotY);
 	    
 	}
 

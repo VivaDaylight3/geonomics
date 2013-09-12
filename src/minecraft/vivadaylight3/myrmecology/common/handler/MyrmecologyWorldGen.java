@@ -41,7 +41,7 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 
     private void generateOverworld(World world, Random random, int i, int j) {
 
-	if(Maths.chanceOf(1, 20)){
+	if(Maths.chanceOf(1, 4)){
 	
 	    generateAntHill(world, random, i, j);
 	    
@@ -79,10 +79,20 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 		    if (currentHill.getHillBiomes()[a] == biome) {
 			
 			if(currentHill.canGenerate(world, blockX, blockY, blockZ)){
+			    
+			    if(currentHill.isUnderground()){
+				
+				int minY = 3;
+				int maxY = 30;
 
-			    world.setBlock(blockX, blockY, blockZ,
-				currentHill.blockID);
-			
+				blockY = minY + random.nextInt(maxY - minY);
+				
+			    }
+
+				world.setBlock(blockX, blockY, blockZ,
+					currentHill.blockID);
+				
+							
 			}
 
 		    }
@@ -92,13 +102,5 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 	    
 	}
     }
-    
-    int minY = 3;
-	int maxY = 30;
-
-	blockY = minY + random.nextInt(maxY - minY);
-
-	new WorldGenMinable(currentHill.blockID, 1)
-		.generate(world, random, blockX,
-			blockY, blockZ);
+  
 }

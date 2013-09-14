@@ -55,54 +55,58 @@ public class AntHillWater extends BlockAntHill {
 	// TODO Auto-generated method stub
 	return true;
     }
-    
+
     @Override
-    public int getGenerationHeightOffset(World world, int x, int currentHeight, int z){
-	
+    public int getGenerationHeightOffset(World world, int x, int currentHeight,
+	    int z) {
+
 	int radius = 1;
-	
+
 	int[] blocks = new int[radius];
-	
-	blocks = Environment.getBlocksFrom("y", radius, world, x, currentHeight, z);
-	
-	for(int k = 0; k < blocks.length; k++){
-	    
-	    if(k != blocks.length - 1){
-		
+
+	blocks = Environment.getBlocksFrom("y", radius, world, x,
+		currentHeight, z);
+
+	for (int k = 0; k < blocks.length; k++) {
+
+	    if (k != blocks.length - 1) {
+
 		int blockUnder = world.getBlockId(x, currentHeight - k - 1, z);
-		
-		if(blockUnder == Block.dirt.blockID || blockUnder == Block.sand.blockID || 
-			blockUnder == Block.blockClay.blockID){
-		    
+
+		if (blockUnder == Block.dirt.blockID
+			|| blockUnder == Block.sand.blockID
+			|| blockUnder == Block.blockClay.blockID) {
+
 		    return k;
-		    
+
 		}
-		
+
 	    }
-	    
+
 	}
-	
+
 	return 0;
-	
+
     }
 
     @Override
-    public boolean canGenerate(World world, int x, int y, int z){
-	
+    public boolean canGenerate(World world, int x, int y, int z) {
+
 	int radius = 1;
-	
+
 	int[] blocks = new int[radius];
-	
+
 	blocks = Environment.getBlocksFrom("y", radius, world, x, y, z);
-	
-	if(blocks[0] == Block.sand.blockID || blocks[0] == Block.dirt.blockID || blocks[0] == Block.blockClay.blockID){
-		
+
+	if (blocks[0] == Block.sand.blockID || blocks[0] == Block.dirt.blockID
+		|| blocks[0] == Block.blockClay.blockID) {
+
 	    return true;
-		
+
 	}
-	
+
 	return false;
-	
+
     }
 
 }

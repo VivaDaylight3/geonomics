@@ -37,86 +37,90 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	}
 
     }
-    
-    public static Side getSide(){
-	
+
+    public static Side getSide() {
+
 	return FMLCommonHandler.instance().getEffectiveSide();
-	
+
     }
-    
-    public static EntityPlayer getSidedPlayer(Player parPlayer){
-	
+
+    public static EntityPlayer getSidedPlayer(Player parPlayer) {
+
 	Side side = getSide();
-	
+
 	EntityPlayer player = null;
-	
-	if(side == Side.SERVER){
-	    
+
+	if (side == Side.SERVER) {
+
 	    player = (EntityPlayerMP) parPlayer;
-	    
-	}else if(side == Side.CLIENT){
-	    
+
+	} else if (side == Side.CLIENT) {
+
 	    player = (EntityClientPlayerMP) parPlayer;
-	    
+
 	}
-	
+
 	return player;
-	
+
     }
 
     /**
      * Guidance method only used as a guideline, shouldn't be called
+     * 
      * @param packet
      * @param parPlayer
      */
     @Deprecated
     public void handlePacket(Packet250CustomPayload packet, Player parPlayer) {
-	
-	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-        
-        int randomInt1;
-        int randomInt2;
-        
-        try {
-                randomInt1 = inputStream.readInt();
-                randomInt2 = inputStream.readInt();
-        } catch (IOException e) {
-                e.printStackTrace();
-                return;
-        }
-        
-        System.out.println(randomInt1 + " " + randomInt2);
-        
+
+	DataInputStream inputStream = new DataInputStream(
+		new ByteArrayInputStream(packet.data));
+
+	int randomInt1;
+	int randomInt2;
+
+	try {
+	    randomInt1 = inputStream.readInt();
+	    randomInt2 = inputStream.readInt();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	    return;
+	}
+
+	System.out.println(randomInt1 + " " + randomInt2);
+
     }
-    
-    public void handleNBTPacket(Packet250CustomPayload packet, Player player){
-	
-	if(packet != null){
-	    
-	    DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-	    
+
+    public void handleNBTPacket(Packet250CustomPayload packet, Player player) {
+
+	if (packet != null) {
+
+	    DataInputStream inputStream = new DataInputStream(
+		    new ByteArrayInputStream(packet.data));
+
 	    String speciesName = null;
 	    int antopediaID = 0;
 	    Object antopedia;
-	    
-	    try{
-		
+
+	    try {
+
 		speciesName = inputStream.readUTF();
-		antopediaID = inputStream.readInt();		
-		
-	    }catch (Exception ex){
-		
+		antopediaID = inputStream.readInt();
+
+	    } catch (Exception ex) {
+
 		ex.printStackTrace();
 		return;
-		
+
 	    }
-	    
-	    Nbt.set(AntopediaProperties.getAntopediaFromID(antopediaID), speciesName, true);
-	    
-	   // AntopediaProperties.clearAntopediaID(antopediaID);
-	    
+
+	    Nbt.set(AntopediaProperties.getAntopediaFromID(antopediaID),
+		    speciesName, true);
+
+	    // AntopediaProperties.clearAntopediaID(antopediaID);
+
 	}
-	
+
     }
 
 }

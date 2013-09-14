@@ -57,10 +57,10 @@ public class AntHillStone extends BlockAntHill {
     }
 
     @Override
-    public boolean canGenerate(World world, int x, int y, int z){
-	
+    public boolean canGenerate(World world, int x, int y, int z) {
+
 	return true;
-	
+
     }
 
     @Override

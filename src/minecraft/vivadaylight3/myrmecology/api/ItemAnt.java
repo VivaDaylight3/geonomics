@@ -148,9 +148,11 @@ public class ItemAnt extends Item {
 
 	if (AntProperties.getMated(par1ItemStack)) {
 
-	    par3List.add("Lifetime: "
-		    + (this.getLifetime()/* - AntProperties
-			    .getLifetimeComplete(par1ItemStack)*/));
+	    par3List.add("Lifetime: " + (this.getLifetime()/*
+							    * - AntProperties
+							    * .getLifetimeComplete
+							    * (par1ItemStack)
+							    */));
 
 	}
 
@@ -199,7 +201,7 @@ public class ItemAnt extends Item {
      * @return String
      */
     public String getSpeciesName() {
-	
+
 	return "Default";
     }
 
@@ -210,7 +212,7 @@ public class ItemAnt extends Item {
      * @return String
      */
     public String getSpeciesSubName() {
-	
+
 	return "default";
     }
 
@@ -220,7 +222,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean isHillAnt() {
-	
+
 	return false;
     }
 
@@ -251,7 +253,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsSweet() {
-	
+
 	return true;
     }
 
@@ -262,7 +264,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsSavoury() {
-	
+
 	return false;
     }
 
@@ -272,7 +274,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsMeat() {
-	
+
 	return false;
     }
 
@@ -282,7 +284,7 @@ public class ItemAnt extends Item {
      * @return boolean
      */
     public boolean eatsLarvae() {
-	
+
 	return false;
     }
 
@@ -306,7 +308,7 @@ public class ItemAnt extends Item {
      * @return String
      */
     public String getSpeciesBinomialName() {
-	
+
 	return "Antus Defaultus";
     }
 
@@ -317,7 +319,7 @@ public class ItemAnt extends Item {
      * @return BiomeGenBase[] (null to use in all biomes)
      */
     public BiomeGenBase[] getAntBiomes() {
-	
+
 	return null;
     }
 

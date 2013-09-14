@@ -125,13 +125,13 @@ public class Register {
 	return latestItemID + ID_ITEM;
 
     }
-    
-    public static int getNewBlockID(){
-	
+
+    public static int getNewBlockID() {
+
 	latestBlockID += 1;
 
 	return latestBlockID + ID_ITEM;
-	
+
     }
 
     public static void registerBlocks() {
@@ -230,19 +230,19 @@ public class Register {
 
 	antStone = new AntStone(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_STONE_NAME, getNewItemID()).getInt());
-	
+
 	antCommon = new AntCommon(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_COMMON_NAME, getNewItemID()).getInt());
 
 	antHarvester = new AntHarvester(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_HARVESTER_NAME, getNewItemID()).getInt());
-	
+
 	antBarbaric = new AntBarbaric(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_BARBARIC_NAME, getNewItemID()).getInt());
-	
+
 	antPlentiful = new AntPlentiful(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_PLENTIFUL_NAME, getNewItemID()).getInt());
-	
+
 	antCultivator = new AntCultivator(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ANT_CULTIVATOR_NAME,
 		getNewItemID()).getInt());
@@ -373,12 +373,12 @@ public class Register {
 
     public static void registerCreativeTab() {
 
-	tabMyrmecology = new CreativeTabs("tab" + Reference.MOD_ID){
-	  
+	tabMyrmecology = new CreativeTabs("tab" + Reference.MOD_ID) {
+
 	    public ItemStack getIconItemStack() {
-                return new ItemStack(antForest, 1, 0);
+		return new ItemStack(antForest, 1, 0);
 	    }
-	    
+
 	};
 
 	LanguageRegistry.instance().addStringLocalization(
@@ -397,12 +397,15 @@ public class Register {
 	GameRegistry.addRecipe(new ItemStack(blockAntFarm, 1), "wgw", "gsg",
 		"wgw", 'w', new ItemStack(Block.woodSingleSlab), 'g',
 		new ItemStack(Block.glass), 's', new ItemStack(Block.sand));
-	
-	GameRegistry.addRecipe(new ItemStack(itemAntopedia, 1), "ggg", "qir", "ggg", 'g', new ItemStack(Block.thinGlass),
-	'q', new ItemStack(Item.netherQuartz), 'i', new ItemStack(Item.dyePowder), 'r', new ItemStack(Item.redstone));
-	
-	GameRegistry.addRecipe(new ItemStack(itemExtractor), " s ", "did", " d ", 's', new ItemStack(Item.shovelIron), 
-		'd', new ItemStack(Item.dyePowder), 'i', new ItemStack(Item.ingotIron));
+
+	GameRegistry.addRecipe(new ItemStack(itemAntopedia, 1), "ggg", "qir",
+		"ggg", 'g', new ItemStack(Block.thinGlass), 'q', new ItemStack(
+			Item.netherQuartz), 'i', new ItemStack(Item.dyePowder),
+		'r', new ItemStack(Item.redstone));
+
+	GameRegistry.addRecipe(new ItemStack(itemExtractor), " s ", "did",
+		" d ", 's', new ItemStack(Item.shovelIron), 'd', new ItemStack(
+			Item.dyePowder), 'i', new ItemStack(Item.ingotIron));
 
     }
 
@@ -410,7 +413,7 @@ public class Register {
 
 	GameRegistry.registerTileEntity(TileEntityAntFarm.class,
 		Reference.BLOCK_ANTFARM_NAME);
-	
+
 	GameRegistry.registerTileEntity(TileEntityIncubator.class,
 		Reference.BLOCK_INCUBATOR_NAME);
 

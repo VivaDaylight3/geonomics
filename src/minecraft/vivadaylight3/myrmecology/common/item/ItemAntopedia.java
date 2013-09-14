@@ -24,29 +24,29 @@ public class ItemAntopedia extends Item {
 	setUnlocalizedName(Reference.ITEM_ANTOPEDIA_NAME);
 	func_111206_d(Resources.TEXTURE_PREFIX + Reference.ITEM_ANTOPEDIA_NAME);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
+    public void registerIcons(IconRegister par1IconRegister) {
+	this.itemIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_ANTOPEDIA_NAME);
     }
-    
+
     @Override
-    public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-			
+    public void onCreated(ItemStack par1ItemStack, World par2World,
+	    EntityPlayer par3EntityPlayer) {
+
 	AntopediaProperties.initiateAntopedia(par1ItemStack);
-	
+
     }
 
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player,
 	    World world, int x, int y, int z, int par7, float par8, float par9,
 	    float par10) {
-	
-	player.openGui(Myrmecology.instance, Register.GUI_ID_ANTOPEDIA,
-		    world, x, y, z);
+
+	player.openGui(Myrmecology.instance, Register.GUI_ID_ANTOPEDIA, world,
+		x, y, z);
 
 	return false;
 

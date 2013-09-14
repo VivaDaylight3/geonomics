@@ -55,22 +55,23 @@ public class AntHillForest extends BlockAntHill {
     }
 
     @Override
-    public boolean canGenerate(World world, int x, int y, int z){
-	
+    public boolean canGenerate(World world, int x, int y, int z) {
+
 	int radius = 1;
-	
+
 	int[] blocks = new int[radius];
-	
+
 	blocks = Environment.getBlocksFrom("y", radius, world, x, y, z);
-	
-	if(blocks[0] == Block.grass.blockID || blocks[0] == Block.dirt.blockID || blocks[0] == Block.wood.blockID){
-		
+
+	if (blocks[0] == Block.grass.blockID || blocks[0] == Block.dirt.blockID
+		|| blocks[0] == Block.wood.blockID) {
+
 	    return true;
-		
+
 	}
-	
+
 	return false;
-	
+
     }
 
 }

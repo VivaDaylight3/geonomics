@@ -4,11 +4,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class Nbt {
-    
-    public static boolean hasTag(ItemStack itemStack){
-	
+
+    public static boolean hasTag(ItemStack itemStack) {
+
 	return itemStack.hasTagCompound();
-	
+
     }
 
     public static void setTag(ItemStack itemStack) {
@@ -142,11 +142,11 @@ public class Nbt {
     }
 
     public static boolean hasKey(ItemStack itemStack, String key) {
-	
-	if(itemStack.getTagCompound() == null){
-	    
+
+	if (itemStack.getTagCompound() == null) {
+
 	    return false;
-	    
+
 	}
 
 	return itemStack.getTagCompound().hasKey(key);

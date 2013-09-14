@@ -58,9 +58,10 @@ public class Myrmecology {
 
 	MyrmecologyGuiHandler guiHandler = new MyrmecologyGuiHandler();
 	NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
-	
+
 	MyrmecologyPacketHandler packetHandler = new MyrmecologyPacketHandler();
-	NetworkRegistry.instance().registerChannel(packetHandler, Reference.MOD_CHANNEL);
+	NetworkRegistry.instance().registerChannel(packetHandler,
+		Reference.MOD_CHANNEL);
 
     }
 

@@ -83,7 +83,8 @@ public class AntWater extends ItemAnt {
     @Override
     public BiomeGenBase[] getAntBiomes() {
 
-	BiomeGenBase[] biomes = new BiomeGenBase[] {BiomeGenBase.ocean, BiomeGenBase.river };
+	BiomeGenBase[] biomes = new BiomeGenBase[] { BiomeGenBase.ocean,
+		BiomeGenBase.river };
 
 	return biomes;
     }

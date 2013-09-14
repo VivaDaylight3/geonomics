@@ -34,7 +34,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
     public boolean isBreeding = false;
 
     private int stackLimit;
-    
+
     private int fertility;
 
     public ItemStack[] getContents() {
@@ -298,8 +298,9 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 		if (this.getQueen() != null && this.getDrone() != null) {
 
 		    if (this.getBreedingResult() != null) {
-			
-			this.fertility = ((ItemAnt) this.getQueen().getItem()).getFertility();
+
+			this.fertility = ((ItemAnt) this.getQueen().getItem())
+				.getFertility();
 
 			ItemStack result = this.getBreedingResult();
 			result.stackSize = 1;
@@ -320,15 +321,17 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
     }
 
     private void finishBreeding() {
-	
-	ItemStack result = new ItemStack(this.getQueen().getItem(), this.fertility, Metadata.getMetaLarva());
-	
+
+	ItemStack result = new ItemStack(this.getQueen().getItem(),
+		this.fertility, Metadata.getMetaLarva());
+
 	AntProperties.setProperties(result, false, 0);
-	
-	//Environment.addItemStackToInventory(result, getContents(), stackLimit, this);
-	
+
+	// Environment.addItemStackToInventory(result, getContents(),
+	// stackLimit, this);
+
 	this.getContents()[7] = result;
-	
+
 	this.decrStackSize(getQueenSlot(), 1);
 
     }

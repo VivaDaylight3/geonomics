@@ -80,7 +80,7 @@ public class BlockAntHill extends Block {
 	if (tool != null) {
 
 	    if (tool.getItem() instanceof ToolExtractor) {
-		
+
 		return true;
 
 	    }
@@ -92,7 +92,7 @@ public class BlockAntHill extends Block {
 
     @Override
     public int idDropped(int par1, Random par2Random, int par3) {
-	
+
 	return this.getAnt().itemID;
 
     }
@@ -162,19 +162,21 @@ public class BlockAntHill extends Block {
 	// TODO Auto-generated method stub
 	return false;
     }
-    
+
     /**
      * Returns the Y offset from the height value at the x and z parameters
+     * 
      * @param world
      * @param x
      * @param currentHeightValue
      * @param z
      * @return
      */
-    public int getGenerationHeightOffset(World world, int x, int currentHeight, int z){
-	
+    public int getGenerationHeightOffset(World world, int x, int currentHeight,
+	    int z) {
+
 	return 0;
-	
+
     }
 
     /**
@@ -190,17 +192,19 @@ public class BlockAntHill extends Block {
     }
 
     /**
-     * Returns true if the ant hill can generate at the given coords, only used if usesNativeGeneration returns true
+     * Returns true if the ant hill can generate at the given coords, only used
+     * if usesNativeGeneration returns true
+     * 
      * @param world
      * @param x
      * @param y
      * @param z
      * @return
      */
-    public boolean canGenerate(World world, int x, int y, int z){
-	
+    public boolean canGenerate(World world, int x, int y, int z) {
+
 	return true;
-	
+
     }
 
     /**

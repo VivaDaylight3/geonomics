@@ -137,10 +137,10 @@ public class InventoryItem implements IInventory {
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 
-	//return itemstack.getItem() instanceof ItemAnt;
+	// return itemstack.getItem() instanceof ItemAnt;
 
 	return true;
-	
+
     }
 
     public void readFromNBT(NBTTagCompound tagcompound) {

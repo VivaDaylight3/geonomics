@@ -56,10 +56,10 @@ public class AntopediaProperties {
 
 	    return antopediaIDs[id];
 
-	}else{
+	} else {
 
 	    return null;
-	
+
 	}
 
     }
@@ -96,13 +96,13 @@ public class AntopediaProperties {
 	packet.channel = Reference.MOD_CHANNEL;
 	packet.data = bos.toByteArray();
 	packet.length = bos.size();
-	
-	if(MyrmecologyPacketHandler.getSide() == Side.CLIENT){
-	    
+
+	if (MyrmecologyPacketHandler.getSide() == Side.CLIENT) {
+
 	    EntityClientPlayerMP player = (EntityClientPlayerMP) MyrmecologyPacketHandler
-			.getSidedPlayer(parPlayer);
-		player.sendQueue.addToSendQueue(packet);
-	    
+		    .getSidedPlayer(parPlayer);
+	    player.sendQueue.addToSendQueue(packet);
+
 	}
 
     }

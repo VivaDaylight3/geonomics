@@ -28,7 +28,7 @@ public class ContainerIncubator extends Container {
 	// args: tileEntity, slotID, horisontal, vertical
 
 	// Larva Slot
-	addSlotToContainer(new Slot(tileEntity, slotID, 26, 17 + 2 * 18));
+	addSlotToContainer(new SlotSizeable(tileEntity, slotID, 26, 17 + 2 * 18, 1));
 	inventorySize++;
 
 	for (int i = 0; i < numRows; i++) {

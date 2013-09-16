@@ -135,11 +135,16 @@ public class ItemAnt extends Item {
 
 	Nbt.setTag(par1ItemStack);
 
-	ItemAnt ant = (ItemAnt) par1ItemStack.getItem();
-
-	AntProperties.setProperties(par1ItemStack, true, 0);
-
-	System.out.println("On Create: " + ant.getLifetime());
+	if(par1ItemStack.getItemDamage() == Metadata.getMetaQueen()){
+	    
+	    AntProperties.setProperties(par1ItemStack, false, 0);
+	    
+	}else if(par1ItemStack.getItemDamage() == Metadata.getMetaLarva()){
+	    
+	    AntProperties.setProperties(par1ItemStack, 0);
+	    
+	}
+	
     }
 
     @Override
@@ -148,12 +153,14 @@ public class ItemAnt extends Item {
 
 	if (AntProperties.getMated(par1ItemStack)) {
 
-	    par3List.add("Lifetime: " + (this.getLifetime()/*
-							    * - AntProperties
-							    * .getLifetimeComplete
-							    * (par1ItemStack)
-							    */));
+	    par3List.add("Time: " + (this.getLifetime() - AntProperties.getLifetimeComplete(par1ItemStack)));
 
+	}
+	
+	if(par1ItemStack.getItemDamage() == Metadata.getMetaLarva()){
+	    
+	    par3List.add("Time: "+ (this.getMaturingTime() - AntProperties.getMaturingTimeComplete(par1ItemStack)));
+	    
 	}
 
     }

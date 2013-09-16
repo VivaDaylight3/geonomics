@@ -333,6 +333,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	this.getContents()[7] = result;
 
 	this.decrStackSize(getQueenSlot(), 1);
+	this.onInventoryChanged();
 
     }
 

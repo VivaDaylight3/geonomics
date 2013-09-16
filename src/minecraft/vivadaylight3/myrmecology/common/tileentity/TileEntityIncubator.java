@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import vivadaylight3.myrmecology.api.AntProperties;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.api.Metadata;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
@@ -32,11 +33,27 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 
     @Override
     public void updateEntity() {
-	if (this.maturationTime > 0) {
+	
+	if(this.canIncubate()){
+	    
+	    if(this.getMaturingTimeComplete() < this.getMaturingTime()){
+		
+		this.increaseMaturingTime();
+		
+	    }else if(this.getMaturingTimeComplete() >= this.getMaturingTime()){
+		
+		this.finishIncubation();
+		
+	    }
+	    	    
+	}
+	
+	//
+	if(this.maturationTime > 0) {
 	    --this.maturationTime;
 
 	    if (this.maturationTime == 0) {
-		this.matureLarva();
+		//this.matureLarva();
 		this.onInventoryChanged();
 	    } else if (!this.canIncubate()) {
 		this.maturationTime = 0;
@@ -52,6 +69,28 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	ItemStack result = new ItemStack(this.getLarva().getItem(), ((ItemAnt) this.getLarva().getItem()).getFertility(), this.resultAntMeta);
 	
 	return result;
+	
+    }
+    
+    private int getMaturingTime(){
+	
+	if(this.getLarva() != null){
+	    
+	    if(this.getLarva().getItem() instanceof ItemAnt){
+		
+		return ((ItemAnt) this.getLarva().getItem()).getMaturingTime();
+		
+	    }
+	    
+	}
+	
+	return 1;
+	
+    }
+    
+    public int getMaturingTimeComplete(){
+	
+	return AntProperties.getMaturingTimeComplete(getLarva());
 	
     }
 
@@ -72,11 +111,21 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	return false;
 	
     }
+    
+    private void increaseMaturingTime(){
+	
+	int complete = AntProperties.getMaturingTimeComplete(getLarva());
+	AntProperties.setMaturingTime(getLarva(), complete+1);
+	
+    }
 
     // turns the larvae into a mature ant
-    private void matureLarva() {
+    private void finishIncubation() {
 	
+	Environment.addItemStackToInventory(getMaturingResult(), getContents(), getMaxStackSize(), this);
+	this.decrStackSize(ContainerIncubator.getLarvaSlot(), 1);
 	
+	this.onInventoryChanged();
 
     }
     
@@ -196,10 +245,6 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	}
     }
 
-    public int getInventoryStackLimit() {
-	return 64;
-    }
-
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 	return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
 		this.zCoord) != this ? false
@@ -225,5 +270,10 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
     @Override
     public void closeChest() {
 	// do nothing
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+	return 64;
     }
 }

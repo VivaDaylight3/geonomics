@@ -21,8 +21,6 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 
     private String field_94045_s;
 
-    public final Set<EntityPlayer> playersUsing = new HashSet<EntityPlayer>();
-
     private final int MAX_MATURATION_TIME = 300;
     private int maturationTime;
     
@@ -274,6 +272,6 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 
     @Override
     public int getInventoryStackLimit() {
-	return 64;
+	return ContainerIncubator.stackLimit;
     }
 }

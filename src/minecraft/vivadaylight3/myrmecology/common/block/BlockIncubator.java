@@ -68,17 +68,28 @@ public class BlockIncubator extends Block {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
 	    EntityPlayer player, int par6, float par7, float par8, float par9) {
-	if (world.isRemote) {
-	    return true;
-	} else {
-	    TileEntity te = world.getBlockTileEntity(x, y, z);
-	    if (te != null && te instanceof TileEntityIncubator
-		    && !player.isSneaking()) {
-		player.openGui(Myrmecology.instance, Register.GUI_ID_INCUBATOR,
+	
+	if(!world.isRemote && !player.isSneaking()){
+	    
+	    TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+	    
+	  //  if(tileEntity != null){
+		
+		//if(tileEntity instanceof TileEntityIncubator){
+	    
+		    player.openGui(Myrmecology.instance, Register.GUI_ID_INCUBATOR,
 			world, x, y, z);
-	    }
-	    return true;
+		    
+		    return true;
+		
+		//}
+	    
+	    //}
+	    
 	}
+	
+	return false;
+	
     }
 
     @Override

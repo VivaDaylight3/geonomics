@@ -31,7 +31,7 @@ public class ItemAnt extends Item {
     /**
      * Holds the ant's icons
      */
-    private Icon[] icons = new Icon[4];
+    private Icon[] icons = new Icon[Metadata.typeMeta.length];
 
     /**
      * Holds the complete set of names for this ant species.

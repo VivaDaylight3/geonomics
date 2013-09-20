@@ -46,7 +46,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	    	    
 	}
 	
-	//
+	/*
 	if(this.maturationTime > 0) {
 	    --this.maturationTime;
 
@@ -60,6 +60,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	} else if (this.canIncubate()) {
 	    this.maturationTime = MAX_MATURATION_TIME;
 	}
+	*/
     }
     
     private ItemStack getMaturingResult(){

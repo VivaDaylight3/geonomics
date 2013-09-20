@@ -1,6 +1,7 @@
 package vivadaylight3.myrmecology.common.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,7 @@ import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 
-public class BlockIncubator extends Block {
+public class BlockIncubator extends BlockContainer {
 
     private String name;
 
@@ -93,7 +94,7 @@ public class BlockIncubator extends Block {
     }
 
     @Override
-    public TileEntity createTileEntity(World world, int metadata) {
+    public TileEntity createNewTileEntity(World world) {
 	return new TileEntityIncubator();
     }
 }

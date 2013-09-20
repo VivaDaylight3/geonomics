@@ -52,6 +52,8 @@ public class AntHillSnow extends BlockAntHill {
 
     @Override
     public boolean canGenerate(World world, int x, int y, int z) {
+	
+	System.out.println("antHillSnow");
 
 	int radius = 1;
 
@@ -59,9 +61,23 @@ public class AntHillSnow extends BlockAntHill {
 
 	blocks = Environment.getBlocksFrom("y", radius, world, x, y, z);
 
-	if (blocks[0] == Block.grass.blockID) {
+	if (blocks[0] != Block.ice.blockID && blocks[0] != Block.waterStill.blockID) {
+	    
+	    System.out.println(this.getHillName()+" has a valid block underneath");
 
-	    return true;
+	    for(int k = 0; k < this.getHillBiomes().length; k++){
+		
+		System.out.println(this.getHillName()+" is at a valid biome");
+		
+		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
+		    
+		    System.out.println("Valid biome");
+		    
+		    return true;
+		    
+		}
+		
+	    }
 
 	}
 

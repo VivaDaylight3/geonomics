@@ -70,9 +70,7 @@ public class Register {
     public static int latestBlockID = 0;
 
     public static Block blockAntFarm;
-
     public static Block blockAntHill;
-
     public static Block blockIncubator;
 
     public static ToolExtractor itemExtractor;

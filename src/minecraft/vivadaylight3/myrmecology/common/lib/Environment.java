@@ -9,6 +9,18 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class Environment {
+    
+    public static boolean blockIsPowered(World world, int x, int y, int z){
+	
+	if(world.getBlockPowerInput(x, y, z) > 0){
+	    
+	    return true;
+	    
+	}
+	
+	return false;
+	
+    }
 
     public static boolean isRaining(World world) {
 

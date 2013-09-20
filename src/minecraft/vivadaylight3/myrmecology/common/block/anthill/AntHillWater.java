@@ -101,7 +101,15 @@ public class AntHillWater extends BlockAntHill {
 	if (blocks[0] == Block.sand.blockID || blocks[0] == Block.dirt.blockID
 		|| blocks[0] == Block.blockClay.blockID) {
 
-	    return true;
+	    for(int k = 0; k < this.getHillBiomes().length; k++){
+		
+		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
+		    
+		    return true;
+		    
+		}
+		
+	    }
 
 	}
 

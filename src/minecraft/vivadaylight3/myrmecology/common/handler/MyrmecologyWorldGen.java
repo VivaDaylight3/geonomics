@@ -59,46 +59,39 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
 	int blockZ = j + random.nextInt(16);
 	int blockY = world.getHeightValue(blockX, blockZ);
 
-	BiomeGenBase biome = world.getBiomeGenForCoords(i, j);// Environment.getBiome(world,
-							      // i, j);
-	int meta = 0;
-
+	BiomeGenBase biome = world.getBiomeGenForCoords(i, j);
+	
 	Object[] hillArray = Register.getHillList().toArray();
 
 	for (int k = 0; k < Register.getHillList().toArray().length; k++) {
-
+	    
 	    BlockAntHill currentHill = (BlockAntHill) Register.getHillList()
 		    .toArray()[k];
-
-	    blockY += currentHill.getGenerationHeightOffset(world, blockX,
-		    blockY, blockZ);
-
+	    
 	    if (currentHill.usesNativeGeneration()) {
+	    
+	   // currentHill.generate(world, blockX, blockY, blockZ);
 
-		for (int a = 0; a < currentHill.getHillBiomes().length; a++) {
+		blockY += currentHill.getGenerationHeightOffset(world, blockX,
+		    blockY, blockZ);
+		
+		if (currentHill.canGenerate(world, blockX, blockY,
+			blockZ)) {
+		    
+		    if (currentHill.isUnderground()) {
+			
+			int minY = 3;
+			int maxY = 30;
 
-		    if (currentHill.getHillBiomes()[a] == biome) {
-
-			if (currentHill.canGenerate(world, blockX, blockY,
-				blockZ)) {
-
-			    if (currentHill.isUnderground()) {
-
-				int minY = 3;
-				int maxY = 30;
-
-				blockY = minY + random.nextInt(maxY - minY);
-
-			    }
-
-			    world.setBlock(blockX, blockY, blockZ,
-				    currentHill.blockID);
-
-			}
+			blockY = minY + random.nextInt(maxY - minY);
 
 		    }
 
+		    world.setBlock(blockX, blockY, blockZ,
+			    currentHill.blockID);
+
 		}
+
 	    }
 
 	}

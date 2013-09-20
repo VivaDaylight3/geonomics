@@ -57,9 +57,17 @@ public class AntHillDesert extends BlockAntHill {
 
 	blocks = Environment.getBlocksFrom("y", radius, world, x, y, z);
 
-	if (blocks[0] == Block.sand.blockID) {
-
-	    return true;
+	if (blocks[0] != Block.ice.blockID && blocks[0] != Block.waterStill.blockID) {
+	    
+	    for(int k = 0; k < this.getHillBiomes().length; k++){
+		
+		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
+		    
+		    return true;
+		    
+		}
+		
+	    }
 
 	}
 

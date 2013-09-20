@@ -71,7 +71,15 @@ public class AntHillJungle extends BlockAntHill {
 	if (blocks[0] == Block.grass.blockID
 		|| blocks[0] == Block.leaves.blockID) {
 
-	    return true;
+	    for(int k = 0; k < this.getHillBiomes().length; k++){
+		
+		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
+		    
+		    return true;
+		    
+		}
+		
+	    }
 
 	}
 

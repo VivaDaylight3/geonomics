@@ -65,7 +65,15 @@ public class AntHillSwamp extends BlockAntHill {
 
 	if (blocks[0] == Block.grass.blockID) {
 
-	    return true;
+	    for(int k = 0; k < this.getHillBiomes().length; k++){
+		
+		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
+		    
+		    return true;
+		    
+		}
+		
+	    }
 
 	}
 

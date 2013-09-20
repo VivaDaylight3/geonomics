@@ -100,7 +100,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	    
 	    if(this.getLarva().getItem() instanceof ItemAnt){
 	
-		return (Environment.inventoryCanHold(this.getMaturingResult(), this.getContents(), this.getInventoryStackLimit()));
+		return (Environment.blockIsPowered(this.worldObj, this.xCoord, this.yCoord, this.zCoord) && Environment.inventoryCanHold(this.getMaturingResult(), this.getContents(), this.getInventoryStackLimit()));
 	    
 	    }
     

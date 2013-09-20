@@ -142,6 +142,7 @@ public class BlockAntHill extends Block {
      * 
      * @return BiomeGenBase[]
      */
+    @Deprecated
     public BiomeGenBase[] getHillBiomes() {
 
 	BiomeGenBase[] biomes = new BiomeGenBase[1];

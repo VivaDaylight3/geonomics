@@ -16,8 +16,6 @@ public class ContainerAntFarm extends Container {
     private static int numRows = 3;
     private static int numColumns = 5;
 
-    private static int inventorySize = 0;
-
     public ContainerAntFarm(InventoryPlayer inventoryPlayer,
 	    TileEntityAntFarm te) {
 
@@ -28,12 +26,10 @@ public class ContainerAntFarm extends Container {
 
 	// Drone Slot
 	addSlotToContainer(new Slot(tileEntity, slotID, 26, 17 + 2 * 18));
-	inventorySize++;
 
 	// Queen Slot
 	slotID++;
 	addSlotToContainer(new Slot(tileEntity, slotID, 26, 17));
-	inventorySize++;
 
 	/*
 	 * Food Slot slotID++; addSlotToContainer(new Slot(tileEntity, slotID,
@@ -49,7 +45,6 @@ public class ContainerAntFarm extends Container {
 		slotID++;
 		addSlotToContainer(new Slot(tileEntity, slotID, 62 + j * 18,
 			17 + i * 18));
-		inventorySize++;
 
 	    }
 	}
@@ -59,7 +54,7 @@ public class ContainerAntFarm extends Container {
 
     public static int getInventorySize() {
 
-	return inventorySize;
+	return numRows * numColumns + 2;
 
     }
 

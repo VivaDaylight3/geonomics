@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
+import vivadaylight3.myrmecology.common.lib.Environment;
+import vivadaylight3.myrmecology.common.lib.Maths;
 import vivadaylight3.myrmecology.common.lib.Resources;
 
 /**
@@ -138,11 +140,10 @@ public class BlockAntHill extends Block {
     }
 
     /**
-     * Gets the biomes in which this hill can generate.
+     * Gets the biomes in which this hill can generate. Not used natively
      * 
      * @return BiomeGenBase[]
      */
-    @Deprecated
     public BiomeGenBase[] getHillBiomes() {
 
 	BiomeGenBase[] biomes = new BiomeGenBase[1];
@@ -203,8 +204,30 @@ public class BlockAntHill extends Block {
      * @return
      */
     public boolean canGenerate(World world, int x, int y, int z) {
+	
+	if(Maths.chanceOf(1, 4)){
 
-	return true;
+	int radius = 1;
+
+	int[] blocks = new int[radius];
+
+	if (world.getBlockId(x, y-1, z) != Block.ice.blockID && world.getBlockId(x, y-1, z) != Block.waterStill.blockID && world.getBlockId(x, y-1, z) != Block.waterMoving.blockID) {
+
+	    for(int k = 0; k < this.getHillBiomes().length; k++){
+		
+		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
+		    
+		    return true;
+		    
+		}
+		
+	    }
+
+	}
+	
+	}
+
+	return false;
 
     }
 

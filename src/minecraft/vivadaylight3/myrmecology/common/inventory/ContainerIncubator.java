@@ -30,7 +30,6 @@ public class ContainerIncubator extends Container {
 
 	// Larva Slot
 	addSlotToContainer(new SlotSizeable(this.tileEntity, slotID, 27, 35, 1));
-	inventorySize++;
 
 	for (int i = 0; i < numRows; i++) {
 	    for (int j = 0; j < numColumns; j++) {
@@ -38,7 +37,6 @@ public class ContainerIncubator extends Container {
 		slotID++;
 		addSlotToContainer(new SlotSizeable(this.tileEntity, slotID, 62 + j * 18,
 			17 + i * 18, stackLimit));
-		inventorySize++;
 
 	    }
 	}

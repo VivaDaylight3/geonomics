@@ -359,8 +359,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 
     private int getLifetimeTotal() {
 
-	// return ((ItemAnt) this.getQueen().getItem()).getLifetime();
-	return 100;
+	return ((ItemAnt) this.getQueen().getItem()).getLifetime();
 
     }
 

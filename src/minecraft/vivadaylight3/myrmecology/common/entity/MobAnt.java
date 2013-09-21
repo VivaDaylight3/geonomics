@@ -16,6 +16,8 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.common.Register;
 
 public class MobAnt extends EntityTameable {
 
@@ -41,6 +43,9 @@ public class MobAnt extends EntityTameable {
 
     @Override
     public void onLivingUpdate() {
+	
+	this.performBehaviour(worldObj, this.posX, this.posY, this.posZ);
+	
 	if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
 	    float var1 = this.getBrightness(1.0F);
 
@@ -50,11 +55,20 @@ public class MobAnt extends EntityTameable {
 			    MathHelper.floor_double(this.posY),
 			    MathHelper.floor_double(this.posZ))
 		    && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
-		this.setFire(8);
+		
+		if(this.burnsFromSun()){
+		
+		    this.setFire(8);
+		
+		}
 	    }
 	}
 
 	super.onLivingUpdate();
+    }
+
+    private boolean burnsFromSun() {
+	return false;
     }
 
     @Override
@@ -117,6 +131,18 @@ public class MobAnt extends EntityTameable {
 
 	return 2;
 
+    }
+    
+    public ItemAnt getAnt(){
+	
+	return Register.antForest;
+	
+    }
+    
+    public void performBehaviour(World world, double x, double y, double z){
+	
+	
+	
     }
 
 }

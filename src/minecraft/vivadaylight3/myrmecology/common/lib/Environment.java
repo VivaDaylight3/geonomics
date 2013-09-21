@@ -5,6 +5,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -21,6 +22,18 @@ public class Environment {
 	return false;
 	
     }
+    
+    public static boolean blockIsPowered(IBlockAccess world, int x, int y, int z){
+	
+   	if(((World) world).getBlockPowerInput(x, y, z) > 0){
+   	    
+   	    return true;
+   	    
+   	}
+   	
+   	return false;
+   	
+       }
 
     public static boolean isRaining(World world) {
 

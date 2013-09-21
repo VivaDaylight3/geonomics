@@ -28,6 +28,8 @@ public class BlockIncubator extends BlockContainer {
     
     public static final int POWERED_META = 1;
     public static final int UNPOWERED_META = 0;
+    
+    public float blockLightValue = 0.5f;
 
     public BlockIncubator(int par1, String par2Name) {
 	super(par1, Material.wood);

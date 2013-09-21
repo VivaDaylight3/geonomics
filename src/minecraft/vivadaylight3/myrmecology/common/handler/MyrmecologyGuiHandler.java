@@ -59,7 +59,7 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 		    (TileEntityAntFarm) tileEntity, world, x, y, z);
 
 	case Register.GUI_ID_INCUBATOR:
-	    return new GuiIncubator(player.inventory,
+	    return new GuiIncubator(player, player.inventory,
 		    (TileEntityIncubator) tileEntity, world, x, y, z);
 
 	case Register.GUI_ID_ANTOPEDIA:

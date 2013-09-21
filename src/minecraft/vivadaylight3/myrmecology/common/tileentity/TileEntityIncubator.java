@@ -25,9 +25,19 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
     private int maturationTime;
     
     // Will be changeable via a gui button, one for each ant type but larvae
-    private int resultAntMeta = Metadata.getMetaQueen();
-
-    Metadata ants = new Metadata();
+    private int resultAntMeta;
+    
+    public void setResultAntMeta(int meta){
+	
+	this.resultAntMeta = meta;
+	
+    }
+    
+    public int getResultAntMeta(){
+	
+	return this.resultAntMeta;
+	
+    }
 
     @Override
     public void updateEntity() {
@@ -45,27 +55,14 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	    }
 	    	    
 	}
-	
-	/*
-	if(this.maturationTime > 0) {
-	    --this.maturationTime;
-
-	    if (this.maturationTime == 0) {
-		//this.matureLarva();
-		this.onInventoryChanged();
-	    } else if (!this.canIncubate()) {
-		this.maturationTime = 0;
-		this.onInventoryChanged();
-	    }
-	} else if (this.canIncubate()) {
-	    this.maturationTime = MAX_MATURATION_TIME;
-	}
-	*/
     }
     
     private ItemStack getMaturingResult(){
 	
-	ItemStack result = new ItemStack(this.getLarva().getItem(), ((ItemAnt) this.getLarva().getItem()).getFertility(), this.resultAntMeta);
+	ItemStack result = new ItemStack(this.getLarva().getItem(), ((ItemAnt) this.getLarva().getItem()).getFertility(), this.getResultAntMeta());
+	System.out.println("Set to: "+this.getResultAntMeta());
+	result.setItemDamage(this.getResultAntMeta());
+	System.out.println("Has been set to: "+result.getItemDamage());
 	
 	return result;
 	
@@ -93,7 +90,6 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	
     }
 
-    // Determines if there is a queen and drone to produce larvae
     private boolean canIncubate() {
 	
 	if(this.getLarva() != null){
@@ -120,8 +116,10 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 
     // turns the larvae into a mature ant
     private void finishIncubation() {
+	ItemStack result = new ItemStack(this.getLarva().getItem(), ((ItemAnt) this.getLarva().getItem()).getFertility(), 
+		this.getResultAntMeta());
 	
-	Environment.addItemStackToInventory(getMaturingResult(), getContents(), getMaxStackSize(), this);
+	Environment.addItemStackToInventory(result, getContents(), getMaxStackSize(), this);
 	this.decrStackSize(ContainerIncubator.getLarvaSlot(), 1);
 	
 	this.onInventoryChanged();

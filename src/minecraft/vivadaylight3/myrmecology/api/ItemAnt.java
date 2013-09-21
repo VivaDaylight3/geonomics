@@ -81,7 +81,7 @@ public class ItemAnt extends Item {
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player,
 	    World par3World, int par4, int par5, int par6, int par7,
 	    float par8, float par9, float par10) {
-
+	
 	return true;
 
     }
@@ -198,7 +198,7 @@ public class ItemAnt extends Item {
      */
     public int getMaturingTime() {
 
-	return Time.getTicksFromMinutes(5);
+	return 50;//Time.getTicksFromMinutes(5);
 
     }
 

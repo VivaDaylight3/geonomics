@@ -49,33 +49,6 @@ public class AntHillPlains extends BlockAntHill {
     }
 
     @Override
-    public boolean canGenerate(World world, int x, int y, int z) {
-
-	int radius = 1;
-
-	int[] blocks = new int[radius];
-
-	blocks = Environment.getBlocksFrom("y", radius, world, x, y, z);
-
-	if (blocks[0] == Block.grass.blockID) {
-
-	    for(int k = 0; k < this.getHillBiomes().length; k++){
-		
-		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
-		    
-		    return true;
-		    
-		}
-		
-	    }
-
-	}
-
-	return false;
-
-    }
-
-    @Override
     public int getDropQuantity() {
 	// TODO Auto-generated method stub
 	return 2;

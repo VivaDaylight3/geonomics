@@ -27,12 +27,14 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
     // Will be changeable via a gui button, one for each ant type but larvae
     private int resultAntMeta;
     
+    // Called in GuiIncubator.actionPerformed()
     public void setResultAntMeta(int meta){
 	
 	this.resultAntMeta = meta;
 	
     }
-    
+
+    // Set by setResultAntMeta()
     public int getResultAntMeta(){
 	
 	return this.resultAntMeta;

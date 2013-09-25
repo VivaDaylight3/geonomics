@@ -1,144 +1,161 @@
 package vivadaylight3.myrmecology.common.tileentity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import vivadaylight3.myrmecology.api.AntProperties;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.api.Metadata;
+import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Environment;
 
-public class TileEntityIncubator extends TileEntity implements IInventory {
+import com.google.common.io.ByteArrayDataInput;
+
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
+
+public class TileEntityIncubator extends TileEntity implements IInventory,
+	IPacketHandler {
 
     private ItemStack[] contents = new ItemStack[this.getSizeInventory()];
 
     private String field_94045_s;
 
-    private final int MAX_MATURATION_TIME = 300;
-    private int maturationTime;
-    
+    private static final String RESULT_ANT_META_KEY = "ResultAntMeta";
+
     // Will be changeable via a gui button, one for each ant type but larvae
     private int resultAntMeta;
-    
+
     // Called in GuiIncubator.actionPerformed()
-    public void setResultAntMeta(int meta){
-	
+    public void setResultAntMeta(int meta) {
+
 	this.resultAntMeta = meta;
-	
+
     }
 
     // Set by setResultAntMeta()
-    public int getResultAntMeta(){
-	
+    public int getResultAntMeta() {
+
 	return this.resultAntMeta;
-	
+
     }
 
     @Override
     public void updateEntity() {
-	
-	if(this.canIncubate()){
-	    
-	    if(this.getMaturingTimeComplete() < this.getMaturingTime()){
-		
+
+	if (this.canIncubate()) {
+
+	    if (this.getMaturingTimeComplete() < this.getMaturingTime()) {
+
 		this.increaseMaturingTime();
-		
-	    }else if(this.getMaturingTimeComplete() >= this.getMaturingTime()){
-		
+
+	    } else if (this.getMaturingTimeComplete() >= this.getMaturingTime()) {
+
 		this.finishIncubation();
-		
+
 	    }
-	    	    
+
 	}
     }
-    
-    private ItemStack getMaturingResult(){
-	
-	ItemStack result = new ItemStack(this.getLarva().getItem(), ((ItemAnt) this.getLarva().getItem()).getFertility(), this.getResultAntMeta());
-	System.out.println("Set to: "+this.getResultAntMeta());
+
+    private ItemStack getMaturingResult() {
+
+	ItemStack result = new ItemStack(this.getLarva().getItem(),
+		((ItemAnt) this.getLarva().getItem()).getFertility(),
+		this.getResultAntMeta());
+	System.out.println("Should be set to: " + this.getResultAntMeta());
 	result.setItemDamage(this.getResultAntMeta());
-	System.out.println("Has been set to: "+result.getItemDamage());
-	
+	System.out.println("Has been set to: " + result.getItemDamage());
+
 	return result;
-	
+
     }
-    
-    private int getMaturingTime(){
-	
-	if(this.getLarva() != null){
-	    
-	    if(this.getLarva().getItem() instanceof ItemAnt){
-		
+
+    private int getMaturingTime() {
+
+	if (this.getLarva() != null) {
+
+	    if (this.getLarva().getItem() instanceof ItemAnt) {
+
 		return ((ItemAnt) this.getLarva().getItem()).getMaturingTime();
-		
+
 	    }
-	    
+
 	}
-	
+
 	return 1;
-	
+
     }
-    
-    public int getMaturingTimeComplete(){
-	
+
+    public int getMaturingTimeComplete() {
+
 	return AntProperties.getMaturingTimeComplete(getLarva());
-	
+
     }
 
     private boolean canIncubate() {
-	
-	if(this.getLarva() != null){
-	    
-	    if(this.getLarva().getItem() instanceof ItemAnt){
-	
-		return (Environment.blockIsPowered(this.worldObj, this.xCoord, this.yCoord, this.zCoord) && Environment.inventoryCanHold(this.getMaturingResult(), this.getContents(), this.getInventoryStackLimit()));
-	    
+
+	if (this.getLarva() != null) {
+
+	    if (this.getLarva().getItem() instanceof ItemAnt) {
+
+		return (Environment.blockIsPowered(this.worldObj, this.xCoord,
+			this.yCoord, this.zCoord) && Environment
+			.inventoryCanHold(this.getMaturingResult(),
+				this.getContents(),
+				this.getInventoryStackLimit()));
+
 	    }
-    
-	
+
 	}
-	
+
 	return false;
-	
+
     }
-    
-    private void increaseMaturingTime(){
-	
+
+    private void increaseMaturingTime() {
+
 	int complete = AntProperties.getMaturingTimeComplete(getLarva());
-	AntProperties.setMaturingTime(getLarva(), complete+1);
-	
+	AntProperties.setMaturingTime(getLarva(), complete + 1);
+
     }
 
     // turns the larvae into a mature ant
     private void finishIncubation() {
-	ItemStack result = new ItemStack(this.getLarva().getItem(), ((ItemAnt) this.getLarva().getItem()).getFertility(), 
+	ItemStack result = new ItemStack(this.getLarva().getItem(),
+		((ItemAnt) this.getLarva().getItem()).getFertility(),
 		this.getResultAntMeta());
-	
-	Environment.addItemStackToInventory(result, getContents(), getMaxStackSize(), this);
+
+	Environment.addItemStackToInventory(result, getContents(),
+		getMaxStackSize(), this);
 	this.decrStackSize(ContainerIncubator.getLarvaSlot(), 1);
-	
+
 	this.onInventoryChanged();
 
     }
-    
-    private ItemStack getLarva(){
-	
+
+    private ItemStack getLarva() {
+
 	return this.getContents()[ContainerIncubator.getLarvaSlot()];
-	
+
     }
-    
+
     public ItemStack[] getContents() {
 
-   	return this.contents;
+	return this.contents;
 
-       }
+    }
 
     public int getMaxStackSize() {
 	return this.getInventoryStackLimit();
@@ -207,8 +224,8 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
 	NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
 	this.contents = new ItemStack[this.getSizeInventory()];
 
-	if (par1NBTTagCompound.hasKey("CustomName")) {
-	    this.field_94045_s = par1NBTTagCompound.getString("CustomName");
+	if (par1NBTTagCompound.hasKey(RESULT_ANT_META_KEY)) {
+	    this.setResultAntMeta(par1NBTTagCompound.getInteger("CustomName"));
 	}
 
 	for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -227,6 +244,9 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 	super.writeToNBT(par1NBTTagCompound);
 	NBTTagList nbttaglist = new NBTTagList();
+
+	par1NBTTagCompound.setInteger(RESULT_ANT_META_KEY,
+		this.getResultAntMeta());
 
 	for (int i = 0; i < this.contents.length; ++i) {
 	    if (this.contents[i] != null) {
@@ -274,5 +294,44 @@ public class TileEntityIncubator extends TileEntity implements IInventory {
     @Override
     public int getInventoryStackLimit() {
 	return ContainerIncubator.stackLimit;
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+	NBTTagCompound var1 = new NBTTagCompound();
+	this.writeToNBT(var1);
+	return new Packet132TileEntityData(this.xCoord, this.yCoord,
+		this.zCoord, 2, var1);
+    }
+
+    @Override
+    public void onDataPacket(INetworkManager netManager,
+	    Packet132TileEntityData packet) {
+	readFromNBT(packet.customParam1);
+    }
+
+    @Override
+    public void onPacketData(INetworkManager manager,
+	    Packet250CustomPayload packet, Player player) {
+
+	if (packet.channel == Reference.MOD_CHANNEL_INCUBATOR) {
+
+	    DataInputStream inputStream = new DataInputStream(
+		    new ByteArrayInputStream(packet.data));
+
+	    try {
+
+		this.setResultAntMeta(inputStream.readInt());
+
+	    } catch (Exception e) {
+
+		System.out
+			.println("[Myrmecology] Error while handling tile entity packet.");
+
+		e.printStackTrace();
+	    }
+
+	}
+
     }
 }

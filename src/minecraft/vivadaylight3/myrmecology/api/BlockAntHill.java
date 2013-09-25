@@ -204,27 +204,30 @@ public class BlockAntHill extends Block {
      * @return
      */
     public boolean canGenerate(World world, int x, int y, int z) {
-	
-	if(Maths.chanceOf(1, 4)){
 
-	int radius = 1;
+	if (Maths.chanceOf(1, 4)) {
 
-	int[] blocks = new int[radius];
+	    int radius = 1;
 
-	if (world.getBlockId(x, y-1, z) != Block.ice.blockID && world.getBlockId(x, y-1, z) != Block.waterStill.blockID && world.getBlockId(x, y-1, z) != Block.waterMoving.blockID) {
+	    int[] blocks = new int[radius];
 
-	    for(int k = 0; k < this.getHillBiomes().length; k++){
-		
-		if(world.getBiomeGenForCoords(x, z) == this.getHillBiomes()[k]){
-		    
-		    return true;
-		    
+	    if (world.getBlockId(x, y - 1, z) != Block.ice.blockID
+		    && world.getBlockId(x, y - 1, z) != Block.waterStill.blockID
+		    && world.getBlockId(x, y - 1, z) != Block.waterMoving.blockID) {
+
+		for (int k = 0; k < this.getHillBiomes().length; k++) {
+
+		    if (world.getBiomeGenForCoords(x, z) == this
+			    .getHillBiomes()[k]) {
+
+			return true;
+
+		    }
+
 		}
-		
+
 	    }
 
-	}
-	
 	}
 
 	return false;

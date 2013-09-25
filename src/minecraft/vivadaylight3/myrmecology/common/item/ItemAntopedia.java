@@ -33,14 +33,14 @@ public class ItemAntopedia extends Item {
 	this.itemIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_ANTOPEDIA_NAME);
     }
-    
-    @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-	
-	par3List.add("Analyses the properties of ants");
-	
-    }
 
+    @Override
+    public void addInformation(ItemStack par1ItemStack,
+	    EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+
+	par3List.add("Analyses the properties of ants");
+
+    }
 
     @Override
     public void onCreated(ItemStack par1ItemStack, World par2World,

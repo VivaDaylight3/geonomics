@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.common;
 import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyGuiHandler;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -22,7 +23,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  */
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
-@NetworkMod(channels = Reference.MOD_CHANNEL, clientSideRequired = true, serverSideRequired = false, packetHandler = MyrmecologyPacketHandler.class)
+@NetworkMod(channels = { Reference.MOD_CHANNEL, Reference.MOD_CHANNEL_INCUBATOR }, clientSideRequired = true, serverSideRequired = false, packetHandler = MyrmecologyPacketHandler.class)
 public class Myrmecology {
 
     @SidedProxy(clientSide = "vivadaylight3.myrmecology.client.ClientProxy", serverSide = "vivadaylight3.myrmecology.common.CommonProxy")
@@ -62,6 +63,10 @@ public class Myrmecology {
 	MyrmecologyPacketHandler packetHandler = new MyrmecologyPacketHandler();
 	NetworkRegistry.instance().registerChannel(packetHandler,
 		Reference.MOD_CHANNEL);
+	
+	TileEntityIncubator packetHandler2 = new TileEntityIncubator();
+	NetworkRegistry.instance().registerChannel(packetHandler2,
+		Reference.MOD_CHANNEL_INCUBATOR);
 
     }
 

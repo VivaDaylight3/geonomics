@@ -81,7 +81,7 @@ public class ItemAnt extends Item {
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player,
 	    World par3World, int par4, int par5, int par6, int par7,
 	    float par8, float par9, float par10) {
-	
+
 	return true;
 
     }
@@ -135,16 +135,16 @@ public class ItemAnt extends Item {
 
 	Nbt.setTag(par1ItemStack);
 
-	if(par1ItemStack.getItemDamage() == Metadata.getMetaQueen()){
-	    
+	if (par1ItemStack.getItemDamage() == Metadata.getMetaQueen()) {
+
 	    AntProperties.setProperties(par1ItemStack, false, 0);
-	    
-	}else if(par1ItemStack.getItemDamage() == Metadata.getMetaLarva()){
-	    
+
+	} else if (par1ItemStack.getItemDamage() == Metadata.getMetaLarva()) {
+
 	    AntProperties.setProperties(par1ItemStack, 0);
-	    
+
 	}
-	
+
     }
 
     @Override
@@ -153,14 +153,18 @@ public class ItemAnt extends Item {
 
 	if (AntProperties.getMated(par1ItemStack)) {
 
-	    par3List.add("Time: " + (this.getLifetime() - AntProperties.getLifetimeComplete(par1ItemStack)));
+	    par3List.add("Time: "
+		    + (this.getLifetime() - AntProperties
+			    .getLifetimeComplete(par1ItemStack)));
 
 	}
-	
-	if(par1ItemStack.getItemDamage() == Metadata.getMetaLarva()){
-	    
-	    par3List.add("Time: "+ (this.getMaturingTime() - AntProperties.getMaturingTimeComplete(par1ItemStack)));
-	    
+
+	if (par1ItemStack.getItemDamage() == Metadata.getMetaLarva()) {
+
+	    par3List.add("Time: "
+		    + (this.getMaturingTime() - AntProperties
+			    .getMaturingTimeComplete(par1ItemStack)));
+
 	}
 
     }
@@ -198,7 +202,7 @@ public class ItemAnt extends Item {
      */
     public int getMaturingTime() {
 
-	return 50;//Time.getTicksFromMinutes(5);
+	return 100;// Time.getTicksFromMinutes(5);
 
     }
 

@@ -31,12 +31,13 @@ public class ToolExtractor extends ItemTool {
 	this.itemIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_EXTRACTOR_NAME);
     }
-    
+
     @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-	
+    public void addInformation(ItemStack par1ItemStack,
+	    EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+
 	par3List.add("Extracts ants from ant hills");
-	
+
     }
 
     @Override

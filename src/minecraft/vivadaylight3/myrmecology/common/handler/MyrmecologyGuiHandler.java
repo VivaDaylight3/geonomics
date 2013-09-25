@@ -45,11 +45,11 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 	    int x, int y, int z) {
 	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-	
-	if(tileEntity == null){
-	    
+
+	if (tileEntity == null) {
+
 	    System.out.println("GuiHandler tileENtoty == null");
-	    
+
 	}
 
 	switch (ID) {

@@ -22,7 +22,7 @@ public class ContainerIncubator extends Container {
 
     public ContainerIncubator(InventoryPlayer inventoryPlayer,
 	    TileEntityIncubator tileEntity2) {
-	
+
 	this.tileEntity = tileEntity2;
 
 	int slotID = 0;
@@ -35,8 +35,8 @@ public class ContainerIncubator extends Container {
 	    for (int j = 0; j < numColumns; j++) {
 
 		slotID++;
-		addSlotToContainer(new SlotSizeable(this.tileEntity, slotID, 62 + j * 18,
-			17 + i * 18, stackLimit));
+		addSlotToContainer(new SlotSizeable(this.tileEntity, slotID,
+			62 + j * 18, 17 + i * 18, stackLimit));
 
 	    }
 	}
@@ -49,11 +49,11 @@ public class ContainerIncubator extends Container {
 	return inventorySize;
 
     }
-    
-    public static int getLarvaSlot(){
-	
+
+    public static int getLarvaSlot() {
+
 	return 0;
-	
+
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -71,9 +71,9 @@ public class ContainerIncubator extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-	
+
 	return this.tileEntity.isUseableByPlayer(player);
-	
+
     }
 
     @Override

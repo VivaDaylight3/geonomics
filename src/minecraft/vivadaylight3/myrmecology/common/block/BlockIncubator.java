@@ -25,10 +25,10 @@ public class BlockIncubator extends BlockContainer {
     private Icon iconTop;
     private Icon iconSideOn;
     private Icon iconSideOff;
-    
+
     public static final int POWERED_META = 1;
     public static final int UNPOWERED_META = 0;
-    
+
     public float blockLightValue = 0.5f;
 
     public BlockIncubator(int par1, String par2Name) {
@@ -41,7 +41,7 @@ public class BlockIncubator extends BlockContainer {
 	name = par2Name;
 	func_111022_d(Reference.MOD_ID.toLowerCase() + name);
     }
-    
+
     @Override
     public void registerIcons(IconRegister iconRegister) {
 
@@ -65,52 +65,47 @@ public class BlockIncubator extends BlockContainer {
 	    }
 	}
     }
-    
+
     @Override
-    public void updateTick(World world, int x, int y, int z, Random par5Random){
-	
-	if(!world.isRemote && Environment.blockIsPowered(world, x, y, z)){
-	    
+    public void updateTick(World world, int x, int y, int z, Random par5Random) {
+
+	if (!world.isRemote && Environment.blockIsPowered(world, x, y, z)) {
+
 	    world.setBlockMetadataWithNotify(x, y, z, POWERED_META, 2);
-	    
-	}else{
-	    
+
+	} else {
+
 	    world.setBlockMetadataWithNotify(x, y, z, UNPOWERED_META, 2);
-	    
+
 	}
-	
+
     }
-    
+
     @Override
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
-    {
-        if (!par1World.isRemote)
-        {
-            if (Environment.blockIsPowered(par1World, par2, par3, par4))
-            {
-        	par1World.setBlockMetadataWithNotify(par2, par3, par4, POWERED_META, 2);
-            }
-            else if (!Environment.blockIsPowered(par1World, par2, par3, par4))
-            {
-        	par1World.setBlockMetadataWithNotify(par2, par3, par4, UNPOWERED_META, 2);
-            }
-        }
+    public void onBlockAdded(World par1World, int par2, int par3, int par4) {
+	if (!par1World.isRemote) {
+	    if (Environment.blockIsPowered(par1World, par2, par3, par4)) {
+		par1World.setBlockMetadataWithNotify(par2, par3, par4,
+			POWERED_META, 2);
+	    } else if (!Environment.blockIsPowered(par1World, par2, par3, par4)) {
+		par1World.setBlockMetadataWithNotify(par2, par3, par4,
+			UNPOWERED_META, 2);
+	    }
+	}
     }
-    
+
     @Override
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if (!par1World.isRemote)
-        {
-            if (Environment.blockIsPowered(par1World, par2, par3, par4))
-            {
-        	par1World.setBlockMetadataWithNotify(par2, par3, par4, POWERED_META, 2);
-            }
-            else if (!Environment.blockIsPowered(par1World, par2, par3, par4))
-            {
-        	par1World.setBlockMetadataWithNotify(par2, par3, par4, UNPOWERED_META, 2);
-            }
-        }
+    public void onNeighborBlockChange(World par1World, int par2, int par3,
+	    int par4, int par5) {
+	if (!par1World.isRemote) {
+	    if (Environment.blockIsPowered(par1World, par2, par3, par4)) {
+		par1World.setBlockMetadataWithNotify(par2, par3, par4,
+			POWERED_META, 2);
+	    } else if (!Environment.blockIsPowered(par1World, par2, par3, par4)) {
+		par1World.setBlockMetadataWithNotify(par2, par3, par4,
+			UNPOWERED_META, 2);
+	    }
+	}
     }
 
     @Override
@@ -118,38 +113,37 @@ public class BlockIncubator extends BlockContainer {
 	    int side) {
 	return true;
     }
-    
+
     @Override
-    public int idDropped(int par1, Random par2Random, int par3)
-    {
-        return Register.blockIncubator.blockID;
+    public int idDropped(int par1, Random par2Random, int par3) {
+	return Register.blockIncubator.blockID;
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
 	    EntityPlayer player, int par6, float par7, float par8, float par9) {
-	
-	if(!world.isRemote && !player.isSneaking()){
-	    
+
+	if (!world.isRemote && !player.isSneaking()) {
+
 	    TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-	    
-	  //  if(tileEntity != null){
-		
-		//if(tileEntity instanceof TileEntityIncubator){
-	    
-		    player.openGui(Myrmecology.instance, Register.GUI_ID_INCUBATOR,
-			world, x, y, z);
-		    
-		    return true;
-		
-		//}
-	    
-	    //}
-	    
+
+	    // if(tileEntity != null){
+
+	    // if(tileEntity instanceof TileEntityIncubator){
+
+	    player.openGui(Myrmecology.instance, Register.GUI_ID_INCUBATOR,
+		    world, x, y, z);
+
+	    return true;
+
+	    // }
+
+	    // }
+
 	}
-	
+
 	return false;
-	
+
     }
 
     @Override

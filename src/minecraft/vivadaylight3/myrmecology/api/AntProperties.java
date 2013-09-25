@@ -68,12 +68,12 @@ public class AntProperties {
 	Nbt.set(itemStack, MATED_KEY, mated);
 
     }
-    
-    public static void setProperties(ItemStack itemStack, int maturingComplete){
-	
+
+    public static void setProperties(ItemStack itemStack, int maturingComplete) {
+
 	Nbt.setTag(itemStack);
 	Nbt.set(itemStack, MATURING_COMPLETE_KEY, maturingComplete);
-	
+
     }
 
     public static int getLifetimeComplete(ItemStack itemStack) {
@@ -107,22 +107,22 @@ public class AntProperties {
 	return Nbt.getBoolean(itemStack, MATED_KEY);
 
     }
-    
-    public static void setMaturingTime(ItemStack itemStack, int value){
-	
+
+    public static void setMaturingTime(ItemStack itemStack, int value) {
+
 	Nbt.setTag(itemStack);
-	
+
 	Nbt.set(itemStack, MATURING_COMPLETE_KEY, value);
-	
+
     }
-    
-    //TODO
-    public static int getMaturingTimeComplete(ItemStack itemStack){
-	
+
+    // TODO
+    public static int getMaturingTimeComplete(ItemStack itemStack) {
+
 	Nbt.setTag(itemStack);
-	
+
 	return Nbt.getInt(itemStack, MATURING_COMPLETE_KEY);
-	
+
     }
 
 }

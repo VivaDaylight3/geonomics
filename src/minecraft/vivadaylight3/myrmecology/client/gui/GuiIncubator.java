@@ -1,11 +1,16 @@
 package vivadaylight3.myrmecology.client.gui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.ArrayList;
 
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -16,92 +21,141 @@ import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiIncubator extends GuiContainer {
-    
+
     private GuiButtonSizeable buttonQueen;
     private GuiButtonSizeable buttonDrone;
     private GuiButtonSizeable buttonWorker;
-    
+
     private int buttonWidth = 10;
     private int buttonHeight = 15;
     
+    private World world;
+
     public TileEntityIncubator tile;
-    
+
+    private Player player;
+
     private ArrayList<EntityPlayer> players = new ArrayList<EntityPlayer>();
 
     public GuiIncubator(EntityPlayer parPlayer, InventoryPlayer inventory,
-	    TileEntityIncubator tileEntity, World world, int x, int y, int z) {
+	    TileEntityIncubator tileEntity, World parWorld, int x, int y, int z) {
 	super(new ContainerIncubator(inventory, tileEntity));
+	this.world = parWorld;
 	this.tile = tileEntity;
 	this.players.add(parPlayer);
     }
-    
+
     @Override
-    public void initGui(){
-	
+    public void initGui() {
+
 	super.initGui();
 	this.buttonList.clear();
-	
+
 	this.buttonList.add(this.buttonQueen = new GuiButtonSizeable(2,
 		this.width / 2 - 80, this.height / 2 - 65, "Q",
 		buttonWidth + 8, buttonHeight));
 	this.buttonList.add(this.buttonDrone = new GuiButtonSizeable(2,
-		this.width / 2 - 83 + (buttonWidth * 2), this.height / 2 - 65, "D",
-		buttonWidth + 8, buttonHeight));
-	
+		this.width / 2 - 83 + (buttonWidth * 2), this.height / 2 - 65,
+		"D", buttonWidth + 8, buttonHeight));
+
 	this.buttonList.add(this.buttonWorker = new GuiButtonSizeable(2,
-		this.width / 2 - 65 + (buttonWidth * 2), this.height / 2 - 65, "W",
-		buttonWidth + 8, buttonHeight));
-	
+		this.width / 2 - 65 + (buttonWidth * 2), this.height / 2 - 65,
+		"W", buttonWidth + 8, buttonHeight));
+
     }
-    
+
     @Override
     protected void actionPerformed(GuiButton par1GuiButton) {
 
 	if (par1GuiButton == this.buttonQueen) {
 
-	    this.tile.setResultAntMeta(Metadata.getMetaQueen());
-	    
-	    if(this.players.size() > 0){
-		
-		for(int k = 0; k < this.players.toArray().length; k++){
-			
-			((EntityPlayer) this.players.toArray()[k]).addChatMessage("This incubator will produce a "+Reference.standardTypeNames[tile.getResultAntMeta()]);
-			
-		    }
-	   
+	    this.sendResultAntMetaPacket(Metadata.getMetaQueen());
+
+	    if (this.players.size() > 0) {
+
+		for (int k = 0; k < this.players.toArray().length; k++) {
+
+		    ((EntityPlayer) this.players.toArray()[k])
+			    .addChatMessage("This incubator will produce a "
+				    + Reference.standardTypeNames[tile
+					    .getResultAntMeta()]);
+
+		}
+
 	    }
 
 	} else if (par1GuiButton == this.buttonDrone) {
 
-	    this.tile.setResultAntMeta(Metadata.getMetaDrone());
-	    if(this.players.size() > 0){
-		
-		for(int k = 0; k < this.players.toArray().length; k++){
-			
-			((EntityPlayer) this.players.toArray()[k]).addChatMessage("This incubator will produce a "+Reference.standardTypeNames[tile.getResultAntMeta()]);
-			
-		    }
-	   
+	    this.sendResultAntMetaPacket(Metadata.getMetaDrone());
+	    if (this.players.size() > 0) {
+
+		for (int k = 0; k < this.players.toArray().length; k++) {
+
+		    ((EntityPlayer) this.players.toArray()[k])
+			    .addChatMessage("This incubator will produce a "
+				    + Reference.standardTypeNames[tile
+					    .getResultAntMeta()]);
+
+		}
+
 	    }
 
 	} else if (par1GuiButton == this.buttonWorker) {
 
-	    this.tile.setResultAntMeta(Metadata.getMetaWorker());
-	    if(this.players.size() > 0){
-		
-		for(int k = 0; k < this.players.toArray().length; k++){
-			
-			((EntityPlayer) this.players.toArray()[k]).addChatMessage("This incubator will produce a "+Reference.standardTypeNames[tile.getResultAntMeta()]);
-			
-		    }
-	   
+	    this.sendResultAntMetaPacket(Metadata.getMetaWorker());
+	    if (this.players.size() > 0) {
+
+		for (int k = 0; k < this.players.toArray().length; k++) {
+
+		    ((EntityPlayer) this.players.toArray()[k])
+			    .addChatMessage("This incubator will produce a "
+				    + Reference.standardTypeNames[tile
+					    .getResultAntMeta()]);
+
+		}
+
 	    }
 
+	}
+
+    }
+
+    private void sendResultAntMetaPacket(int meta) {
+
+	ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+	DataOutputStream outputStream = new DataOutputStream(bos);
+	try {
+	    outputStream.writeInt(meta);
+	} catch (Exception ex) {
+	    ex.printStackTrace();
+	}
+
+	Packet250CustomPayload packet = new Packet250CustomPayload();
+	packet.channel = Reference.MOD_CHANNEL_INCUBATOR;
+	packet.data = bos.toByteArray();
+	packet.length = bos.size();
+
+	Side side = FMLCommonHandler.instance().getEffectiveSide();
+	if (side == Side.SERVER) {
+	    // We are on the server side.
+	    EntityPlayerMP player2 = (EntityPlayerMP) this.player;
+	} else if (side == Side.CLIENT) {
+	    
+	    EntityClientPlayerMP player2 = (EntityClientPlayerMP) this.player;
+	    
+	    player2. 
+	    sendQueue.
+	    addToSendQueue(
+		    packet);
+	} else {
+	    // We are on the Bukkit server.
 	}
 
     }
@@ -135,14 +189,12 @@ public class GuiIncubator extends GuiContainer {
 	int l = (this.height - this.ySize) / 2;
 	this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
     }
-    
+
     @Override
-    public void onGuiClosed()
-    {
-        if (this.mc.thePlayer != null)
-        {
-            this.inventorySlots.onContainerClosed(this.mc.thePlayer);
-            this.players.remove(this.mc.thePlayer);
-        }
+    public void onGuiClosed() {
+	if (this.mc.thePlayer != null) {
+	    this.inventorySlots.onContainerClosed(this.mc.thePlayer);
+	    this.players.remove(this.mc.thePlayer);
+	}
     }
 }

@@ -10,6 +10,7 @@ public class Reference {
 
     public static final String MOD_ID = "Myrmecology";
     public static final String MOD_CHANNEL = MOD_ID;
+    public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
     public static final String MOD_NAME = MOD_ID;
     public static final String MOD_VERSION = "0.0.2";
     public static final String MOD_DEPENDENCIES = "";

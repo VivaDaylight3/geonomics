@@ -2,24 +2,35 @@ package vivadaylight3.myrmecology.common.block;
 
 import java.util.Random;
 
-import vivadaylight3.myrmecology.common.Register;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import vivadaylight3.myrmecology.common.lib.Resources;
 
 public class BlockFungi extends BlockMushroom {
+    
+    private String name;
 
     public BlockFungi(int par1, String par2Name) {
 	super(par1);
 	setUnlocalizedName(par2Name);
 	setCreativeTab((CreativeTabs)null);
-	setStepSound(Block.soundMetalFootstep);
-	setHardness(1.0F);
+	setStepSound(Block.soundGrassFootstep);
+	this.name = par2Name;
+	setHardness(0.2F);
 	setResistance(1.0F);
+    }
+    
+    @Override
+    public void registerIcons(IconRegister register){
+	
+	this.blockIcon = register.registerIcon(Resources.TEXTURE_PREFIX + name);
+	
     }
     
     @Override

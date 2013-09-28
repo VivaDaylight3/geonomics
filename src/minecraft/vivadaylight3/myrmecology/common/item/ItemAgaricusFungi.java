@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.common.item;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,13 @@ public class ItemAgaricusFungi extends Item {
 	setMaxStackSize(64);
 	setUnlocalizedName(Reference.ITEM_FUNGI_NAME);
 	func_111206_d(Resources.TEXTURE_PREFIX + Reference.ITEM_FUNGI_NAME);
+    }
+    
+    @Override
+    public void registerIcons(IconRegister register){
+	
+	this.itemIcon = register.registerIcon(Resources.TEXTURE_PREFIX + Reference.ITEM_FUNGI_NAME);
+	
     }
     
     @Override

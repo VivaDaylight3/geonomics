@@ -17,7 +17,7 @@ public class ContainerIncubator extends Container {
     private static int numRows = 3;
     private static int numColumns = 5;
 
-    private static int inventorySize = numRows * numColumns + 1;
+    private static int inventorySize = numRows * numColumns + 2;
     public static final int stackLimit = 64;
 
     public ContainerIncubator(InventoryPlayer inventoryPlayer,
@@ -30,6 +30,8 @@ public class ContainerIncubator extends Container {
 
 	// Larva Slot
 	addSlotToContainer(new SlotSizeable(this.tileEntity, slotID, 27, 35, 1));
+	slotID++;
+	addSlotToContainer(new SlotSizeable(this.tileEntity, slotID, 8, 35, 1));
 
 	for (int i = 0; i < numRows; i++) {
 	    for (int j = 0; j < numColumns; j++) {
@@ -54,6 +56,12 @@ public class ContainerIncubator extends Container {
 
 	return 0;
 
+    }
+    
+    public static int getFoodSlot(){
+	
+	return 1;
+	
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {

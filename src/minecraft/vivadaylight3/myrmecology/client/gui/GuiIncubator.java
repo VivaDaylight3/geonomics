@@ -18,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 
 import vivadaylight3.myrmecology.api.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
@@ -56,6 +57,7 @@ public class GuiIncubator extends GuiContainer {
     public void initGui() {
 
 	super.initGui();
+	/*
 	this.buttonList.clear();
 
 	this.buttonList.add(this.buttonQueen = new GuiButtonSizeable(2,
@@ -68,6 +70,7 @@ public class GuiIncubator extends GuiContainer {
 	this.buttonList.add(this.buttonWorker = new GuiButtonSizeable(2,
 		this.width / 2 - 65 + (buttonWidth * 2), this.height / 2 - 65,
 		"W", buttonWidth + 8, buttonHeight));
+	*/
 
     }
 
@@ -148,14 +151,15 @@ public class GuiIncubator extends GuiContainer {
 	    EntityPlayerMP player2 = (EntityPlayerMP) this.player;
 	} else if (side == Side.CLIENT) {
 	    
-	    EntityClientPlayerMP player2 = (EntityClientPlayerMP) this.player;
+	    EntityClientPlayerMP player2 = (EntityClientPlayerMP) MyrmecologyPacketHandler
+		    .getSidedPlayer(this.player);
 	    
-	    player2. 
+	    player2.
 	    sendQueue.
 	    addToSendQueue(
 		    packet);
+	    
 	} else {
-	    // We are on the Bukkit server.
 	}
 
     }

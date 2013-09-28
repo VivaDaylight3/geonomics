@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -17,6 +18,7 @@ import vivadaylight3.myrmecology.api.AntProperties;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.api.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Environment;
 
@@ -35,7 +37,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     private static final String RESULT_ANT_META_KEY = "ResultAntMeta";
 
     // Will be changeable via a gui button, one for each ant type but larvae
-    private int resultAntMeta;
+    private int resultAntMeta = -1;
 
     // Called in GuiIncubator.actionPerformed()
     public void setResultAntMeta(int meta) {
@@ -55,7 +57,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     public void updateEntity() {
 
 	if (this.canIncubate()) {
-
+	    
 	    if (this.getMaturingTimeComplete() < this.getMaturingTime()) {
 
 		this.increaseMaturingTime();
@@ -74,9 +76,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 	ItemStack result = new ItemStack(this.getLarva().getItem(),
 		((ItemAnt) this.getLarva().getItem()).getFertility(),
 		this.getResultAntMeta());
-	System.out.println("Should be set to: " + this.getResultAntMeta());
 	result.setItemDamage(this.getResultAntMeta());
-	System.out.println("Has been set to: " + result.getItemDamage());
 
 	return result;
 
@@ -105,16 +105,26 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     }
 
     private boolean canIncubate() {
+	
+	if(this.getContents()[ContainerIncubator.getFoodSlot()] != null){
+	    
+	    this.setResultAntMeta(getResultAntMetaFromInput());
+	    
+	}
 
 	if (this.getLarva() != null) {
 
 	    if (this.getLarva().getItem() instanceof ItemAnt) {
+		
+		if(this.getResultAntMeta() != -1){
 
-		return (Environment.blockIsPowered(this.worldObj, this.xCoord,
+		    return (Environment.blockIsPowered(this.worldObj, this.xCoord,
 			this.yCoord, this.zCoord) && Environment
 			.inventoryCanHold(this.getMaturingResult(),
 				this.getContents(),
 				this.getInventoryStackLimit()));
+		
+		}
 
 	    }
 
@@ -140,8 +150,10 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 	Environment.addItemStackToInventory(result, getContents(),
 		getMaxStackSize(), this);
 	this.decrStackSize(ContainerIncubator.getLarvaSlot(), 1);
+	this.decrStackSize(ContainerIncubator.getFoodSlot(), 1);
 
 	this.onInventoryChanged();
+	this.setResultAntMeta(-1);
 
     }
 
@@ -295,43 +307,35 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     public int getInventoryStackLimit() {
 	return ContainerIncubator.stackLimit;
     }
-
-    @Override
-    public Packet getDescriptionPacket() {
-	NBTTagCompound var1 = new NBTTagCompound();
-	this.writeToNBT(var1);
-	return new Packet132TileEntityData(this.xCoord, this.yCoord,
-		this.zCoord, 2, var1);
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager netManager,
-	    Packet132TileEntityData packet) {
-	readFromNBT(packet.customParam1);
+    
+    public int getResultAntMetaFromInput(){
+	
+	Item input = this.getContents()[ContainerIncubator.getFoodSlot()].getItem();
+	
+	if(input == Item.stick){
+	    
+	    return Metadata.getMetaDrone();
+	    
+	}else if(input == Register.itemFungi){
+	    
+	    return Metadata.getMetaWorker();
+	    
+	}else if(input == Item.goldNugget){
+	    
+	    return Metadata.getMetaQueen();
+	    
+	}else{
+	    
+	    return -1;
+	    
+	}
+	
     }
 
     @Override
     public void onPacketData(INetworkManager manager,
 	    Packet250CustomPayload packet, Player player) {
-
-	if (packet.channel == Reference.MOD_CHANNEL_INCUBATOR) {
-
-	    DataInputStream inputStream = new DataInputStream(
-		    new ByteArrayInputStream(packet.data));
-
-	    try {
-
-		this.setResultAntMeta(inputStream.readInt());
-
-	    } catch (Exception e) {
-
-		System.out
-			.println("[Myrmecology] Error while handling tile entity packet.");
-
-		e.printStackTrace();
-	    }
-
-	}
-
+	// TODO Auto-generated method stub
+	
     }
 }

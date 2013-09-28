@@ -12,6 +12,7 @@ import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.Breeding;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
+import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillDesert;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillForest;
@@ -22,6 +23,7 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillStone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillSwamp;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
+import vivadaylight3.myrmecology.common.item.ItemAgaricusFungi;
 import vivadaylight3.myrmecology.common.item.ItemAntopedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.item.ant.AntBarbaric;
@@ -72,10 +74,12 @@ public class Register {
     public static Block blockAntFarm;
     public static Block blockAntHill;
     public static Block blockIncubator;
+    public static Block blockFungi;
 
     public static ToolExtractor itemExtractor;
 
     public static ItemAntopedia itemAntopedia;
+    public static ItemAgaricusFungi itemFungi;
 
     public static AntHillForest hillForest;
     public static AntHillJungle hillJungle;
@@ -135,6 +139,10 @@ public class Register {
     public static void registerBlocks() {
 
 	config.load();
+	
+	blockFungi = new BlockFungi(config.get(
+		Configuration.CATEGORY_BLOCK, Reference.BLOCK_FUNGI_NAME,
+		getNewBlockID()).getInt(), Reference.BLOCK_FUNGI_NAME);
 
 	blockAntFarm = new BlockAntFarm(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTFARM_NAME,
@@ -174,7 +182,8 @@ public class Register {
 		Material.ground);
 
 	config.save();
-
+	
+	addBlock(blockFungi, "Agaricus Fungi Block", Reference.BLOCK_FUNGI_NAME);
 	addBlock(blockIncubator, "Ant Incubator",
 		Reference.BLOCK_INCUBATOR_NAME);
 	addBlock(blockAntFarm, "Ant Farm", Reference.BLOCK_ANTFARM_NAME);
@@ -196,6 +205,10 @@ public class Register {
     public static void registerItems() {
 
 	config.load();
+	
+	itemFungi = new ItemAgaricusFungi(config.get(
+		Configuration.CATEGORY_ITEM, Reference.ITEM_FUNGI_NAME,
+		getNewItemID()).getInt());
 
 	itemExtractor = new ToolExtractor(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
@@ -272,6 +285,8 @@ public class Register {
 	config.save();
 
 	// TODO
+	
+	addItem(itemFungi, "Agaricus Fungi", Reference.ITEM_FUNGI_NAME);
 
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 

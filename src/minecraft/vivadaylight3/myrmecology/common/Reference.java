@@ -28,6 +28,7 @@ public class Reference {
     // Items
     public static final String ITEM_EXTRACTOR_NAME = "extractor";
     public static final String ITEM_ANTOPEDIA_NAME = "myrmopedia";
+    public static final String ITEM_FUNGI_NAME = "Agaricus Fungi";
 
     // Ant hills
     public static final String HILL_FOREST_NAME = "antHillForest";

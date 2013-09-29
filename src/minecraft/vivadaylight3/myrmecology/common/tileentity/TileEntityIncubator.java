@@ -310,17 +310,17 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     
     public int getResultAntMetaFromInput(){
 	
-	Item input = this.getContents()[ContainerIncubator.getFoodSlot()].getItem();
+	int input = this.getContents()[ContainerIncubator.getFoodSlot()].getItem().itemID;
 	
-	if(input == Item.stick){
+	if(input == Item.stick.itemID){
 	    
 	    return Metadata.getMetaDrone();
 	    
-	}else if(input == Register.itemFungi){
+	}else if(input == Register.blockFungi.blockID){
 	    
 	    return Metadata.getMetaWorker();
 	    
-	}else if(input == Item.goldNugget){
+	}else if(input == Item.goldNugget.itemID){
 	    
 	    return Metadata.getMetaQueen();
 	    

@@ -42,6 +42,19 @@ public class MyrmecologyWorldGen implements IWorldGenerator {
     private void generateOverworld(World world, Random random, int i, int j) {
 
 	generateAntHill(world, random, i, j);
+	
+	int blockX = i + random.nextInt(16);
+	int blockZ = j + random.nextInt(16);
+	int blockY = world.getHeightValue(blockX, blockZ);
+
+	BiomeGenBase biome = world.getBiomeGenForCoords(i, j);
+	
+	if(biome == BiomeGenBase.swampland){
+	    
+	    world.setBlock(blockX, blockY, blockZ,
+			Register.blockFungi.blockID);
+	    
+	}
 
     }
 

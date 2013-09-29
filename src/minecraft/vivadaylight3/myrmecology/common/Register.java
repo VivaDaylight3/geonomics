@@ -23,7 +23,6 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillStone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillSwamp;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
-import vivadaylight3.myrmecology.common.item.ItemAgaricusFungi;
 import vivadaylight3.myrmecology.common.item.ItemAntopedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.item.ant.AntBarbaric;
@@ -79,7 +78,6 @@ public class Register {
     public static ToolExtractor itemExtractor;
 
     public static ItemAntopedia itemAntopedia;
-    public static ItemAgaricusFungi itemFungi;
 
     public static AntHillForest hillForest;
     public static AntHillJungle hillJungle;
@@ -205,10 +203,6 @@ public class Register {
     public static void registerItems() {
 
 	config.load();
-	
-	itemFungi = new ItemAgaricusFungi(config.get(
-		Configuration.CATEGORY_ITEM, Reference.ITEM_FUNGI_NAME,
-		getNewItemID()).getInt());
 
 	itemExtractor = new ToolExtractor(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
@@ -286,8 +280,6 @@ public class Register {
 
 	// TODO
 	
-	addItem(itemFungi, "Agaricus Fungi", Reference.ITEM_FUNGI_NAME);
-
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
 	addItem(itemAntopedia, "Myrmopedia", Reference.ITEM_ANTOPEDIA_NAME);

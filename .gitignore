@@ -6,8 +6,12 @@
 *.exe
 *.o
 *.so
+
+# Text Files #
+##############
 *.properties
 *.xml
+*.sh
 
 # Packages #
 ############

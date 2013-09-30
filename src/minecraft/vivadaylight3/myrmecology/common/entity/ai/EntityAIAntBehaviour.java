@@ -11,6 +11,12 @@ public class EntityAIAntBehaviour extends EntityAIBase {
     private IEntityAnt theAnt;
     private PathNavigate pathFinder;
 
+    /**
+     * The AI used for ant behaviours
+     * @param IEntityAnt
+     * @param World
+     * @param PathNavigate
+     */
     public EntityAIAntBehaviour(IEntityAnt parEntityAnt, World parWorld, PathNavigate parPathFinder){
 	
 	this.theAnt = parEntityAnt;

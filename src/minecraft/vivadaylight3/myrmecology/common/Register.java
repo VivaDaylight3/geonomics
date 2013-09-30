@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.Breeding;
+import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
@@ -22,6 +24,7 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillSnow;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillStone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillSwamp;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
 import vivadaylight3.myrmecology.common.item.ItemAntopedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
@@ -48,6 +51,7 @@ import vivadaylight3.myrmecology.common.item.ant.AntSwamp;
 import vivadaylight3.myrmecology.common.item.ant.AntWater;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -59,6 +63,7 @@ public class Register {
 
     private static ArrayList<ItemAnt> antList = new ArrayList<ItemAnt>();
     private static ArrayList<BlockAntHill> hillList = new ArrayList<BlockAntHill>();
+ //   private static ArrayList<IEntityAnt> entityAntList = new ArrayList<IEntityAnt>();
 
     public static final int ID_BLOCK = 600;
     public static final int ID_ITEM = 3853;
@@ -391,6 +396,22 @@ public class Register {
 		Reference.MOD_NAME);
 
     }
+    
+    public static void registerEntities(){
+	
+	/*
+	for(int k = 0; k < getEntityAntList().toArray().length; k++){
+	    
+	    IEntityAnt entity = (IEntityAnt) getEntityAntList().toArray()[k];
+	    
+	    EntityRegistry.registerModEntity((Class<? extends Entity>) entity.getClass(), entity.getEntityName(), entity.getEntityID(), entity.getMod(), entity.getTrackingRange(), entity.getUpdateFrequency(), entity.getSendsVelocityUpdates());
+	    
+	}
+	*/
+	
+	EntityRegistry.registerModEntity(EntityAntForest.class, "Forest Ant", 0, Myrmecology.instance, 50, 10, true);
+		
+    }
 
     public static void registerRecipes() {
 
@@ -518,6 +539,14 @@ public class Register {
 	getHillList().add(hill);
 
     }
+    
+    /*
+    public static void addEntityAnt(IEntityAnt entity){
+	
+	getEntityAntList().add(entity);
+	
+    }
+    */
 
     public static ArrayList<ItemAnt> getAntList() {
 
@@ -530,5 +559,13 @@ public class Register {
 	return hillList;
 
     }
+    
+    /*
+    public static ArrayList<IEntityAnt> getEntityAntList(){
+	
+	return entityAntList;
+	
+    }
+    */
 
 }

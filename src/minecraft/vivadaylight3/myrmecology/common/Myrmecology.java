@@ -56,6 +56,8 @@ public class Myrmecology {
 	Register.registerTileEntities();
 
 	Register.registerWorldGen();
+	
+	Register.registerEntities();
 
 	MyrmecologyGuiHandler guiHandler = new MyrmecologyGuiHandler();
 	NetworkRegistry.instance().registerGuiHandler(this, guiHandler);

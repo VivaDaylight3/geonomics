@@ -36,7 +36,7 @@ public class GuiIncubator extends GuiContainer {
 
     private int buttonWidth = 10;
     private int buttonHeight = 15;
-    
+
     private World world;
 
     public TileEntityIncubator tile;
@@ -58,19 +58,18 @@ public class GuiIncubator extends GuiContainer {
 
 	super.initGui();
 	/*
-	this.buttonList.clear();
-
-	this.buttonList.add(this.buttonQueen = new GuiButtonSizeable(2,
-		this.width / 2 - 80, this.height / 2 - 65, "Q",
-		buttonWidth + 8, buttonHeight));
-	this.buttonList.add(this.buttonDrone = new GuiButtonSizeable(2,
-		this.width / 2 - 83 + (buttonWidth * 2), this.height / 2 - 65,
-		"D", buttonWidth + 8, buttonHeight));
-
-	this.buttonList.add(this.buttonWorker = new GuiButtonSizeable(2,
-		this.width / 2 - 65 + (buttonWidth * 2), this.height / 2 - 65,
-		"W", buttonWidth + 8, buttonHeight));
-	*/
+	 * this.buttonList.clear();
+	 * 
+	 * this.buttonList.add(this.buttonQueen = new GuiButtonSizeable(2,
+	 * this.width / 2 - 80, this.height / 2 - 65, "Q", buttonWidth + 8,
+	 * buttonHeight)); this.buttonList.add(this.buttonDrone = new
+	 * GuiButtonSizeable(2, this.width / 2 - 83 + (buttonWidth * 2),
+	 * this.height / 2 - 65, "D", buttonWidth + 8, buttonHeight));
+	 * 
+	 * this.buttonList.add(this.buttonWorker = new GuiButtonSizeable(2,
+	 * this.width / 2 - 65 + (buttonWidth * 2), this.height / 2 - 65, "W",
+	 * buttonWidth + 8, buttonHeight));
+	 */
 
     }
 
@@ -150,15 +149,12 @@ public class GuiIncubator extends GuiContainer {
 	    // We are on the server side.
 	    EntityPlayerMP player2 = (EntityPlayerMP) this.player;
 	} else if (side == Side.CLIENT) {
-	    
+
 	    EntityClientPlayerMP player2 = (EntityClientPlayerMP) MyrmecologyPacketHandler
 		    .getSidedPlayer(this.player);
-	    
-	    player2.
-	    sendQueue.
-	    addToSendQueue(
-		    packet);
-	    
+
+	    player2.sendQueue.addToSendQueue(packet);
+
 	} else {
 	}
 

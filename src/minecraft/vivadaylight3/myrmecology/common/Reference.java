@@ -11,12 +11,13 @@ public class Reference {
     public static final String VERSION_MAJOR = "0";
     public static final String VERSION_MINOR = "0";
     public static final String VERSION_BUILD = "3";
-    
+
     public static final String MOD_ID = "Myrmecology";
     public static final String MOD_CHANNEL = MOD_ID;
     public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
     public static final String MOD_NAME = MOD_ID;
-    public static final String MOD_VERSION = VERSION_MAJOR+"."+VERSION_MINOR+"."+VERSION_BUILD;
+    public static final String MOD_VERSION = VERSION_MAJOR + "."
+	    + VERSION_MINOR + "." + VERSION_BUILD;
     public static final String MOD_DEPENDENCIES = "";
 
     // Ant types

@@ -57,11 +57,11 @@ public class ContainerIncubator extends Container {
 	return 0;
 
     }
-    
-    public static int getFoodSlot(){
-	
+
+    public static int getFoodSlot() {
+
 	return 1;
-	
+
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {

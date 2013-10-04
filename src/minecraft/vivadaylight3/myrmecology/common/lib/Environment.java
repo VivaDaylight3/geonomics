@@ -1,6 +1,10 @@
 package vivadaylight3.myrmecology.common.lib;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -10,6 +14,28 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class Environment {
+    
+    public static Entity spawnEntity(World par0World, int par1, double par2, double par4, double par6){
+	
+	Entity entity = EntityList.createEntityByID(par1, par0World);
+	
+        for (int j = 0; j < 1; ++j)
+        {
+            if (entity != null && entity instanceof EntityLivingBase)
+            {
+                EntityLiving entityliving = (EntityLiving)entity;
+                entity.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
+                entityliving.rotationYawHead = entityliving.rotationYaw;
+                entityliving.renderYawOffset = entityliving.rotationYaw;
+                entityliving.func_110161_a((EntityLivingData)null);
+                par0World.spawnEntityInWorld(entity);
+                entityliving.playLivingSound();
+            }
+        }
+
+        return entity;
+	
+    }
 
     public static boolean blockIsPowered(World world, int x, int y, int z) {
 

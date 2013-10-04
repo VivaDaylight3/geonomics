@@ -57,7 +57,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     public void updateEntity() {
 
 	if (this.canIncubate()) {
-	    
+
 	    if (this.getMaturingTimeComplete() < this.getMaturingTime()) {
 
 		this.increaseMaturingTime();
@@ -105,25 +105,25 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     }
 
     private boolean canIncubate() {
-	
-	if(this.getContents()[ContainerIncubator.getFoodSlot()] != null){
-	    
+
+	if (this.getContents()[ContainerIncubator.getFoodSlot()] != null) {
+
 	    this.setResultAntMeta(getResultAntMetaFromInput());
-	    
+
 	}
 
 	if (this.getLarva() != null) {
 
 	    if (this.getLarva().getItem() instanceof ItemAnt) {
-		
-		if(this.getResultAntMeta() != -1){
 
-		    return (Environment.blockIsPowered(this.worldObj, this.xCoord,
-			this.yCoord, this.zCoord) && Environment
-			.inventoryCanHold(this.getMaturingResult(),
-				this.getContents(),
-				this.getInventoryStackLimit()));
-		
+		if (this.getResultAntMeta() != -1) {
+
+		    return (Environment.blockIsPowered(this.worldObj,
+			    this.xCoord, this.yCoord, this.zCoord) && Environment
+			    .inventoryCanHold(this.getMaturingResult(),
+				    this.getContents(),
+				    this.getInventoryStackLimit()));
+
 		}
 
 	    }
@@ -307,35 +307,36 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     public int getInventoryStackLimit() {
 	return ContainerIncubator.stackLimit;
     }
-    
-    public int getResultAntMetaFromInput(){
-	
-	int input = this.getContents()[ContainerIncubator.getFoodSlot()].getItem().itemID;
-	
-	if(input == Item.stick.itemID){
-	    
+
+    public int getResultAntMetaFromInput() {
+
+	int input = this.getContents()[ContainerIncubator.getFoodSlot()]
+		.getItem().itemID;
+
+	if (input == Item.stick.itemID) {
+
 	    return Metadata.getMetaDrone();
-	    
-	}else if(input == Register.blockFungi.blockID){
-	    
+
+	} else if (input == Register.blockFungi.blockID) {
+
 	    return Metadata.getMetaWorker();
-	    
-	}else if(input == Item.goldNugget.itemID){
-	    
+
+	} else if (input == Item.goldNugget.itemID) {
+
 	    return Metadata.getMetaQueen();
-	    
-	}else{
-	    
+
+	} else {
+
 	    return -1;
-	    
+
 	}
-	
+
     }
 
     @Override
     public void onPacketData(INetworkManager manager,
 	    Packet250CustomPayload packet, Player player) {
 	// TODO Auto-generated method stub
-	
+
     }
 }

@@ -48,8 +48,6 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 
 	if (tileEntity == null) {
 
-	    System.out.println("GuiHandler tileENtoty == null");
-
 	}
 
 	switch (ID) {

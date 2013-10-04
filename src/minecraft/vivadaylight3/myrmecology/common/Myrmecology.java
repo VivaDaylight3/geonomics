@@ -56,8 +56,6 @@ public class Myrmecology {
 	Register.registerTileEntities();
 
 	Register.registerWorldGen();
-	
-	Register.registerEntities();
 
 	MyrmecologyGuiHandler guiHandler = new MyrmecologyGuiHandler();
 	NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
@@ -65,11 +63,13 @@ public class Myrmecology {
 	MyrmecologyPacketHandler packetHandler = new MyrmecologyPacketHandler();
 	NetworkRegistry.instance().registerChannel(packetHandler,
 		Reference.MOD_CHANNEL);
-	
+
 	TileEntityIncubator packetHandler2 = new TileEntityIncubator();
 	NetworkRegistry.instance().registerChannel(packetHandler2,
 		Reference.MOD_CHANNEL_INCUBATOR);
 
+	Register.registerEntities();
+	
     }
 
     @EventHandler

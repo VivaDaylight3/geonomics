@@ -8,7 +8,7 @@ import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Register;
 
 public class EntityAnt extends EntityCreature implements IEntityAnt {
-
+    
     public EntityAnt(World par1World) {
 	super(par1World);
     }
@@ -17,6 +17,21 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     public ItemAnt getAnt() {
 	// TODO Auto-generated method stub
 	return null;
+    }
+
+    @Override
+    protected String getLivingSound() {
+	return "ant." + this.getAnt().getSpeciesSubName() + ".say";
+    }
+
+    @Override
+    protected String getHurtSound() {
+	return "ant." + this.getAnt().getSpeciesSubName() + ".hurt";
+    }
+
+    @Override
+    protected String getDeathSound() {
+	return "ant." + this.getAnt().getSpeciesSubName() + ".death";
     }
 
     @Override

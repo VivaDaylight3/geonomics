@@ -39,7 +39,7 @@ public class BlockIncubator extends BlockContainer {
 	setHardness(1.0F);
 	setResistance(1.0F);
 	name = par2Name;
-	func_111022_d(Reference.MOD_ID.toLowerCase() + name);
+	//func_111022_d(Reference.MOD_ID.toLowerCase() + name);
     }
 
     @Override

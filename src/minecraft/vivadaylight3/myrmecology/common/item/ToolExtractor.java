@@ -22,7 +22,7 @@ public class ToolExtractor extends ItemTool {
     public ToolExtractor(int par1) {
 	super(par1, 1.0F, EnumToolMaterial.WOOD, blocks);
 	setCreativeTab(Register.tabMyrmecology);
-	func_111206_d(Resources.TEXTURE_PREFIX + Reference.ITEM_EXTRACTOR_NAME);
+	//func_111206_d(Resources.TEXTURE_PREFIX + Reference.ITEM_EXTRACTOR_NAME);
     }
 
     @Override

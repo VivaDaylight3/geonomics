@@ -224,7 +224,7 @@ public class GuiAntopedia extends GuiContainer {
 
     @Override
     public void updateScreen() {
-	
+
 	super.updateScreen();
 
 	if (this.selectedAnt != null) {

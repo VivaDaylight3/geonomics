@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 
 public class Resources {
 
@@ -19,11 +20,16 @@ public class Resources {
     public static final String ARMOUR_LOCATION = TEXTURE_LOCATION + "armor/";
     public static final String GUI_LOCATION = TEXTURE_LOCATION + "gui/";
     public static final String EFFECT_LOCATION = TEXTURE_LOCATION + "effects/";
+    public static final String ENTITY_LOCATION = TEXTURE_LOCATION + "entity/";
     public static final String ANT_LOCATION = "ant/";
 
     public static final ResourceLocation VANILLA_BLOCK_TEXTURE_SHEET = TextureMap.field_110575_b;
     public static final ResourceLocation VANILLA_ITEM_TEXTURE_SHEET = TextureMap.field_110576_c;
 
+    public static final ResourceLocation ENTITY_ANT_FOREST = getResourceLocation(ENTITY_LOCATION
+	    + Register.antForest.getSpeciesSubName() + FORMAT);
+    
+    
     public static final ResourceLocation GUI_ANTFARM = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_ANTFARM_NAME + FORMAT);
 

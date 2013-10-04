@@ -1,11 +1,13 @@
 package vivadaylight3.myrmecology.common;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -63,10 +65,11 @@ public class Register {
 
     private static ArrayList<ItemAnt> antList = new ArrayList<ItemAnt>();
     private static ArrayList<BlockAntHill> hillList = new ArrayList<BlockAntHill>();
- //   private static ArrayList<IEntityAnt> entityAntList = new ArrayList<IEntityAnt>();
+    private static ArrayList<Class <? extends IEntityAnt>> entityAntList = new ArrayList<Class <? extends IEntityAnt>>();
 
     public static final int ID_BLOCK = 600;
     public static final int ID_ITEM = 3853;
+    public static int startEntityId;
 
     public static final int GUI_ID_ANTFARM = 1;
     public static final int GUI_ID_ANTOPEDIA = 2;
@@ -142,10 +145,10 @@ public class Register {
     public static void registerBlocks() {
 
 	config.load();
-	
-	blockFungi = new BlockFungi(config.get(
-		Configuration.CATEGORY_BLOCK, Reference.BLOCK_FUNGI_NAME,
-		getNewBlockID()).getInt(), Reference.BLOCK_FUNGI_NAME);
+
+	blockFungi = new BlockFungi(config.get(Configuration.CATEGORY_BLOCK,
+		Reference.BLOCK_FUNGI_NAME, getNewBlockID()).getInt(),
+		Reference.BLOCK_FUNGI_NAME);
 
 	blockAntFarm = new BlockAntFarm(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTFARM_NAME,
@@ -185,11 +188,11 @@ public class Register {
 		Material.ground);
 
 	config.save();
-	
+
 	addBlock(blockFungi, "Agaricus Fungi Block", Reference.BLOCK_FUNGI_NAME);
-	addBlock(blockIncubator, "Ant Incubator",
+	addBlock(blockIncubator, "Solarium",
 		Reference.BLOCK_INCUBATOR_NAME);
-	addBlock(blockAntFarm, "Ant Farm", Reference.BLOCK_ANTFARM_NAME);
+	addBlock(blockAntFarm, "Formicarium", Reference.BLOCK_ANTFARM_NAME);
 	addBlock(hillForest, hillForest.getHillName(),
 		hillForest.getHillSubName());
 	addBlock(hillDesert, hillDesert.getHillName(),
@@ -284,7 +287,7 @@ public class Register {
 	config.save();
 
 	// TODO
-	
+
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
 	addItem(itemAntopedia, "Myrmopedia", Reference.ITEM_ANTOPEDIA_NAME);
@@ -396,21 +399,27 @@ public class Register {
 		Reference.MOD_NAME);
 
     }
-    
-    public static void registerEntities(){
-	
+
+    public static void registerEntities() {
+
 	/*
-	for(int k = 0; k < getEntityAntList().toArray().length; k++){
-	    
-	    IEntityAnt entity = (IEntityAnt) getEntityAntList().toArray()[k];
-	    
-	    EntityRegistry.registerModEntity((Class<? extends Entity>) entity.getClass(), entity.getEntityName(), entity.getEntityID(), entity.getMod(), entity.getTrackingRange(), entity.getUpdateFrequency(), entity.getSendsVelocityUpdates());
-	    
-	}
-	*/
+	 * for(int k = 0; k < getEntityAntList().toArray().length; k++){
+	 * 
+	 * IEntityAnt entity = (IEntityAnt) getEntityAntList().toArray()[k];
+	 * 
+	 * EntityRegistry.registerModEntity((Class<? extends Entity>)
+	 * entity.getClass(), entity.getEntityName(), entity.getEntityID(),
+	 * entity.getMod(), entity.getTrackingRange(),
+	 * entity.getUpdateFrequency(), entity.getSendsVelocityUpdates());
+	 * 
+	 * }
+	 */
+
+	EntityRegistry.registerModEntity(EntityAntForest.class, "Forest Ant",
+		1, Myrmecology.instance, 50, 10, true);
 	
-	EntityRegistry.registerModEntity(EntityAntForest.class, "Forest Ant", 0, Myrmecology.instance, 50, 10, true);
-		
+	addEntityAnt(EntityAntForest.class);
+
     }
 
     public static void registerRecipes() {
@@ -521,6 +530,22 @@ public class Register {
 	}
 
     }
+    
+    public static int getUniqueEntityId()
+    {
+        do
+        {
+            ++startEntityId;
+
+            if (startEntityId > 255)
+            {
+                Logger.getLogger("Minecraft").log(Level.WARNING, "Entity Id is greater than 255: " + startEntityId);
+            }
+        }
+        while (EntityList.getStringFromID(startEntityId) != null);
+
+        return startEntityId;
+    }
 
     public static ItemStack getCreativeTabIcon() {
 
@@ -539,14 +564,13 @@ public class Register {
 	getHillList().add(hill);
 
     }
+
     
-    /*
-    public static void addEntityAnt(IEntityAnt entity){
-	
-	getEntityAntList().add(entity);
-	
-    }
-    */
+     public static void addEntityAnt(Class <? extends IEntityAnt> class1){
+      
+	 getEntityAntList().add(class1);
+      
+      }
 
     public static ArrayList<ItemAnt> getAntList() {
 
@@ -559,13 +583,11 @@ public class Register {
 	return hillList;
 
     }
-    
-    /*
-    public static ArrayList<IEntityAnt> getEntityAntList(){
-	
-	return entityAntList;
-	
-    }
-    */
 
+    
+     public static ArrayList<Class <? extends IEntityAnt>> getEntityAntList(){
+      
+      return entityAntList;
+      
+     }
 }

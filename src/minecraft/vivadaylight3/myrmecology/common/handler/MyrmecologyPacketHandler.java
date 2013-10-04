@@ -89,8 +89,6 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	    return;
 	}
 
-	System.out.println(randomInt1 + " " + randomInt2);
-
     }
 
     public void handleNBTPacket(Packet250CustomPayload packet, Player player) {

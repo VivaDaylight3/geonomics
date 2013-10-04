@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,6 +14,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
+import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Time;
@@ -39,6 +43,7 @@ public class ItemAnt extends Item {
     private String[] names = this.getCompleteNames();
 
     public ItemAnt(int par1) {
+	
 	super(par1);
 
 	setHasSubtypes(true);
@@ -60,8 +65,8 @@ public class ItemAnt extends Item {
 	setUnlocalizedName(this.getSpeciesSubName());
 	setCreativeTab(Register.tabMyrmecology);
 	setMaxStackSize(64);
-	func_111206_d(Resources.TEXTURE_PREFIX + "ant_"
-		+ this.getSpeciesSubName());
+	//func_111206_d(Resources.TEXTURE_PREFIX + "ant_"
+		//+ this.getSpeciesSubName());
 
     }
 
@@ -76,16 +81,24 @@ public class ItemAnt extends Item {
 
 	return false;
     }
-
+    
     @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player,
-	    World par3World, int par4, int par5, int par6, int par7,
-	    float par8, float par9, float par10) {
-
-	return true;
-
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10){
+	
+	if(this.hasEntity()){
+	    	    
+	    Entity entity = EntityList.createEntityByID(1, par3World);
+	    
+	    par3World.spawnEntityInWorld(entity);
+	    
+	    double d0 = 0.0D;
+	    //Environment.spawnEntity(par3World, this.getEntityID(), (double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D);
+	    return true;
+	}
+	return false;
+		
     }
-
+    
     /**
      * Returns the names variable
      * 
@@ -363,6 +376,24 @@ public class ItemAnt extends Item {
      */
     public boolean getNocturnal() {
 	return false;
+    }
+    
+    public boolean hasEntity(){
+	
+	return true;
+	
+    }
+    
+    public IEntityAnt getNewEntity(World world){
+	
+	return new EntityAntForest(world);
+	
+    }
+    
+    public int getEntityID(){
+	
+	return 1;
+	
     }
 
 }

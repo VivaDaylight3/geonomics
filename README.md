@@ -3,6 +3,11 @@ Myrmecology
 
 The Myrmecology mod for Minecraft
 
+Downloads
+=========
+
+All downloads are located under the 'releases' tab, here's a link if you can't find it: https://github.com/VivaDaylight3/myrmecology/releases
+
 Bugs
 ====
 

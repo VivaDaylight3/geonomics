@@ -10,17 +10,17 @@ import net.minecraft.util.EnumChatFormatting;
  */
 public class Reference {
 
-    public static final String VERSION_MAJOR = "@VERSION_MAJOR@";
-    public static final String VERSION_MINOR = "@VERSION_MINOR@";
-    public static final String VERSION_BUILD = "@VERSION_BUILD@";
-    public static final String VERSION_MC = "@VERSION_MC@";
-    public static final String VERSION_FORGE = "@VERSION_FORGE@";
-    public static final String VERSION_CHECK_URL = "@VERSION_URL@";
+    public static final String VERSION_MAJOR = "0";//"@VERSION_MAJOR@";
+    public static final String VERSION_MINOR = "1";//"@VERSION_MINOR@";
+    public static final String VERSION_BUILD = "3";//"@VERSION_BUILD@";
+    public static final String VERSION_MC = "1.6.2";//@VERSION_MC@";
+    public static final String VERSION_FORGE = "forge";//"@VERSION_FORGE@";
+    public static final String VERSION_CHECK_URL = "https://www.dropbox.com/s/fvpaxr8j8t9ojzz/version.txt";//"@VERSION_URL@";
 
-    public static final String MOD_ID = "@MOD_ID@";
+    public static final String MOD_ID = "Myrmecology";//"@MOD_ID@";
     public static final String MOD_CHANNEL = MOD_ID;
-    public static final String MOD_FINGERPRINT = "@MOD_FINGERPRINT@";
-    public static final String MOD_URL = "@MOD_URL@";
+    public static final String MOD_FINGERPRINT = "Myrmecology";//"@MOD_FINGERPRINT@";
+    public static final String MOD_URL = "mod_url";//"@MOD_URL@";
     
     public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
     public static final String MOD_VERSION = VERSION_MAJOR + "."

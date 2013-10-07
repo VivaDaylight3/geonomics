@@ -213,6 +213,12 @@ public class Register {
     
     public static boolean checkForUpdates(Url url){
 	
+	config.load();
+	
+	checkForUpdates = config.get(Configuration.CATEGORY_GENERAL, "check for updates", false).getBoolean(false);
+	
+	config.save();
+	
 	if(checkForUpdates){
 		
 	    return url.updateIsAvailable();

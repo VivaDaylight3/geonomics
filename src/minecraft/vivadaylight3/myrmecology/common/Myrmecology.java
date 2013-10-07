@@ -48,7 +48,7 @@ public class Myrmecology {
 	
 	Url url = new Url(Reference.VERSION_CHECK_URL);
 	
-	updateIsAvailable = Register.checkForUpdates(url);
+	//updateIsAvailable = Register.checkForUpdates(url);
 
 	Register.registerCreativeTab();
 

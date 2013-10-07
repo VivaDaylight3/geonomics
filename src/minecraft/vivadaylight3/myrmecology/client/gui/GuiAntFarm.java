@@ -49,7 +49,7 @@ public class GuiAntFarm extends GuiContainer {
 	    int par3) {
 
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	this.mc.renderEngine.func_110577_a(Resources.GUI_ANTFARM);
+	this.mc.renderEngine.bindTexture(Resources.GUI_ANTFARM);
 	int k = (this.width - this.xSize) / 2;
 	int l = (this.height - this.ySize) / 2;
 	this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.common;
 import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyGuiHandler;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
+import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -22,7 +23,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  * @author VivaDaylight3
  */
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_ID, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES, certificateFingerprint=Reference.MOD_FINGERPRINT)
 @NetworkMod(channels = { Reference.MOD_CHANNEL, Reference.MOD_CHANNEL_INCUBATOR }, clientSideRequired = true, serverSideRequired = false, packetHandler = MyrmecologyPacketHandler.class)
 public class Myrmecology {
 
@@ -32,8 +33,10 @@ public class Myrmecology {
     @Metadata
     public static ModMetadata meta;
 
-    @Instance(Reference.MOD_NAME)
+    @Instance(Reference.MOD_ID)
     public static Myrmecology instance;
+    
+    public static boolean updateIsAvailable = false;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -42,6 +45,10 @@ public class Myrmecology {
 		event.getSuggestedConfigurationFile());
 
 	Register.setConfig(config);
+	
+	Url url = new Url(Reference.VERSION_CHECK_URL);
+	
+	updateIsAvailable = Register.checkForUpdates(url);
 
 	Register.registerCreativeTab();
 

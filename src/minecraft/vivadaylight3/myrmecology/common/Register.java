@@ -51,6 +51,7 @@ import vivadaylight3.myrmecology.common.item.ant.AntSprouter;
 import vivadaylight3.myrmecology.common.item.ant.AntStone;
 import vivadaylight3.myrmecology.common.item.ant.AntSwamp;
 import vivadaylight3.myrmecology.common.item.ant.AntWater;
+import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -67,6 +68,8 @@ public class Register {
     private static ArrayList<BlockAntHill> hillList = new ArrayList<BlockAntHill>();
     private static ArrayList<Class <? extends IEntityAnt>> entityAntList = new ArrayList<Class <? extends IEntityAnt>>();
 
+    public static boolean checkForUpdates = true;
+    
     public static final int ID_BLOCK = 600;
     public static final int ID_ITEM = 3853;
     public static int startEntityId;
@@ -206,6 +209,20 @@ public class Register {
 	addBlock(hillSwamp, hillSwamp.getHillName(), hillSwamp.getHillSubName());
 	addBlock(hillWater, hillWater.getHillName(), hillWater.getHillSubName());
 
+    }
+    
+    public static boolean checkForUpdates(Url url){
+	
+	if(checkForUpdates){
+		
+	    return url.updateIsAvailable();
+	
+	}else{
+	    
+	    return false;
+	    
+	}
+	
     }
 
     public static void registerItems() {
@@ -396,7 +413,7 @@ public class Register {
 
 	LanguageRegistry.instance().addStringLocalization(
 		"itemGroup." + "tab" + Reference.MOD_ID, "en_US",
-		Reference.MOD_NAME);
+		Reference.MOD_ID);
 
     }
 

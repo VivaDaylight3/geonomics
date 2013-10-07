@@ -1,5 +1,7 @@
 package vivadaylight3.myrmecology.common;
 
+import net.minecraft.util.EnumChatFormatting;
+
 /**
  * This class holds the names of blocks, items and mod details
  * 
@@ -8,17 +10,24 @@ package vivadaylight3.myrmecology.common;
  */
 public class Reference {
 
-    public static final String VERSION_MAJOR = "0";
-    public static final String VERSION_MINOR = "0";
-    public static final String VERSION_BUILD = "3";
+    public static final String VERSION_MAJOR = "@VERSION_MAJOR@";
+    public static final String VERSION_MINOR = "@VERSION_MINOR@";
+    public static final String VERSION_BUILD = "@VERSION_BUILD@";
+    public static final String VERSION_MC = "@VERSION_MC@";
+    public static final String VERSION_FORGE = "@VERSION_FORGE@";
+    public static final String VERSION_CHECK_URL = "@VERSION_URL@";
 
-    public static final String MOD_ID = "Myrmecology";
+    public static final String MOD_ID = "@MOD_ID@";
     public static final String MOD_CHANNEL = MOD_ID;
+    public static final String MOD_FINGERPRINT = "@MOD_FINGERPRINT@";
+    public static final String MOD_URL = "@MOD_URL@";
+    
     public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
-    public static final String MOD_NAME = MOD_ID;
     public static final String MOD_VERSION = VERSION_MAJOR + "."
 	    + VERSION_MINOR + "." + VERSION_BUILD;
     public static final String MOD_DEPENDENCIES = "";
+    
+    public static final String CHAT_PREFIX = "["+EnumChatFormatting.BLUE+MOD_ID+EnumChatFormatting.RESET+"]";
 
     // Ant types
     public static final String[] standardTypeNames = new String[] { "Queen",

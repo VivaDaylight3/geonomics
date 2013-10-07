@@ -1,15 +1,14 @@
 [
 {
-  "modid": "Myrmecology",
-  "name": "Myrmecology",
+  "modid": "@MOD_NAME@",
+  "name": "@MOD_NAME@",
   "description": "Capture, Breed and Enslave Ants!",
-  "version": "0.0.3",
-  "mcversion": "1.6.2",
+  "version": "@MOD_VERSION@",
+  "mcversion": "@VERSION_MINECRAFT@",
   "logoFile": "/assets/myrmecology/textures/logo/logo.png",
-  "url": "http://www.minecraftforum.net/topic/1960672-forge-162-myrmecology-capture-breed-and-enslave-ants/page__hl__+myrmecology#entry24140063",
-  "updateUrl": "",
+  "url": "@MOD_URL@",
   "authors": ["VivaDaylight3", "Aurliux", "RaccoonSam"],
-  "credits": "The Forge and MCP teams for their amazing contributions to modding",
+  "credits": "The Forge and MCP teams for their amazing contributions to mc modding",
   "parent": "",
   "screenshots": [],
   "dependencies": []

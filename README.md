@@ -11,7 +11,7 @@ All downloads are located under the 'releases' tab, here's a link if you can't f
 Bugs
 ====
 
-To see a list of known bugs, got to the Issues section and then Milestones. To report a bug, file an issue in the Issues section.
+To see a list of known bugs, got to the Issues section. To report a bug, file an issue in the Issues section.
 
 Info
 ====

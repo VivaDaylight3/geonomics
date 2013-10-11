@@ -13,10 +13,8 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	super(par1World);
     }
 
-    @Override
-    public ItemAnt getAnt() {
-	// TODO Auto-generated method stub
-	return null;
+    public static ItemAnt getAnt() {
+	return Register.antForest;
     }
 
     @Override

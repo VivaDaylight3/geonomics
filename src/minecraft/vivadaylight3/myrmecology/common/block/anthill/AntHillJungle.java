@@ -23,7 +23,7 @@ public class AntHillJungle extends BlockAntHill {
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
 	    int par4, Entity par5Entity) {
 
-	par5Entity.attackEntityFrom(AntDamageSource.antBite, 1.0F);
+	par5Entity.attackEntityFrom(new AntDamageSource(Reference.DEATH_MESSAGE+Register.antJungle.getSpeciesName()+"s"), 1.0F);
 
     }
 

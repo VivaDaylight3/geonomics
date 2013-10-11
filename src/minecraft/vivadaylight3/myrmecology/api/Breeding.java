@@ -6,8 +6,6 @@ import net.minecraft.item.ItemStack;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.api.ItemAnt;
 
-;
-
 public class Breeding {
 
     private static ArrayList<BreedingRecipe> breedingList = new ArrayList<BreedingRecipe>();
@@ -35,6 +33,11 @@ public class Breeding {
 
     }
 
+    /**
+     * Returns all BreedingRecipes that include the given ant
+     * @param parAnt
+     * @return
+     */
     public static ArrayList<BreedingRecipe> getAntBreedingOptions(ItemAnt parAnt) {
 
 	ArrayList<BreedingRecipe> result = new ArrayList<BreedingRecipe>();

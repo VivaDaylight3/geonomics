@@ -34,7 +34,7 @@ public class Resources {
 	    + Reference.BLOCK_INCUBATOR_NAME + FORMAT);
 
     public static final ResourceLocation GUI_ANTOPEDIA = getResourceLocation(GUI_LOCATION
-	    + Reference.ITEM_ANTOPEDIA_NAME + FORMAT);
+	    + Reference.ITEM_MYRMOPAEDIA_NAME + FORMAT);
 
     private static ResourceLocation getResourceLocation(String path) {
 

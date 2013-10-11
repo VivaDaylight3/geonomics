@@ -12,7 +12,7 @@ import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 
-public class ContainerAntopedia extends Container {
+public class ContainerMyrmopaedia extends Container {
 
     public InventoryItem inventory;
 
@@ -34,7 +34,7 @@ public class ContainerAntopedia extends Container {
 
     private ArrayList<ItemAnt> registerAntList = new ArrayList<ItemAnt>();
 
-    public ContainerAntopedia(InventoryItem inventoryItem, EntityPlayer player) {
+    public ContainerMyrmopaedia(InventoryItem inventoryItem, EntityPlayer player) {
 
 	this.inventory = inventoryItem;
 	this.containerStack = player.getHeldItem();

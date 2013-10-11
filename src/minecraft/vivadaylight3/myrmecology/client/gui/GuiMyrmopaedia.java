@@ -12,23 +12,23 @@ import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 
-import vivadaylight3.myrmecology.api.AntopediaProperties;
 import vivadaylight3.myrmecology.api.Breeding;
 import vivadaylight3.myrmecology.api.BreedingRecipe;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.api.Metadata;
-import vivadaylight3.myrmecology.common.inventory.ContainerAntopedia;
+import vivadaylight3.myrmecology.api.MyrmopaediaProperties;
+import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Strings;
 import vivadaylight3.myrmecology.common.lib.Time;
 import cpw.mods.fml.common.network.Player;
 
-public class GuiAntopedia extends GuiContainer {
+public class GuiMyrmopaedia extends GuiContainer {
 
     private InventoryItem inventory;
-    private ContainerAntopedia container;
-    private ItemStack antopedia;
+    private ContainerMyrmopaedia container;
+    private ItemStack myrmopaedia;
 
     private Icon antIcon;
 
@@ -57,13 +57,13 @@ public class GuiAntopedia extends GuiContainer {
 
     private ScaledResolution scaledRes;
 
-    public GuiAntopedia(ContainerAntopedia parcontainer, EntityPlayer parPlayer) {
+    public GuiMyrmopaedia(ContainerMyrmopaedia parcontainer, EntityPlayer parPlayer) {
 
-	super(new ContainerAntopedia(parcontainer.inventory, parPlayer));
+	super(new ContainerMyrmopaedia(parcontainer.inventory, parPlayer));
 	this.player = (Player) parPlayer;
 	this.inventory = parcontainer.inventory;
 	this.container = parcontainer;
-	this.antopedia = parcontainer.containerStack;
+	this.myrmopaedia = parcontainer.containerStack;
 	this.selectedScreen = "ants";
 	selectedAnt = null;
 
@@ -210,16 +210,6 @@ public class GuiAntopedia extends GuiContainer {
 
 	}
 
-	/*
-	 * String s = this.inventory.isInvNameLocalized() ? this.inventory
-	 * .getInvName() : I18n.func_135053_a(this.inventory.getInvName());
-	 * this.fontRenderer.drawString(s, this.xSize / 2 -
-	 * this.fontRenderer.getStringWidth(s) / 2, 0, 4210752);
-	 * 
-	 * this.fontRenderer.drawString(I18n.func_135053_a("container.inventory")
-	 * , 26, this.ySize - 96 + 4, 4210752);
-	 */
-
     }
 
     @Override
@@ -236,16 +226,13 @@ public class GuiAntopedia extends GuiContainer {
 
 	if (this.antIcon != null) {
 
-	    // drawIcon(this.antIcon, this.container.antSlotX + 15,
-	    // this.container.antSlotY);
-
 	}
 
 	if (this.getAnt() != null) {
 
 	    this.selectedAnt = this.getAnt();
 
-	    AntopediaProperties.addAntToAntopedia(
+	    MyrmopaediaProperties.addAntToMyrmopaedia(
 		    this.container.containerStack, this.selectedAnt,
 		    this.player);
 
@@ -328,7 +315,6 @@ public class GuiAntopedia extends GuiContainer {
 
 	    }
 
-	} else {
 
 	    printKeyAndValue("Biomes: ", "All", 75);
 

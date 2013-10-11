@@ -11,15 +11,23 @@ import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
 import vivadaylight3.myrmecology.common.lib.Nbt;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 
-public class AntopediaProperties {
+/**
+ * Handles Myrmopaedia properties
+ * @author samueltebbs
+ *
+ */
+public class MyrmopaediaProperties {
 
-    public static ItemStack[] antopediaIDs = new ItemStack[1000];
+    public static ItemStack[] myrmopaediaIDs = new ItemStack[1000];
 
-    public static void initiateAntopedia(ItemStack itemStack) {
+    /**
+     * Initiates a new antopedia with NBT data
+     * @param itemStack
+     */
+    public static void initiateMyrmopaedia(ItemStack itemStack) {
 
 	Nbt.setTag(itemStack);
 
@@ -32,13 +40,18 @@ public class AntopediaProperties {
 
     }
 
-    public static int newAntopediaID(ItemStack itemStack) {
+    /**
+     * Gets a new vacant myrmopaedia ID
+     * @param itemStack
+     * @return
+     */
+    private static int newMyrmopaediaID(ItemStack itemStack) {
 
-	for (int k = 0; k < antopediaIDs.length; k++) {
+	for (int k = 0; k < myrmopaediaIDs.length; k++) {
 
-	    if (antopediaIDs[k] == null) {
+	    if (myrmopaediaIDs[k] == null) {
 
-		antopediaIDs[k] = itemStack;
+		myrmopaediaIDs[k] = itemStack;
 
 		return k;
 
@@ -50,11 +63,11 @@ public class AntopediaProperties {
 
     }
 
-    public static ItemStack getAntopediaFromID(int id) {
+    public static ItemStack getMyrmopaediaFromID(int id) {
 
-	if (antopediaIDs[id] != null) {
+	if (myrmopaediaIDs[id] != null) {
 
-	    return antopediaIDs[id];
+	    return myrmopaediaIDs[id];
 
 	} else {
 
@@ -64,13 +77,13 @@ public class AntopediaProperties {
 
     }
 
-    public static void clearAntopediaID(int id) {
+    public static void clearMyrmopaediaID(int id) {
 
-	antopediaIDs[id] = null;
+	myrmopaediaIDs[id] = null;
 
     }
 
-    public static void addAntToAntopedia(ItemStack itemstack, ItemAnt ant,
+    public static void addAntToMyrmopaedia(ItemStack itemstack, ItemAnt ant,
 	    Player parPlayer) {
 
 	boolean bool = true;
@@ -83,7 +96,7 @@ public class AntopediaProperties {
 	try {
 
 	    dos.writeUTF(ant.getSpeciesSubName());
-	    dos.writeInt(newAntopediaID(itemstack));
+	    dos.writeInt(newMyrmopaediaID(itemstack));
 
 	} catch (Exception ex) {
 
@@ -107,7 +120,7 @@ public class AntopediaProperties {
 
     }
 
-    public static ArrayList<ItemAnt> getAntopediaAnts(ItemStack itemStack) {
+    public static ArrayList<ItemAnt> getMyrmopaediaAnts(ItemStack itemStack) {
 
 	ArrayList<ItemAnt> result = new ArrayList<ItemAnt>();
 

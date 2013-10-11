@@ -19,6 +19,7 @@ import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Time;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -88,12 +89,7 @@ public class ItemAnt extends Item {
 	if(this.hasEntity()){
 	    	    
 	    Entity entity = EntityList.createEntityByID(1, par3World);
-	    
-	    par3World.spawnEntityInWorld(entity);
-	    
-	    double d0 = 0.0D;
-	    //Environment.spawnEntity(par3World, this.getEntityID(), (double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D);
-	    return true;
+	   
 	}
 	return false;
 		

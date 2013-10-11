@@ -8,8 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.Breeding;
@@ -28,7 +30,7 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillSwamp;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
-import vivadaylight3.myrmecology.common.item.ItemAntopedia;
+import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.item.ant.AntBarbaric;
 import vivadaylight3.myrmecology.common.item.ant.AntCarpenter;
@@ -75,7 +77,7 @@ public class Register {
     public static int startEntityId;
 
     public static final int GUI_ID_ANTFARM = 1;
-    public static final int GUI_ID_ANTOPEDIA = 2;
+    public static final int GUI_ID_MYRMOPAEDIA = 2;
     public static final int GUI_ID_INCUBATOR = 3;
 
     public static int latestItemID = 0;
@@ -88,7 +90,7 @@ public class Register {
 
     public static ToolExtractor itemExtractor;
 
-    public static ItemAntopedia itemAntopedia;
+    public static ItemMyrmopaedia itemAntopedia;
 
     public static AntHillForest hillForest;
     public static AntHillJungle hillJungle;
@@ -239,8 +241,8 @@ public class Register {
 		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
 		getNewItemID()).getInt());
 
-	itemAntopedia = new ItemAntopedia(config.get(
-		Configuration.CATEGORY_ITEM, Reference.ITEM_ANTOPEDIA_NAME,
+	itemAntopedia = new ItemMyrmopaedia(config.get(
+		Configuration.CATEGORY_ITEM, Reference.ITEM_MYRMOPAEDIA_NAME,
 		getNewItemID()).getInt());
 
 	antForest = new AntForest(config.get(Configuration.CATEGORY_ITEM,
@@ -313,7 +315,7 @@ public class Register {
 
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
-	addItem(itemAntopedia, "Myrmopedia", Reference.ITEM_ANTOPEDIA_NAME);
+	addItem(itemAntopedia, "Myrmopaedia", Reference.ITEM_MYRMOPAEDIA_NAME);
 
 	addItem(antForest, antForest.getNames(),
 		Reference.MOD_ID + antForest.getSpeciesSubName());
@@ -425,23 +427,14 @@ public class Register {
 
     public static void registerEntities() {
 
-	/*
-	 * for(int k = 0; k < getEntityAntList().toArray().length; k++){
-	 * 
-	 * IEntityAnt entity = (IEntityAnt) getEntityAntList().toArray()[k];
-	 * 
-	 * EntityRegistry.registerModEntity((Class<? extends Entity>)
-	 * entity.getClass(), entity.getEntityName(), entity.getEntityID(),
-	 * entity.getMod(), entity.getTrackingRange(),
-	 * entity.getUpdateFrequency(), entity.getSendsVelocityUpdates());
-	 * 
-	 * }
-	 */
-
 	EntityRegistry.registerModEntity(EntityAntForest.class, "Forest Ant",
 		1, Myrmecology.instance, 50, 10, true);
 	
 	addEntityAnt(EntityAntForest.class);
+	
+	BiomeGenBase[] biomes = EntityAntForest.getAnt().getAntBiomes();
+	
+	EntityRegistry.addSpawn(EntityAntForest.class, 10, 1, 3, EnumCreatureType.creature, biomes);
 
     }
 

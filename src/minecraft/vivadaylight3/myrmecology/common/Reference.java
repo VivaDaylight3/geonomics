@@ -27,6 +27,8 @@ public class Reference {
 	    + VERSION_MINOR + "." + VERSION_BUILD;
     public static final String MOD_DEPENDENCIES = "";
     
+    public static final String DEATH_MESSAGE = "%1$s just angered some ";
+    
     public static final String CHAT_PREFIX = "["+EnumChatFormatting.BLUE+MOD_ID+EnumChatFormatting.RESET+"]";
 
     // Ant types
@@ -41,7 +43,7 @@ public class Reference {
 
     // Items
     public static final String ITEM_EXTRACTOR_NAME = "extractor";
-    public static final String ITEM_ANTOPEDIA_NAME = "myrmopedia";
+    public static final String ITEM_MYRMOPAEDIA_NAME = "myrmopaedia";
     public static final String ITEM_FUNGI_NAME = "Agaricus Fungi";
 
     // Ant hills

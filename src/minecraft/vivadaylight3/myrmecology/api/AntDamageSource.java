@@ -10,13 +10,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  * 
  */
 public class AntDamageSource extends DamageSource {
+    
+    public AntDamageSource(String message) {
 
-    public static final AntDamageSource antBite = (new AntDamageSource(
-	    "antBite", "%1$s angered some ants!"));
-
-    protected AntDamageSource(String par1Str, String message) {
-
-	super(par1Str);
+	super("antDamage");
 	setDeathMessage(message);
 
     }

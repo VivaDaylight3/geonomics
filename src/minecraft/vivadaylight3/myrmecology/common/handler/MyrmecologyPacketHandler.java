@@ -9,9 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import vivadaylight3.myrmecology.api.AntopediaProperties;
+import vivadaylight3.myrmecology.api.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -114,10 +112,8 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 
 	    }
 
-	    Nbt.set(AntopediaProperties.getAntopediaFromID(antopediaID),
+	    Nbt.set(MyrmopaediaProperties.getMyrmopaediaFromID(antopediaID),
 		    speciesName, true);
-
-	    // AntopediaProperties.clearAntopediaID(antopediaID);
 
 	}
 

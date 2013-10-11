@@ -6,6 +6,12 @@ public class BreedingRecipe {
     private ItemAnt ant2;
     private ItemAnt antOutput;
 
+    /**
+     * Creates a new ant BreedingRecipe
+     * @param ItemAnt ant input 1
+     * @param ItemAnt ant input 2
+     * @param ItemAnt ant output
+     */
     public BreedingRecipe(ItemAnt par1, ItemAnt par2, ItemAnt par3) {
 
 	this.ant1 = par1;

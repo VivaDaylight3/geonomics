@@ -4,12 +4,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.client.gui.GuiAntFarm;
-import vivadaylight3.myrmecology.client.gui.GuiAntopedia;
 import vivadaylight3.myrmecology.client.gui.GuiIncubator;
+import vivadaylight3.myrmecology.client.gui.GuiMyrmopaedia;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.inventory.ContainerAntFarm;
-import vivadaylight3.myrmecology.common.inventory.ContainerAntopedia;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
+import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
@@ -32,8 +32,8 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 	    return new ContainerIncubator(player.inventory,
 		    (TileEntityIncubator) tileEntity);
 
-	case Register.GUI_ID_ANTOPEDIA:
-	    return new ContainerAntopedia(new InventoryItem(
+	case Register.GUI_ID_MYRMOPAEDIA:
+	    return new ContainerMyrmopaedia(new InventoryItem(
 		    player.getHeldItem()), player);
 
 	}
@@ -60,12 +60,12 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 	    return new GuiIncubator(player, player.inventory,
 		    (TileEntityIncubator) tileEntity, world, x, y, z);
 
-	case Register.GUI_ID_ANTOPEDIA:
+	case Register.GUI_ID_MYRMOPAEDIA:
 
 	    InventoryItem inventory = new InventoryItem(player.getHeldItem());
-	    ContainerAntopedia container = new ContainerAntopedia(inventory,
+	    ContainerMyrmopaedia container = new ContainerMyrmopaedia(inventory,
 		    player);
-	    return new GuiAntopedia(container, player);
+	    return new GuiMyrmopaedia(container, player);
 
 	}
 

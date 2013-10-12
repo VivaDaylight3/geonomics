@@ -1,5 +1,6 @@
 package vivadaylight3.myrmecology.common.entity.ant;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
@@ -26,6 +27,12 @@ public class EntityAntForest extends EntityAnt {
 
     @Override
     public void startPerformingBehaviour() {
+	
+	if(this.worldObj.getBlockId(this.serverPosX, this.serverPosY - 1, this.serverPosZ) == Block.wood.blockID){
+	    
+	    this.worldObj.setBlock(serverPosX, serverPosY, serverPosZ, Block.sponge.blockID);
+	    
+	}
 
     }
 

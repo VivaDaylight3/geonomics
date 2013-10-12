@@ -82,7 +82,7 @@ public class Myrmecology {
     @EventHandler
     public void mainInit(FMLInitializationEvent event) {
 
-	proxy.registerRenderers();
+	Register.registerRenderers();
 
     }
 

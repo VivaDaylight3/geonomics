@@ -15,7 +15,6 @@ public class AntDamageSource extends DamageSource {
 
 	super("antDamage");
 	setDeathMessage(message);
-
     }
 
     public AntDamageSource setDeathMessage(String message) {

@@ -1,22 +1,24 @@
 package vivadaylight3.myrmecology.common;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.Breeding;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.client.ClientProxy;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
@@ -53,6 +55,7 @@ import vivadaylight3.myrmecology.common.item.ant.AntSprouter;
 import vivadaylight3.myrmecology.common.item.ant.AntStone;
 import vivadaylight3.myrmecology.common.item.ant.AntSwamp;
 import vivadaylight3.myrmecology.common.item.ant.AntWater;
+import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
@@ -72,9 +75,11 @@ public class Register {
 
     public static boolean checkForUpdates = true;
     
+    public static String language;
+    
     public static final int ID_BLOCK = 600;
     public static final int ID_ITEM = 3853;
-    public static int startEntityId;
+    public static int entityAntForestID = ModLoader.getUniqueEntityId();
 
     public static final int GUI_ID_ANTFARM = 1;
     public static final int GUI_ID_MYRMOPAEDIA = 2;
@@ -146,6 +151,29 @@ public class Register {
 	return latestBlockID + ID_ITEM;
 
     }
+    
+    public static void registerLanguages(){
+	
+	  String path = Resources.LANG_LOCATION; 
+	 
+	  String files;
+	  File folder = new File(path);
+	  File[] listOfFiles = folder.listFiles(); 
+	 
+	  for (int i = 0; i < listOfFiles.length; i++) 
+	  {
+	 
+	   if (listOfFiles[i].isFile()) 
+	   {
+	   files = listOfFiles[i].getName();
+	       if (files.endsWith(".txt") || files.endsWith(".TXT"))
+	       {
+	          System.out.println(files);
+	        }
+	     }
+	  }
+	}
+	
 
     public static void registerBlocks() {
 
@@ -424,6 +452,13 @@ public class Register {
 		Reference.MOD_ID);
 
     }
+    
+    public static void registerRenderers(){
+	
+	ClientProxy proxy = new ClientProxy();
+	proxy.registerRenderers();
+	
+    }
 
     public static void registerEntities() {
 
@@ -434,7 +469,10 @@ public class Register {
 	
 	BiomeGenBase[] biomes = EntityAntForest.getAnt().getAntBiomes();
 	
-	EntityRegistry.addSpawn(EntityAntForest.class, 10, 1, 3, EnumCreatureType.creature, biomes);
+	EntityRegistry.addSpawn(EntityAntForest.class, 60, 1, 3, EnumCreatureType.creature, biomes);
+	
+	EntityList.IDtoClassMapping.put(entityAntForestID, EntityAntForest.class);
+	EntityList.entityEggs.put(entityAntForestID, new EntityEggInfo(entityAntForestID, 0xEF42D8, 0x42EF42));
 
     }
 
@@ -545,22 +583,6 @@ public class Register {
 
 	}
 
-    }
-    
-    public static int getUniqueEntityId()
-    {
-        do
-        {
-            ++startEntityId;
-
-            if (startEntityId > 255)
-            {
-                Logger.getLogger("Minecraft").log(Level.WARNING, "Entity Id is greater than 255: " + startEntityId);
-            }
-        }
-        while (EntityList.getStringFromID(startEntityId) != null);
-
-        return startEntityId;
     }
 
     public static ItemStack getCreativeTabIcon() {

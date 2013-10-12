@@ -30,7 +30,7 @@ public class Reference {
     public static final String DEATH_MESSAGE = "%1$s just angered some ";
     
     public static final String CHAT_PREFIX = "["+EnumChatFormatting.BLUE+MOD_ID+EnumChatFormatting.RESET+"]";
-
+    
     // Ant types
     public static final String[] standardTypeNames = new String[] { "Queen",
 	    "Drone", "Worker", "Larva" };

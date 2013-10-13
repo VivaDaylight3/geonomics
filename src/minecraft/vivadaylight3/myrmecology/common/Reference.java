@@ -13,7 +13,7 @@ public class Reference {
     public static final String VERSION_MAJOR = "@VERSION_MAJOR@";
     public static final String VERSION_MINOR = "@VERSION_MINOR@";
     public static final String VERSION_BUILD = "@VERSION_BUILD@";
-    public static final String VERSION_MC = "VERSION_MC@";
+    public static final String VERSION_MC = "@VERSION_MC@";
     public static final String VERSION_FORGE = "@VERSION_FORGE@";
     public static final String VERSION_CHECK_URL = "@VERSION_URL@";
 

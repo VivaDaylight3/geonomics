@@ -23,6 +23,7 @@ public class Resources {
     public static final String EFFECT_LOCATION = TEXTURE_LOCATION + "effects/";
     public static final String ENTITY_LOCATION = TEXTURE_LOCATION + "entity/";
     public static final String ANT_LOCATION = "ant/";
+    public static final String LOGO_PATH = TEXTURE_LOCATION + "logo/logo.png";
 
     public static final ResourceLocation ENTITY_ANT_FOREST = getResourceLocation(ENTITY_LOCATION
 	    + Register.antForest.getSpeciesSubName() + FORMAT);

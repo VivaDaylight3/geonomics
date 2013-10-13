@@ -478,7 +478,7 @@ public class Register {
 	EntityList.entityEggs.put(entityAntForestID, new EntityEggInfo(entityAntForestID, 0xEF42D8, 0x42EF42));
 	
 	LanguageRegistry.instance().addStringLocalization(
-		"entity."+antForest.getSpeciesSubName()+".name", "en_US",
+		"entity."+Reference.MOD_ID+"."+antForest.getSpeciesSubName()+".name", "en_US",
 		antForest.getSpeciesName());
 
     }

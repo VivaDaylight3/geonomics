@@ -12,10 +12,9 @@ public class EntityAntForest extends EntityAnt {
     public EntityAntForest(World par1World) {
 
 	super(par1World);
-	this.setSize(0.9F, 1.3F);
+	this.setSize(1.0F, 1.0F);
 	this.getNavigator().setAvoidsWater(true);
-	this.tasks.addTask(0,
-		new EntityAIAntBehaviour(this, par1World, this.getNavigator()));
+	this.tasks.addTask(0, new EntityAIAntBehaviour(this, par1World, this.getNavigator()));
 
     }
 
@@ -23,6 +22,7 @@ public class EntityAntForest extends EntityAnt {
     protected float getSoundVolume() {
 
 	return 0.5f;
+	
     }
 
     @Override

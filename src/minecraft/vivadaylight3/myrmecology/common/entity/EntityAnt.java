@@ -34,26 +34,30 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
     @Override
     public boolean canPerformBehaviour() {
-	// TODO Auto-generated method stub
-	return false;
+	System.out.println("canPerformBehaviour");	
+	
+	return true;
     }
 
     @Override
     public void startPerformingBehaviour() {
-	// TODO Auto-generated method stub
 
+	System.out.println("startPerformingBehaviour");
+	
     }
 
     @Override
     public void updateBehaviour() {
-	// TODO Auto-generated method stub
+	
+	System.out.println("updateBehaviour");
 
     }
 
     @Override
     public void resetBehaviour() {
-	// TODO Auto-generated method stub
 
+	System.out.println("resetBehaviour");
+	
     }
 
 }

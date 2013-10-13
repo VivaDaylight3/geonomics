@@ -462,8 +462,10 @@ public class Register {
 
     public static void registerEntities() {
 
-	EntityRegistry.registerModEntity(EntityAntForest.class, "Forest Ant",
+	EntityRegistry.registerModEntity(EntityAntForest.class, antForest.getSpeciesSubName(),
 		1, Myrmecology.instance, 50, 10, true);
+	
+	EntityRegistry.registerGlobalEntityID(EntityAntForest.class, antForest.getSpeciesSubName(), entityAntForestID);
 	
 	addEntityAnt(EntityAntForest.class);
 	
@@ -472,7 +474,12 @@ public class Register {
 	EntityRegistry.addSpawn(EntityAntForest.class, 60, 1, 3, EnumCreatureType.creature, biomes);
 	
 	EntityList.IDtoClassMapping.put(entityAntForestID, EntityAntForest.class);
+	
 	EntityList.entityEggs.put(entityAntForestID, new EntityEggInfo(entityAntForestID, 0xEF42D8, 0x42EF42));
+	
+	LanguageRegistry.instance().addStringLocalization(
+		"entity."+antForest.getSpeciesSubName()+".name", "en_US",
+		antForest.getSpeciesName());
 
     }
 

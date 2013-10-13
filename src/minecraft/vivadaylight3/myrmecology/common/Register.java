@@ -462,10 +462,10 @@ public class Register {
 
     public static void registerEntities() {
 
-	EntityRegistry.registerModEntity(EntityAntForest.class, antForest.getSpeciesSubName(),
+	EntityRegistry.registerModEntity(EntityAntForest.class, antForest.getSpeciesName(),
 		1, Myrmecology.instance, 50, 10, true);
 	
-	EntityRegistry.registerGlobalEntityID(EntityAntForest.class, antForest.getSpeciesSubName(), entityAntForestID);
+	EntityRegistry.registerGlobalEntityID(EntityAntForest.class, antForest.getSpeciesName(), entityAntForestID);
 	
 	addEntityAnt(EntityAntForest.class);
 	
@@ -478,7 +478,7 @@ public class Register {
 	EntityList.entityEggs.put(entityAntForestID, new EntityEggInfo(entityAntForestID, 0xEF42D8, 0x42EF42));
 	
 	LanguageRegistry.instance().addStringLocalization(
-		"entity."+Reference.MOD_ID+"."+antForest.getSpeciesSubName()+".name", "en_US",
+		"entity."+Reference.MOD_ID+"."+antForest.getSpeciesName()+".name", "en_US",
 		antForest.getSpeciesName());
 
     }

@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityEggInfo;
-import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -71,14 +70,14 @@ public class Register {
 
     private static ArrayList<ItemAnt> antList = new ArrayList<ItemAnt>();
     private static ArrayList<BlockAntHill> hillList = new ArrayList<BlockAntHill>();
-    private static ArrayList<Class <? extends IEntityAnt>> entityAntList = new ArrayList<Class <? extends IEntityAnt>>();
+    private static ArrayList<Class<? extends IEntityAnt>> entityAntList = new ArrayList<Class<? extends IEntityAnt>>();
 
     public static boolean checkForUpdates = true;
-    
+
     public static String language;
-    
-    public static final int ID_BLOCK = 600;
-    public static final int ID_ITEM = 3853;
+
+    public static final int ID_BLOCK = 600; // 12
+    public static final int ID_ITEM = 3853; // 23
     public static int entityAntForestID = ModLoader.getUniqueEntityId();
 
     public static final int GUI_ID_ANTFARM = 1;
@@ -148,32 +147,28 @@ public class Register {
 
 	latestBlockID += 1;
 
-	return latestBlockID + ID_ITEM;
+	return latestBlockID + ID_BLOCK;
 
     }
-    
-    public static void registerLanguages(){
-	
-	  String path = Resources.LANG_LOCATION; 
-	 
-	  String files;
-	  File folder = new File(path);
-	  File[] listOfFiles = folder.listFiles(); 
-	 
-	  for (int i = 0; i < listOfFiles.length; i++) 
-	  {
-	 
-	   if (listOfFiles[i].isFile()) 
-	   {
-	   files = listOfFiles[i].getName();
-	       if (files.endsWith(".txt") || files.endsWith(".TXT"))
-	       {
-	          System.out.println(files);
-	        }
-	     }
-	  }
+
+    public static void registerLanguages() {
+
+	String path = Resources.LANG_LOCATION;
+
+	String files;
+	File folder = new File(path);
+	File[] listOfFiles = folder.listFiles();
+
+	for (int i = 0; i < listOfFiles.length; i++) {
+
+	    if (listOfFiles[i].isFile()) {
+		files = listOfFiles[i].getName();
+		if (files.endsWith(".txt") || files.endsWith(".TXT")) {
+		    System.out.println(files);
+		}
+	    }
 	}
-	
+    }
 
     public static void registerBlocks() {
 
@@ -223,8 +218,7 @@ public class Register {
 	config.save();
 
 	addBlock(blockFungi, "Agaricus Fungi Block", Reference.BLOCK_FUNGI_NAME);
-	addBlock(blockIncubator, "Solarium",
-		Reference.BLOCK_INCUBATOR_NAME);
+	addBlock(blockIncubator, "Solarium", Reference.BLOCK_INCUBATOR_NAME);
 	addBlock(blockAntFarm, "Formicarium", Reference.BLOCK_ANTFARM_NAME);
 	addBlock(hillForest, hillForest.getHillName(),
 		hillForest.getHillSubName());
@@ -240,25 +234,26 @@ public class Register {
 	addBlock(hillWater, hillWater.getHillName(), hillWater.getHillSubName());
 
     }
-    
-    public static boolean checkForUpdates(Url url){
-	
+
+    public static boolean checkForUpdates(Url url) {
+
 	config.load();
-	
-	checkForUpdates = config.get(Configuration.CATEGORY_GENERAL, "check for updates", false).getBoolean(false);
-	
+
+	checkForUpdates = config.get(Configuration.CATEGORY_GENERAL,
+		"check for updates", false).getBoolean(false);
+
 	config.save();
-	
-	if(checkForUpdates){
-		
+
+	if (checkForUpdates) {
+
 	    return url.updateIsAvailable();
-	
-	}else{
-	    
+
+	} else {
+
 	    return false;
-	    
+
 	}
-	
+
     }
 
     public static void registerItems() {
@@ -452,34 +447,44 @@ public class Register {
 		Reference.MOD_ID);
 
     }
-    
-    public static void registerRenderers(){
-	
+
+    public static void registerRenderers() {
+
 	ClientProxy proxy = new ClientProxy();
 	proxy.registerRenderers();
-	
+
     }
 
+    // TODO
     public static void registerEntities() {
 
-	EntityRegistry.registerModEntity(EntityAntForest.class, antForest.getSpeciesName(),
-		1, Myrmecology.instance, 50, 10, true);
-	
-	EntityRegistry.registerGlobalEntityID(EntityAntForest.class, antForest.getSpeciesName(), entityAntForestID);
-	
-	addEntityAnt(EntityAntForest.class);
-	
-	BiomeGenBase[] biomes = EntityAntForest.getAnt().getAntBiomes();
-	
-	EntityRegistry.addSpawn(EntityAntForest.class, 60, 1, 3, EnumCreatureType.creature, biomes);
-	
-	EntityList.IDtoClassMapping.put(entityAntForestID, EntityAntForest.class);
-	
-	EntityList.entityEggs.put(entityAntForestID, new EntityEggInfo(entityAntForestID, 0xEF42D8, 0x42EF42));
-	
-	LanguageRegistry.instance().addStringLocalization(
-		"entity."+Reference.MOD_ID+"."+antForest.getSpeciesName()+".name", "en_US",
-		antForest.getSpeciesName());
+	addEntityAnt(EntityAntForest.class, antForest.getSpeciesName(), entityAntForestID,
+		0xEF42D8, 0x42EF42, 50,
+		10, true, 60,
+		1, 3, EnumCreatureType.creature, antForest.getAntBiomes());
+
+	/*
+	 * EntityRegistry.registerModEntity(EntityAntForest.class,
+	 * antForest.getSpeciesName(), entityAntForestID, Myrmecology.instance,
+	 * 50, 10, true);
+	 * 
+	 * EntityRegistry.registerGlobalEntityID(EntityAntForest.class,
+	 * antForest.getSpeciesName(), entityAntForestID);
+	 * 
+	 * // addEntityAnt(EntityAntForest.class, antForest.getSpeciesName(), //
+	 * entityAntForestID, 0xEF42D8, 0x42EF42, 50, 10, true);
+	 * 
+	 * BiomeGenBase[] biomes = EntityAntForest.getAnt().getAntBiomes();
+	 * 
+	 * EntityRegistry.addSpawn(EntityAntForest.class, 60, 1, 3,
+	 * EnumCreatureType.creature, biomes);
+	 * 
+	 * EntityList.IDtoClassMapping.put(entityAntForestID,
+	 * EntityAntForest.class);
+	 * 
+	 * EntityList.entityEggs.put(entityAntForestID, new EntityEggInfo(
+	 * entityAntForestID, 0xEF42D8, 0x42EF42));
+	 */
 
     }
 
@@ -501,7 +506,7 @@ public class Register {
 
 	GameRegistry.addRecipe(new ItemStack(itemExtractor), " s ", "did",
 		" d ", 's', new ItemStack(Item.shovelIron), 'd', new ItemStack(
-			Item.dyePowder), 'i', new ItemStack(Item.ingotIron));
+			Item.dyePowder, 1, 2), 'i', new ItemStack(Item.ingotIron));
 
     }
 
@@ -610,12 +615,29 @@ public class Register {
 
     }
 
-    
-     public static void addEntityAnt(Class <? extends IEntityAnt> class1){
-      
-	 getEntityAntList().add(class1);
-      
-      }
+    public static void addEntityAnt(Class<? extends EntityLiving> class1,
+	    String antName, int ID, int colour1, int colour2,
+	    int trackingRange, int updateFrequency,
+	    boolean sendsVelocityUpdates, int weightedProb, int minSpawn,
+	    int maxSpawn, EnumCreatureType type, BiomeGenBase... biomes) {
+
+	getEntityAntList().add((Class<? extends IEntityAnt>) class1);
+
+	EntityRegistry.registerModEntity(class1, antName, ID,
+		Myrmecology.instance, trackingRange, updateFrequency,
+		sendsVelocityUpdates);
+
+	EntityRegistry.registerGlobalEntityID(EntityAntForest.class,
+		antForest.getSpeciesName(), entityAntForestID);
+
+	EntityRegistry.addSpawn(class1, weightedProb, minSpawn, maxSpawn, type,
+		biomes);
+
+	LanguageRegistry.instance().addStringLocalization(
+		"entity." + Reference.MOD_ID + "." + antName + ".name",
+		"en_US", antName);
+
+    }
 
     public static ArrayList<ItemAnt> getAntList() {
 
@@ -629,10 +651,9 @@ public class Register {
 
     }
 
-    
-     public static ArrayList<Class <? extends IEntityAnt>> getEntityAntList(){
-      
-      return entityAntList;
-      
-     }
+    public static ArrayList<Class<? extends IEntityAnt>> getEntityAntList() {
+
+	return entityAntList;
+
+    }
 }

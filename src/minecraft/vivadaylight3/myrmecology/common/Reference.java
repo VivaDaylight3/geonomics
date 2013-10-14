@@ -9,7 +9,20 @@ import net.minecraft.util.EnumChatFormatting;
  * 
  */
 public class Reference {
+    
+    public static final String VERSION_MAJOR = "0";
+    public static final String VERSION_MINOR = "1";
+    public static final String VERSION_BUILD = "0";
+    public static final String VERSION_MC = "1.6.4";
+    public static final String VERSION_FORGE = "forge";
+    public static final String VERSION_CHECK_URL = "http://www.google.co.uk";
 
+    public static final String MOD_ID = "Myrmecology";
+    public static final String MOD_CHANNEL = MOD_ID;
+    public static final String MOD_URL = "www.google.co.uk";
+    public static final String MOD_DESC = "ants";
+    
+/*
     public static final String VERSION_MAJOR = "@VERSION_MAJOR@";
     public static final String VERSION_MINOR = "@VERSION_MINOR@";
     public static final String VERSION_BUILD = "@VERSION_BUILD@";
@@ -21,6 +34,7 @@ public class Reference {
     public static final String MOD_CHANNEL = MOD_ID;
     public static final String MOD_URL = "@MOD_URL@";
     public static final String MOD_DESC = "@MOD_DESC@";
+    */
     
     public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
     public static final String MOD_VERSION = VERSION_MAJOR + "."
@@ -44,6 +58,7 @@ public class Reference {
     // Items
     public static final String ITEM_EXTRACTOR_NAME = "extractor";
     public static final String ITEM_MYRMOPAEDIA_NAME = "myrmopaedia";
+    public static final String ITEM_SPAWNEGG_NAME = "spawnEgg";
     public static final String ITEM_FUNGI_NAME = "Agaricus Fungi";
 
     // Ant hills

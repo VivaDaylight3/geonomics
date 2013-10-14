@@ -26,7 +26,7 @@ public class Resources {
     public static final String LOGO_PATH = TEXTURE_LOCATION + "logo/logo.png";
 
     public static final ResourceLocation ENTITY_ANT_FOREST = getResourceLocation(ENTITY_LOCATION
-	    + Register.antForest.getSpeciesSubName() + FORMAT);
+	    +"antForest.png");//+ Register.antForest.getSpeciesSubName() + FORMAT);
     
     
     public static final ResourceLocation GUI_ANTFARM = getResourceLocation(GUI_LOCATION

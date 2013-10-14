@@ -322,6 +322,12 @@ public class ItemAnt extends Item {
 
 	return this.icons[par1];
     }
+    
+    public String getBehaviourDesc(){
+	
+	return null;
+	
+    }
 
     /**
      * Gets the time in ticks that it takes to incubate the ant's larvae

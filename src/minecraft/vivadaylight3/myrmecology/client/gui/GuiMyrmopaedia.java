@@ -146,7 +146,7 @@ public class GuiMyrmopaedia extends GuiContainer {
 			    + Time.getMinutesFromTicks(this.selectedAnt
 				    .getMaturingTime()), 45);
 
-	    printKeyAndValue("Fetility: ",
+	    printKeyAndValue("Fertility: ",
 		    "" + this.selectedAnt.getFertility(), 60);
 
 	    this.printBiomes();

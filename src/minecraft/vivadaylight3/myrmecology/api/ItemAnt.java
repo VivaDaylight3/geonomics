@@ -442,6 +442,7 @@ public class ItemAnt extends Item {
      * @param y
      * @param z
      */
+    @Deprecated
     public void performBehaviour(World world, int x, int y, int z) {
 
     }

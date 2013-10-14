@@ -131,6 +131,8 @@ public class GuiMyrmopaedia extends GuiContainer {
 
 	    printKeyAndValue("Binomial Name: ",
 		    this.selectedAnt.getSpeciesBinomialName(), 45);
+	    
+	    printKeyAndValue("Behaviour: ", this.selectedAnt.getBehaviourDesc(), 60);
 
 	} else if (this.selectedScreen == "info" && this.selectedAnt != null) {
 

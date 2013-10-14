@@ -325,7 +325,7 @@ public class ItemAnt extends Item {
     
     public String getBehaviourDesc(){
 	
-	return null;
+	return "None";
 	
     }
 

@@ -153,6 +153,9 @@ public class GuiMyrmopaedia extends GuiContainer {
 	    
 	    printKeyAndValue("Winged: ",
 		    "" + this.selectedAnt.getWinged(), 75);
+	    
+	    printKeyAndValue("Nocturnal: ",
+		    "" + this.selectedAnt.getWinged(), 90);
 
 	    this.printBiomes();
 
@@ -321,7 +324,7 @@ public class GuiMyrmopaedia extends GuiContainer {
 	    }
 
 
-	    printKeyAndValue("Biomes: ", "All", 90);
+	    printKeyAndValue("Biomes: ", "---", 105);
 
 	}
 

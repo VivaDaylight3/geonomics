@@ -194,7 +194,9 @@ public class ItemAnt extends Item {
      */
     public static Entity spawnCreature(World par0World, int par1, double par2, double par4, double par6)
     {
-            Entity entity = null;
+	Entity entity = null;
+	
+	if(hasEntity()){
 
             for (int j = 0; j < 1; ++j)
             {
@@ -210,8 +212,11 @@ public class ItemAnt extends Item {
                     entityliving.playLivingSound();
                 }
             }
+            
+	}
 
             return entity;
+           
     }
     
     /**
@@ -500,7 +505,17 @@ public class ItemAnt extends Item {
 	return false;
     }
     
-    public boolean hasEntity(){
+    /**
+     * Gets the breeding chamber (extends ItemBreedingChamber) that this species uses when breeding
+     * @return ItemBreedingChamber (null if it doesn't use one)
+     */
+    public ItemBreedingChamber getBreedingChamber(){
+	
+	return null;
+	
+    }
+    
+    public static boolean hasEntity(){
 	
 	return true;
 	
@@ -509,12 +524,6 @@ public class ItemAnt extends Item {
     public static IEntityAnt getNewEntity(World world){
 	
 	return new EntityAntForest(world);
-	
-    }
-    
-    public int getEntityID(){
-	
-	return 1;
 	
     }
 

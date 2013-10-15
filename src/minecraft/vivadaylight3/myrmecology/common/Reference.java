@@ -60,6 +60,7 @@ public class Reference {
     public static final String ITEM_MYRMOPAEDIA_NAME = "myrmopaedia";
     public static final String ITEM_SPAWNEGG_NAME = "spawnEgg";
     public static final String ITEM_FUNGI_NAME = "Agaricus Fungi";
+    public static final String ITEM_CHAMBER_NAME = "Breeding Chamber";
 
     // Ant hills
     public static final String HILL_FOREST_NAME = "antHillForest";

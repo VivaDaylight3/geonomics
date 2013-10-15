@@ -6,20 +6,18 @@ import java.util.Set;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.AntProperties;
 import vivadaylight3.myrmecology.api.Breeding;
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.ItemBreedingChamber;
 import vivadaylight3.myrmecology.api.Metadata;
 import vivadaylight3.myrmecology.common.inventory.ContainerAntFarm;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Time;
-import vivadaylight3.myrmecology.common.lib.Variables;
 
 public class TileEntityAntFarm extends TileEntity implements IInventory {
 
@@ -94,6 +92,22 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 
 	return null;
 
+    }
+    
+    private ItemStack getBreedingChamber(){
+	
+	if (this.getContents()[getBreedingChamberSlot()] != null) {
+
+	    if (this.getContents()[getBreedingChamberSlot()].getItem() instanceof ItemBreedingChamber) {
+
+		return this.getContents()[getBreedingChamberSlot()];
+
+	    }
+
+	}
+
+	return null;
+	
     }
 
     /**
@@ -249,6 +263,26 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	return false;
 
     }
+    
+    private boolean chamberCheck(){
+	
+	if(this.getBreedingChamber() != null){
+	    
+	    if(((ItemBreedingChamber) this.getBreedingChamber().getItem()).getAnt() != null){
+		
+		if(((ItemBreedingChamber) this.getBreedingChamber().getItem()).getAnt().getClass() == this.getQueen().getItem().getClass()){
+		    
+		    return true;
+		    
+		}
+		
+	    }
+	    
+	}
+	
+	return false;
+	
+    }
 
     public boolean canBreed() {
 
@@ -257,8 +291,12 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	    if (this.timeCheck()) {
 
 		if (this.weatherCheck()) {
+		    
+		    if(this.chamberCheck()){
 
-		    return true;
+			return true;
+		    
+		    }
 
 		}
 
@@ -549,6 +587,12 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 
 	return 1;
 
+    }
+    
+    public int getBreedingChamberSlot(){
+	
+	return 2;
+	
     }
 
     @Override

@@ -630,9 +630,6 @@ public class Register {
 	EntityRegistry.registerGlobalEntityID(EntityAntForest.class,
 		antForest.getSpeciesName(), entityAntForestID);
 
-	EntityRegistry.addSpawn(class1, weightedProb, minSpawn, maxSpawn, type,
-		biomes);
-
 	LanguageRegistry.instance().addStringLocalization(
 		"entity." + Reference.MOD_ID + "." + antName + ".name",
 		"en_US", antName);

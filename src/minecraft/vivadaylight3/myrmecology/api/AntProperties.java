@@ -9,7 +9,6 @@ import vivadaylight3.myrmecology.common.lib.Nbt;
 
 public class AntProperties {
 
-    @Deprecated
     private static ArrayList<Property[]> propertyList = new ArrayList<Property[]>();
 
     public static final String LIFETIME_TOTAL_KEY = "lifetimeTotal";
@@ -19,39 +18,6 @@ public class AntProperties {
     public static final String WINGED_KEY = "winged";
     public static final String MATED_KEY = "mated";
     public static final String NOCTURNAL_KEY = "nocturnal";
-
-    /*
-     * private static int[] foodSweet = { Item.appleRed.itemID,
-     * Item.cake.itemID, Item.appleGold.itemID, Item.sugar.itemID,
-     * Item.cookie.itemID, Item.melon.itemID };
-     * 
-     * private static int[] foodSavoury = { Item.bowlSoup.itemID,
-     * Item.bread.itemID, Item.carrot.itemID, Item.potato.itemID,
-     * Item.bakedPotato.itemID, Item.pumpkinPie.itemID };
-     * 
-     * private static int[] foodMeat = { Item.beefCooked.itemID,
-     * Item.beefRaw.itemID, Item.porkRaw.itemID, Item.porkCooked.itemID,
-     * Item.fishRaw.itemID, Item.fishCooked.itemID, Item.chickenRaw.itemID,
-     * Item.chickenCooked.itemID, Item.rottenFlesh.itemID };
-     * 
-     * public static int[] getFoodSweet() {
-     * 
-     * return foodSweet;
-     * 
-     * }
-     * 
-     * public static int[] getFoodSavoury() {
-     * 
-     * return foodSavoury;
-     * 
-     * }
-     * 
-     * public static int[] getFoodMeat() {
-     * 
-     * return foodMeat;
-     * 
-     * }
-     */
 
     /**
      * Set an ant's properties

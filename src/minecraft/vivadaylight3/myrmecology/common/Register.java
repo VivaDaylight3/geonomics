@@ -17,6 +17,7 @@ import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.Breeding;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.ItemBreedingChamber;
 import vivadaylight3.myrmecology.client.ClientProxy;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
@@ -54,6 +55,19 @@ import vivadaylight3.myrmecology.common.item.ant.AntSprouter;
 import vivadaylight3.myrmecology.common.item.ant.AntStone;
 import vivadaylight3.myrmecology.common.item.ant.AntSwamp;
 import vivadaylight3.myrmecology.common.item.ant.AntWater;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberCommon;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberBarbaric;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberCarpenter;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberCultivator;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberDredger;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberFungal;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberHarvester;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberHostile;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberMound;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberOdourous;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberPlentiful;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberScavenger;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberSprouter;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
@@ -95,6 +109,21 @@ public class Register {
     public static ToolExtractor itemExtractor;
 
     public static ItemMyrmopaedia itemAntopedia;
+    public static ItemBreedingChamber itemBreedingChamber;
+    
+    public static ChamberCommon chamberCommon;
+    public static ChamberHarvester chamberHarvester;
+    public static ChamberCarpenter chamberCarpenter;
+    public static ChamberMound chamberMound;
+    public static ChamberBarbaric chamberBarbaric;
+    public static ChamberOdourous chamberOdourous;
+    public static ChamberHostile chamberHostile;
+    public static ChamberPlentiful chamberPlentiful;
+    public static ChamberDredger chamberDredger;
+    public static ChamberScavenger chamberScavenger;
+    public static ChamberCultivator chamberCultivator;
+    public static ChamberSprouter chamberSprouter;
+    public static ChamberFungal chamberFungal;
 
     public static AntHillForest hillForest;
     public static AntHillJungle hillJungle;
@@ -267,7 +296,54 @@ public class Register {
 	itemAntopedia = new ItemMyrmopaedia(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ITEM_MYRMOPAEDIA_NAME,
 		getNewItemID()).getInt());
+	
+	// Chambers
+	itemBreedingChamber = new ItemBreedingChamber(config.get(
+		Configuration.CATEGORY_ITEM, Reference.ITEM_CHAMBER_NAME,
+		getNewItemID()).getInt());
 
+	chamberCommon = new ChamberCommon(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_COMMON_NAME, getNewItemID()).getInt());
+
+	chamberHarvester = new ChamberHarvester(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_HARVESTER_NAME, getNewItemID()).getInt());
+
+	chamberBarbaric = new ChamberBarbaric(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_BARBARIC_NAME, getNewItemID()).getInt());
+
+	chamberPlentiful = new ChamberPlentiful(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_PLENTIFUL_NAME, getNewItemID()).getInt());
+
+	chamberCultivator = new ChamberCultivator(config.get(
+		Configuration.CATEGORY_ITEM, Reference.CHAMBER_CULTIVATOR_NAME,
+		getNewItemID()).getInt());
+
+	chamberCarpenter = new ChamberCarpenter(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_CARPENTER_NAME, getNewItemID()).getInt());
+
+	chamberMound = new ChamberMound(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_MOUND_NAME, getNewItemID()).getInt());
+
+	chamberOdourous = new ChamberOdourous(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_ODOUROUS_NAME, getNewItemID()).getInt());
+
+	chamberHostile = new ChamberHostile(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_HOSTILE_NAME, getNewItemID()).getInt());
+
+	chamberDredger = new ChamberDredger(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_DREDGER_NAME, getNewItemID()).getInt());
+
+	chamberScavenger = new ChamberScavenger(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_SCAVENGER_NAME, getNewItemID()).getInt());
+
+	chamberSprouter = new ChamberSprouter(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_SPROUTER_NAME, getNewItemID()).getInt());
+
+	chamberFungal = new ChamberFungal(config.get(Configuration.CATEGORY_ITEM,
+		Reference.CHAMBER_FUNGAL_NAME, getNewItemID()).getInt());
+	
+	
+	// Ants
 	antForest = new AntForest(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_FOREST_NAME, getNewItemID()).getInt());
 
@@ -339,7 +415,49 @@ public class Register {
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
 	addItem(itemAntopedia, "Myrmopaedia", Reference.ITEM_MYRMOPAEDIA_NAME);
+	
+	addItem(itemBreedingChamber, "Breeding Chamber", Reference.ITEM_CHAMBER_NAME);
 
+	addItem(chamberHarvester, chamberHarvester.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_HARVESTER_NAME);
+
+	addItem(chamberCarpenter, chamberCarpenter.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_CARPENTER_NAME);
+
+	addItem(chamberMound, chamberMound.getChamberAntSpeciesName() + "Breeding Chamber",
+		Reference.MOD_ID + Reference.CHAMBER_MOUND_NAME);
+
+	addItem(chamberBarbaric, chamberBarbaric.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_BARBARIC_NAME);
+
+	addItem(chamberOdourous, chamberOdourous.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_ODOUROUS_NAME);
+
+	addItem(chamberHostile, chamberHostile.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_HOSTILE_NAME);
+
+	addItem(chamberPlentiful, chamberPlentiful.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_PLENTIFUL_NAME);
+
+	addItem(chamberDredger, chamberDredger.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_DREDGER_NAME);
+
+	addItem(chamberScavenger, chamberScavenger.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_SCAVENGER_NAME);
+
+	addItem(chamberCultivator, chamberCultivator.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_CULTIVATOR_NAME);
+
+	addItem(chamberSprouter, chamberSprouter.getChamberAntSpeciesName() + "Breeding Chamber", Reference.MOD_ID
+		+ Reference.CHAMBER_SPROUTER_NAME);
+
+	addItem(chamberFungal, chamberFungal.getChamberAntSpeciesName() + "Breeding Chamber",
+		Reference.MOD_ID + Reference.CHAMBER_FUNGAL_NAME);
+
+	
+	
+	
+	// Ants
 	addItem(antForest, antForest.getNames(),
 		Reference.MOD_ID + antForest.getSpeciesSubName());
 

@@ -59,8 +59,22 @@ public class Reference {
     public static final String ITEM_EXTRACTOR_NAME = "extractor";
     public static final String ITEM_MYRMOPAEDIA_NAME = "myrmopaedia";
     public static final String ITEM_SPAWNEGG_NAME = "spawnEgg";
-    public static final String ITEM_FUNGI_NAME = "Agaricus Fungi";
-    public static final String ITEM_CHAMBER_NAME = "Breeding Chamber";
+    public static final String ITEM_CHAMBER_NAME = "breedingChamber";
+    
+    // Breeding Chambers
+    public static final String CHAMBER_BARBARIC_NAME = "chamberBarbaric";
+    public static final String CHAMBER_CARPENTER_NAME = "chamberCarpenter";
+    public static final String CHAMBER_COMMON_NAME = "chamberCommon";
+    public static final String CHAMBER_CULTIVATOR_NAME = "chamberCultivator";
+    public static final String CHAMBER_DREDGER_NAME = "chamberDredger";
+    public static final String CHAMBER_FUNGAL_NAME = "chamberFungal";
+    public static final String CHAMBER_HARVESTER_NAME = "chamberHarvester";
+    public static final String CHAMBER_HOSTILE_NAME = "chamberHostile";
+    public static final String CHAMBER_MOUND_NAME = "chamberMound";
+    public static final String CHAMBER_ODOUROUS_NAME = "chamberOdourous";
+    public static final String CHAMBER_PLENTIFUL_NAME = "chamberPlentiful";
+    public static final String CHAMBER_SCAVENGER_NAME = "chamberScavenger";
+    public static final String CHAMBER_SPROUTER_NAME = "chamberSprouter";
 
     // Ant hills
     public static final String HILL_FOREST_NAME = "antHillForest";

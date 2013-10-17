@@ -9,7 +9,7 @@ import net.minecraft.util.EnumChatFormatting;
  * 
  */
 public class Reference {
-    
+
     public static final String VERSION_MAJOR = "0";
     public static final String VERSION_MINOR = "1";
     public static final String VERSION_BUILD = "0";
@@ -21,30 +21,30 @@ public class Reference {
     public static final String MOD_CHANNEL = MOD_ID;
     public static final String MOD_URL = "www.google.co.uk";
     public static final String MOD_DESC = "ants";
-    
-/*
-    public static final String VERSION_MAJOR = "@VERSION_MAJOR@";
-    public static final String VERSION_MINOR = "@VERSION_MINOR@";
-    public static final String VERSION_BUILD = "@VERSION_BUILD@";
-    public static final String VERSION_MC = "@VERSION_MC@";
-    public static final String VERSION_FORGE = "@VERSION_FORGE@";
-    public static final String VERSION_CHECK_URL = "@VERSION_URL@";
 
-    public static final String MOD_ID = "@MOD_ID@";
-    public static final String MOD_CHANNEL = MOD_ID;
-    public static final String MOD_URL = "@MOD_URL@";
-    public static final String MOD_DESC = "@MOD_DESC@";
-    */
-    
+    /*
+     * public static final String VERSION_MAJOR = "@VERSION_MAJOR@"; public
+     * static final String VERSION_MINOR = "@VERSION_MINOR@"; public static
+     * final String VERSION_BUILD = "@VERSION_BUILD@"; public static final
+     * String VERSION_MC = "@VERSION_MC@"; public static final String
+     * VERSION_FORGE = "@VERSION_FORGE@"; public static final String
+     * VERSION_CHECK_URL = "@VERSION_URL@";
+     * 
+     * public static final String MOD_ID = "@MOD_ID@"; public static final
+     * String MOD_CHANNEL = MOD_ID; public static final String MOD_URL =
+     * "@MOD_URL@"; public static final String MOD_DESC = "@MOD_DESC@";
+     */
+
     public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
     public static final String MOD_VERSION = VERSION_MAJOR + "."
 	    + VERSION_MINOR + "." + VERSION_BUILD;
     public static final String MOD_DEPENDENCIES = "";
-    
+
     public static final String DEATH_MESSAGE = "%1$s just angered some ";
-    
-    public static final String CHAT_PREFIX = "["+EnumChatFormatting.BLUE+MOD_ID+EnumChatFormatting.RESET+"]";
-    
+
+    public static final String CHAT_PREFIX = "[" + EnumChatFormatting.BLUE
+	    + MOD_ID + EnumChatFormatting.RESET + "]";
+
     // Ant types
     public static final String[] standardTypeNames = new String[] { "Queen",
 	    "Drone", "Worker", "Larva" };
@@ -60,7 +60,7 @@ public class Reference {
     public static final String ITEM_MYRMOPAEDIA_NAME = "myrmopaedia";
     public static final String ITEM_SPAWNEGG_NAME = "spawnEgg";
     public static final String ITEM_CHAMBER_NAME = "breedingChamber";
-    
+
     // Breeding Chambers
     public static final String CHAMBER_BARBARIC_NAME = "chamberBarbaric";
     public static final String CHAMBER_CARPENTER_NAME = "chamberCarpenter";

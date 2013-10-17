@@ -12,13 +12,14 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-	RenderingRegistry.registerEntityRenderingHandler(EntityAntForest.class, new RenderAnt(new ModelAnt(), 0.5f));
+	RenderingRegistry.registerEntityRenderingHandler(EntityAntForest.class,
+		new RenderAnt(new ModelAnt(), 0.5f));
     }
-    
-    public static String getCurrentLanguage(){
-	
+
+    public static String getCurrentLanguage() {
+
 	return FMLCommonHandler.instance().getCurrentLanguage();
-	
+
     }
 
 }

@@ -13,17 +13,17 @@ public class EntityAntCarpenter extends EntityAnt {
     public EntityAntCarpenter(World par1World) {
 	super(par1World);
     }
-    
+
     @Override
     public ItemAnt getAnt() {
 	return Register.antCarpenter;
     }
-    
+
     @Override
-    public ResourceLocation getResource(){
-	
+    public ResourceLocation getResource() {
+
 	return Resources.ENTITY_ANT_CARPENTER;
-	
+
     }
 
 }

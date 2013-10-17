@@ -14,24 +14,25 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class Environment {
-    
-    public static Entity spawnEntity(World par0World, Entity entity, double par2, double par4, double par6){
-		
-        for (int j = 0; j < 1; ++j)
-        {
-            if (entity != null && entity instanceof EntityLivingBase)
-            {
-                EntityLiving entityliving = (EntityLiving)entity;
-                entity.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
-                entityliving.rotationYawHead = entityliving.rotationYaw;
-                entityliving.renderYawOffset = entityliving.rotationYaw;
-                par0World.spawnEntityInWorld(entity);
-                entityliving.playLivingSound();
-            }
-        }
 
-        return entity;
-	
+    public static Entity spawnEntity(World par0World, Entity entity,
+	    double par2, double par4, double par6) {
+
+	for (int j = 0; j < 1; ++j) {
+	    if (entity != null && entity instanceof EntityLivingBase) {
+		EntityLiving entityliving = (EntityLiving) entity;
+		entity.setLocationAndAngles(par2, par4, par6,
+			MathHelper.wrapAngleTo180_float(par0World.rand
+				.nextFloat() * 360.0F), 0.0F);
+		entityliving.rotationYawHead = entityliving.rotationYaw;
+		entityliving.renderYawOffset = entityliving.rotationYaw;
+		par0World.spawnEntityInWorld(entity);
+		entityliving.playLivingSound();
+	    }
+	}
+
+	return entity;
+
     }
 
     public static boolean blockIsPowered(World world, int x, int y, int z) {

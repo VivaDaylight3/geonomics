@@ -30,7 +30,7 @@ public class ContainerAntFarm extends Container {
 	// Queen Slot
 	slotID++;
 	addSlotToContainer(new Slot(tileEntity, slotID, 26, 17));
-	
+
 	// Breeding Chamber slot
 	slotID++;
 	addSlotToContainer(new Slot(tileEntity, slotID, 44, 17 + 18));

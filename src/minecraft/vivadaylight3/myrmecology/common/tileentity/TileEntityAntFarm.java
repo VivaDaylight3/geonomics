@@ -93,9 +93,9 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	return null;
 
     }
-    
-    private ItemStack getBreedingChamber(){
-	
+
+    private ItemStack getBreedingChamber() {
+
 	if (this.getContents()[getBreedingChamberSlot()] != null) {
 
 	    if (this.getContents()[getBreedingChamberSlot()].getItem() instanceof ItemBreedingChamber) {
@@ -107,7 +107,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	}
 
 	return null;
-	
+
     }
 
     /**
@@ -263,25 +263,28 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	return false;
 
     }
-    
-    private boolean chamberCheck(){
-	
-	if(this.getBreedingChamber() != null){
-	    
-	    if(((ItemBreedingChamber) this.getBreedingChamber().getItem()).getAnt() != null){
-		
-		if(((ItemBreedingChamber) this.getBreedingChamber().getItem()).getAnt().getClass() == this.getQueen().getItem().getClass()){
-		    
+
+    private boolean chamberCheck() {
+
+	if (this.getBreedingChamber() != null) {
+
+	    if (((ItemBreedingChamber) this.getBreedingChamber().getItem())
+		    .getAnt() != null) {
+
+		if (((ItemBreedingChamber) this.getBreedingChamber().getItem())
+			.getAnt().getClass() == this.getQueen().getItem()
+			.getClass()) {
+
 		    return true;
-		    
+
 		}
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
 
     public boolean canBreed() {
@@ -291,11 +294,11 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	    if (this.timeCheck()) {
 
 		if (this.weatherCheck()) {
-		    
-		    if(this.chamberCheck()){
+
+		    if (this.chamberCheck()) {
 
 			return true;
-		    
+
 		    }
 
 		}
@@ -588,11 +591,11 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 	return 1;
 
     }
-    
-    public int getBreedingChamberSlot(){
-	
+
+    public int getBreedingChamberSlot() {
+
 	return 2;
-	
+
     }
 
     @Override

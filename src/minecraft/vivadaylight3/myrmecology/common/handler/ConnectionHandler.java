@@ -16,16 +16,19 @@ public class ConnectionHandler implements IConnectionHandler {
     @Override
     public void playerLoggedIn(Player player, NetHandler netHandler,
 	    INetworkManager manager) {
-	
+
 	Url url = new Url(Reference.VERSION_CHECK_URL);
-	
-	if(url.updateIsAvailable()){
-	    
-	    netHandler.getPlayer().addChatMessage(Reference.CHAT_PREFIX + " Version "+url.getLatestVersion()+" is now available!");
-	    netHandler.getPlayer().addChatMessage("Update here: "+Reference.MOD_URL);
-	    
+
+	if (url.updateIsAvailable()) {
+
+	    netHandler.getPlayer().addChatMessage(
+		    Reference.CHAT_PREFIX + " Version "
+			    + url.getLatestVersion() + " is now available!");
+	    netHandler.getPlayer().addChatMessage(
+		    "Update here: " + Reference.MOD_URL);
+
 	}
-	
+
     }
 
     @Override
@@ -39,29 +42,27 @@ public class ConnectionHandler implements IConnectionHandler {
     public void connectionOpened(NetHandler netClientHandler, String server,
 	    int port, INetworkManager manager) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void connectionOpened(NetHandler netClientHandler,
 	    MinecraftServer server, INetworkManager manager) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void connectionClosed(INetworkManager manager) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void clientLoggedIn(NetHandler clientHandler,
 	    INetworkManager manager, Packet1Login login) {
 	// TODO Auto-generated method stub
-	
+
     }
-    
-    
 
 }

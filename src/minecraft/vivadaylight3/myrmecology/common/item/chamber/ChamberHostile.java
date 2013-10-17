@@ -10,19 +10,19 @@ public class ChamberHostile extends ItemBreedingChamber {
 	super(par1);
 	// TODO Auto-generated constructor stub
     }
-    
+
     @Override
-    public ItemAnt getAnt(){
-	
+    public ItemAnt getAnt() {
+
 	return Register.antHostile;
-	
+
     }
-    
+
     @Override
-    public String getChamberAntSpeciesName(){
-	
+    public String getChamberAntSpeciesName() {
+
 	return "Hostile Ant ";
-	
+
     }
 
 }

@@ -35,6 +35,7 @@ public class Breeding {
 
     /**
      * Returns all BreedingRecipes that include the given ant
+     * 
      * @param parAnt
      * @return
      */

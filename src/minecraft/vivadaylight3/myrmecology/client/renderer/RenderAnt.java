@@ -12,30 +12,28 @@ import vivadaylight3.myrmecology.common.lib.Resources;
 public class RenderAnt extends RenderLiving {
 
     public RenderAnt(ModelBase par1ModelBase, float par2) {
-	
+
 	super(par1ModelBase, par2);
-	
+
     }
-    
+
     @Override
-    public void doRenderLiving(EntityLiving entityliving, double d, double d1, double d2, 
-            float f, float f1)
-    {
-	super.doRenderLiving((EntityAntForest)entityliving, d, d1, d2, f, f1);
+    public void doRenderLiving(EntityLiving entityliving, double d, double d1,
+	    double d2, float f, float f1) {
+	super.doRenderLiving((EntityAntForest) entityliving, d, d1, d2, f, f1);
     }
-    
+
     @Override
-    public void doRender(Entity entity, double d, double d1, double d2, 
-            float f, float f1)
-    {
-	super.doRenderLiving((EntityAnt)entity, d, d1, d2, f, f1);
+    public void doRender(Entity entity, double d, double d1, double d2,
+	    float f, float f1) {
+	super.doRenderLiving((EntityAnt) entity, d, d1, d2, f, f1);
     }
 
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-		
-	EntityAnt entity2 = (EntityAnt)entity;
-	
+
+	EntityAnt entity2 = (EntityAnt) entity;
+
 	return entity2.getResource();
     }
 

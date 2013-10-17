@@ -103,19 +103,19 @@ public class AntCarpenter extends ItemAnt {
 	return false;
 
     }
-    
+
     @Override
-    public boolean hasEntity(){
-	
+    public boolean hasEntity() {
+
 	return true;
-	
+
     }
-    
+
     @Override
-    public EntityAnt getNewEntity(World world){
-	
+    public EntityAnt getNewEntity(World world) {
+
 	return new EntityAntCarpenter(world);
-	
+
     }
 
 }

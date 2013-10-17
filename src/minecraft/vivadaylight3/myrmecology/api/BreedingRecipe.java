@@ -8,9 +8,13 @@ public class BreedingRecipe {
 
     /**
      * Creates a new ant BreedingRecipe
-     * @param ItemAnt ant input 1
-     * @param ItemAnt ant input 2
-     * @param ItemAnt ant output
+     * 
+     * @param ItemAnt
+     *            ant input 1
+     * @param ItemAnt
+     *            ant input 2
+     * @param ItemAnt
+     *            ant output
      */
     public BreedingRecipe(ItemAnt par1, ItemAnt par2, ItemAnt par3) {
 

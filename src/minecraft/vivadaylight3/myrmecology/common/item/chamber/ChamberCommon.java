@@ -5,26 +5,26 @@ import vivadaylight3.myrmecology.api.ItemBreedingChamber;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.item.ant.AntCommon;
 
-public class ChamberCommon extends ItemBreedingChamber{
+public class ChamberCommon extends ItemBreedingChamber {
 
     public ChamberCommon(int par) {
-	
+
 	super(par);
-	
+
     }
-    
+
     @Override
-    public ItemAnt getAnt(){
-	
+    public ItemAnt getAnt() {
+
 	return Register.antCommon;
-	
+
     }
-    
+
     @Override
-    public String getChamberAntSpeciesName(){
-	
+    public String getChamberAntSpeciesName() {
+
 	return "Common Ant ";
-	
+
     }
 
 }

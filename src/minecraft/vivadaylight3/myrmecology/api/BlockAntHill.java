@@ -43,7 +43,7 @@ public class BlockAntHill extends Block {
 	setStepSound(Block.soundGrassFootstep);
 	setHardness(1.0F);
 	setResistance(1.0F);
-	//func_111022_d(Resources.TEXTURE_PREFIX + this.getHillSubName());
+	// func_111022_d(Resources.TEXTURE_PREFIX + this.getHillSubName());
 
     }
 

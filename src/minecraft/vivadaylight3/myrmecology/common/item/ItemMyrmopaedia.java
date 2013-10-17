@@ -22,7 +22,8 @@ public class ItemMyrmopaedia extends Item {
 	setCreativeTab(Register.tabMyrmecology);
 	setMaxStackSize(1);
 	setUnlocalizedName(Reference.ITEM_MYRMOPAEDIA_NAME);
-	//func_111206_d(Resources.TEXTURE_PREFIX + Reference.ITEM_ANTOPEDIA_NAME);
+	// func_111206_d(Resources.TEXTURE_PREFIX +
+	// Reference.ITEM_ANTOPEDIA_NAME);
     }
 
     @Override
@@ -53,8 +54,8 @@ public class ItemMyrmopaedia extends Item {
 	    World world, int x, int y, int z, int par7, float par8, float par9,
 	    float par10) {
 
-	player.openGui(Myrmecology.instance, Register.GUI_ID_MYRMOPAEDIA, world,
-		x, y, z);
+	player.openGui(Myrmecology.instance, Register.GUI_ID_MYRMOPAEDIA,
+		world, x, y, z);
 
 	return false;
 

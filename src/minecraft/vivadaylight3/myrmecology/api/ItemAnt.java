@@ -54,7 +54,7 @@ public class ItemAnt extends Item {
     private String[] names = this.getCompleteNames();
 
     public ItemAnt(int par1) {
-	
+
 	super(par1);
 
 	setHasSubtypes(true);
@@ -76,8 +76,8 @@ public class ItemAnt extends Item {
 	setUnlocalizedName(this.getSpeciesSubName());
 	setCreativeTab(Register.tabMyrmecology);
 	setMaxStackSize(64);
-	//func_111206_d(Resources.TEXTURE_PREFIX + "ant_"
-		//+ this.getSpeciesSubName());
+	// func_111206_d(Resources.TEXTURE_PREFIX + "ant_"
+	// + this.getSpeciesSubName());
 
     }
 
@@ -92,26 +92,37 @@ public class ItemAnt extends Item {
 
 	return false;
     }
-    
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
-        if (par3World.isRemote || par1ItemStack.getItemDamage() != Metadata.getMetaWorker())
-        {
-            return true;
-        }
-        
-            par4 += Facing.offsetsXForSide[par7];
-            par5 += Facing.offsetsYForSide[par7];
-            par6 += Facing.offsetsZForSide[par7];
-            
-       Entity ant = new EntityAntForest(par3World);
-            
-       Environment.spawnEntity(par3World, ant, par4, par5, par6);
-       
-       return true;
-        
+
+    public boolean onItemUse(ItemStack par1ItemStack,
+	    EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
+	    int par6, int par7, float par8, float par9, float par10) {
+
+	if (this.hasEntity() && this.getNewEntity(par3World) != null) {
+	    
+	    if (par3World.isRemote
+		    || par1ItemStack.getItemDamage() != Metadata
+			    .getMetaWorker()) {
+		return true;
+	    }
+
+	    par4 += Facing.offsetsXForSide[par7];
+	    par5 += Facing.offsetsYForSide[par7];
+	    par6 += Facing.offsetsZForSide[par7];
+
+	    Entity ant = this.getNewEntity(par3World);
+
+	    Environment.spawnEntity(par3World, ant, par4, par5, par6);
+
+	    if (!par2EntityPlayer.capabilities.isCreativeMode) {
+		--par1ItemStack.stackSize;
+	    }
+
+	}
+
+	return true;
+
     }
-    
+
     /**
      * Returns the names variable
      * 
@@ -220,11 +231,11 @@ public class ItemAnt extends Item {
 
 	return this.icons[par1];
     }
-    
-    public String getBehaviourDesc(){
-	
+
+    public String getBehaviourDesc() {
+
 	return "None";
-	
+
     }
 
     /**
@@ -397,27 +408,38 @@ public class ItemAnt extends Item {
     public boolean getNocturnal() {
 	return false;
     }
-    
+
     /**
-     * Gets the breeding chamber (extends ItemBreedingChamber) that this species uses when breeding
+     * Gets the breeding chamber (extends ItemBreedingChamber) that this species
+     * uses when breeding
+     * 
      * @return ItemBreedingChamber (null if it doesn't use one)
      */
-    public ItemBreedingChamber getBreedingChamber(){
-	
+    public ItemBreedingChamber getBreedingChamber() {
+
 	return null;
-	
+
     }
-    
-    public static boolean hasEntity(){
-	
-	return true;
-	
+
+    /**
+     * Return true if the ant has an entity form, this will be ignored if getNewEntity() doesn't return null
+     * @return boolean
+     */
+    public boolean hasEntity() {
+
+	return false;
+
     }
-    
-    public IEntityAnt getNewEntity(World world){
-	
-	return new EntityAntForest(world);
-	
+
+    /**
+     * Returns a new instance of the ant's entity
+     * @param world
+     * @return Entity
+     */
+    public Entity getNewEntity(World world) {
+
+	return null;
+
     }
 
 }

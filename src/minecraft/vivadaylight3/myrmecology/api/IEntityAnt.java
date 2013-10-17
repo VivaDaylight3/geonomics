@@ -10,7 +10,7 @@ public interface IEntityAnt {
      * 
      * @return ItemAnt
      */
-   // public ItemAnt getAnt();
+    // public ItemAnt getAnt();
 
     /**
      * Override this and check for conditions required to perform the behaviour

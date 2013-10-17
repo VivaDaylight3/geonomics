@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiAntFarm extends GuiContainer {
-    
+
     public TileEntityAntFarm tile;
 
     public GuiAntFarm(InventoryPlayer playerInventory,

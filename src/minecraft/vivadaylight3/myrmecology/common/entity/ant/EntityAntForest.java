@@ -17,28 +17,30 @@ public class EntityAntForest extends EntityAnt {
 	super(par1World);
 
     }
-    
+
     @Override
-    public ResourceLocation getResource(){
-	
+    public ResourceLocation getResource() {
+
 	return Resources.ENTITY_ANT_FOREST;
-	
+
     }
 
     @Override
     protected float getSoundVolume() {
 
 	return 0.5f;
-	
+
     }
 
     @Override
     public void startPerformingBehaviour() {
-	
-	if(this.worldObj.getBlockId(this.serverPosX, this.serverPosY - 1, this.serverPosZ) == Block.wood.blockID){
-	    
-	    this.worldObj.setBlock(serverPosX, serverPosY, serverPosZ, Block.sponge.blockID);
-	    
+
+	if (this.worldObj.getBlockId(this.serverPosX, this.serverPosY - 1,
+		this.serverPosZ) == Block.wood.blockID) {
+
+	    this.worldObj.setBlock(serverPosX, serverPosY, serverPosZ,
+		    Block.sponge.blockID);
+
 	}
 
     }

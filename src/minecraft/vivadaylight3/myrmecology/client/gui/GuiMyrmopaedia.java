@@ -57,7 +57,8 @@ public class GuiMyrmopaedia extends GuiContainer {
 
     private ScaledResolution scaledRes;
 
-    public GuiMyrmopaedia(ContainerMyrmopaedia parcontainer, EntityPlayer parPlayer) {
+    public GuiMyrmopaedia(ContainerMyrmopaedia parcontainer,
+	    EntityPlayer parPlayer) {
 
 	super(new ContainerMyrmopaedia(parcontainer.inventory, parPlayer));
 	this.player = (Player) parPlayer;
@@ -131,8 +132,9 @@ public class GuiMyrmopaedia extends GuiContainer {
 
 	    printKeyAndValue("Binomial Name: ",
 		    this.selectedAnt.getSpeciesBinomialName(), 45);
-	    
-	    printKeyAndValue("Behaviour: ", this.selectedAnt.getBehaviourDesc(), 60);
+
+	    printKeyAndValue("Behaviour: ",
+		    this.selectedAnt.getBehaviourDesc(), 60);
 
 	} else if (this.selectedScreen == "info" && this.selectedAnt != null) {
 
@@ -150,12 +152,11 @@ public class GuiMyrmopaedia extends GuiContainer {
 
 	    printKeyAndValue("Fertility: ",
 		    "" + this.selectedAnt.getFertility(), 60);
-	    
-	    printKeyAndValue("Winged: ",
-		    "" + this.selectedAnt.getWinged(), 75);
-	    
-	    printKeyAndValue("Nocturnal: ",
-		    "" + this.selectedAnt.getWinged(), 90);
+
+	    printKeyAndValue("Winged: ", "" + this.selectedAnt.getWinged(), 75);
+
+	    printKeyAndValue("Nocturnal: ", "" + this.selectedAnt.getWinged(),
+		    90);
 
 	    this.printBiomes();
 
@@ -322,7 +323,6 @@ public class GuiMyrmopaedia extends GuiContainer {
 			.getAntBiomes()[k]));
 
 	    }
-
 
 	    printKeyAndValue("Biomes: ", "---", 105);
 

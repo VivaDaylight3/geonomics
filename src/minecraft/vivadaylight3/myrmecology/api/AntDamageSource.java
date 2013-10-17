@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  * 
  */
 public class AntDamageSource extends DamageSource {
-    
+
     public AntDamageSource(String message) {
 
 	super("antDamage");

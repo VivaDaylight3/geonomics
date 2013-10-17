@@ -12,17 +12,17 @@ public class ChamberCultivator extends ItemBreedingChamber {
     }
 
     @Override
-    public ItemAnt getAnt(){
-	
+    public ItemAnt getAnt() {
+
 	return Register.antCultivator;
-	
+
     }
-    
+
     @Override
-    public String getChamberAntSpeciesName(){
-	
+    public String getChamberAntSpeciesName() {
+
 	return "Cultivator Ant ";
-	
+
     }
-    
+
 }

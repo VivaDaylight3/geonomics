@@ -63,8 +63,8 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 	case Register.GUI_ID_MYRMOPAEDIA:
 
 	    InventoryItem inventory = new InventoryItem(player.getHeldItem());
-	    ContainerMyrmopaedia container = new ContainerMyrmopaedia(inventory,
-		    player);
+	    ContainerMyrmopaedia container = new ContainerMyrmopaedia(
+		    inventory, player);
 	    return new GuiMyrmopaedia(container, player);
 
 	}

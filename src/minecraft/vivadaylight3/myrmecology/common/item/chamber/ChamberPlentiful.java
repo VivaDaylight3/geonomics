@@ -10,19 +10,19 @@ public class ChamberPlentiful extends ItemBreedingChamber {
 	super(par1);
 	// TODO Auto-generated constructor stub
     }
-    
+
     @Override
-    public ItemAnt getAnt(){
-	
+    public ItemAnt getAnt() {
+
 	return Register.antPlentiful;
-	
+
     }
-    
+
     @Override
-    public String getChamberAntSpeciesName(){
-	
+    public String getChamberAntSpeciesName() {
+
 	return "Plentiful Ant ";
-	
+
     }
 
 }

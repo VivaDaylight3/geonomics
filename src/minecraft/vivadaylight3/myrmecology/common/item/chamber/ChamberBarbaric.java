@@ -9,19 +9,19 @@ public class ChamberBarbaric extends ItemBreedingChamber {
     public ChamberBarbaric(int par1) {
 	super(par1);
     }
-    
+
     @Override
-    public ItemAnt getAnt(){
-	
+    public ItemAnt getAnt() {
+
 	return Register.antBarbaric;
-	
+
     }
-    
+
     @Override
-    public String getChamberAntSpeciesName(){
-	
+    public String getChamberAntSpeciesName() {
+
 	return "Barbaric Ant ";
-	
+
     }
 
 }

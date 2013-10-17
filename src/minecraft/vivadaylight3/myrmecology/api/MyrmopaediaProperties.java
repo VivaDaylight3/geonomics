@@ -16,8 +16,9 @@ import cpw.mods.fml.relauncher.Side;
 
 /**
  * Handles Myrmopaedia properties
+ * 
  * @author samueltebbs
- *
+ * 
  */
 public class MyrmopaediaProperties {
 
@@ -25,6 +26,7 @@ public class MyrmopaediaProperties {
 
     /**
      * Initiates a new antopedia with NBT data
+     * 
      * @param itemStack
      */
     public static void initiateMyrmopaedia(ItemStack itemStack) {
@@ -42,6 +44,7 @@ public class MyrmopaediaProperties {
 
     /**
      * Gets a new vacant myrmopaedia ID
+     * 
      * @param itemStack
      * @return
      */

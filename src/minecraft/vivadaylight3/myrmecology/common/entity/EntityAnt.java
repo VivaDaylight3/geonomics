@@ -9,22 +9,23 @@ import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.entity.ai.EntityAIAntBehaviour;
 
 public class EntityAnt extends EntityCreature implements IEntityAnt {
-    
+
     public EntityAnt(World par1World) {
 	super(par1World);
 	this.setSize(1.0F, 1.0F);
 	this.getNavigator().setAvoidsWater(true);
-	this.tasks.addTask(0, new EntityAIAntBehaviour(this, par1World, this.getNavigator()));
+	this.tasks.addTask(0,
+		new EntityAIAntBehaviour(this, par1World, this.getNavigator()));
     }
 
     public ItemAnt getAnt() {
 	return Register.antForest;
     }
-    
-    public ResourceLocation getResource(){
-	
+
+    public ResourceLocation getResource() {
+
 	return null;
-	
+
     }
 
     @Override
@@ -44,8 +45,8 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
     @Override
     public boolean canPerformBehaviour() {
-	System.out.println("canPerformBehaviour");	
-	
+	System.out.println("canPerformBehaviour");
+
 	return true;
     }
 
@@ -53,12 +54,12 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     public void startPerformingBehaviour() {
 
 	System.out.println("startPerformingBehaviour");
-	
+
     }
 
     @Override
     public void updateBehaviour() {
-	
+
 	System.out.println("updateBehaviour");
 
     }
@@ -67,7 +68,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     public void resetBehaviour() {
 
 	System.out.println("resetBehaviour");
-	
+
     }
 
 }

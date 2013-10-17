@@ -1,7 +1,10 @@
 package vivadaylight3.myrmecology.api;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.util.Icon;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
@@ -12,6 +15,8 @@ import vivadaylight3.myrmecology.common.lib.Resources;
  *
  */
 public class ItemBreedingChamber extends Item {
+    
+    private Icon iconOverlay;
 
     public ItemBreedingChamber(int par1) {
 	super(par1);
@@ -27,6 +32,25 @@ public class ItemBreedingChamber extends Item {
 		//+ this.getSpeciesSubName());
 
     }
+    /*
+    @SideOnly(Side.CLIENT)
+    public boolean requiresMultipleRenderPasses()
+    {
+        return true;
+    }
+    */
+
+    @SideOnly(Side.CLIENT)
+
+    /**
+     * Gets an icon index based on an item's damage value and the given render pass
+     */
+    /*
+    public Icon getIconFromDamageForRenderPass(int par1, int par2)
+    {
+        return par2 > 0 ? this.iconOverlay : super.getIconFromDamageForRenderPass(par1, par2);
+    }
+    */
     
     @Override
     public void registerIcons(IconRegister register){

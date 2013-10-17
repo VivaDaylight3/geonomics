@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
+import vivadaylight3.myrmecology.common.entity.EntityAnt;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 import vivadaylight3.myrmecology.common.lib.Resources;
 
@@ -27,12 +28,15 @@ public class RenderAnt extends RenderLiving {
     public void doRender(Entity entity, double d, double d1, double d2, 
             float f, float f1)
     {
-	super.doRenderLiving((EntityAntForest)entity, d, d1, d2, f, f1);
+	super.doRenderLiving((EntityAnt)entity, d, d1, d2, f, f1);
     }
 
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-	return Resources.ENTITY_ANT_FOREST;
+		
+	EntityAnt entity2 = (EntityAnt)entity;
+	
+	return entity2.getResource();
     }
 
 }

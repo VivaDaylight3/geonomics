@@ -27,6 +27,8 @@ import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Time;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -192,15 +194,15 @@ public class ItemAnt extends Item {
      * Spawns the creature specified by the egg's type in the location specified by the last three parameters.
      * Parameters: world, entityID, x, y, z.
      */
-    public static Entity spawnCreature(World par0World, int par1, double par2, double par4, double par6)
-    {
-	Entity entity = null;
+    public static Entity spawnCreature(World par0World, int par1, double par2, double par4, double par6){
+	
+	EntityAntForest entity = new EntityAntForest(par0World);
 	
 	if(hasEntity()){
-
-            for (int j = 0; j < 1; ++j)
-            {
-                entity = (Entity) getNewEntity(par0World);
+	    
+            for (int j = 0; j < 1; ++j){
+        	
+                //entity = (Entity) getNewEntity(par0World);
 
                 if (entity != null && entity instanceof EntityLivingBase)
                 {
@@ -521,7 +523,7 @@ public class ItemAnt extends Item {
 	
     }
     
-    public static IEntityAnt getNewEntity(World world){
+    public IEntityAnt getNewEntity(World world){
 	
 	return new EntityAntForest(world);
 	

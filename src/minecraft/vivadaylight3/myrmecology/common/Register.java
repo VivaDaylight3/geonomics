@@ -30,6 +30,7 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillSnow;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillStone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillSwamp;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntCarpenter;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
@@ -93,6 +94,7 @@ public class Register {
     public static final int ID_BLOCK = 600; // 12
     public static final int ID_ITEM = 3853; // 23
     public static int entityAntForestID = ModLoader.getUniqueEntityId();
+    public static int entityAntCarpenterID = ModLoader.getUniqueEntityId();
 
     public static final int GUI_ID_ANTFARM = 1;
     public static final int GUI_ID_MYRMOPAEDIA = 2;
@@ -576,10 +578,12 @@ public class Register {
     // TODO
     public static void registerEntities() {
 
-	addEntityAnt(EntityAntForest.class, antForest.getSpeciesName(), entityAntForestID,
-		0xEF42D8, 0x42EF42, 50,
-		10, true, 60,
-		1, 3, EnumCreatureType.creature, antForest.getAntBiomes());
+	addEntityAnt(EntityAntForest.class, antForest.getSpeciesName(), entityAntForestID, 50,
+		10, true);
+	/*
+	addEntityAnt(EntityAntCarpenter.class, antCarpenter.getSpeciesName(), entityAntCarpenterID, 50,
+		10, true);
+		*/
 
 	/*
 	 * EntityRegistry.registerModEntity(EntityAntForest.class,
@@ -734,10 +738,9 @@ public class Register {
     }
 
     public static void addEntityAnt(Class<? extends EntityLiving> class1,
-	    String antName, int ID, int colour1, int colour2,
+	    String antName, int ID,
 	    int trackingRange, int updateFrequency,
-	    boolean sendsVelocityUpdates, int weightedProb, int minSpawn,
-	    int maxSpawn, EnumCreatureType type, BiomeGenBase... biomes) {
+	    boolean sendsVelocityUpdates) {
 
 	getEntityAntList().add((Class<? extends IEntityAnt>) class1);
 
@@ -745,8 +748,8 @@ public class Register {
 		Myrmecology.instance, trackingRange, updateFrequency,
 		sendsVelocityUpdates);
 
-	EntityRegistry.registerGlobalEntityID(EntityAntForest.class,
-		antForest.getSpeciesName(), entityAntForestID);
+	EntityRegistry.registerGlobalEntityID(class1,
+		antName, ID);
 
 	LanguageRegistry.instance().addStringLocalization(
 		"entity." + Reference.MOD_ID + "." + antName + ".name",

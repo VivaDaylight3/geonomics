@@ -1,8 +1,11 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.entity.EntityAnt;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntCarpenter;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntCarpenter extends ItemAnt {
@@ -99,6 +102,20 @@ public class AntCarpenter extends ItemAnt {
 
 	return false;
 
+    }
+    
+    @Override
+    public boolean hasEntity(){
+	
+	return true;
+	
+    }
+    
+    @Override
+    public EntityAnt getNewEntity(World world){
+	
+	return new EntityAntCarpenter(world);
+	
     }
 
 }

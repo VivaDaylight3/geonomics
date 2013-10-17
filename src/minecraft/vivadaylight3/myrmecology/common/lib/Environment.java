@@ -15,10 +15,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class Environment {
     
-    public static Entity spawnEntity(World par0World, int par1, double par2, double par4, double par6){
-	
-	Entity entity = EntityList.createEntityByID(par1, par0World);
-	
+    public static Entity spawnEntity(World par0World, Entity entity, double par2, double par4, double par6){
+		
         for (int j = 0; j < 1; ++j)
         {
             if (entity != null && entity instanceof EntityLivingBase)

@@ -94,7 +94,7 @@ public class Register {
     public static final int ID_BLOCK = 600; // 12
     public static final int ID_ITEM = 3853; // 23
     public static int entityAntForestID = ModLoader.getUniqueEntityId();
-    public static int entityAntCarpenterID = ModLoader.getUniqueEntityId();
+    public static int entityAntCarpenterID = entityAntForestID+1;
 
     public static final int GUI_ID_ANTFARM = 1;
     public static final int GUI_ID_MYRMOPAEDIA = 2;

@@ -13,6 +13,12 @@ Bugs
 
 To see a list of known bugs, got to the Issues section. To report a bug, file an issue in the Issues section.
 
+Wiki
+====
+
+All info on the mod can be found in the "Wiki" tab.
+Here's a link: https://github.com/VivaDaylight3/myrmecology/releases
+
 Info
 ====
 

@@ -17,7 +17,7 @@ Wiki
 ====
 
 All info on the mod can be found in the "Wiki" tab.
-Here's a link: https://github.com/VivaDaylight3/myrmecology/releases
+Here's a link: https://github.com/VivaDaylight3/myrmecology/wiki
 
 Info
 ====

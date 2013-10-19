@@ -103,5 +103,12 @@ public class AntSnow extends ItemAnt {
 	return true;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x355454, 0xcbdbdb};
+	
+    }
 
 }

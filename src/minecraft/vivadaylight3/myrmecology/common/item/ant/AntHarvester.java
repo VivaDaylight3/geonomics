@@ -90,5 +90,12 @@ public class AntHarvester extends ItemAnt {
 	return Time.getTicksFromMinutes(15);
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x967c5e, 0xc7b299};
+	
+    }
 
 }

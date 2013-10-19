@@ -86,5 +86,12 @@ public class AntHostile extends ItemAnt {
 
 	return null;
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x381400, 0x7b2e00};
+	
+    }
 
 }

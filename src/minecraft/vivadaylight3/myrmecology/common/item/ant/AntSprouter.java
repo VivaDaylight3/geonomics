@@ -85,5 +85,12 @@ public class AntSprouter extends ItemAnt {
 
 	return null;
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x00202d, 0x005b7f};
+	
+    }
 
 }

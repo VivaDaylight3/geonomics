@@ -23,5 +23,12 @@ public class AntCultivator extends ItemAnt {
 	return Reference.ANT_CULTIVATOR_NAME;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x603a60, 0xa864a8};
+	
+    }
 
 }

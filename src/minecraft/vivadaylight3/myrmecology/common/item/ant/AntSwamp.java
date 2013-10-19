@@ -101,5 +101,12 @@ public class AntSwamp extends ItemAnt {
 	return true;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x210020, 0x4b0049};
+	
+    }
 
 }

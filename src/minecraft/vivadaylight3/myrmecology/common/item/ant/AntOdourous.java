@@ -86,5 +86,12 @@ public class AntOdourous extends ItemAnt {
 
 	return null;
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x8c5210, 0xf7941d};
+	
+    }
 
 }

@@ -86,5 +86,12 @@ public class AntScavenger extends ItemAnt {
 
 	return null;
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x724539, 0xf69679};
+	
+    }
 
 }

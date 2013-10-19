@@ -88,5 +88,12 @@ public class AntMound extends ItemAnt {
 
 	return biomes;
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x332f00, 0x827b00};
+	
+    }
 
 }

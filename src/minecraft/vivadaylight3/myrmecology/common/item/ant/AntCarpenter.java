@@ -105,17 +105,17 @@ public class AntCarpenter extends ItemAnt {
     }
 
     @Override
-    public boolean hasEntity() {
-
-	return true;
-
-    }
-
-    @Override
     public EntityAnt getNewEntity(World world) {
 
 	return new EntityAntCarpenter(world);
 
+    }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x253810, 0x4b7021};
+	
     }
 
 }

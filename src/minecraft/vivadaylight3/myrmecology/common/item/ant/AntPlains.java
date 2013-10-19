@@ -99,5 +99,12 @@ public class AntPlains extends ItemAnt {
 	return true;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x162308, 0x406618};
+	
+    }
 
 }

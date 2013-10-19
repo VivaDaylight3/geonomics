@@ -109,5 +109,12 @@ public class AntForest extends ItemAnt {
 	return new EntityAntForest(parWorld);
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x020202, 0x333333};
+	
+    }
 
 }

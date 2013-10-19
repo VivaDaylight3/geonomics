@@ -88,5 +88,12 @@ public class AntDredger extends ItemAnt {
 	return true;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x63584c, 0xc7b299};
+	
+    }
 
 }

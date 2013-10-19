@@ -48,6 +48,9 @@ public class ItemAnt extends Item {
      */
     private Icon[] icons = new Icon[Metadata.typeMeta.length];
 
+    private Icon[] iconsBase = new Icon[Metadata.typeMeta.length];
+    private Icon[] iconsOverlay = new Icon[Metadata.typeMeta.length];
+
     /**
      * Holds the complete set of names for this ant species.
      */
@@ -82,6 +85,30 @@ public class ItemAnt extends Item {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public boolean requiresMultipleRenderPasses() {
+	return this.usesColourRendering();
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    /**
+     * Gets an icon index based on an item's damage value and the given render pass
+     */
+    public Icon getIconFromDamageForRenderPass(int par1, int par2) {
+	
+	if(par2 == 0){
+	    
+	    return iconsBase[par1];
+	    
+	}else{
+	    
+	    return iconsOverlay[par1];
+	    
+	}
+    }
+
+    @Override
     public boolean hasEffect(ItemStack par1ItemStack) {
 
 	if (AntProperties.getMated(par1ItemStack)) {
@@ -97,8 +124,8 @@ public class ItemAnt extends Item {
 	    EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
 	    int par6, int par7, float par8, float par9, float par10) {
 
-	if (this.hasEntity() && this.getNewEntity(par3World) != null) {
-	    
+	if (this.getNewEntity(par3World) != null) {
+
 	    if (par3World.isRemote
 		    || par1ItemStack.getItemDamage() != Metadata
 			    .getMetaWorker()) {
@@ -156,11 +183,34 @@ public class ItemAnt extends Item {
     @Override
     public void registerIcons(IconRegister register) {
 
-	for (int k = 0; k < 4; k++) {
+	if (!this.usesColourRendering()) {
 
-	    icons[k] = register.registerIcon(Resources.TEXTURE_PREFIX
-		    + Resources.ANT_LOCATION + this.getSpeciesSubName() + "_"
-		    + this.getTypeNames()[k]);
+	    for (int k = 0; k < Metadata.typeMeta.length; k++) {
+
+		icons[k] = register.registerIcon(Resources.TEXTURE_PREFIX
+			+ Resources.ANT_LOCATION + this.getSpeciesSubName()
+			+ "_" + this.getTypeNames()[k]);
+
+	    }
+
+	} else {
+
+	    for (int k = 0; k < Metadata.typeMeta.length; k++) {
+
+		iconsBase[k] = register.registerIcon(Resources.TEXTURE_PREFIX
+			+ Resources.ANT_LOCATION
+			+ "ant" + Reference.standardTypeNames[k]);
+
+		iconsOverlay[k] = register
+			.registerIcon(Resources.TEXTURE_PREFIX
+				+ Resources.ANT_LOCATION
+				+ "ant" + Reference.standardTypeNames[k] + "_overlay");
+
+		// icons[k] = register.registerIcon(Resources.TEXTURE_PREFIX
+		// + Resources.ANT_LOCATION + this.getSpeciesSubName() + "_"
+		// + this.getTypeNames()[k]);
+
+	    }
 
 	}
 
@@ -228,8 +278,58 @@ public class ItemAnt extends Item {
 
     @Override
     public Icon getIconFromDamage(int par1) {
-
-	return this.icons[par1];
+	
+	if(!this.usesColourRendering()){
+	    
+	    return this.icons[par1];
+	    
+	}
+	
+	return null;
+    }
+    
+    @Override
+    public Icon getIcon(ItemStack stack, int pass){
+	
+	if(this.usesColourRendering()){
+	
+	if(pass == 0){
+	    
+	    return iconsBase[stack.getItemDamage()];
+	    
+	}else if(pass == 1){
+	    
+	    return iconsOverlay[stack.getItemDamage()];
+	    
+	}
+	
+	}else{
+	    
+	    return this.icons[stack.getItemDamage()];
+	    
+	}
+	
+	return null;
+		
+    }
+    
+    @Override
+    public int getColorFromItemStack(ItemStack par1ItemStack, int pass){
+	
+	return this.getColours()[pass];
+	
+    }
+    
+    /**
+     * (Only used if usesColourRendering() returns true) Gets the hexadecimal colour codes for each render pass.
+     * Index 0 of the returned int[] should be the colour of the outside 'frame' of the ant texture and index 1 
+     * should be the main colour of the ant (what goes isnide the frame) 
+     * @return int[] (length 2)
+     */
+    protected int[] getColours(){
+	
+	return new int[] {0x483CF5, 0x3CE9F5};
+	
     }
 
     public String getBehaviourDesc() {
@@ -422,23 +522,29 @@ public class ItemAnt extends Item {
     }
 
     /**
-     * Return true if the ant has an entity form, this will be ignored if getNewEntity() doesn't return null
-     * @return boolean
-     */
-    public boolean hasEntity() {
-
-	return false;
-
-    }
-
-    /**
-     * Returns a new instance of the ant's entity
+     * Returns a new instance of the ant's entity, return null if the ant
+     * doesn't have an entity form
+     * 
      * @param world
      * @return Entity
      */
     public Entity getNewEntity(World world) {
 
 	return null;
+
+    }
+
+    /**
+     * Returns true if you want your ant to use Myrmecology's texture overlay.
+     * The colour codes returned by getColourCodes() will be applied to the base
+     * ant textures to create your ant's coloured texture. Also used with
+     * ItemBreedingChamber
+     * 
+     * @return
+     */
+    public boolean usesColourRendering() {
+
+	return false;
 
     }
 

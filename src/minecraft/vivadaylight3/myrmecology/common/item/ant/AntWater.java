@@ -102,5 +102,12 @@ public class AntWater extends ItemAnt {
 	return false;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x00495b, 0x00bff3};
+	
+    }
 
 }

@@ -87,4 +87,11 @@ public class AntDesert extends ItemAnt {
 	return biomes;
     }
 
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x898000, 0xeada00};
+	
+    }
+    
 }

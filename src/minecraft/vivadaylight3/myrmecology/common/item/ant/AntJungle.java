@@ -100,5 +100,12 @@ public class AntJungle extends ItemAnt {
 	return false;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x3d0000, 0x790000};
+	
+    }
 
 }

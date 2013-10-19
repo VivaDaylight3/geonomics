@@ -86,5 +86,12 @@ public class AntPlentiful extends ItemAnt {
 
 	return null;
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x7f5842, 0xf9ad81};
+	
+    }
 
 }

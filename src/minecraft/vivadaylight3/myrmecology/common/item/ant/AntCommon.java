@@ -81,5 +81,12 @@ public class AntCommon extends ItemAnt {
 
 	return null;
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x3f2a17, 0x684526};
+	
+    }
 
 }

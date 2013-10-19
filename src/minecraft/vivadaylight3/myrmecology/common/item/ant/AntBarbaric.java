@@ -101,5 +101,12 @@ public class AntBarbaric extends ItemAnt {
 	return true;
 
     }
+    
+    @Override
+    protected int[] getColours(){
+	
+	return new int[] {0x382000, 0x6d3f00};
+	
+    }
 
 }

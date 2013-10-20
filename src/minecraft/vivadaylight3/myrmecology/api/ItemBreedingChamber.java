@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
@@ -18,10 +19,57 @@ import vivadaylight3.myrmecology.common.lib.Resources;
 public class ItemBreedingChamber extends Item {
 
     private Icon iconOverlay;
+    private Icon iconBase;
 
     public ItemBreedingChamber(int par1) {
 	super(par1);
 	prepareItem();
+    }
+    
+    /**
+     * Returns true if you want your chamber to use Myrmecology's texture overlay.
+     * The colour codes returned by getColours() will be applied to the base
+     * ant textures to create your chamber's coloured texture. Also used with
+     * ItemBreedingChamber
+     * 
+     * @return
+     */
+    public boolean usesColourRendering() {
+
+	return true;
+
+    }
+    
+    public Icon getIconFromDamageForRenderPass(int par1, int par2) {
+
+	if (par2 == 0) {
+
+	    return iconBase;
+
+	} else {
+
+	    return iconOverlay;
+
+	}
+    }
+    
+    protected int[] getColours() {
+
+	return new int[] { 0xE6AD4B, 0x3CE9F5 };
+
+    }
+    
+    @Override
+    public int getColorFromItemStack(ItemStack par1ItemStack, int pass) {
+
+	return this.getColours()[pass];
+
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean requiresMultipleRenderPasses() {
+	return this.usesColourRendering();
     }
 
     private void prepareItem() {
@@ -35,24 +83,14 @@ public class ItemBreedingChamber extends Item {
 
     }
 
-    /*
-     * @SideOnly(Side.CLIENT) public boolean requiresMultipleRenderPasses() {
-     * return true; }
-     */
-
     @SideOnly(Side.CLIENT)
-    /**
-     * Gets an icon index based on an item's damage value and the given render pass
-     */
-    /*
-     * public Icon getIconFromDamageForRenderPass(int par1, int par2) { return
-     * par2 > 0 ? this.iconOverlay : super.getIconFromDamageForRenderPass(par1,
-     * par2); }
-     */
     @Override
     public void registerIcons(IconRegister register) {
 
-	this.itemIcon = register.registerIcon(Resources.TEXTURE_PREFIX
+	this.iconOverlay = register.registerIcon(Resources.TEXTURE_PREFIX
+		+ Reference.ITEM_CHAMBER_NAME+"_overlay");
+	
+	this.iconBase = register.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_CHAMBER_NAME);
 
     }

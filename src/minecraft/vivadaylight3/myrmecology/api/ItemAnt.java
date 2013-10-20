@@ -59,18 +59,12 @@ public class ItemAnt extends Item {
     public ItemAnt(int par1) {
 
 	super(par1);
+	
+	Register.addAnt(this);
 
 	setHasSubtypes(true);
 
 	prepareItem();
-
-	Register.addAnt(this);
-
-    }
-
-    public int getAntID() {
-
-	return this.itemID;
 
     }
 
@@ -96,15 +90,15 @@ public class ItemAnt extends Item {
      * Gets an icon index based on an item's damage value and the given render pass
      */
     public Icon getIconFromDamageForRenderPass(int par1, int par2) {
-	
-	if(par2 == 0){
-	    
+
+	if (par2 == 0) {
+
 	    return iconsBase[par1];
-	    
-	}else{
-	    
+
+	} else {
+
 	    return iconsOverlay[par1];
-	    
+
 	}
     }
 
@@ -198,17 +192,13 @@ public class ItemAnt extends Item {
 	    for (int k = 0; k < Metadata.typeMeta.length; k++) {
 
 		iconsBase[k] = register.registerIcon(Resources.TEXTURE_PREFIX
-			+ Resources.ANT_LOCATION
-			+ "ant" + Reference.standardTypeNames[k]);
+			+ Resources.ANT_LOCATION + "ant"
+			+ Reference.standardTypeNames[k]);
 
 		iconsOverlay[k] = register
 			.registerIcon(Resources.TEXTURE_PREFIX
-				+ Resources.ANT_LOCATION
-				+ "ant" + Reference.standardTypeNames[k] + "_overlay");
-
-		// icons[k] = register.registerIcon(Resources.TEXTURE_PREFIX
-		// + Resources.ANT_LOCATION + this.getSpeciesSubName() + "_"
-		// + this.getTypeNames()[k]);
+				+ Resources.ANT_LOCATION + "ant"
+				+ Reference.standardTypeNames[k] + "_overlay");
 
 	    }
 
@@ -278,58 +268,60 @@ public class ItemAnt extends Item {
 
     @Override
     public Icon getIconFromDamage(int par1) {
-	
-	if(!this.usesColourRendering()){
-	    
+
+	if (!this.usesColourRendering()) {
+
 	    return this.icons[par1];
-	    
+
 	}
-	
+
 	return null;
     }
-    
+
     @Override
-    public Icon getIcon(ItemStack stack, int pass){
-	
-	if(this.usesColourRendering()){
-	
-	if(pass == 0){
-	    
-	    return iconsBase[stack.getItemDamage()];
-	    
-	}else if(pass == 1){
-	    
-	    return iconsOverlay[stack.getItemDamage()];
-	    
-	}
-	
-	}else{
-	    
+    public Icon getIcon(ItemStack stack, int pass) {
+
+	if (this.usesColourRendering()) {
+
+	    if (pass == 0) {
+
+		return iconsBase[stack.getItemDamage()];
+
+	    } else if (pass == 1) {
+
+		return iconsOverlay[stack.getItemDamage()];
+
+	    }
+
+	} else {
+
 	    return this.icons[stack.getItemDamage()];
-	    
+
 	}
-	
+
 	return null;
-		
+
     }
-    
+
     @Override
-    public int getColorFromItemStack(ItemStack par1ItemStack, int pass){
-	
+    public int getColorFromItemStack(ItemStack par1ItemStack, int pass) {
+
 	return this.getColours()[pass];
-	
+
     }
-    
+
     /**
-     * (Only used if usesColourRendering() returns true) Gets the hexadecimal colour codes for each render pass.
-     * Index 0 of the returned int[] should be the colour of the outside 'frame' of the ant texture and index 1 
-     * should be the main colour of the ant (what goes isnide the frame) 
+     * (Only used if usesColourRendering() returns true) Gets the hexadecimal
+     * colour codes for each render pass. Index 0 of the returned int[] should
+     * be the colour of the outside 'frame' of the ant texture and index 1
+     * should be the main colour of the ant (what goes isnide the frame)
+     * 
      * @return int[] (length 2)
      */
-    protected int[] getColours(){
-	
-	return new int[] {0x483CF5, 0x3CE9F5};
-	
+    public int[] getColours() {
+
+	return new int[] { 0xE6AD4B, 0x3CE9F5 };
+
     }
 
     public String getBehaviourDesc() {
@@ -544,7 +536,7 @@ public class ItemAnt extends Item {
      */
     public boolean usesColourRendering() {
 
-	return false;
+	return true;
 
     }
 

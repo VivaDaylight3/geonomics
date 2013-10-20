@@ -117,7 +117,7 @@ public class BlockAntHill extends Block {
      * @return extends ItemAnt
      */
     public ItemAnt getAnt() {
-	return Register.antForest;
+	return null;
     }
 
     /**

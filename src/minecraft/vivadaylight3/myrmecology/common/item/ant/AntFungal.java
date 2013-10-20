@@ -90,12 +90,12 @@ public class AntFungal extends ItemAnt {
 	return false;
 
     }
-    
+
     @Override
-    protected int[] getColours(){
-	
-	return new int[] {0x680026, 0x9e0039};
-	
+    public int[] getColours() {
+
+	return new int[] { 0x680026, 0x9e0039 };
+
     }
 
 }

@@ -3,9 +3,7 @@ package vivadaylight3.myrmecology.common.item.ant;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
-import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
-import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntSnow extends ItemAnt {
@@ -103,12 +101,12 @@ public class AntSnow extends ItemAnt {
 	return true;
 
     }
-    
+
     @Override
-    protected int[] getColours(){
-	
-	return new int[] {0x355454, 0xcbdbdb};
-	
+    public int[] getColours() {
+
+	return new int[] { 0x355454, 0xcbdbdb };
+
     }
 
 }

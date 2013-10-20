@@ -33,9 +33,9 @@ public class MyrmopaediaProperties {
 
 	Nbt.setTag(itemStack);
 
-	for (int k = 0; k < Register.getAntList().toArray().length; k++) {
+	for (int k = 0; k < Register.getAntList().size(); k++) {
 
-	    Nbt.set(itemStack, ((ItemAnt) Register.getAntList().toArray()[k])
+	    Nbt.set(itemStack, ((ItemAnt) Register.getAntList().get(k))
 		    .getSpeciesSubName(), false);
 
 	}
@@ -127,12 +127,13 @@ public class MyrmopaediaProperties {
 
 	ArrayList<ItemAnt> result = new ArrayList<ItemAnt>();
 
-	for (int k = 0; k < Register.getAntList().toArray().length; k++) {
+	for (int k = 0; k < Register.getAntList().size(); k++) {
 
-	    if (Nbt.getBoolean(itemStack, ((ItemAnt) Register.getAntList()
-		    .toArray()[k]).getSpeciesSubName())) {
+	    if (Nbt.getBoolean(itemStack,
+		    ((ItemAnt) Register.getAntList().get(k))
+			    .getSpeciesSubName())) {
 
-		result.add((ItemAnt) Register.getAntList().toArray()[k]);
+		result.add((ItemAnt) Register.getAntList().get(k));
 
 	    }
 

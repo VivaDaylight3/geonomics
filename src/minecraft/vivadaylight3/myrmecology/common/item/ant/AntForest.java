@@ -3,7 +3,6 @@ package vivadaylight3.myrmecology.common.item.ant;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
@@ -109,12 +108,12 @@ public class AntForest extends ItemAnt {
 	return new EntityAntForest(parWorld);
 
     }
-    
+
     @Override
-    protected int[] getColours(){
-	
-	return new int[] {0x020202, 0x333333};
-	
+    public int[] getColours() {
+
+	return new int[] { 0x020202, 0x333333 };
+
     }
 
 }

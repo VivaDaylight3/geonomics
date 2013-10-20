@@ -7,11 +7,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.api.BlockAntHill;
 import vivadaylight3.myrmecology.api.Breeding;
@@ -56,9 +54,9 @@ import vivadaylight3.myrmecology.common.item.ant.AntSprouter;
 import vivadaylight3.myrmecology.common.item.ant.AntStone;
 import vivadaylight3.myrmecology.common.item.ant.AntSwamp;
 import vivadaylight3.myrmecology.common.item.ant.AntWater;
-import vivadaylight3.myrmecology.common.item.chamber.ChamberCommon;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberBarbaric;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberCarpenter;
+import vivadaylight3.myrmecology.common.item.chamber.ChamberCommon;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberCultivator;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberDredger;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberFungal;
@@ -93,8 +91,9 @@ public class Register {
 
     public static final int ID_BLOCK = 600; // 12
     public static final int ID_ITEM = 3853; // 23
-    public static int entityAntForestID = ModLoader.getUniqueEntityId();
-    public static int entityAntCarpenterID = entityAntForestID + 1;
+    
+    public static int entityAntForestID;
+    public static int entityAntCarpenterID;
 
     public static final int GUI_ID_ANTFARM = 1;
     public static final int GUI_ID_MYRMOPAEDIA = 2;
@@ -600,9 +599,9 @@ public class Register {
 
 	addEntityAnt(EntityAntForest.class, antForest.getSpeciesName(),
 		entityAntForestID, 50, 10, true);
-	
-	 addEntityAnt(EntityAntCarpenter.class, antCarpenter.getSpeciesName(),
-	 entityAntCarpenterID, 50, 10, true);
+
+	addEntityAnt(EntityAntCarpenter.class, antCarpenter.getSpeciesName(),
+		entityAntCarpenterID, 50, 10, true);
 
 	/*
 	 * EntityRegistry.registerModEntity(EntityAntForest.class,
@@ -745,12 +744,6 @@ public class Register {
 
     }
 
-    public static void addAnt(ItemAnt ant) {
-
-	getAntList().add(ant);
-
-    }
-
     public static void addHill(BlockAntHill hill) {
 
 	getHillList().add(hill);
@@ -760,6 +753,8 @@ public class Register {
     public static void addEntityAnt(Class<? extends EntityLiving> class1,
 	    String antName, int ID, int trackingRange, int updateFrequency,
 	    boolean sendsVelocityUpdates) {
+	
+	ID = ModLoader.getUniqueEntityId();
 
 	getEntityAntList().add((Class<? extends IEntityAnt>) class1);
 
@@ -778,6 +773,12 @@ public class Register {
     public static ArrayList<ItemAnt> getAntList() {
 
 	return antList;
+
+    }
+
+    public static void addAnt(ItemAnt ant) {
+
+	getAntList().add(ant);
 
     }
 

@@ -4,7 +4,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
-import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntOdourous extends ItemAnt {
@@ -86,12 +85,12 @@ public class AntOdourous extends ItemAnt {
 
 	return null;
     }
-    
+
     @Override
-    protected int[] getColours(){
-	
-	return new int[] {0x8c5210, 0xf7941d};
-	
+    public int[] getColours() {
+
+	return new int[] { 0x8c5210, 0xf7941d };
+
     }
 
 }

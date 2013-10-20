@@ -3,9 +3,7 @@ package vivadaylight3.myrmecology.common.item.ant;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
-import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
-import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntJungle extends ItemAnt {
@@ -100,12 +98,12 @@ public class AntJungle extends ItemAnt {
 	return false;
 
     }
-    
+
     @Override
-    protected int[] getColours(){
-	
-	return new int[] {0x3d0000, 0x790000};
-	
+    public int[] getColours() {
+
+	return new int[] { 0x3d0000, 0x790000 };
+
     }
 
 }

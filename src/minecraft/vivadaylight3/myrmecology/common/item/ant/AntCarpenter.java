@@ -110,12 +110,12 @@ public class AntCarpenter extends ItemAnt {
 	return new EntityAntCarpenter(world);
 
     }
-    
+
     @Override
-    protected int[] getColours(){
-	
-	return new int[] {0x253810, 0x4b7021};
-	
+    public int[] getColours() {
+
+	return new int[] { 0x253810, 0x4b7021 };
+
     }
 
 }

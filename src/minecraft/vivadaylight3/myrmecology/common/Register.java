@@ -598,10 +598,10 @@ public class Register {
     public static void registerEntities() {
 
 	addEntityAnt(EntityAntForest.class, antForest.getSpeciesName(),
-		entityAntForestID, 50, 10, true);
+		entityAntForestID, 100, 20, true);
 
 	addEntityAnt(EntityAntCarpenter.class, antCarpenter.getSpeciesName(),
-		entityAntCarpenterID, 50, 10, true);
+		entityAntCarpenterID, 100, 20, true);
 
 	/*
 	 * EntityRegistry.registerModEntity(EntityAntForest.class,

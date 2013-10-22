@@ -29,18 +29,25 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-	return this.theAnt.canPerformBehaviour();
+	
+	System.out.println("AI shouldExecute");
+	
+	return true;
     }
 
     @Override
     public void startExecuting() {
+	
+	System.out.println("AI startExecuting");
 
-	this.theAnt.startPerformingBehaviour();
+	//this.theAnt.startPerformingBehaviour();
 
     }
 
     @Override
     public void updateTask() {
+	
+	System.out.println("AI updateTask");
 
 	this.theAnt.updateBehaviour();
 
@@ -48,8 +55,10 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 
     @Override
     public void resetTask() {
+	
+	System.out.println("AI resetTask");
 
-	this.theAnt.resetBehaviour();
+	//this.theAnt.resetBehaviour();
 
     }
 

@@ -29,6 +29,8 @@ public class Resources {
 	    + "antForest.png");
     public static final ResourceLocation ENTITY_ANT_CARPENTER = getResourceLocation(ENTITY_LOCATION
 	    + "antCarpenter.png");
+    public static final ResourceLocation ENTITY_ANT_BARBARIC = getResourceLocation(ENTITY_LOCATION
+	    + "antBarbaric.png");
 
     public static final ResourceLocation GUI_ANTFARM = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_ANTFARM_NAME + FORMAT);

@@ -14,7 +14,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	super(par1World);
 	this.setSize(1.0F, 1.0F);
 	this.getNavigator().setAvoidsWater(true);
-	this.tasks.addTask(0,
+	this.tasks.addTask(1,
 		new EntityAIAntBehaviour(this, par1World, this.getNavigator()));
     }
 

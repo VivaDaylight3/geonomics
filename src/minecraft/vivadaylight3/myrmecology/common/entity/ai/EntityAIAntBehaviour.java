@@ -24,6 +24,7 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 	this.theAnt = parEntityAnt;
 	this.world = parWorld;
 	this.pathFinder = parPathFinder;
+	this.setMutexBits(26);
 
     }
 

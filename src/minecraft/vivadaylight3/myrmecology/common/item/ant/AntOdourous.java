@@ -1,9 +1,11 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntOdourous extends ItemAnt {
@@ -91,6 +93,13 @@ public class AntOdourous extends ItemAnt {
 
 	return new int[] { 0x8c5210, 0xf7941d };
 
+    }
+    
+    @Override
+    public Entity getNewEntity(World parWorld){
+	
+	return new EntityAntOdourous(parWorld);
+	
     }
 
 }

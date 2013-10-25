@@ -1,13 +1,16 @@
 package vivadaylight3.myrmecology.common.lib;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,6 +36,38 @@ public class Environment {
 
 	return entity;
 
+    }
+    
+    public static boolean coordinateIsCloseTo(int x, int y, int z, int x2, int y2, int z2, int distance){
+	
+	for(int k = -distance; k <= distance; k++){
+	    
+	    if(x+k == x2 || y+k == y2 || z+k == z2){
+		
+		return true;
+		
+	    }
+	    
+	}
+	
+	return false;
+	
+    }
+    
+    public static ArrayList<EntityPlayer> getEntitiesInRadius(World world, double x, double y, double z, int radius){
+	
+	AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool().getAABB(x, y, z, (double)(x + 1), (double)(y + 1), (double)(z + 1)).expand(radius, radius, radius);
+        axisalignedbb.maxY = (double)world.getHeight();
+        List list = world.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
+        
+        ArrayList<EntityPlayer> result = new ArrayList<EntityPlayer>();
+        
+        for(int k = 0; k < list.size(); k++){
+            
+            result.add((EntityPlayer) list.get(k));
+            
+        }
+        return result;	
     }
 
     public static boolean blockIsPowered(World world, int x, int y, int z) {
@@ -154,43 +189,43 @@ public class Environment {
     }
 
     // TODO
-    public int[][] getBlocksInRadius(World world, int x, int y, int z,
-	    int radius) {
-
-	int progress = 0;
-
-	int offsetX = 0;
-	int offsetY = 0;
-	int offsetZ = 0;
-
-	int blocksInSegment = radius * radius;
-	int blocksInCorner = blocksInSegment * radius;
-	int blocksInAxes = radius * 2;
-	int planes = 3;
-	int segments = 4;
-
-	// int totalBlocks = ((blocksInSegment) * 4) * planes + (blocksInAxes *
-	// 2) + (blocksInCorner * segments);
-	int totalBlocks = Maths.intToPowerOf((radius * 2 + 1), 3) - 1;
-
-	int[][] blocksArray = new int[totalBlocks][3];
-
-	for (int k = 1; k <= radius; k++) {
-
-	    for (int i = 1; i <= radius; i++) {
-
-		blocksArray[progress][0] = x + offsetX;
-		blocksArray[progress][1] = y + offsetY;
-		blocksArray[progress][2] = z + offsetZ;
-
-		offsetX += i;
-
+    public static ArrayList<BlockEntry> getBlocksInRadius(World world, int x, int y, int z,
+	    int radius, int blockID) {
+	
+	ArrayList<BlockEntry> result = new ArrayList<BlockEntry>();
+	
+	for(int newX = -1 * radius; newX <= radius; newX++){
+	    
+	    for(int newY = -1 * radius; newY <= radius; newY++){
+		    
+		for(int newZ = -1 * radius; newZ <= radius; newZ++){
+		    
+		    if(newX*newX + newY*newY + newZ*newZ <= radius*radius){
+			
+			if(world.getBlockId(newX + x, newY + y, newZ + z) == blockID){
+			    
+			    result.add(new BlockEntry(newX + x, newY + y, newZ + z, blockID));
+			    
+			}
+			
+		    }
+		    
+		}
+		    
 	    }
-
+	    
 	}
+	    	
+	return result;
 
-	return null;
-
+    }
+    
+    public int getMaxFromRadius(int radius){
+	
+	// Num of blocks in segments + Num of blocks in middle slice
+	
+	return (int) (4*Math.pow(radius, 3) + (6*radius) + (4*Math.pow(radius, 2)));
+	
     }
 
     public static boolean blockIsTouching(World world, int blockID, int x,

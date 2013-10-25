@@ -1,14 +1,13 @@
-package vivadaylight3.myrmecology.common.entity.ai;
+package vivadaylight3.myrmecology.api;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.api.IEntityAnt;
 
 public class EntityAIAntBehaviour extends EntityAIBase {
 
-    private World world;
-    private IEntityAnt theAnt;
+    protected World world;
+    protected IEntityAnt theAnt;
     private PathNavigate pathFinder;
 
     /**
@@ -30,37 +29,26 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-	
-	System.out.println("AI shouldExecute");
-	
+		
 	return true;
     }
-
-    @Override
-    public void startExecuting() {
+    
+    public int getPosX(){
 	
-	System.out.println("AI startExecuting");
-
-	//this.theAnt.startPerformingBehaviour();
-
+	return (int) this.theAnt.getPosX();
+	
     }
-
-    @Override
-    public void updateTask() {
+    
+    public int getPosY(){
+    	
+    	return (int) this.theAnt.getPosY();
 	
-	System.out.println("AI updateTask");
-
-	this.theAnt.updateBehaviour();
-
     }
-
-    @Override
-    public void resetTask() {
+    
+    public int getPosZ(){
 	
-	System.out.println("AI resetTask");
-
-	//this.theAnt.resetBehaviour();
-
+	return (int) this.theAnt.getPosZ();
+	
     }
 
 }

@@ -5,7 +5,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
-import vivadaylight3.myrmecology.common.entity.ant.EntityAntBarbaric;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntBarbaric extends ItemAnt {
@@ -108,7 +107,7 @@ public class AntBarbaric extends ItemAnt {
     @Override
     public Entity getNewEntity(World parWorld){
 	
-	return new EntityAntBarbaric(parWorld);
+	return null;
 	
     }
 

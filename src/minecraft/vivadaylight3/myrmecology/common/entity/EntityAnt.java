@@ -9,10 +9,10 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import vivadaylight3.myrmecology.api.EntityAIAntBehaviour;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.entity.ai.EntityAIAntBehaviour;
 
 public class EntityAnt extends EntityCreature implements IEntityAnt {
 
@@ -20,21 +20,42 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	super(par1World);
 	this.setSize(1.0F, 1.0F);
 	this.getNavigator().setAvoidsWater(true);
-<<<<<<< HEAD
-	this.tasks.addTask(1,
-		new EntityAIAntBehaviour(this, par1World, this.getNavigator()));
-=======
-    this.tasks.addTask(1, new EntityAISwimming(this));
-    this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0D, false));
-    this.tasks.addTask(3, new EntityAIWander(this, 0.8D));
+    this.tasks.addTask(2, new EntityAISwimming(this));
+    this.tasks.addTask(3, new EntityAIWander(this, 0.1D));
     this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(5, new EntityAILookIdle(this));
-	this.tasks.addTask(6, new EntityAIAntBehaviour(this, par1World, this.getNavigator()));
->>>>>>> origin/Aurilux's-Branch
+    }
+    
+    @Override
+    public void moveEntityTo(int x, int y, int z){
+	
+	this.getNavigator().tryMoveToXYZ(x, y, z, 0.3D);
+	
     }
 
     public ItemAnt getAnt() {
 	return Register.antForest;
+    }
+    
+    @Override
+    public double getPosX(){
+	
+	return this.posX;
+	
+    }
+    
+    @Override
+    public double getPosY(){
+	
+	return this.posY;
+	
+    }
+    
+    @Override
+    public double getPosZ(){
+	
+	return this.posZ;
+	
     }
     
     @Override
@@ -59,34 +80,6 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     @Override
     protected String getDeathSound() {
 	return "ant." + this.getAnt().getSpeciesSubName() + ".death";
-    }
-
-    @Override
-    public boolean canPerformBehaviour() {
-	System.out.println("canPerformBehaviour");
-
-	return true;
-    }
-
-    @Override
-    public void startPerformingBehaviour() {
-
-	System.out.println("startPerformingBehaviour");
-
-    }
-
-    @Override
-    public void updateBehaviour() {
-
-	System.out.println("updateBehaviour");
-
-    }
-
-    @Override
-    public void resetBehaviour() {
-
-	System.out.println("resetBehaviour");
-
     }
 
 }

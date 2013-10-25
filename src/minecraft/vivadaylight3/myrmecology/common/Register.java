@@ -30,6 +30,8 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillSwamp;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntCarpenter;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
@@ -94,6 +96,8 @@ public class Register {
     
     public static int entityAntForestID;
     public static int entityAntCarpenterID;
+    public static int entityAntOdourousID;
+    public static int entityAntScavengerID;
 
     public static final int GUI_ID_ANTFARM = 1;
     public static final int GUI_ID_MYRMOPAEDIA = 2;
@@ -602,6 +606,12 @@ public class Register {
 
 	addEntityAnt(EntityAntCarpenter.class, antCarpenter.getSpeciesName(),
 		entityAntCarpenterID, 100, 20, true);
+	
+	addEntityAnt(EntityAntOdourous.class, antOdourous.getSpeciesName(),
+		entityAntOdourousID, 100, 20, true);
+	
+	addEntityAnt(EntityAntScavenger.class, antScavenger.getSpeciesName(),
+		entityAntScavengerID, 100, 20, true);
 
 	/*
 	 * EntityRegistry.registerModEntity(EntityAntForest.class,

@@ -18,25 +18,28 @@ public class AntBehaviourOdourous extends EntityAIAntBehaviour {
 	    PathNavigate parPathFinder) {
 	super(parEntityAnt, parWorld, parPathFinder);
     }
-    
+
     @Override
-    public void startExecuting(){
-	
-	ArrayList<EntityPlayer> list = Environment.getEntitiesInRadius(world, this.theAnt.getPosX(), this.theAnt.getPosY(), this.theAnt.getPosZ(), 5);
-	
-	for(int k = 0; k < list.size(); k++){
-	    	    
-	    list.get(k).addPotionEffect(new PotionEffect(Potion.poison.id, 60, 1, true));
-	    
+    public void startExecuting() {
+
+	ArrayList<EntityPlayer> list = Environment.getEntitiesInRadius(world,
+		this.theAnt.getPosX(), this.theAnt.getPosY(),
+		this.theAnt.getPosZ(), 5);
+
+	for (int k = 0; k < list.size(); k++) {
+
+	    list.get(k).addPotionEffect(
+		    new PotionEffect(Potion.poison.id, 60, 1, true));
+
 	}
-	    	
+
     }
-    
+
     @Override
-    public void updateTask(){
-	
+    public void updateTask() {
+
 	this.startExecuting();
-	
+
     }
 
 }

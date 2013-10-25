@@ -28,19 +28,19 @@ public class ChamberCommon extends ItemBreedingChamber {
 	return "Common Ant ";
 
     }
-    
+
     public boolean usesColourRendering() {
 
 	return true;
 
     }
-    
+
     protected int[] getColours() {
 
 	return this.getAnt().getColours();
 
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses() {

@@ -8,7 +8,7 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 
     protected World world;
     protected IEntityAnt theAnt;
-    private PathNavigate pathFinder;
+    protected PathNavigate pathFinder;
 
     /**
      * The AI used for ant behaviours
@@ -29,26 +29,26 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-		
+
 	return true;
     }
-    
-    public int getPosX(){
-	
+
+    public int getPosX() {
+
 	return (int) this.theAnt.getPosX();
-	
+
     }
-    
-    public int getPosY(){
-    	
-    	return (int) this.theAnt.getPosY();
-	
+
+    public int getPosY() {
+
+	return (int) this.theAnt.getPosY();
+
     }
-    
-    public int getPosZ(){
-	
+
+    public int getPosZ() {
+
 	return (int) this.theAnt.getPosZ();
-	
+
     }
 
 }

@@ -59,7 +59,7 @@ public class ItemAnt extends Item {
     public ItemAnt(int par1) {
 
 	super(par1);
-	
+
 	Register.addAnt(this);
 
 	setHasSubtypes(true);

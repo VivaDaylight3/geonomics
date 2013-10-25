@@ -94,12 +94,12 @@ public class AntOdourous extends ItemAnt {
 	return new int[] { 0x8c5210, 0xf7941d };
 
     }
-    
+
     @Override
-    public Entity getNewEntity(World parWorld){
-	
+    public Entity getNewEntity(World parWorld) {
+
 	return new EntityAntOdourous(parWorld);
-	
+
     }
 
 }

@@ -15,29 +15,61 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     public AntBehaviourCarpenter(IEntityAnt parEntityAnt, World parWorld,
 	    PathNavigate parPathFinder) {
 	super(parEntityAnt, parWorld, parPathFinder);
-		
+
     }
-    
+
     @Override
     public void startExecuting() {
 	
-	this.theAnt.moveEntityTo((int)this.theAnt.getPosX() + 1, (int)this.theAnt.getPosY(), (int)this.theAnt.getPosZ());
-	
-	ArrayList<BlockEntry> list = Environment.getBlocksInRadius(world, (int)this.theAnt.getPosX(), (int)this.theAnt.getPosY(), (int)this.theAnt.getPosZ(), 10, Block.wood.blockID);
-	
-	for(int k = 0; k < list.size(); k++){
+	System.out.println("aiCarpenter star");
+
+	if (this.theAnt.getHasGoneTo()) {
 	    
-	    this.theAnt.moveEntityTo(list.get(k).xCoord, list.get(k).yCoord, list.get(k).zCoord);
+	    System.out.println("aiCarpenter star -: hasgone == true");
+
+	    ArrayList<BlockEntry> list = Environment.getBlocksInRadius(world,
+		    (int) this.theAnt.getPosX(), (int) this.theAnt.getPosY(),
+		    (int) this.theAnt.getPosZ(), 10, Block.wood.blockID);
+
+	    world.setBlockToAir(list.get(0).xCoord, list.get(0).yCoord,
+		    list.get(0).zCoord);
+	    this.theAnt.setShouldGoTo(true);
+	    this.theAnt.setHasGoneTo(false);
+	    this.theAnt.setGoToX((int) this.theAnt.getHomeX());
+	    this.theAnt.setGoToY((int) this.theAnt.getHomeY());
+	    this.theAnt.setGoToZ((int) this.theAnt.getHomeZ());
+
+	} else {
 	    
-	    this.world.setBlock(list.get(k).xCoord, list.get(k).yCoord, list.get(k).zCoord, Block.bedrock.blockID);
-	    
+	    System.out.println("aiCarpenter star -: hasgone != true");
+
+	    ArrayList<BlockEntry> list = Environment.getBlocksInRadius(world,
+		    (int) this.theAnt.getPosX(), (int) this.theAnt.getPosY(),
+		    (int) this.theAnt.getPosZ(), 10, Block.wood.blockID);
+
+	    if (list != null) {
+
+		if (list.get(0) != null) {
+		    
+		    System.out.println("aiCarpenter star -: list[0] != null");
+
+		    this.theAnt.setShouldGoTo(true);
+		    this.theAnt.setHasGoneTo(false);
+		    this.theAnt.setGoToX(list.get(0).xCoord);
+		    this.theAnt.setGoToY(list.get(0).yCoord);
+		    this.theAnt.setGoToZ(list.get(0).zCoord);
+
+		}
+
+	    }
+
 	}
 
     }
-    
+
     @Override
     public void updateTask() {
-	
+
 	this.startExecuting();
 
     }

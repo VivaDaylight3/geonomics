@@ -9,8 +9,39 @@ public interface IEntityAnt {
     double getPosY();
 
     double getPosZ();
-    
-    void moveEntityTo(int x, int y, int z);
 
+    int getGoToX();
+
+    int getGoToY();
+
+    int getGoToZ();
+
+    void setGoToX(int x);
+
+    void setGoToY(int y);
+
+    void setGoToZ(int z);
+
+    double getHomeX();
+
+    double getHomeY();
+
+    double getHomeZ();
+
+    void setHomeX(int x);
+
+    void setHomeY(int y);
+
+    void setHomeZ(int z);
+
+    boolean getShouldGoTo();
+
+    boolean getHasGoneTo();
+
+    void setShouldGoTo(boolean bool);
+
+    void setHasGoneTo(boolean bool);
+
+    void moveEntityTo(int x, int y, int z);
 
 }

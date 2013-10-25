@@ -26,19 +26,19 @@ public class ChamberOdourous extends ItemBreedingChamber {
 	return "Odourous Ant ";
 
     }
-    
+
     public boolean usesColourRendering() {
 
 	return true;
 
     }
-    
+
     protected int[] getColours() {
 
 	return this.getAnt().getColours();
 
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses() {

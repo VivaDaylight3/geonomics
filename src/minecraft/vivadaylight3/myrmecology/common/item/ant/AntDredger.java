@@ -9,7 +9,6 @@ public class AntDredger extends ItemAnt {
 
     public AntDredger(int par1) {
 	super(par1);
-	// TODO Auto-generated constructor stub
     }
 
     @Override
@@ -84,6 +83,13 @@ public class AntDredger extends ItemAnt {
 
     @Override
     public boolean getNocturnal() {
+
+	return true;
+
+    }
+
+    @Override
+    public boolean getWinged() {
 
 	return true;
 

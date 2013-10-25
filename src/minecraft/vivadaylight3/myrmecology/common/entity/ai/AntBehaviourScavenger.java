@@ -11,12 +11,10 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	    PathNavigate parPathFinder) {
 	super(parEntityAnt, parWorld, parPathFinder);
     }
-    
+
     @Override
-    public void startExecuting(){
-	
-	
-	
+    public void startExecuting() {
+
     }
 
 }

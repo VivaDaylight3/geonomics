@@ -37,37 +37,43 @@ public class Environment {
 	return entity;
 
     }
-    
-    public static boolean coordinateIsCloseTo(int x, int y, int z, int x2, int y2, int z2, int distance){
-	
-	for(int k = -distance; k <= distance; k++){
-	    
-	    if(x+k == x2 || y+k == y2 || z+k == z2){
-		
+
+    public static boolean coordinateIsCloseTo(int x, int y, int z, int x2,
+	    int y2, int z2, int distance) {
+
+	for (int k = -distance; k <= distance; k++) {
+
+	    if (x + k == x2 || y + k == y2 || z + k == z2) {
+
 		return true;
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
-    
-    public static ArrayList<EntityPlayer> getEntitiesInRadius(World world, double x, double y, double z, int radius){
-	
-	AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool().getAABB(x, y, z, (double)(x + 1), (double)(y + 1), (double)(z + 1)).expand(radius, radius, radius);
-        axisalignedbb.maxY = (double)world.getHeight();
-        List list = world.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
-        
-        ArrayList<EntityPlayer> result = new ArrayList<EntityPlayer>();
-        
-        for(int k = 0; k < list.size(); k++){
-            
-            result.add((EntityPlayer) list.get(k));
-            
-        }
-        return result;	
+
+    public static ArrayList<EntityPlayer> getEntitiesInRadius(World world,
+	    double x, double y, double z, int radius) {
+
+	AxisAlignedBB axisalignedbb = AxisAlignedBB
+		.getAABBPool()
+		.getAABB(x, y, z, (double) (x + 1), (double) (y + 1),
+			(double) (z + 1)).expand(radius, radius, radius);
+	axisalignedbb.maxY = (double) world.getHeight();
+	List list = world.getEntitiesWithinAABB(EntityPlayer.class,
+		axisalignedbb);
+
+	ArrayList<EntityPlayer> result = new ArrayList<EntityPlayer>();
+
+	for (int k = 0; k < list.size(); k++) {
+
+	    result.add((EntityPlayer) list.get(k));
+
+	}
+	return result;
     }
 
     public static boolean blockIsPowered(World world, int x, int y, int z) {
@@ -189,43 +195,46 @@ public class Environment {
     }
 
     // TODO
-    public static ArrayList<BlockEntry> getBlocksInRadius(World world, int x, int y, int z,
-	    int radius, int blockID) {
-	
+    public static ArrayList<BlockEntry> getBlocksInRadius(World world, int x,
+	    int y, int z, int radius, int blockID) {
+
 	ArrayList<BlockEntry> result = new ArrayList<BlockEntry>();
-	
-	for(int newX = -1 * radius; newX <= radius; newX++){
-	    
-	    for(int newY = -1 * radius; newY <= radius; newY++){
-		    
-		for(int newZ = -1 * radius; newZ <= radius; newZ++){
-		    
-		    if(newX*newX + newY*newY + newZ*newZ <= radius*radius){
-			
-			if(world.getBlockId(newX + x, newY + y, newZ + z) == blockID){
-			    
-			    result.add(new BlockEntry(newX + x, newY + y, newZ + z, blockID));
-			    
+
+	for (int newX = -1 * radius; newX <= radius; newX++) {
+
+	    for (int newY = -1 * radius; newY <= radius; newY++) {
+
+		for (int newZ = -1 * radius; newZ <= radius; newZ++) {
+
+		    if (newX * newX + newY * newY + newZ * newZ <= radius
+			    * radius) {
+
+			if (world.getBlockId(newX + x, newY + y, newZ + z) == blockID) {
+
+			    result.add(new BlockEntry(newX + x, newY + y, newZ
+				    + z, blockID));
+
 			}
-			
+
 		    }
-		    
+
 		}
-		    
+
 	    }
-	    
+
 	}
-	    	
+
 	return result;
 
     }
-    
-    public int getMaxFromRadius(int radius){
-	
+
+    public int getMaxFromRadius(int radius) {
+
 	// Num of blocks in segments + Num of blocks in middle slice
-	
-	return (int) (4*Math.pow(radius, 3) + (6*radius) + (4*Math.pow(radius, 2)));
-	
+
+	return (int) (4 * Math.pow(radius, 3) + (6 * radius) + (4 * Math.pow(
+		radius, 2)));
+
     }
 
     public static boolean blockIsTouching(World world, int blockID, int x,

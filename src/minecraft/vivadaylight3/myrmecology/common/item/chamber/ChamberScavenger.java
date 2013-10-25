@@ -26,19 +26,19 @@ public class ChamberScavenger extends ItemBreedingChamber {
 	return "Scavanger Ant ";
 
     }
-    
+
     public boolean usesColourRendering() {
 
 	return true;
 
     }
-    
+
     protected int[] getColours() {
 
 	return this.getAnt().getColours();
 
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses() {

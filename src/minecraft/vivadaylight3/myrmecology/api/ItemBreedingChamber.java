@@ -25,12 +25,12 @@ public class ItemBreedingChamber extends Item {
 	super(par1);
 	prepareItem();
     }
-    
+
     /**
-     * Returns true if you want your chamber to use Myrmecology's texture overlay.
-     * The colour codes returned by getColours() will be applied to the base
-     * ant textures to create your chamber's coloured texture. Also used with
-     * ItemBreedingChamber
+     * Returns true if you want your chamber to use Myrmecology's texture
+     * overlay. The colour codes returned by getColours() will be applied to the
+     * base ant textures to create your chamber's coloured texture. Also used
+     * with ItemBreedingChamber
      * 
      * @return
      */
@@ -39,7 +39,7 @@ public class ItemBreedingChamber extends Item {
 	return true;
 
     }
-    
+
     public Icon getIconFromDamageForRenderPass(int par1, int par2) {
 
 	if (par2 == 0) {
@@ -52,20 +52,20 @@ public class ItemBreedingChamber extends Item {
 
 	}
     }
-    
+
     protected int[] getColours() {
 
 	return new int[] { 0xE6AD4B, 0x3CE9F5 };
 
     }
-    
+
     @Override
     public int getColorFromItemStack(ItemStack par1ItemStack, int pass) {
 
 	return this.getColours()[pass];
 
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses() {
@@ -88,8 +88,8 @@ public class ItemBreedingChamber extends Item {
     public void registerIcons(IconRegister register) {
 
 	this.iconOverlay = register.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.ITEM_CHAMBER_NAME+"_overlay");
-	
+		+ Reference.ITEM_CHAMBER_NAME + "_overlay");
+
 	this.iconBase = register.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_CHAMBER_NAME);
 

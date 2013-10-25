@@ -103,12 +103,12 @@ public class AntBarbaric extends ItemAnt {
 	return true;
 
     }
-    
+
     @Override
-    public Entity getNewEntity(World parWorld){
-	
+    public Entity getNewEntity(World parWorld) {
+
 	return null;
-	
+
     }
 
     @Override

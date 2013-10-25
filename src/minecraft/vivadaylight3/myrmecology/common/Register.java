@@ -93,7 +93,7 @@ public class Register {
 
     public static final int ID_BLOCK = 600; // 12
     public static final int ID_ITEM = 3853; // 23
-    
+
     public static int entityAntForestID;
     public static int entityAntCarpenterID;
     public static int entityAntOdourousID;
@@ -606,10 +606,10 @@ public class Register {
 
 	addEntityAnt(EntityAntCarpenter.class, antCarpenter.getSpeciesName(),
 		entityAntCarpenterID, 100, 20, true);
-	
+
 	addEntityAnt(EntityAntOdourous.class, antOdourous.getSpeciesName(),
 		entityAntOdourousID, 100, 20, true);
-	
+
 	addEntityAnt(EntityAntScavenger.class, antScavenger.getSpeciesName(),
 		entityAntScavengerID, 100, 20, true);
 
@@ -763,7 +763,7 @@ public class Register {
     public static void addEntityAnt(Class<? extends EntityLiving> class1,
 	    String antName, int ID, int trackingRange, int updateFrequency,
 	    boolean sendsVelocityUpdates) {
-	
+
 	ID = ModLoader.getUniqueEntityId();
 
 	getEntityAntList().add((Class<? extends IEntityAnt>) class1);

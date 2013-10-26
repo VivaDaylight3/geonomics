@@ -525,7 +525,9 @@ public class Environment {
 			inventory[k] = new ItemStack(item.getItem(), max,
 				item.getItemDamage());
 
+			if(tileEntity != null){
 			tileEntity.onInventoryChanged();
+			}
 
 		    } else if (amount < max) {
 
@@ -534,7 +536,9 @@ public class Environment {
 
 			amount = 0;
 
-			tileEntity.onInventoryChanged();
+			if(tileEntity != null){
+				tileEntity.onInventoryChanged();
+				}
 
 		    }
 
@@ -547,7 +551,9 @@ public class Environment {
 
 			amount = max - inventory[k].stackSize;
 
-			tileEntity.onInventoryChanged();
+			if(tileEntity != null){
+				tileEntity.onInventoryChanged();
+				}
 
 		    }
 

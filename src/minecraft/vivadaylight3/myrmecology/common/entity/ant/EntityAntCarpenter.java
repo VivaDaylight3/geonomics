@@ -15,10 +15,10 @@ public class EntityAntCarpenter extends EntityAnt {
 	super(par1World);
 	this.tasks
 		.addTask(
-			1,
+			2,
 			new AntBehaviourCarpenter(this, par1World, this
 				.getNavigator()));
-	this.tasks.addTask(2,
+	this.tasks.addTask(1,
 		new EntityAIAntGoTo(this, par1World, this.getNavigator()));
     }
 

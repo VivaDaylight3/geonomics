@@ -1,6 +1,6 @@
 package vivadaylight3.myrmecology.client;
 
-import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraft.entity.player.EntityPlayer;
 import vivadaylight3.myrmecology.client.model.ModelAnt;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
 import vivadaylight3.myrmecology.common.CommonProxy;

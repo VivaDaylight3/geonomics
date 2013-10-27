@@ -37,8 +37,8 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 		world.setBlockToAir(list.get(0).xCoord, list.get(0).yCoord,
 			list.get(0).zCoord);
 		
-		ItemStack stack = new ItemStack(Block.wood, meta, 1);
-		Environment.spawnItem(stack, world, getPosX(), getPosY(), getPosZ());
+		ItemStack stack = new ItemStack(Block.wood, 1, meta);
+		this.theAnt.dropItemStack(stack);
 		
 		//Environment.addItemStackToInventory(new ItemStack(Block.wood, meta, 1), this.theAnt.inventory, 64, null);
 		

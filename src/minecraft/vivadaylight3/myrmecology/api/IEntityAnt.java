@@ -47,4 +47,6 @@ public interface IEntityAnt {
 
     int getTicks();
 
+    void dropItemStack(ItemStack stack);
+
 }

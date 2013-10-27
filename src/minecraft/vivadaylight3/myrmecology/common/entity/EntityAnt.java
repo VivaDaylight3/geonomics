@@ -46,6 +46,13 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     }
     
     @Override
+    public void dropItemStack(ItemStack stack){
+	
+	this.entityDropItem(stack, 0.0F);
+	
+    }
+    
+    @Override
     public void onUpdate(){
 	
 	super.onUpdate();

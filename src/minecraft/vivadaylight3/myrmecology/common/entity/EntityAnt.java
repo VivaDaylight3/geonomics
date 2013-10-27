@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.Maths;
 
 public class EntityAnt extends EntityCreature implements IEntityAnt {
 
@@ -25,6 +26,8 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
     boolean shouldGoTo = false;
     boolean hasGoneTo = false;
+    
+    public int ticksPassed;
 
     public EntityAnt(World par1World) {
 	super(par1World);
@@ -40,6 +43,28 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	this.setHomeY((int) getPosY());
 	this.setHomeZ((int) getPosZ());
 
+    }
+    
+    @Override
+    public void onUpdate(){
+	
+	super.onUpdate();
+	
+	ticksPassed++;
+	
+	if(ticksPassed > 20){
+	    
+	    ticksPassed = 0;
+	    
+	}
+	
+    }
+    
+    @Override
+    public int getTicks(){
+	
+	return ticksPassed;
+	
     }
 
     @Override

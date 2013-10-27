@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 public interface IEntityAnt {
 
     ItemStack[] inventory = new ItemStack[1];
-
     double getPosX();
 
     double getPosY();
@@ -45,5 +44,7 @@ public interface IEntityAnt {
     void setHasGoneTo(boolean bool);
 
     void moveEntityTo(int x, int y, int z);
+
+    int getTicks();
 
 }

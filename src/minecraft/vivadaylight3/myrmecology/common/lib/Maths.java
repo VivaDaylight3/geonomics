@@ -13,6 +13,20 @@ public class Maths {
 	return i;
 
     }
+    
+    public static int incrementTo(int numToChange, int increment, int to, int setTo){
+	
+	if(numToChange == to){
+	    
+	    return setTo;
+	    
+	}else{
+	    
+	    return numToChange += increment;
+	    
+	}
+	
+    }
 
     public static boolean chanceOf(int chance, int max) {
 

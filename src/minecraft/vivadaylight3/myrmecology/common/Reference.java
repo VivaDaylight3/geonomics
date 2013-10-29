@@ -54,6 +54,7 @@ public class Reference {
     public static final String BLOCK_ANTHILL_NAME = "antHill";
     public static final String BLOCK_INCUBATOR_NAME = "incubator";
     public static final String BLOCK_FUNGI_NAME = "fungi";
+    public static final String BLOCK_ANTCHEST_NAME = "antChest";
 
     // Items
     public static final String ITEM_EXTRACTOR_NAME = "extractor";

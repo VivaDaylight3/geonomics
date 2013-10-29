@@ -7,8 +7,4 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy {
 
-    // Client stuff
-    public void registerRenderers() {
-    }
-
 }

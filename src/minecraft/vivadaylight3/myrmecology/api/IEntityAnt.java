@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 public interface IEntityAnt {
 
     ItemStack[] inventory = new ItemStack[1];
+
     double getPosX();
 
     double getPosY();

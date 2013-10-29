@@ -2,34 +2,22 @@ package vivadaylight3.myrmecology.api;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Facing;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Time;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.network.FMLNetworkHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -112,6 +100,15 @@ public class ItemAnt extends Item {
 	}
 
 	return false;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
+	    EntityPlayer par3EntityPlayer) {
+
+	this.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
+	return par1ItemStack;
+
     }
 
     public boolean onItemUse(ItemStack par1ItemStack,

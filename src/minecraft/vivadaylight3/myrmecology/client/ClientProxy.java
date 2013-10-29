@@ -1,19 +1,36 @@
 package vivadaylight3.myrmecology.client;
 
-import net.minecraft.entity.player.EntityPlayer;
-import vivadaylight3.myrmecology.client.model.ModelAnt;
-import vivadaylight3.myrmecology.client.renderer.RenderAnt;
+import java.util.ArrayList;
+
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.EntityLiving;
 import vivadaylight3.myrmecology.common.CommonProxy;
-import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ClientProxy extends CommonProxy {
 
-    @Override
-    public void registerRenderers() {
-	RenderingRegistry.registerEntityRenderingHandler(EntityAntForest.class,
-		new RenderAnt(new ModelAnt(), 0.5f));
+    static ArrayList<Class<? extends EntityLiving>> entityClassList = new ArrayList<Class<? extends EntityLiving>>();
+    static  ArrayList<RenderLiving> renderClassList = new ArrayList<RenderLiving>();
+
+    public static void addAntForRenderer(Class<? extends EntityLiving> parClass,
+	    RenderLiving render) {
+
+	entityClassList.add(parClass);
+	renderClassList.add(render);
+
+    }
+
+    public static void registerRenderers() {
+
+	for (int k = 0; k < entityClassList.size(); k++) {
+
+	    RenderingRegistry.registerEntityRenderingHandler(
+		    (Class<? extends EntityLiving>) entityClassList.get(k),
+		    renderClassList.get(k));
+
+	}
+	
     }
 
     public static String getCurrentLanguage() {

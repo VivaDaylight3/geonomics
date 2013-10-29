@@ -26,7 +26,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
     boolean shouldGoTo = false;
     boolean hasGoneTo = false;
-    
+
     public int ticksPassed;
 
     public EntityAnt(World par1World) {
@@ -44,34 +44,34 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	this.setHomeZ((int) getPosZ());
 
     }
-    
+
     @Override
-    public void dropItemStack(ItemStack stack){
-	
+    public void dropItemStack(ItemStack stack) {
+
 	this.entityDropItem(stack, 0.0F);
-	
+
     }
-    
+
     @Override
-    public void onUpdate(){
-	
+    public void onUpdate() {
+
 	super.onUpdate();
-	
+
 	ticksPassed++;
-	
-	if(ticksPassed > 20){
-	    
+
+	if (ticksPassed > 20) {
+
 	    ticksPassed = 0;
-	    
+
 	}
-	
+
     }
-    
+
     @Override
-    public int getTicks(){
-	
+    public int getTicks() {
+
 	return ticksPassed;
-	
+
     }
 
     @Override

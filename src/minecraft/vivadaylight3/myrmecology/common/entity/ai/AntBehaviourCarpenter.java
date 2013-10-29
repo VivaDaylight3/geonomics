@@ -23,27 +23,27 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     public void startExecuting() {
 
 	if (this.theAnt.getHasGoneTo()) {
-	    
+
 	    ArrayList<BlockEntry> list = Environment.getBlocksInRadius(world,
 		    (int) this.theAnt.getPosX(), (int) this.theAnt.getPosY(),
 		    (int) this.theAnt.getPosZ(), 10, Block.wood.blockID);
-	    
-	    System.out.println(this.theAnt.getTicks());
 
 	    if (list.size() > 1 && this.theAnt.getTicks() / 20 == 1) {
-		
-		int meta = this.world.getBlockMetadata(list.get(0).xCoord, list.get(0).yCoord, list.get(0).zCoord);
-				
+
+		int meta = this.world.getBlockMetadata(list.get(0).xCoord,
+			list.get(0).yCoord, list.get(0).zCoord);
+
 		world.setBlockToAir(list.get(0).xCoord, list.get(0).yCoord,
 			list.get(0).zCoord);
-		
+
 		ItemStack stack = new ItemStack(Block.wood, 1, meta);
 		this.theAnt.dropItemStack(stack);
-		
-		//Environment.addItemStackToInventory(new ItemStack(Block.wood, meta, 1), this.theAnt.inventory, 64, null);
-		
+
+		// Environment.addItemStackToInventory(new ItemStack(Block.wood,
+		// meta, 1), this.theAnt.inventory, 64, null);
+
 	    } else {
-		
+
 		this.theAnt.setShouldGoTo(true);
 		this.theAnt.setHasGoneTo(false);
 		this.theAnt.setGoToX((int) this.theAnt.getHomeX());

@@ -1,9 +1,12 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntScavenger extends ItemAnt {
@@ -90,6 +93,13 @@ public class AntScavenger extends ItemAnt {
     public int[] getColours() {
 
 	return new int[] { 0x724539, 0xf69679 };
+
+    }
+
+    @Override
+    public Entity getNewEntity(World parWorld) {
+
+	return new EntityAntScavenger(parWorld);
 
     }
 

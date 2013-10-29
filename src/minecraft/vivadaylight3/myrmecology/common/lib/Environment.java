@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,6 +53,28 @@ public class Environment {
 	}
 
 	return false;
+
+    }
+
+    public static ArrayList<EntityItem> getEntityItemsInRadius(World world,
+	    double x, double y, double z, int radius) {
+
+	List list = world.getEntitiesWithinAABB(
+		EntityItem.class,
+		AxisAlignedBB.getAABBPool().getAABB(x - radius, y - radius,
+			z - radius, x + radius, y + radius, z + radius));
+
+	ArrayList<EntityItem> result = new ArrayList<EntityItem>();
+
+	for (int k = 0; k < list.size(); k++) {
+
+	    System.out.println("list " + k);
+
+	    result.add((EntityItem) list.get(k));
+
+	}
+
+	return result;
 
     }
 
@@ -525,8 +548,8 @@ public class Environment {
 			inventory[k] = new ItemStack(item.getItem(), max,
 				item.getItemDamage());
 
-			if(tileEntity != null){
-			tileEntity.onInventoryChanged();
+			if (tileEntity != null) {
+			    tileEntity.onInventoryChanged();
 			}
 
 		    } else if (amount < max) {
@@ -536,9 +559,9 @@ public class Environment {
 
 			amount = 0;
 
-			if(tileEntity != null){
-				tileEntity.onInventoryChanged();
-				}
+			if (tileEntity != null) {
+			    tileEntity.onInventoryChanged();
+			}
 
 		    }
 
@@ -551,9 +574,9 @@ public class Environment {
 
 			amount = max - inventory[k].stackSize;
 
-			if(tileEntity != null){
-				tileEntity.onInventoryChanged();
-				}
+			if (tileEntity != null) {
+			    tileEntity.onInventoryChanged();
+			}
 
 		    }
 

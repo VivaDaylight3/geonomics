@@ -1,11 +1,7 @@
 package vivadaylight3.myrmecology.common.lib;
 
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
-import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
-import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.entity.ant.EntityAntForest;
 
 public class Resources {
 
@@ -34,6 +30,9 @@ public class Resources {
     public static final ResourceLocation ENTITY_ANT_ODOUROUS = getResourceLocation(ENTITY_LOCATION
 	    + "antOdourous.png");
 
+    public static final ResourceLocation ENTITY_ANT_SCAVENGER = getResourceLocation(ENTITY_LOCATION
+	    + "antScavenger.png");
+
     public static final ResourceLocation GUI_ANTFARM = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_ANTFARM_NAME + FORMAT);
 
@@ -42,6 +41,9 @@ public class Resources {
 
     public static final ResourceLocation GUI_ANTOPEDIA = getResourceLocation(GUI_LOCATION
 	    + Reference.ITEM_MYRMOPAEDIA_NAME + FORMAT);
+
+    public static final ResourceLocation GUI_ANTCHEST = getResourceLocation(GUI_LOCATION
+	    + Reference.BLOCK_ANTCHEST_NAME + FORMAT);
 
     private static ResourceLocation getResourceLocation(String path) {
 

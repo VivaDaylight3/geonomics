@@ -3,14 +3,17 @@ package vivadaylight3.myrmecology.common.handler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import vivadaylight3.myrmecology.client.gui.GuiAntChest;
 import vivadaylight3.myrmecology.client.gui.GuiAntFarm;
 import vivadaylight3.myrmecology.client.gui.GuiIncubator;
 import vivadaylight3.myrmecology.client.gui.GuiMyrmopaedia;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.inventory.ContainerAntChest;
 import vivadaylight3.myrmecology.common.inventory.ContainerAntFarm;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -35,6 +38,10 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 	case Register.GUI_ID_MYRMOPAEDIA:
 	    return new ContainerMyrmopaedia(new InventoryItem(
 		    player.getHeldItem()), player);
+
+	case Register.GUI_ID_ANTCHEST:
+	    return new ContainerAntChest(player.inventory,
+		    (TileEntityAntChest) tileEntity);
 
 	}
 
@@ -66,6 +73,10 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 	    ContainerMyrmopaedia container = new ContainerMyrmopaedia(
 		    inventory, player);
 	    return new GuiMyrmopaedia(container, player);
+
+	case Register.GUI_ID_ANTCHEST:
+	    return new GuiAntChest(player.inventory,
+		    (TileEntityAntChest) tileEntity);
 
 	}
 

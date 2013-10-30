@@ -1,12 +1,23 @@
 package vivadaylight3.myrmecology.common.entity;
 
+import java.util.Iterator;
+
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityHanging;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagShort;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
@@ -234,6 +245,108 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
 	homeZ = z;
 
+    }
+    
+    @Override
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+	par1NBTTagCompound.setDouble("HomeX", this.getHomeX());
+	par1NBTTagCompound.setDouble("HomeY", this.getHomeY());
+	par1NBTTagCompound.setDouble("HomeZ", this.getHomeZ());
+	par1NBTTagCompound.setDouble("GoToX", this.getGoToX());
+	par1NBTTagCompound.setDouble("GoToY", this.getGoToY());
+	par1NBTTagCompound.setDouble("GoToZ", this.getGoToZ());
+	
+	par1NBTTagCompound.setFloat("HealF", this.getHealth());
+        par1NBTTagCompound.setShort("Health", (short)((int)Math.ceil((double)this.getHealth())));
+        par1NBTTagCompound.setShort("HurtTime", (short)this.hurtTime);
+        par1NBTTagCompound.setShort("DeathTime", (short)this.deathTime);
+        par1NBTTagCompound.setShort("AttackTime", (short)this.attackTime);
+        par1NBTTagCompound.setFloat("AbsorptionAmount", this.getAbsorptionAmount());
+        ItemStack[] aitemstack = this.getLastActiveItems();
+        int i = aitemstack.length;
+        int j;
+        ItemStack itemstack;
+
+        for (j = 0; j < i; ++j)
+        {
+            itemstack = aitemstack[j];
+        }
+
+        par1NBTTagCompound.setTag("Attributes", SharedMonsterAttributes.func_111257_a(this.getAttributeMap()));
+        aitemstack = this.getLastActiveItems();
+        i = aitemstack.length;
+
+        for (j = 0; j < i; ++j)
+        {
+            itemstack = aitemstack[j];
+        }
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        this.setAbsorptionAmount(par1NBTTagCompound.getFloat("AbsorptionAmount"));
+        
+        if(par1NBTTagCompound.hasKey("HomeX") && par1NBTTagCompound.hasKey("HomeY") && par1NBTTagCompound.hasKey("HomeZ")){
+            
+            this.setHomeX(par1NBTTagCompound.getInteger("HomeX"));
+            this.setHomeY(par1NBTTagCompound.getInteger("HomeY"));
+            this.setHomeZ(par1NBTTagCompound.getInteger("HomeZ"));
+            
+        }
+        
+        if(par1NBTTagCompound.hasKey("GoToX") && par1NBTTagCompound.hasKey("GoToY") && par1NBTTagCompound.hasKey("GoToZ")){
+            
+            this.setGoToX(par1NBTTagCompound.getInteger("GoToX"));
+            this.setGoToY(par1NBTTagCompound.getInteger("GoToY"));
+            this.setGoToZ(par1NBTTagCompound.getInteger("GoToZ"));
+            
+        }
+
+        if (par1NBTTagCompound.hasKey("Attributes") && this.worldObj != null && !this.worldObj.isRemote)
+        {
+            SharedMonsterAttributes.func_111260_a(this.getAttributeMap(), par1NBTTagCompound.getTagList("Attributes"), this.worldObj == null ? null : this.worldObj.getWorldLogAgent());
+        }
+
+        if (par1NBTTagCompound.hasKey("ActiveEffects"))
+        {
+            NBTTagList nbttaglist = par1NBTTagCompound.getTagList("ActiveEffects");
+
+            for (int i = 0; i < nbttaglist.tagCount(); ++i)
+            {
+                NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+                PotionEffect potioneffect = PotionEffect.readCustomPotionEffectFromNBT(nbttagcompound1);
+            }
+        }
+
+        if (par1NBTTagCompound.hasKey("HealF"))
+        {
+            this.setHealth(par1NBTTagCompound.getFloat("HealF"));
+        }
+        else
+        {
+            NBTBase nbtbase = par1NBTTagCompound.getTag("Health");
+
+            if (nbtbase == null)
+            {
+                this.setHealth(this.getMaxHealth());
+            }
+            else if (nbtbase.getId() == 5)
+            {
+                this.setHealth(((NBTTagFloat)nbtbase).data);
+            }
+            else if (nbtbase.getId() == 2)
+            {
+                this.setHealth((float)((NBTTagShort)nbtbase).data);
+            }
+        }
+
+        this.hurtTime = par1NBTTagCompound.getShort("HurtTime");
+        this.deathTime = par1NBTTagCompound.getShort("DeathTime");
+        this.attackTime = par1NBTTagCompound.getShort("AttackTime");
     }
 
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.creativetab.CreativeTabs;
@@ -35,6 +36,7 @@ import vivadaylight3.myrmecology.common.entity.ant.EntityAntCarpenter;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
+import vivadaylight3.myrmecology.common.item.ItemAntBook;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.item.ant.AntBarbaric;
@@ -85,6 +87,7 @@ public class Register {
     private static Configuration config;
 
     public static CreativeTabs tabMyrmecology;
+    public static final Material antHill = new Material(MapColor.dirtColor);
 
     private static ArrayList<ItemAnt> antList = new ArrayList<ItemAnt>();
     private static ArrayList<BlockAntHill> hillList = new ArrayList<BlockAntHill>();
@@ -108,6 +111,7 @@ public class Register {
     public static final int GUI_ID_MYRMOPAEDIA = 2;
     public static final int GUI_ID_INCUBATOR = 3;
     public static final int GUI_ID_ANTCHEST = 4;
+    public static final int GUI_ID_ANTBOOK = 5;
 
     public static int latestItemID = 0;
     public static int latestBlockID = 0;
@@ -122,6 +126,7 @@ public class Register {
 
     public static ItemMyrmopaedia itemAntopedia;
     public static ItemBreedingChamber itemBreedingChamber;
+    public static ItemAntBook itemAntBook;
 
     public static ChamberCommon chamberCommon;
     public static ChamberHarvester chamberHarvester;
@@ -306,6 +311,10 @@ public class Register {
     public static void registerItems() {
 
 	config.load();
+	
+	itemAntBook = new ItemAntBook(config.get(
+		Configuration.CATEGORY_ITEM, Reference.ITEM_ANTBOOK_NAME,
+		getNewItemID()).getInt());
 
 	itemExtractor = new ToolExtractor(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
@@ -440,6 +449,8 @@ public class Register {
 
 	// TODO
 
+	addItem(itemAntBook, "Book of "+Reference.MOD_ID, Reference.ITEM_ANTBOOK_NAME);
+	
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
 	addItem(itemAntopedia, "Myrmopaedia", Reference.ITEM_MYRMOPAEDIA_NAME);
@@ -773,7 +784,7 @@ public class Register {
 	
 	id++;
 
-	ClientProxy.addAntForRenderer(class1, render);
+	ClientProxy.addAntRenderer(class1, render);
 
     }
 

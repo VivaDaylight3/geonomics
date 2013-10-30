@@ -44,6 +44,9 @@ public class Resources {
 
     public static final ResourceLocation GUI_ANTCHEST = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_ANTCHEST_NAME + FORMAT);
+    
+    public static final ResourceLocation GUI_ANTBOOK = getResourceLocation(GUI_LOCATION
+	    + Reference.ITEM_ANTBOOK_NAME + FORMAT);
 
     private static ResourceLocation getResourceLocation(String path) {
 

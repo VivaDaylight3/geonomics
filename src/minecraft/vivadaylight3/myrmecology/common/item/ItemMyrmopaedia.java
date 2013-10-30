@@ -22,8 +22,6 @@ public class ItemMyrmopaedia extends Item {
 	setCreativeTab(Register.tabMyrmecology);
 	setMaxStackSize(1);
 	setUnlocalizedName(Reference.ITEM_MYRMOPAEDIA_NAME);
-	// func_111206_d(Resources.TEXTURE_PREFIX +
-	// Reference.ITEM_ANTOPEDIA_NAME);
     }
 
     @Override
@@ -47,6 +45,13 @@ public class ItemMyrmopaedia extends Item {
 
 	MyrmopaediaProperties.initiateMyrmopaedia(par1ItemStack);
 
+    }
+    
+    @Override
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer){
+	
+	this.onItemUse(par1ItemStack, par3EntityPlayer, par2World, (int)par3EntityPlayer.posX, (int)par3EntityPlayer.posY, (int)par3EntityPlayer.posZ, 0, 0f, 0f, 0f);
+	return par1ItemStack;
     }
 
     @Override

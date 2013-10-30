@@ -28,7 +28,7 @@ public class BlockAntHill extends Block {
     private Icon icon;
 
     public BlockAntHill(int par1, Material material) {
-	super(par1, material);
+	super(par1, Register.antHill);
 
 	prepareBlock();
 

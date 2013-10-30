@@ -68,8 +68,6 @@ public class Environment {
 
 	for (int k = 0; k < list.size(); k++) {
 
-	    System.out.println("list " + k);
-
 	    result.add((EntityItem) list.get(k));
 
 	}
@@ -465,7 +463,7 @@ public class Environment {
 
 	int itemAmount = item.stackSize;
 
-	for (int k = 0; k <= inventory.length; k++) {
+	for (int k = 0; k < inventory.length; k++) {
 
 	    if (inventory[k] == null) {
 

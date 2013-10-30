@@ -13,7 +13,7 @@ public class ClientProxy extends CommonProxy {
     static ArrayList<Class<? extends EntityLiving>> entityClassList = new ArrayList<Class<? extends EntityLiving>>();
     static  ArrayList<RenderLiving> renderClassList = new ArrayList<RenderLiving>();
 
-    public static void addAntForRenderer(Class<? extends EntityLiving> parClass,
+    public static void addAntRenderer(Class<? extends EntityLiving> parClass,
 	    RenderLiving render) {
 
 	entityClassList.add(parClass);

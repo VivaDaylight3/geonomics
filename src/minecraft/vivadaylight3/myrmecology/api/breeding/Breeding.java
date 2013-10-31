@@ -1,10 +1,11 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.breeding;
 
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
+import vivadaylight3.myrmecology.api.util.Metadata;
 
 public class Breeding {
 

@@ -7,8 +7,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.api.EntityAIAntBehaviour;
 import vivadaylight3.myrmecology.api.IEntityAnt;
+import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 

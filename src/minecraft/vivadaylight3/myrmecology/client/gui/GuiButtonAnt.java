@@ -1,8 +1,8 @@
 package vivadaylight3.myrmecology.client.gui;
 
 import net.minecraft.util.Icon;
-import vivadaylight3.myrmecology.api.ItemAnt;
-import vivadaylight3.myrmecology.api.Metadata;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
+import vivadaylight3.myrmecology.api.util.Metadata;
 
 public class GuiButtonAnt extends GuiButtonSizeable {
 

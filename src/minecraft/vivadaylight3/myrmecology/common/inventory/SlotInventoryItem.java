@@ -4,7 +4,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 
 public class SlotInventoryItem extends Slot {
 

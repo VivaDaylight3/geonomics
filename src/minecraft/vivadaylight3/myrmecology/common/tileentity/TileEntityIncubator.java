@@ -14,9 +14,9 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import vivadaylight3.myrmecology.api.AntProperties;
-import vivadaylight3.myrmecology.api.ItemAnt;
-import vivadaylight3.myrmecology.api.Metadata;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
+import vivadaylight3.myrmecology.api.util.AntProperties;
+import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
@@ -310,8 +310,22 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 
     public int getResultAntMetaFromInput() {
 
-	int input = this.getContents()[ContainerIncubator.getFoodSlot()]
-		.getItem().itemID;
+	Item input = this.getContents()[ContainerIncubator.getFoodSlot()]
+		.getItem();
+	
+	for(int k = 0; k < Metadata.breedingItems.length; k++){
+	    
+	    if(input == Metadata.breedingItems[k]){
+		
+		return k;
+		
+	    }
+	    
+	}
+	
+	return -1;
+	
+	/*
 
 	if (input == Item.stick.itemID) {
 
@@ -330,6 +344,8 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 	    return -1;
 
 	}
+	
+	*/
 
     }
 

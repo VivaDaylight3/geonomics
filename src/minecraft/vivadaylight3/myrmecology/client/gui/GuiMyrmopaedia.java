@@ -12,11 +12,11 @@ import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 
-import vivadaylight3.myrmecology.api.Breeding;
-import vivadaylight3.myrmecology.api.BreedingRecipe;
-import vivadaylight3.myrmecology.api.ItemAnt;
-import vivadaylight3.myrmecology.api.Metadata;
-import vivadaylight3.myrmecology.api.MyrmopaediaProperties;
+import vivadaylight3.myrmecology.api.breeding.Breeding;
+import vivadaylight3.myrmecology.api.breeding.BreedingRecipe;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
+import vivadaylight3.myrmecology.api.util.Metadata;
+import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
 import vivadaylight3.myrmecology.common.lib.Resources;

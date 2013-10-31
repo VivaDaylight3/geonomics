@@ -2,22 +2,18 @@ package vivadaylight3.myrmecology.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.Icon;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.client.gui.content.AntBookText;
 import vivadaylight3.myrmecology.common.lib.Resources;
 
 public class GuiAntBook extends GuiScreen {
         
-    String s1 = EnumChatFormatting.BOLD+Reference.MOD_ID;
-    String s2 = getNewLine(s1)+EnumChatFormatting.UNDERLINE+"Contents"+EnumChatFormatting.RESET;
-    String s3 = getNewLine(s2)+"1+2 : Introduction";
-    String s4 = getNewLine(s3)+"3+4 : Capture Ants";
-    String[] bookContent = new String[]{s1+s2+s3+s4};
+    String[] bookContent = new AntBookText().getContent();
         
     private int numPages = bookContent.length;
     private int currPage;
@@ -32,22 +28,6 @@ public class GuiAntBook extends GuiScreen {
 	
 	//bookContent.add(new ContentPage1(this));
 		
-    }
-    
-    private String getNewLine(String string){
-	
-	String result = "";
-	
-	int count = 22 - string.length();
-	
-	for(int k = 0; k < count; k++){
-	    
-	    result += " ";
-	    
-	}
-	
-	return result;
-	
     }
 
     public void updateScreen()
@@ -106,12 +86,11 @@ public class GuiAntBook extends GuiScreen {
         String s1;
         int l;
 
-        //this.fontRenderer.drawString(s, k - l + this.bookImageWidth - 44, b0 + 16, 0);
-        //minX, maxX, Y
+        s = String.format(I18n.getString("book.pageIndicator"), new Object[] {Integer.valueOf(this.currPage + 1), Integer.valueOf(this.numPages)});
+        l = this.fontRenderer.getStringWidth(s);
+        this.fontRenderer.drawString(s, k - l + this.bookImageWidth - 44, b0 + 16, 0);
         this.fontRenderer.drawSplitString(bookContent[currPage], k + 36, b0 + 16 + 16, 116, 0);
         
-       // bookContent.get(currPage).drawPage(fontRenderer, k + 36, b0 + 16, 116);
-
         super.drawScreen(par1, par2, par3);
     }
     

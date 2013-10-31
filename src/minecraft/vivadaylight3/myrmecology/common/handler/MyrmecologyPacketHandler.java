@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import vivadaylight3.myrmecology.api.MyrmopaediaProperties;
+import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import cpw.mods.fml.common.FMLCommonHandler;

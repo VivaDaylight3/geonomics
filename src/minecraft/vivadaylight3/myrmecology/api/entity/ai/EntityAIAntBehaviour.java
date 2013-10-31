@@ -1,5 +1,6 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.entity.ai;
 
+import vivadaylight3.myrmecology.api.IEntityAnt;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;

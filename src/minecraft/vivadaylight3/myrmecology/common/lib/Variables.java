@@ -7,7 +7,7 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 
 public class Variables {
 

@@ -1,4 +1,4 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;

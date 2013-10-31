@@ -48,6 +48,8 @@ public class Myrmecology {
 		event.getSuggestedConfigurationFile());
 
 	Register.setConfig(config);
+	
+	Register.checkAntBook();
 
 	Url url = new Url(Reference.VERSION_CHECK_URL);
 
@@ -79,6 +81,8 @@ public class Myrmecology {
 		Reference.MOD_CHANNEL_INCUBATOR);
 
 	Register.registerEntities();
+	
+	Register.registerKeyBindings();
 
     }
 

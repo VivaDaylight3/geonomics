@@ -1,4 +1,4 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.util;
 
 import net.minecraft.util.DamageSource;
 import cpw.mods.fml.common.registry.LanguageRegistry;

@@ -1,4 +1,4 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.block;
 
 import java.util.Random;
 
@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
+import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.lib.Environment;

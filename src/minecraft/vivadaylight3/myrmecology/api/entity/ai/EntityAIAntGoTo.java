@@ -1,5 +1,6 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.entity.ai;
 
+import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.launchwrapper.LaunchClassLoader;

@@ -62,6 +62,8 @@ public class Reference {
     public static final String ITEM_SPAWNEGG_NAME = "spawnEgg";
     public static final String ITEM_CHAMBER_NAME = "breedingChamber";
     public static final String ITEM_ANTBOOK_NAME = "antBook";
+    
+    public static final String ANTBOOK_TITLE = "The book of "+MOD_ID;
 
     // Breeding Chambers
     public static final String CHAMBER_BARBARIC_NAME = "chamberBarbaric";

@@ -1,4 +1,4 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.util;
 
 @Deprecated
 public class Property {

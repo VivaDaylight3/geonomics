@@ -1,4 +1,6 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.breeding;
+
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 
 public class BreedingRecipe {
 

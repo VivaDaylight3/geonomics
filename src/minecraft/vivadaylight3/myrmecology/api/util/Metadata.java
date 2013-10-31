@@ -1,4 +1,6 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.util;
+
+import net.minecraft.item.Item;
 
 public class Metadata {
 
@@ -6,6 +8,7 @@ public class Metadata {
      * Holds the metadata values for each type of ant
      */
     public static final int[] typeMeta = new int[] { 0, 1, 2, 3 };
+    public static final Item[] breedingItems = new Item[]{Item.goldNugget, Item.bone, Item.stick};
 
     /**
      * Gets the metadata value for queen ants

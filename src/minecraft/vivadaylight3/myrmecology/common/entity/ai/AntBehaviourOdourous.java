@@ -7,8 +7,8 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.api.EntityAIAntBehaviour;
 import vivadaylight3.myrmecology.api.IEntityAnt;
+import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.lib.Environment;
 

@@ -2,8 +2,8 @@ package vivadaylight3.myrmecology.common.entity.ant;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.api.EntityAIAntGoTo;
-import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntGoTo;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.entity.EntityAnt;
 import vivadaylight3.myrmecology.common.entity.ai.AntBehaviourCarpenter;

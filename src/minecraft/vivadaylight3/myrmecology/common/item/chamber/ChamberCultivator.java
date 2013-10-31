@@ -2,8 +2,8 @@ package vivadaylight3.myrmecology.common.item.chamber;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vivadaylight3.myrmecology.api.ItemAnt;
-import vivadaylight3.myrmecology.api.ItemBreedingChamber;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
+import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
 import vivadaylight3.myrmecology.common.Register;
 
 public class ChamberCultivator extends ItemBreedingChamber {

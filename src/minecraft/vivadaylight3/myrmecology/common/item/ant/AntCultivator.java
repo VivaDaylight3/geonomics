@@ -1,6 +1,6 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
-import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
 
 public class AntCultivator extends ItemAnt {

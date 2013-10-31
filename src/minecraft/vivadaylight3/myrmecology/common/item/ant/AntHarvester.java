@@ -1,7 +1,7 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
 import net.minecraft.world.biome.BiomeGenBase;
-import vivadaylight3.myrmecology.api.ItemAnt;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.lib.Time;
 

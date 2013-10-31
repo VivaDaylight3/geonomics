@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import vivadaylight3.myrmecology.api.Metadata;
+import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;

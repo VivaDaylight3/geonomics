@@ -1,4 +1,4 @@
-package vivadaylight3.myrmecology.api;
+package vivadaylight3.myrmecology.api.item;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.api.util.AntProperties;
+import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Environment;

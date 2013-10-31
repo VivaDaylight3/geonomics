@@ -2,21 +2,26 @@ package vivadaylight3.myrmecology.common;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
-import vivadaylight3.myrmecology.api.BlockAntHill;
-import vivadaylight3.myrmecology.api.Breeding;
+
+import org.lwjgl.input.Keyboard;
+
 import vivadaylight3.myrmecology.api.IEntityAnt;
-import vivadaylight3.myrmecology.api.ItemAnt;
-import vivadaylight3.myrmecology.api.ItemBreedingChamber;
+import vivadaylight3.myrmecology.api.block.BlockAntHill;
+import vivadaylight3.myrmecology.api.breeding.Breeding;
+import vivadaylight3.myrmecology.api.item.ItemAnt;
+import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
 import vivadaylight3.myrmecology.client.ClientProxy;
 import vivadaylight3.myrmecology.client.model.ModelAnt;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
@@ -35,7 +40,9 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntCarpenter;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
+import vivadaylight3.myrmecology.common.handler.KeyBindingHandler;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
+import vivadaylight3.myrmecology.common.handler.PlayerTickHandler;
 import vivadaylight3.myrmecology.common.item.ItemAntBook;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
@@ -78,9 +85,13 @@ import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class Register {
 
@@ -94,6 +105,7 @@ public class Register {
     private static ArrayList<Class<? extends IEntityAnt>> entityAntList = new ArrayList<Class<? extends IEntityAnt>>();
 
     public static boolean checkForUpdates = true;
+    public static boolean receiveAntBookOnJoin = true;
 
     public static String language;
 
@@ -195,6 +207,16 @@ public class Register {
 
 	return latestBlockID + ID_BLOCK;
 
+    }
+        
+    public static void registerKeyBindings(){
+	
+	KeyBinding[] key = {new KeyBinding("Receive "+Reference.ANTBOOK_TITLE, Keyboard.KEY_L)};
+        boolean[] repeat = {false};
+        KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler("Receive "+Reference.ANTBOOK_TITLE, key, repeat));
+	
+        TickRegistry.registerTickHandler(new PlayerTickHandler(EnumSet.of(TickType.PLAYER)), Side.SERVER);
+        
     }
 
     public static void registerLanguages() {
@@ -306,6 +328,16 @@ public class Register {
 
 	}
 
+    }
+    
+    public static void checkAntBook(){
+	
+	config.load();
+	
+	receiveAntBookOnJoin = config.get(Configuration.CATEGORY_GENERAL, "receive ant book on join", true).getBoolean(true);
+	
+	config.save();
+		
     }
 
     public static void registerItems() {
@@ -449,7 +481,7 @@ public class Register {
 
 	// TODO
 
-	addItem(itemAntBook, "Book of "+Reference.MOD_ID, Reference.ITEM_ANTBOOK_NAME);
+	addItem(itemAntBook, Reference.ANTBOOK_TITLE, Reference.ITEM_ANTBOOK_NAME);
 	
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 

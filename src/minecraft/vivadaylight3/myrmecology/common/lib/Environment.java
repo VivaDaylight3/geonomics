@@ -3,7 +3,6 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,6 +17,27 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class Environment {
+    
+    public static Entity getNearestEntityFrom(List list, int x, int y, int z, int distance){
+	
+	double d4 = -1.0D;
+        Entity entity = null;
+
+        for (int i = 0; i < list.size(); ++i)
+        {
+            Entity entity1 = (Entity)list.get(i);
+            double d5 = entity1.getDistanceSq(x, y, z);
+
+            if ((distance < 0.0D || d5 < distance * distance) && (d4 == -1.0D || d5 < d4))
+            {
+                d4 = d5;
+                entity = entity1;
+            }
+        }
+
+        return entity;
+	
+    }
 
     public static Entity spawnEntity(World par0World, Entity entity,
 	    double par2, double par4, double par6) {
@@ -64,7 +84,7 @@ public class Environment {
 
     }
 
-    public static ArrayList<EntityItem> getEntityItemsInRadius(World world,
+    public static List getEntityItemsInRadius(World world,
 	    double x, double y, double z, int radius) {
 
 	List list = world.getEntitiesWithinAABB(
@@ -72,15 +92,7 @@ public class Environment {
 		AxisAlignedBB.getAABBPool().getAABB(x - radius, y - radius,
 			z - radius, x + radius, y + radius, z + radius));
 
-	ArrayList<EntityItem> result = new ArrayList<EntityItem>();
-
-	for (int k = 0; k < list.size(); k++) {
-
-	    result.add((EntityItem) list.get(k));
-
-	}
-
-	return result;
+	return list;
 
     }
 

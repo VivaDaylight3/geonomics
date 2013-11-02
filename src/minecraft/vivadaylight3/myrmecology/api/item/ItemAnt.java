@@ -22,6 +22,7 @@ import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Time;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import vivadaylight3.myrmecology.api.*;
 
 /**
  * Extend this class to create a new ant, it is suggested that you override
@@ -104,15 +105,6 @@ public class ItemAnt extends Item {
 	return false;
     }
 
-    @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
-	    EntityPlayer par3EntityPlayer) {
-
-	this.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
-	return par1ItemStack;
-
-    }
-
     public boolean onItemUse(ItemStack par1ItemStack,
 	    EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
 	    int par6, int par7, float par8, float par9, float par10) {
@@ -132,6 +124,10 @@ public class ItemAnt extends Item {
 	    Entity ant = this.getNewEntity(par3World);
 
 	    Environment.spawnEntity(par3World, ant, par4, par5, par6);
+	    
+	    ((IEntityAnt) ant).setHomeX(par4);
+	    ((IEntityAnt) ant).setHomeY(par5);
+	    ((IEntityAnt) ant).setHomeZ(par6);
 
 	    if (!par2EntityPlayer.capabilities.isCreativeMode) {
 		--par1ItemStack.stackSize;

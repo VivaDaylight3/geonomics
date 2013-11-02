@@ -5,21 +5,26 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 
 public class Variables {
+    
+    public static ArrayList listToArrayList(List list){
+	
+	ArrayList result = new ArrayList();
 
-    private static List<String> antIconNameList = new ArrayList<String>();
+	for (int k = 0; k < list.size(); k++) {
 
-    private static List<String> hillIconNameList = new ArrayList<String>();
+	    result.add(list.get(k));
 
-    private static List<String> nameList = new ArrayList<String>();
+	}
 
-    private static List<String> hillList = new ArrayList<String>();
-
-    private static List<Integer> metaList = new ArrayList<Integer>();
+	return result;
+	
+    }
 
     public static ItemAnt getAntFromItemStack(ItemStack item) {
 

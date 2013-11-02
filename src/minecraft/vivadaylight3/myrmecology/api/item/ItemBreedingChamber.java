@@ -23,6 +23,7 @@ public class ItemBreedingChamber extends Item {
 
     public ItemBreedingChamber(int par1) {
 	super(par1);
+	Register.addChamber(this);
 	prepareItem();
     }
 
@@ -38,6 +39,12 @@ public class ItemBreedingChamber extends Item {
 
 	return true;
 
+    }
+    
+    public ItemStack getCraftingIngredient(){
+	
+	return null;
+	
     }
 
     public Icon getIconFromDamageForRenderPass(int par1, int par2) {

@@ -62,7 +62,7 @@ public class ItemAntBook extends Item {
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack par1ItemStack)
     {
-        return true;
+        return false;
     }
 
 }

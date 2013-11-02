@@ -13,6 +13,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Achievement;
+import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
 
 import org.lwjgl.input.Keyboard;
@@ -22,6 +24,7 @@ import vivadaylight3.myrmecology.api.block.BlockAntHill;
 import vivadaylight3.myrmecology.api.breeding.Breeding;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
+import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.client.ClientProxy;
 import vivadaylight3.myrmecology.client.model.ModelAnt;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
@@ -103,7 +106,9 @@ public class Register {
     private static ArrayList<ItemAnt> antList = new ArrayList<ItemAnt>();
     private static ArrayList<BlockAntHill> hillList = new ArrayList<BlockAntHill>();
     private static ArrayList<Class<? extends IEntityAnt>> entityAntList = new ArrayList<Class<? extends IEntityAnt>>();
-
+    private static ArrayList<ItemBreedingChamber> chamberList = new ArrayList<ItemBreedingChamber>(); 
+    public static ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
+    
     public static boolean checkForUpdates = true;
     public static boolean receiveAntBookOnJoin = true;
 
@@ -113,7 +118,14 @@ public class Register {
     public static final int ID_ITEM = 3853; // 23
     
     static int id = 1;
-
+    
+    public static Achievement achieveGetBook;
+    public static Achievement achieveExtractAnts;
+    public static Achievement achieveIncubateAnts;
+    public static Achievement achieveBreedAnts;
+    public static Achievement achieveSpawnAnts;
+    public static Achievement achieveAntDimension;
+       
     public static int entityAntForestID;
     public static int entityAntCarpenterID;
     public static int entityAntOdourousID;
@@ -184,6 +196,8 @@ public class Register {
     public static AntCultivator antCultivator;
     public static AntSprouter antSprouter;
     public static AntFungal antFungal;
+    
+    public static AchievementPage achievementPage;
 
     // TODO
 
@@ -207,6 +221,31 @@ public class Register {
 
 	return latestBlockID + ID_BLOCK;
 
+    }
+    
+    public static void registerAchievements(){
+	
+	achieveGetBook = addAchievement(27, "Myrmecologist", "Get "+Reference.ANTBOOK_TITLE+"!", 0, 0, null, new ItemStack(itemAntBook));
+	achieveExtractAnts = addAchievement(28, "Extraction Completion", "Extract some ants from an ant hill!", 2, 0, achieveGetBook, new ItemStack(itemExtractor));
+	achieveIncubateAnts = addAchievement(29, "Nature or Nurture?", "Start incubating some ants!", 2, 2, achieveExtractAnts, new ItemStack(blockIncubator));
+	achieveBreedAnts = addAchievement(30, "Breeding, just the beginning", "Start breeding some ants!", 0, 2, achieveIncubateAnts, new ItemStack(blockAntFarm));
+	achieveSpawnAnts = addAchievement(31, "Ant Enslavement", "Spawn an ant "+Reference.standardTypeNames[Metadata.getMetaWorker()]+ " and make it do your bidding", -2, 2, achieveBreedAnts, new ItemStack(antForest, 1, Metadata.getMetaWorker()));
+	achieveAntDimension = addAchievement(32, "Holiday Destination", "CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(blockAntChest));
+
+	achievementPage = new AchievementPage("Myrmecology", achieveGetBook);
+	
+	for(int k = 0; k < achievementList.size(); k++){
+	    
+	    if(achievementList.get(k) != achieveGetBook){
+	    
+		achievementPage.getAchievements().add(achievementList.get(k));
+	    
+	    }
+	    
+	}
+	
+	AchievementPage.registerAchievementPage(achievementPage);
+	
     }
         
     public static void registerKeyBindings(){
@@ -680,6 +719,8 @@ public class Register {
 	GameRegistry.addRecipe(new ItemStack(blockAntFarm, 1), "wgw", "gsg",
 		"wgw", 'w', new ItemStack(Block.woodSingleSlab), 'g',
 		new ItemStack(Block.glass), 's', new ItemStack(Block.sand));
+	
+	GameRegistry.addRecipe(new ItemStack(itemBreedingChamber), "sws", "w w", "sws", 's', new ItemStack(Item.stick), 'w', new ItemStack(Block.cloth));
 
 	GameRegistry.addRecipe(new ItemStack(itemAntopedia, 1), "ggg", "qir",
 		"ggg", 'g', new ItemStack(Block.thinGlass), 'q', new ItemStack(
@@ -690,6 +731,16 @@ public class Register {
 		" d ", 's', new ItemStack(Item.shovelIron), 'd', new ItemStack(
 			Item.dyePowder, 1, 2), 'i', new ItemStack(
 			Item.ingotIron));
+	
+	for(int k = 0; k < chamberList.size(); k++){
+	    
+	    if(chamberList.get(k) != itemBreedingChamber && chamberList.get(k).getCraftingIngredient() != null){
+	    
+		GameRegistry.addShapelessRecipe(new ItemStack(chamberList.get(k)), new ItemStack(itemBreedingChamber), chamberList.get(k).getCraftingIngredient());
+	    
+	    }
+	    
+	}
 
     }
 
@@ -830,6 +881,25 @@ public class Register {
 
 	getAntList().add(ant);
 
+    }
+    
+    public static Achievement addAchievement(int parID, String parName, String parDesc, int posX, int posY, Achievement parParent, ItemStack parIcon){
+	
+	Achievement ach = new Achievement(parID, parName, posX, posY, parIcon, parParent);
+	ach.registerAchievement();
+	LanguageRegistry.instance().addStringLocalization("achievement."+parName, "en_US", parName);
+	LanguageRegistry.instance().addStringLocalization("achievement."+parName+".desc", "en_US", parDesc);
+	
+	achievementList.add(ach);
+	
+	return ach;
+	
+    }
+    
+    public static void addChamber(ItemBreedingChamber chamber){
+	
+	chamberList.add(chamber);
+	
     }
 
     public static ArrayList<BlockAntHill> getHillList() {

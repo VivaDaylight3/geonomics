@@ -18,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Resources;
@@ -51,6 +52,8 @@ public class GuiIncubator extends GuiContainer {
 	this.world = parWorld;
 	this.tile = tileEntity;
 	this.players.add(parPlayer);
+	
+	parPlayer.addStat(Register.achieveIncubateAnts, 1);
     }
 
     @Override

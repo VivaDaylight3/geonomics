@@ -47,6 +47,7 @@ public class PlayerTickHandler implements ITickHandler {
 	if(KeyBindingHandler.keyPressed){
 	    
 	    player.inventory.addItemStackToInventory(new ItemStack(Register.itemAntBook));
+	    player.addStat(Register.achieveGetBook, 1);
 	    KeyBindingHandler.keyPressed = false;
 	    
 	}

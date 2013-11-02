@@ -83,6 +83,8 @@ public class Myrmecology {
 	Register.registerEntities();
 	
 	Register.registerKeyBindings();
+	
+	Register.registerAchievements();
 
     }
 

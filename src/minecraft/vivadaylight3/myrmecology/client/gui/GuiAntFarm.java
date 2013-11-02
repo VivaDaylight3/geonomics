@@ -1,12 +1,14 @@
 package vivadaylight3.myrmecology.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.inventory.ContainerAntFarm;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
@@ -18,10 +20,11 @@ public class GuiAntFarm extends GuiContainer {
 
     public TileEntityAntFarm tile;
 
-    public GuiAntFarm(InventoryPlayer playerInventory,
+    public GuiAntFarm(EntityPlayer player,
 	    TileEntityAntFarm tileEntity, World world, int x, int y, int z) {
-	super(new ContainerAntFarm(playerInventory, tileEntity));
+	super(new ContainerAntFarm(player.inventory, tileEntity));
 	this.tile = tileEntity;
+	player.addStat(Register.achieveBreedAnts, 1);
     }
 
     /**

@@ -1,10 +1,13 @@
 package vivadaylight3.myrmecology.common.item.chamber;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
 import vivadaylight3.myrmecology.common.Register;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChamberCarpenter extends ItemBreedingChamber {
 
@@ -18,6 +21,13 @@ public class ChamberCarpenter extends ItemBreedingChamber {
 
 	return Register.antCarpenter;
 
+    }
+    
+    @Override
+    public ItemStack getCraftingIngredient(){
+	
+	return new ItemStack(Item.axeStone);
+	
     }
 
     @Override

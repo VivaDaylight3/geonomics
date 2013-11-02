@@ -38,6 +38,14 @@ public class Environment {
 	return entity;
 
     }
+    
+    public static boolean coordinateIsCloseTo(double x, double y, double z, int x2,
+	    int y2, int z2, int distance){
+	
+	return coordinateIsCloseTo(x, y, z, x2,
+		    y2, z2, distance);
+	
+    }
 
     public static boolean coordinateIsCloseTo(int x, int y, int z, int x2,
 	    int y2, int z2, int distance) {

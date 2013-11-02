@@ -5,6 +5,10 @@ import net.minecraft.item.ItemStack;
 public interface IEntityAnt {
 
     ItemStack[] inventory = new ItemStack[1];
+    
+    void newDestination(int x, int y, int z);
+    
+    boolean isAtDestination(int distance);
 
     double getPosX();
 

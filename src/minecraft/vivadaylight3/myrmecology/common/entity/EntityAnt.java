@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Maths;
 
 public class EntityAnt extends EntityCreature implements IEntityAnt {
@@ -292,9 +293,9 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
         
         if(par1NBTTagCompound.hasKey("HomeX") && par1NBTTagCompound.hasKey("HomeY") && par1NBTTagCompound.hasKey("HomeZ")){
             
-            this.setHomeX(par1NBTTagCompound.getInteger("HomeX"));
-            this.setHomeY(par1NBTTagCompound.getInteger("HomeY"));
-            this.setHomeZ(par1NBTTagCompound.getInteger("HomeZ"));
+            this.setHomeX((int) par1NBTTagCompound.getDouble("HomeX"));
+            this.setHomeY((int) par1NBTTagCompound.getDouble("HomeY"));
+            this.setHomeZ((int) par1NBTTagCompound.getDouble("HomeZ"));
             
         }
         
@@ -347,6 +348,24 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
         this.hurtTime = par1NBTTagCompound.getShort("HurtTime");
         this.deathTime = par1NBTTagCompound.getShort("DeathTime");
         this.attackTime = par1NBTTagCompound.getShort("AttackTime");
+    }
+
+    @Override
+    public void newDestination(int x, int y, int z) {
+
+	this.setShouldGoTo(true);
+	this.setHasGoneTo(false);
+	this.setGoToX(x);
+	this.setGoToY(y);
+	this.setGoToZ(z);
+	
+    }
+    
+    @Override
+    public boolean isAtDestination(int distance){
+	
+	return Environment.coordinateIsCloseTo(this.posX, this.posY, this.posZ, this.getGoToX(), this.getGoToY(), this.getGoToZ(), distance) && this.getHasGoneTo();
+	
     }
 
 }

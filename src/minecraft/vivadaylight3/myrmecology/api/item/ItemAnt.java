@@ -12,6 +12,7 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.util.AntProperties;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
@@ -22,7 +23,6 @@ import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Time;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vivadaylight3.myrmecology.api.*;
 
 /**
  * Extend this class to create a new ant, it is suggested that you override
@@ -33,7 +33,7 @@ import vivadaylight3.myrmecology.api.*;
  */
 
 public class ItemAnt extends Item {
-
+    
     /**
      * Holds the ant's icons
      */
@@ -124,10 +124,6 @@ public class ItemAnt extends Item {
 	    Entity ant = this.getNewEntity(par3World);
 
 	    Environment.spawnEntity(par3World, ant, par4, par5, par6);
-	    
-	    ((IEntityAnt) ant).setHomeX(par4);
-	    ((IEntityAnt) ant).setHomeY(par5);
-	    ((IEntityAnt) ant).setHomeZ(par6);
 
 	    if (!par2EntityPlayer.capabilities.isCreativeMode) {
 		--par1ItemStack.stackSize;

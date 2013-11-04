@@ -2,7 +2,6 @@ package vivadaylight3.myrmecology.common.entity.ant;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntGoTo;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.entity.EntityAnt;
@@ -15,11 +14,9 @@ public class EntityAntDredger extends EntityAnt {
 	super(par1World);
 	this.tasks
 	.addTask(
-		2,
+		1,
 		new AntBehaviourDredger(this, par1World, this
 			.getNavigator()));
-	this.tasks.addTask(1,
-	new EntityAIAntGoTo(this, par1World, this.getNavigator()));
     }
     
     @Override

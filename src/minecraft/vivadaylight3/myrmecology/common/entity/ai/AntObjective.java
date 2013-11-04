@@ -21,12 +21,26 @@ public class AntObjective {
 	setTargetZ(z);
 	setTargetName(name);
 	this.distance = distance;
+	this.theAnt = ant;
 	
     }
     
     public boolean isAtObjective(int distance){
 	
-	return Environment.coordinateIsCloseTo(theAnt.getPosX(), theAnt.getPosY(), theAnt.getPosZ(), this.getTargetX(), this.getTargetY(), this.getTargetZ(), distance);
+	return Environment.coordinateIsCloseTo(
+		theAnt.
+		getPosX(), 
+		theAnt.
+		getPosY(), 
+		theAnt.
+		getPosZ(), 
+		this.
+		getTargetX(), 
+		this.
+		getTargetY(), 
+		this.
+		getTargetZ(), 
+		distance);
 	
     }
     

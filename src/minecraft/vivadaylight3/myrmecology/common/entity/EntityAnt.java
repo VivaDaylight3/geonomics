@@ -14,13 +14,12 @@ import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.entity.ai.AntObjective;
-import vivadaylight3.myrmecology.common.lib.Environment;
 
 public class EntityAnt extends EntityCreature implements IEntityAnt {
 
@@ -35,10 +34,10 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     boolean shouldGoTo = false;
     boolean hasGoneTo = false;
 
-    public int ticksPassed;
+    public TileEntity homeBlockTileEntity;
     
-    private AntObjective objective;
-
+    public int ticksPassed;
+        
     public EntityAnt(World par1World) {
 	super(par1World);
 	this.setSize(0.5F, 0.5F);
@@ -48,6 +47,8 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	this.tasks.addTask(5, new EntityAIWatchClosest(this,
 		EntityPlayer.class, 8.0F));
 	this.tasks.addTask(6, new EntityAILookIdle(this));
+	
+	this.homeBlockTileEntity = par1World.getBlockTileEntity((int)this.posX, (int)this.posY - 1, (int)this.posZ); 
 
     }
 
@@ -83,7 +84,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     @Override
     public void moveEntityTo(int x, int y, int z) {
 
-	this.getNavigator().tryMoveToXYZ(x, y, z, 0.3D);
+	this.getNavigator().tryMoveToXYZ(x, y, z, 1f/*SharedMonsterAttributes.movementSpeed.getDefaultValue()*/);
 
     }
 
@@ -138,51 +139,10 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	return "ant." + this.getAnt().getSpeciesSubName() + ".death";
     }
 
-    @Override
-    public double getHomeX() {
-	// TODO Auto-generated method stub
-	return homeX;
-    }
-
-    @Override
-    public double getHomeY() {
-	// TODO Auto-generated method stub
-	return homeY;
-    }
-
-    @Override
-    public double getHomeZ() {
-	// TODO Auto-generated method stub
-	return homeZ;
-    }
-
-    @Override
-    public void setHomeX(int x) {
-
-	homeX = x;
-
-    }
-
-    @Override
-    public void setHomeY(int y) {
-
-	homeY = y;
-
-    }
-
-    @Override
-    public void setHomeZ(int z) {
-
-	homeZ = z;
-
-    }
     
     @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
-	par1NBTTagCompound.setDouble("HomeX", this.getHomeX());
-	par1NBTTagCompound.setDouble("HomeY", this.getHomeY());
-	par1NBTTagCompound.setDouble("HomeZ", this.getHomeZ());
 	
 	par1NBTTagCompound.setFloat("HealF", this.getHealth());
         par1NBTTagCompound.setShort("Health", (short)((int)Math.ceil((double)this.getHealth())));
@@ -261,35 +221,9 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     }
 
     @Override
-    public void newObjective(String name, int x, int y, int z, int distance) {
-
-	this.objective = new AntObjective(this, z, x, y, name, distance);
+    public void moveEntityTo(double posX, double posY, double posZ) {
 	
-    }
-    
-    @Override
-    public boolean isAtDestination(int distance){
-	
-	return Environment.coordinateIsCloseTo(this.posX, this.posY, this.posZ, this.getObjective().getTargetX(), this.getObjective().getTargetY(), this.getObjective().getTargetZ(), distance);
-	
-    }
-
-    @Override
-    public void newObjective(String name, double posX, double posY, double posZ, int distance) {
-	
-	newObjective(name, (int) posX, (int) posY, (int) posZ, distance);
-	
-    }
-
-    @Override
-    public AntObjective getObjective() {
-	return this.objective;
-    }
-
-    @Override
-    public void clearObjective() {
-
-	this.objective = null;
+	moveEntityTo((int) posX, (int) posY, (int) posZ);
 	
     }
 

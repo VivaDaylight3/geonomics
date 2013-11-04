@@ -3,11 +3,13 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -22,6 +24,12 @@ public class Environment {
 	
 	double d4 = -1.0D;
         Entity entity = null;
+        
+        if(list.size() <= 0 || list == null){
+            
+            return null;
+            
+        }
 
         for (int i = 0; i < list.size(); ++i)
         {
@@ -36,6 +44,42 @@ public class Environment {
         }
 
         return entity;
+	
+    }
+    
+    public static TileEntity getNearestTileEntityFrom(List list, double x, double y, double z){
+	
+	double d4 = -1.0D;
+        TileEntity entity = null;
+        
+        if(list.size() <= 0 || list == null){
+            
+            System.out.println("getNearest : list < 0 || list == null");
+            
+            return null;
+            
+        }
+        
+        TileEntity nearest = (TileEntity) list.get(0);
+
+        for (int i = 0; i < list.size(); ++i)
+        {
+            
+            if(((TileEntity) list.get(i)).getDistanceFrom(x, y, z) < nearest.getDistanceFrom(x, y, z)){
+        	
+        	nearest = (TileEntity) list.get(i);
+        	
+            }
+            
+        }
+
+        return nearest;
+	
+    }
+    
+    public static int[] getNearestBlockFrom(List list, Entity entity, int distance){
+	
+	return null;
 	
     }
 
@@ -62,7 +106,7 @@ public class Environment {
     public static boolean coordinateIsCloseTo(double x, double y, double z, int x2,
 	    int y2, int z2, int distance){
 	
-	return coordinateIsCloseTo(x, y, z, x2,
+	return coordinateIsCloseTo((int)x, (int)y, (int)z, x2,
 		    y2, z2, distance);
 	
     }
@@ -87,11 +131,29 @@ public class Environment {
     public static List getEntityItemsInRadius(World world,
 	    double x, double y, double z, int radius) {
 
-	List list = world.getEntitiesWithinAABB(
-		EntityItem.class,
-		AxisAlignedBB.getAABBPool().getAABB(x - radius, y - radius,
-			z - radius, x + radius, y + radius, z + radius));
+	List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(x-radius, y-radius, z-radius, x + radius, y + radius, z + radius));
 
+	return list;
+
+    }
+    
+    public static List getTileEntitiesInRadius(World world,
+	    double x, double y, double z, int radius) {
+
+	List list = world.getEntitiesWithinAABB(TileEntity.class, AxisAlignedBB.getAABBPool().getAABB(x-radius, y-radius, z-radius, x + radius, y + radius, z + radius));
+
+	if(list == null){
+	    
+	    System.out.println("getTileEntities : list == null");
+	    
+	}
+	
+	if(list.size() < 0){
+	    
+	    System.out.println("getTileEntities : list < 0");
+	    
+	}
+	
 	return list;
 
     }

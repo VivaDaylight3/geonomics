@@ -37,14 +37,14 @@ public class TextContent {
 	if(string.length() > 22){
 	    
 	    div = string.length() / 22;
-	    dec = div - Math.floor(div);
+	    dec = div - Math.ceil(div);
 	    
-	    length = (int) Math.ceil(22 * dec) +5;
+	    length = (int) Math.ceil(22 * dec);
 	    
 	    
 	}else{
 	
-	    length = string.length() + 5;
+	    length = string.length();
 	    
 	}
 	

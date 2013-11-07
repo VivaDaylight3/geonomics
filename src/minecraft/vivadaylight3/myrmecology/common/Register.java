@@ -271,7 +271,6 @@ public class Register {
 	    if (listOfFiles[i].isFile()) {
 		files = listOfFiles[i].getName();
 		if (files.endsWith(".txt") || files.endsWith(".TXT")) {
-		    System.out.println(files);
 		}
 	    }
 	}

@@ -52,7 +52,6 @@ public class Environment {
 	
 	if(list == null || list.size() < 1){
 	    
-	    System.out.println("getNTE: "+list);
 	    return null;
 	    
 	}
@@ -647,8 +646,6 @@ public class Environment {
 
 	for (int k = 0; k < inventory.length; k++) {
 	    
-	    System.out.println("addTo : "+amount);
-
 	    if (amount > 0) {
 
 		if (inventory[k] == null) {
@@ -674,7 +671,6 @@ public class Environment {
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
-			System.out.println("addTo : break");
 			break;
 
 		    }
@@ -691,7 +687,6 @@ public class Environment {
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
-			System.out.println("addTo : break");
 			break;
 
 		    }

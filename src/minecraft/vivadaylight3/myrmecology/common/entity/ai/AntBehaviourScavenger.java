@@ -9,6 +9,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
+import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.BlockEntry;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 
@@ -27,9 +29,13 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     @Override
     public boolean shouldExecute() {
 	
-	targetChest = this.theAnt.homeBlockTileEntity;
+	System.out.println("shouldExecute");
+	
+	targetChest = Environment.getNearestTileEntityFrom(Environment.getTileEntitiesInRadius(world, getPosX(), getPosY(), getPosZ(), 10), (Entity) this.theAnt, getPosX(), getPosY(), getPosZ());
 		
 	if(state.equalsIgnoreCase("none") && nearestItemExists(searchForNearestItem())){
+	    
+	    System.out.println("shouldExecute : none");
 	    	    
 	    targetItem = (EntityItem) searchForNearestItem();
 	    
@@ -41,20 +47,21 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	    
 	}else if(state.equalsIgnoreCase("itemPickup") && targetItem != null){
 	    
+	    System.out.println("shouldExecute : itemPickup");
+	    
 	    flag = "flag:itemPickup";
 	    
 	    return true;
 	    
-	}else if(state.equalsIgnoreCase("itemDropOff") && targetChest != null){
+	}else if(state.equalsIgnoreCase("itemDropOff") && antChestExists(targetChest)){
+	    
+	    System.out.println("shouldExecute : itemDropOff");
 	    
 	    flag = "flag:itemDropOff";
 	    
 	    return true;
 	    
 	}else{
-	    
-	    flag = "flag:none";
-	    state = "none";
 	    
 	    return false;
 	    
@@ -67,9 +74,13 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	
 	if(flag.equalsIgnoreCase("flag:itemPickup")){
 	    
+	    System.out.println("updateTask : itemPickup");
+	    
 	    pickUpItem();
 	    
 	}else if(flag.equalsIgnoreCase("flag:itemDropOff") || state.equalsIgnoreCase("itemDropOff")){
+	    
+	    System.out.println("updateTask : itemDropOff");
 	    	    
 	    dropOffItem();
 	    
@@ -86,6 +97,8 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     
     private Entity searchForNearestItem(){
 	
+	System.out.println("searchForNearestItem");
+	
 	List list = Environment.getEntityItemsInRadius(world, this.getPosX(), this.getPosY(), this.getPosZ(), 20);
 	
 	return Environment.getNearestEntityFrom(list, this.getPosX(), this.getPosY(), this.getPosZ(), 20);
@@ -94,11 +107,19 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     
     private boolean nearestItemExists(Entity entity){
 	
+	System.out.println("nearestItemExists");
+	
 	if(entity != null){
+	    
+	    System.out.println("nearestItemExists : entity != null");
 	    
 	    if(entity instanceof EntityItem){
 		
+		System.out.println("nearestItemExists : entity != null : instanceof : ");
+		
 		if(!entity.isDead){
+		    
+		    System.out.println("nearestItemExists : entity != null : instanceof : isDead");
 		
 		    return true;
 		
@@ -113,15 +134,19 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     }
     
     private void pickUpItem(){
+	
+	System.out.println("pickUpItem");
 		
 	if(Environment.inventoryCanHold(targetItem.getEntityItem(), this.theAnt.inventory, 64)){
+	    
+	    System.out.println("pickUpItem : canHold");
 	    	
 	    this.theAnt.moveEntityTo(targetItem.posX, targetItem.posY, targetItem.posZ);
 	    
 	    int itemX = (int) Math.ceil(targetItem.posX), itemY = (int) Math.ceil(targetItem.posY), itemZ  = (int) Math.ceil(targetItem.posZ);
 	    
 	    if(targetItem.posX > getPosX()){
-		
+				
 		itemY = (int) Math.floor(targetItem.posX);
 		
 	    }
@@ -139,6 +164,8 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	    }
 	    
 	    if(Environment.coordinateIsCloseTo(itemX, itemY, itemZ, getPosX(), getPosY(), getPosZ(), 2)){
+		
+		System.out.println("pickUpItem : canHold : isClose");
 						
 		Environment.addItemStackToInventory(targetItem.getEntityItem(), this.theAnt.inventory, 64, null);
 				
@@ -156,6 +183,8 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     
     private void dropOffItem(){
 	
+	System.out.println("dropOffItem");
+			
 	this.
 	theAnt
 	.moveEntityTo(
@@ -168,9 +197,19 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	
 	if(Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(), targetChest.xCoord, targetChest.yCoord, targetChest.zCoord, 1)){
 	    
+	    System.out.println("dropOffItem : isClose");
+	    
 	    if(Environment.inventoryCanHold(this.theAnt.inventory[0], this.theAnt.inventory, 64)){
 		
-		Environment.addItemStackToInventory(this.theAnt.inventory[0], this.theAnt.inventory, 64, targetChest);
+		System.out.println("dropOffItem : isClose : canHold");
+		
+		((TileEntityAntChest) this.targetChest).getContents()[0] = this.theAnt.inventory[0];
+		
+		//Environment.addItemStackToInventory(this.theAnt.inventory[0], ((TileEntityAntChest) this.targetChest).getContents(), 64, targetChest);
+		
+		System.out.println("dropOffItem : isClose : canHold : addTo");
+		
+		//Environment.spawnItem(this.theAnt.inventory[0], world, getPosX(), getPosY(), getPosZ());
 		
 		this.state = "none";
 		
@@ -179,6 +218,22 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	    }
 	    
 	}
+	
+    }
+    
+    public boolean antChestExists(TileEntity te){
+	
+	if(te != null){
+	    
+	    if(te instanceof TileEntityAntChest){
+		
+		return true;
+		
+	    }
+	    
+	}
+	
+	return false;
 	
     }
 	

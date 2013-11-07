@@ -3,13 +3,12 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.command.IEntitySelector;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -47,39 +46,30 @@ public class Environment {
 	
     }
     
-    public static TileEntity getNearestTileEntityFrom(List list, double x, double y, double z){
+    public static TileEntity getNearestTileEntityFrom(ArrayList<TileEntity> list, Entity entity, double x, double y, double z){
 	
-	double d4 = -1.0D;
-        TileEntity entity = null;
-        
-        if(list.size() <= 0 || list == null){
-            
-            System.out.println("getNearest : list < 0 || list == null");
-            
-            return null;
-            
-        }
-        
-        TileEntity nearest = (TileEntity) list.get(0);
-
-        for (int i = 0; i < list.size(); ++i)
-        {
-            
-            if(((TileEntity) list.get(i)).getDistanceFrom(x, y, z) < nearest.getDistanceFrom(x, y, z)){
-        	
-        	nearest = (TileEntity) list.get(i);
-        	
-            }
-            
-        }
-
-        return nearest;
+	TileEntity nearest = null;
 	
-    }
-    
-    public static int[] getNearestBlockFrom(List list, Entity entity, int distance){
+	if(list == null || list.size() < 1){
+	    
+	    System.out.println("getNTE: "+list);
+	    return null;
+	    
+	}
 	
-	return null;
+	nearest = list.get(0);
+	
+	for(TileEntity tile : list){
+	    
+	    if(entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity.getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)){
+		
+		nearest = tile;
+		
+	    }
+	    
+	}
+	
+	return nearest;
 	
     }
 
@@ -137,25 +127,36 @@ public class Environment {
 
     }
     
-    public static List getTileEntitiesInRadius(World world,
-	    double x, double y, double z, int radius) {
-
-	List list = world.getEntitiesWithinAABB(TileEntity.class, AxisAlignedBB.getAABBPool().getAABB(x-radius, y-radius, z-radius, x + radius, y + radius, z + radius));
-
-	if(list == null){
-	    
-	    System.out.println("getTileEntities : list == null");
-	    
-	}
+    public static ArrayList<TileEntity> getTileEntitiesInRadius(World world,
+	    int x, int y, int z, int radius) {
 	
-	if(list.size() < 0){
-	    
-	    System.out.println("getTileEntities : list < 0");
-	    
-	}
-	
-	return list;
+	ArrayList<TileEntity> result = new ArrayList<TileEntity>();
 
+	for (int newX = -1 * radius; newX <= radius; newX++) {
+
+	    for (int newY = -1 * radius; newY <= radius; newY++) {
+
+		for (int newZ = -1 * radius; newZ <= radius; newZ++) {
+
+		    if (newX * newX + newY * newY + newZ * newZ <= radius
+			    * radius) {
+
+			if (world.getBlockTileEntity(newX + x, newY + y, newZ + z) != null) {
+
+			    result.add(world.getBlockTileEntity(newX + x, newY + y, newZ + z));
+
+			}
+
+		    }
+
+		}
+
+	    }
+
+	}
+
+	return result;
+	
     }
 
     public static ArrayList<EntityPlayer> getEntitiesInRadius(World world,
@@ -288,6 +289,35 @@ public class Environment {
 	    for (int k = 0; k < result.length; k++) {
 
 		result[k] = 0;
+
+	    }
+
+	}
+
+	return result;
+
+    }
+    
+    public static ArrayList<BlockEntry> getBlockIDsInRadius(World world, int x,
+	    int y, int z, int radius) {
+
+	ArrayList<BlockEntry> result = new ArrayList<BlockEntry>();
+
+	for (int newX = -1 * radius; newX <= radius; newX++) {
+
+	    for (int newY = -1 * radius; newY <= radius; newY++) {
+
+		for (int newZ = -1 * radius; newZ <= radius; newZ++) {
+
+		    if (newX * newX + newY * newY + newZ * newZ <= radius
+			    * radius) {
+
+			    result.add(new BlockEntry(newX + x, newY + y, newZ
+				    + z, world.getBlockId(x, y, z)));
+
+		    }
+
+		}
 
 	    }
 
@@ -616,6 +646,8 @@ public class Environment {
 	int amount = item.stackSize;
 
 	for (int k = 0; k < inventory.length; k++) {
+	    
+	    System.out.println("addTo : "+amount);
 
 	    if (amount > 0) {
 
@@ -638,10 +670,12 @@ public class Environment {
 				item.getItemDamage());
 
 			amount = 0;
-
+			
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
+			System.out.println("addTo : break");
+			break;
 
 		    }
 
@@ -657,6 +691,8 @@ public class Environment {
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
+			System.out.println("addTo : break");
+			break;
 
 		    }
 

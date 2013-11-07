@@ -531,6 +531,10 @@ public class Register {
 
 	addItem(itemBreedingChamber, "Breeding Chamber",
 		Reference.ITEM_CHAMBER_NAME);
+	
+	addItem(chamberCommon, chamberCommon.getChamberAntSpeciesName()
+		+ "Breeding Chamber",
+		Reference.CHAMBER_COMMON_NAME);
 
 	addItem(chamberHarvester, chamberHarvester.getChamberAntSpeciesName()
 		+ "Breeding Chamber", Reference.MOD_ID

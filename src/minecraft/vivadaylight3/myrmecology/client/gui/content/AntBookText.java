@@ -16,6 +16,7 @@ public class AntBookText extends TextContent {
 	String t7 = EnumChatFormatting.BOLD+"The Book Of";
 	String t8 = "Myrmecology";
 	String t9 = EnumChatFormatting.RESET+"by William Wheeler";
+	String t10 = "First Draft Edition";
 	
 	String s2 = EnumChatFormatting.BOLD+""+EnumChatFormatting.UNDERLINE+"Contents"+EnumChatFormatting.RESET;
 	String s2a = getNewLine(s2);
@@ -46,12 +47,12 @@ public class AntBookText extends TextContent {
 	String s22 = getNewLine(s21);;
 	String s23 = EnumChatFormatting.BOLD+"Worker: "+EnumChatFormatting.RESET+"Stick"+getNewLine(s20);
 	
-	String s24 = "The way a myrmecologist gains access new species is through breeding. To start breeding, you need to craft a formicarium. Place the formicarium on the ground and then out a drone in the bottom slot and a queen in the top slot. They will start breeding if they can breed together.";
+	String s24 = "A myrmecologist access new species by breeding ants. To start breeding, you need a formicarium. Place the formicarium and then put a drone in the bottom slot, a queen in the top slot and the species' breeding chamber in the slot in the middle. They will start breeding if they can breed together.";
 			
-	String s25 = "Each ant except ants you extract from ant hills and common ants can be put to work. " +
+	String s25 = "#NOT YET IMPLEMENTED# Each ant except ants you extract from ant hills and common ants can be put to work. " +
 			"Mature an ant larva into a worker ant and then spawn it by right-clicking with it on the ground. If the ant's species has a behaviour it will begin its work.";
 	
-	return new String[]{newBookPage(true, t7, t8, t9), newBookPage(true, s2, s2a, s3, s4, s5, s6, s7), newBookPage(true, s10, s11), newBookPage(true, s12, s13, s14, s15)
+	return new String[]{newBookPage(true, t7, t8, t9, t10), newBookPage(true, s2, s2a, s3, s4, s5, s6, s7), newBookPage(true, s10, s11), newBookPage(true, s12, s13, s14, s15)
 		,newBookPage(true, s16), newBookPage(true, s17, s18), newBookPage(false, s19, s20, s21, s22, s23), newBookPage(false, s24), newBookPage(false, s25)};
 	
     }

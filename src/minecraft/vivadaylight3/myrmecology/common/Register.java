@@ -87,6 +87,7 @@ import vivadaylight3.myrmecology.common.item.chamber.ChamberPlentiful;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberScavenger;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberSprouter;
 import vivadaylight3.myrmecology.common.lib.Resources;
+import vivadaylight3.myrmecology.common.lib.TreeDictionary;
 import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
@@ -225,6 +226,13 @@ public class Register {
 
 	return latestBlockID + ID_BLOCK;
 
+    }
+    
+    public static void registerTreeDictionary(){
+	
+	TreeDictionary.registerVanillaTrees();
+	TreeDictionary.registerTreesFromOreDict(false);
+	
     }
     
     public static void registerAchievements(){

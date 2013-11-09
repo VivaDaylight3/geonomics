@@ -27,7 +27,6 @@ public class RendererAntChest extends TileEntitySpecialRenderer {
     private ModelChest largeChestModel = new ModelLargeChest();
 
     public RendererAntChest() {
-	// TODO Auto-generated constructor stub
     }
 
     public void renderTileEntityAntChestAt(TileEntityAntChest par1TileEntityAntChest, double par2, double par4, double par6, float par8)

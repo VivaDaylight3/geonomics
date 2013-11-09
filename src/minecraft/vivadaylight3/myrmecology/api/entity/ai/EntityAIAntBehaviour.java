@@ -34,21 +34,21 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 	return true;
     }
 
-    public int getPosX() {
+    public double getPosX() {
 
-	return (int) this.theAnt.getPosX();
-
-    }
-
-    public int getPosY() {
-
-	return (int) this.theAnt.getPosY();
+	return this.theAnt.getPosX();
 
     }
 
-    public int getPosZ() {
+    public double getPosY() {
 
-	return (int) this.theAnt.getPosZ();
+	return this.theAnt.getPosY();
+
+    }
+
+    public double getPosZ() {
+
+	return this.theAnt.getPosZ();
 
     }
 

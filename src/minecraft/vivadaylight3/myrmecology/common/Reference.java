@@ -31,7 +31,7 @@ public class Reference {
      VERSION_FORGE = "@VERSION_FORGE@"; public static final String
      VERSION_CHECK_URL = "@VERSION_URL@";
       
-      public static final String MOD_ID = "@MOD_ID@"; public static final
+      public static final String MOD_ID = "Myrmecology"; public static final
       String MOD_CHANNEL = MOD_ID; public static final String MOD_URL =
       "@MOD_URL@"; public static final String MOD_DESC = "@MOD_DESC@";
      

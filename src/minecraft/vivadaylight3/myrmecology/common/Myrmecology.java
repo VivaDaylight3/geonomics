@@ -44,6 +44,7 @@ public class Myrmecology {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
+	Log.info("Initialising config");
 	Configuration config = new Configuration(
 		event.getSuggestedConfigurationFile());
 
@@ -51,22 +52,30 @@ public class Myrmecology {
 	
 	Register.checkAntBook();
 
+	Log.info("Getting version check URL");
 	Url url = new Url(Reference.VERSION_CHECK_URL);
 
 	// updateIsAvailable = Register.checkForUpdates(url);
 
+	Log.info("Registering creative tab");
 	Register.registerCreativeTab();
 
+	Log.info("Registering blocks");
 	Register.registerBlocks();
 
+	Log.info("Registering items");
 	Register.registerItems();
 
+	Log.info("Registering ant breeding recipes");
 	Register.registerBreeding();
 
+	Log.info("Registering crafting recipes");
 	Register.registerRecipes();
 
+	Log.info("Registering tile entities");
 	Register.registerTileEntities();
 
+	Log.info("Registering world gen");
 	Register.registerWorldGen();
 
 	MyrmecologyGuiHandler guiHandler = new MyrmecologyGuiHandler();
@@ -80,11 +89,17 @@ public class Myrmecology {
 	NetworkRegistry.instance().registerChannel(packetHandler2,
 		Reference.MOD_CHANNEL_INCUBATOR);
 
+	Log.info("Registering entities");
 	Register.registerEntities();
 	
+	Log.info("Registering key bindings");
 	Register.registerKeyBindings();
 	
+	Log.info("Registering achievements");
 	Register.registerAchievements();
+	
+	Log.info("Registering tree dictionary");
+	Register.registerTreeDictionary();
 
     }
 

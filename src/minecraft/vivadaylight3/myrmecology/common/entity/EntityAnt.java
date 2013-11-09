@@ -115,7 +115,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
     @Override
     public boolean isAIEnabled() {
-	return false;
+	return true;
     }
 
     public ResourceLocation getResource() {

@@ -9,8 +9,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
-import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.lib.BlockEntry;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 

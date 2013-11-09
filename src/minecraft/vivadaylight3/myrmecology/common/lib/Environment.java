@@ -19,6 +19,12 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class Environment {
     
+    public static Entity getNearestEntityFrom(List list, double x, double y, double z, int distance){
+	
+	return getNearestEntityFrom(list, (int) x, (int) y, (int) z, distance);
+	
+    }
+    
     public static Entity getNearestEntityFrom(List list, int x, int y, int z, int distance){
 	
 	double d4 = -1.0D;
@@ -71,6 +77,32 @@ public class Environment {
 	return nearest;
 	
     }
+    
+    public static BlockPosEntry getNearestBlockFrom(ArrayList<BlockPosEntry> list, Entity entity, double x, double y, double z){
+	
+	BlockPosEntry nearest = null;
+	
+	if(list == null || list.size() < 1){
+	    
+	    return null;
+	    
+	}
+	
+	nearest = list.get(0);
+	
+	for(BlockPosEntry tile : list){
+	    
+	    if(entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity.getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)){
+		
+		nearest = tile;
+		
+	    }
+	    
+	}
+	
+	return nearest;
+	
+    }
 
     public static Entity spawnEntity(World par0World, Entity entity,
 	    double par2, double par4, double par6) {
@@ -100,6 +132,13 @@ public class Environment {
 	
     }
 
+    public static boolean coordinateIsCloseTo(double x, double y, double z, double x2,
+	    double y2, double z2, int distance) {
+	
+	return coordinateIsCloseTo((int) x, (int) y, (int) z, x2,
+		    y2, z2, distance);
+    }
+    
     public static boolean coordinateIsCloseTo(int x, int y, int z, int x2,
 	    int y2, int z2, int distance) {
 
@@ -124,6 +163,14 @@ public class Environment {
 
 	return list;
 
+    }
+    
+    public static ArrayList<TileEntity> getTileEntitiesInRadius(World world,
+	    double x, double y, double z, int radius) {
+	
+	return getTileEntitiesInRadius(world,
+		    (int) x, (int) y, (int) z, radius);
+	
     }
     
     public static ArrayList<TileEntity> getTileEntitiesInRadius(World world,
@@ -297,10 +344,10 @@ public class Environment {
 
     }
     
-    public static ArrayList<BlockEntry> getBlockIDsInRadius(World world, int x,
+    public static ArrayList<BlockPosEntry> getBlockIDsInRadius(World world, int x,
 	    int y, int z, int radius) {
 
-	ArrayList<BlockEntry> result = new ArrayList<BlockEntry>();
+	ArrayList<BlockPosEntry> result = new ArrayList<BlockPosEntry>();
 
 	for (int newX = -1 * radius; newX <= radius; newX++) {
 
@@ -311,8 +358,8 @@ public class Environment {
 		    if (newX * newX + newY * newY + newZ * newZ <= radius
 			    * radius) {
 
-			    result.add(new BlockEntry(newX + x, newY + y, newZ
-				    + z, world.getBlockId(x, y, z)));
+			    result.add(new BlockPosEntry(newX + x, newY + y, newZ
+				    + z, world.getBlockId(x, y, z), world.getBlockMetadata(newX + x, newY + y, newZ + z)));
 
 		    }
 
@@ -325,12 +372,19 @@ public class Environment {
 	return result;
 
     }
+    
+    public static ArrayList<BlockPosEntry> getBlocksInRadius(World world, double x,
+	    double y, double z, int radius) {
+	
+	 return getBlocksInRadius(world, (int) x,
+		 (int) y, (int) z, radius);
+	
+    }
 
-    // TODO
-    public static ArrayList<BlockEntry> getBlocksInRadius(World world, int x,
-	    int y, int z, int radius, int blockID) {
+    public static ArrayList<BlockPosEntry> getBlocksInRadius(World world, int x,
+	    int y, int z, int radius) {
 
-	ArrayList<BlockEntry> result = new ArrayList<BlockEntry>();
+	ArrayList<BlockPosEntry> result = new ArrayList<BlockPosEntry>();
 
 	for (int newX = -1 * radius; newX <= radius; newX++) {
 
@@ -341,12 +395,9 @@ public class Environment {
 		    if (newX * newX + newY * newY + newZ * newZ <= radius
 			    * radius) {
 
-			if (world.getBlockId(newX + x, newY + y, newZ + z) == blockID) {
-
-			    result.add(new BlockEntry(newX + x, newY + y, newZ
-				    + z, blockID));
-
-			}
+			    result.add(new BlockPosEntry(newX + x, newY + y, newZ
+				    + z, world.getBlockId(newX + x, newY + y, newZ
+				    + z), world.getBlockMetadata(newX + x, newY + y, newZ + z)));
 
 		    }
 

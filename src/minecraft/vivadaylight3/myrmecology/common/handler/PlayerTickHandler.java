@@ -5,12 +5,15 @@ import java.util.EnumSet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.TreeDictionary;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 public class PlayerTickHandler implements ITickHandler {
     
     private final EnumSet<TickType> ticksToGet;
+    private static int ticks = 0;
+    private static int tickInterval = 20;
 
     public PlayerTickHandler(EnumSet<TickType> ticksToGet) {
 	
@@ -21,6 +24,7 @@ public class PlayerTickHandler implements ITickHandler {
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
 
 	playerTick((EntityPlayer)tickData[0]);
+	ticks++;
 	
     }
 
@@ -50,6 +54,14 @@ public class PlayerTickHandler implements ITickHandler {
 	    player.addStat(Register.achieveGetBook, 1);
 	    KeyBindingHandler.keyPressed = false;
 	    
+	}
+	
+	if(ticks % tickInterval == 0){
+	    
+	    TreeDictionary.updateTreesFromOreDict();
+	    player.addChatMessage("onUpdate");
+	    tickInterval = 1200;
+	
 	}
 	
     }

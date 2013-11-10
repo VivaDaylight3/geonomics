@@ -502,14 +502,12 @@ public class Environment {
     public static void spawnItem(ItemStack item, World world, int x, int y,
 	    int z) {
 
-	if (!world.isRemote
-		&& world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+	if (world.isRemote) {
 	    float f = 0.7F;
 	    double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 	    double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 	    double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-	    EntityItem entityitem = new EntityItem(world, x + d0, y + d1, z
-		    + d2, item);
+	    EntityItem entityitem = new EntityItem(world, x, y, z, item);
 	    entityitem.delayBeforeCanPickup = 10;
 	    world.spawnEntityInWorld(entityitem);
 	}

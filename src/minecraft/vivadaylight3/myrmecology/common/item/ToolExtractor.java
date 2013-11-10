@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.common.item;
 import java.util.List;
 
 import vivadaylight3.myrmecology.api.IEntityAnt;
+import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.entity.EntityAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
@@ -51,16 +52,18 @@ public class ToolExtractor extends ItemTool {
     }
     
     @Override
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target, EntityLivingBase player)
     {
 
-	if(par2EntityLivingBase instanceof IEntityAnt){
+	if(target instanceof EntityAnt){
 	    
-	    Environment.spawnItem(new ItemStack(((EntityAnt) par2EntityLivingBase).getAnt()), par2EntityLivingBase.worldObj, par2EntityLivingBase.serverPosX, par2EntityLivingBase.serverPosY, par2EntityLivingBase.serverPosZ);
+	    ItemStack ant = new ItemStack(((EntityAnt) target).getAnt(), 1, Metadata.getMetaWorker());
+	    
+	    Environment.addItemStackToInventory(ant, ((EntityPlayer)player).inventory.mainInventory, 64, null);
+	    		
+	    target.setDead();
 		
-	    par2EntityLivingBase.setDead();
-		
-	    return true;
+	    return false;
 	    
 	}
 	

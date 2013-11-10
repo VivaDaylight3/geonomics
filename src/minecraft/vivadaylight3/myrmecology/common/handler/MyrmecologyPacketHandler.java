@@ -1,17 +1,21 @@
 package vivadaylight3.myrmecology.common.handler;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.lib.Nbt;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -44,7 +48,8 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	return FMLCommonHandler.instance().getEffectiveSide();
 
     }
-@SideOnly(Side.CLIENT)
+    
+    @SideOnly(Side.CLIENT)
     public static EntityPlayer getSidedPlayer(Player parPlayer) {
 
 	Side side = getSide();

@@ -14,6 +14,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
 
@@ -27,7 +28,10 @@ import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.client.ClientProxy;
 import vivadaylight3.myrmecology.client.model.ModelAnt;
+import vivadaylight3.myrmecology.client.renderer.ItemRendererAntChest;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
+import vivadaylight3.myrmecology.client.renderer.RendererAntChest;
+import vivadaylight3.myrmecology.common.block.BlockAntChest;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
@@ -85,8 +89,10 @@ import vivadaylight3.myrmecology.common.item.chamber.ChamberSprouter;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.TreeDictionary;
 import vivadaylight3.myrmecology.common.lib.Url;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -107,7 +113,7 @@ public class Register {
     private static ArrayList<BlockAntHill> hillList = new ArrayList<BlockAntHill>();
     private static ArrayList<Class<? extends IEntityAnt>> entityAntList = new ArrayList<Class<? extends IEntityAnt>>();
     private static ArrayList<ItemBreedingChamber> chamberList = new ArrayList<ItemBreedingChamber>();
-    public static ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
+    private static ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
 
     public static boolean checkForUpdates = true;
     public static boolean receiveAntBookOnJoin = true;
@@ -251,9 +257,8 @@ public class Register {
 			+ " and make it do your bidding", -2, 2,
 		achieveBreedAnts,
 		new ItemStack(antForest, 1, Metadata.getMetaWorker()));
-	// achieveAntDimension = addAchievement(32, "Holiday Destination",
-	// "CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(blockAntChest));
-	// TODO
+	 achieveAntDimension = addAchievement(32, "Holiday Destination",
+	 "CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(blockAntChest));
 	achievementPage = new AchievementPage("Myrmecology", achieveGetBook);
 
 	for (int k = 0; k < achievementList.size(); k++) {
@@ -306,12 +311,11 @@ public class Register {
     public static void registerBlocks() {
 
 	config.load();
-	// TODO
-	/*
-	 * blockAntChest = new BlockAntChest(config.get(
-	 * Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTCHEST_NAME,
-	 * getNewBlockID()).getInt());
-	 */
+
+	blockAntChest = new BlockAntChest(config.get(
+	  Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTCHEST_NAME,
+	  getNewBlockID()).getInt());
+	 
 	blockFungi = new BlockFungi(config.get(Configuration.CATEGORY_BLOCK,
 		Reference.BLOCK_FUNGI_NAME, getNewBlockID()).getInt(),
 		Reference.BLOCK_FUNGI_NAME);
@@ -354,11 +358,10 @@ public class Register {
 		Material.ground);
 
 	config.save();
-	// TODO
-	/*
-	 * addBlock(blockAntChest, "Scavenging Chest",
-	 * Reference.BLOCK_ANTCHEST_NAME);
-	 */
+	
+	addBlock(blockAntChest, "Scavenging Chest",
+	  Reference.BLOCK_ANTCHEST_NAME);
+	 
 	addBlock(blockFungi, "Agaricus Fungi Block", Reference.BLOCK_FUNGI_NAME);
 	addBlock(blockIncubator, "Solarium", Reference.BLOCK_INCUBATOR_NAME);
 	addBlock(blockAntFarm, "Formicarium", Reference.BLOCK_ANTFARM_NAME);
@@ -722,12 +725,13 @@ public class Register {
     @SideOnly(Side.CLIENT)
     public static void registerRenderers() {
 	  ClientProxy.registerRenderers();
-	 /* ClientRegistry.bindTileEntitySpecialRenderer
-	 * (TileEntityAntChest.class, new RendererAntChest());
-	 * MinecraftForgeClient
-	 * .registerItemRenderer(Register.blockAntChest.blockID, new
-	 * ItemRendererAntChest());
-	 */
+	  
+	  ClientRegistry.bindTileEntitySpecialRenderer
+	  (TileEntityAntChest.class, new RendererAntChest());
+	  MinecraftForgeClient
+	  .registerItemRenderer(Register.blockAntChest.blockID, new
+	  ItemRendererAntChest());
+	 
     }
 
     // TODO
@@ -804,10 +808,9 @@ public class Register {
 	GameRegistry.registerTileEntity(TileEntityIncubator.class,
 		Reference.BLOCK_INCUBATOR_NAME);
 
-	/*
-	 * GameRegistry.registerTileEntity(TileEntityAntChest.class,
-	 * Reference.BLOCK_ANTCHEST_NAME);
-	 */
+	  GameRegistry.registerTileEntity(TileEntityAntChest.class,
+	  Reference.BLOCK_ANTCHEST_NAME);
+	 
 	// TODO
 
     }

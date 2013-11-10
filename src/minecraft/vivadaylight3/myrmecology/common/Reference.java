@@ -28,12 +28,12 @@ public class Reference {
     public static final String VERSION_FORGE = "@VERSION_FORGE@";
     public static final String VERSION_CHECK_URL = "@VERSION_URL@";
 
-    public static final String MOD_ID = "Myrmecology";
+    public static final String MOD_ID = "@MOD_ID@";
     public static final String MOD_CHANNEL = MOD_ID;
     public static final String MOD_URL = "@MOD_URL@";
     public static final String MOD_DESC = "@MOD_DESC@";
 
-    public static final boolean LOG_DEBUG = true;
+    public static final boolean LOG_DEBUG = false;
 
     public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
     public static final String MOD_VERSION = VERSION_MAJOR + "."

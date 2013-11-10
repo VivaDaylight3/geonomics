@@ -1,153 +1,114 @@
 package vivadaylight3.myrmecology.client.renderer;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import static org.lwjgl.opengl.GL11.glColor4f;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslatef;
+
+import java.util.Random;
+
 import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.model.ModelLargeChest;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
-import cpw.mods.fml.common.FMLLog;
+
+import com.google.common.primitives.SignedBytes;
 
 public class RendererAntChest extends TileEntitySpecialRenderer {
 
-    private static final ResourceLocation RESOURCE_SINGLE = Resources.BLOCK_ANTCHEST;
-    private static final ResourceLocation RESOURCE_DOUBLE = Resources.BLOCK_ANTCHEST_DOUBLE;
+    private static ResourceLocation[] resources = {Resources.BLOCK_ANTCHEST, Resources.BLOCK_ANTCHEST_DOUBLE};
+    private Random random;
 
-    /** The normal small chest model. */
-    private ModelChest chestModel = new ModelChest();
+    private RenderBlocks renderBlocks;
 
-    /** The large double chest model. */
-    private ModelChest largeChestModel = new ModelLargeChest();
+    private RenderItem itemRenderer;
 
-    public RendererAntChest() {
+    private static float[][] shifts = { { 0.3F, 0.45F, 0.3F }, { 0.7F, 0.45F, 0.3F }, { 0.3F, 0.45F, 0.7F }, { 0.7F, 0.45F, 0.7F }, { 0.3F, 0.1F, 0.3F },
+            { 0.7F, 0.1F, 0.3F }, { 0.3F, 0.1F, 0.7F }, { 0.7F, 0.1F, 0.7F }, { 0.5F, 0.32F, 0.5F }, };
+
+    public RendererAntChest()
+    {
+        model = new ModelChest();
+        random = new Random();
+        renderBlocks = new RenderBlocks();
+        itemRenderer = new RenderItem() {
+            @Override
+            public byte getMiniBlockCount(ItemStack stack) {
+                return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 15) + 1);
+            }
+            @Override
+            public byte getMiniItemCount(ItemStack stack) {
+                return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 7) + 1);
+            }
+            @Override
+            public boolean shouldBob() {
+                return false;
+            }
+            @Override
+            public boolean shouldSpreadItems() {
+                return false;
+            }
+        };
+        itemRenderer.setRenderManager(RenderManager.instance);
     }
 
-    public void renderTileEntityAntChestAt(
-	    TileEntityAntChest par1TileEntityAntChest, double par2,
-	    double par4, double par6, float par8) {
-	int i;
-
-	if (!par1TileEntityAntChest.hasWorldObj()) {
-	    i = 0;
-	} else {
-	    Block block = par1TileEntityAntChest.getBlockType();
-	    i = par1TileEntityAntChest.getBlockMetadata();
-
-	    if (block instanceof BlockChest && i == 0) {
-		try {
-		    ((BlockChest) block).unifyAdjacentChests(
-			    par1TileEntityAntChest.getWorldObj(),
-			    par1TileEntityAntChest.xCoord,
-			    par1TileEntityAntChest.yCoord,
-			    par1TileEntityAntChest.zCoord);
-		} catch (ClassCastException e) {
-		    FMLLog.severe(
-			    "Attempted to render a chest at %d,  %d, %d that was not a chest",
-			    par1TileEntityAntChest.xCoord,
-			    par1TileEntityAntChest.yCoord,
-			    par1TileEntityAntChest.zCoord);
-		}
-		i = par1TileEntityAntChest.getBlockMetadata();
-	    }
-
-	    par1TileEntityAntChest.checkForAdjacentChests();
-	}
-
-	if (par1TileEntityAntChest.adjacentChestZNeg == null
-		&& par1TileEntityAntChest.adjacentChestXNeg == null) {
-	    ModelChest modelchest = null;
-
-	    if (par1TileEntityAntChest.adjacentChestXPos == null
-		    && par1TileEntityAntChest.adjacentChestZPosition == null) {
-		modelchest = this.chestModel;
-		this.bindTexture(RESOURCE_SINGLE);
-	    } else {
-
-		this.bindTexture(RESOURCE_DOUBLE);
-	    }
-
-	    GL11.glPushMatrix();
-	    GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    GL11.glTranslatef((float) par2, (float) par4 + 1.0F,
-		    (float) par6 + 1.0F);
-	    GL11.glScalef(1.0F, -1.0F, -1.0F);
-	    GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-	    short short1 = 0;
-
-	    if (i == 2) {
-		short1 = 180;
-	    }
-
-	    if (i == 3) {
-		short1 = 0;
-	    }
-
-	    if (i == 4) {
-		short1 = 90;
-	    }
-
-	    if (i == 5) {
-		short1 = -90;
-	    }
-
-	    if (i == 2 && par1TileEntityAntChest.adjacentChestXPos != null) {
-		GL11.glTranslatef(1.0F, 0.0F, 0.0F);
-	    }
-
-	    if (i == 5 && par1TileEntityAntChest.adjacentChestZPosition != null) {
-		GL11.glTranslatef(0.0F, 0.0F, -1.0F);
-	    }
-
-	    GL11.glRotatef((float) short1, 0.0F, 1.0F, 0.0F);
-	    GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-	    float f1 = par1TileEntityAntChest.prevLidAngle
-		    + (par1TileEntityAntChest.lidAngle - par1TileEntityAntChest.prevLidAngle)
-		    * par8;
-	    float f2;
-
-	    if (par1TileEntityAntChest.adjacentChestZNeg != null) {
-		f2 = par1TileEntityAntChest.adjacentChestZNeg.prevLidAngle
-			+ (par1TileEntityAntChest.adjacentChestZNeg.lidAngle - par1TileEntityAntChest.adjacentChestZNeg.prevLidAngle)
-			* par8;
-
-		if (f2 > f1) {
-		    f1 = f2;
-		}
-	    }
-
-	    if (par1TileEntityAntChest.adjacentChestXNeg != null) {
-		f2 = par1TileEntityAntChest.adjacentChestXNeg.prevLidAngle
-			+ (par1TileEntityAntChest.adjacentChestXNeg.lidAngle - par1TileEntityAntChest.adjacentChestXNeg.prevLidAngle)
-			* par8;
-
-		if (f2 > f1) {
-		    f1 = f2;
-		}
-	    }
-
-	    f1 = 1.0F - f1;
-	    f1 = 1.0F - f1 * f1 * f1;
-	    modelchest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
-	    modelchest.renderAll();
-	    GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-	    GL11.glPopMatrix();
-	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	}
+    public void render(TileEntityAntChest tile, double x, double y, double z, float partialTick) {
+        if (tile == null) {
+            return;
+        }
+        int facing = 3;
+        if (tile != null && tile.getWorldObj() != null) {
+            facing = tile.getFacing();
+            int typ = tile.getWorldObj().getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord);
+        }
+        bindTexture(resources[0]);
+        glPushMatrix();
+        glEnable(32826 /* GL_RESCALE_NORMAL_EXT */);
+        glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
+        glScalef(1.0F, -1F, -1F);
+        glTranslatef(0.5F, 0.5F, 0.5F);
+        int k = 0;
+        if (facing == 2) {
+            k = 180;
+        }
+        if (facing == 3) {
+            k = 0;
+        }
+        if (facing == 4) {
+            k = 90;
+        }
+        if (facing == 5) {
+            k = -90;
+        }
+        glRotatef(k, 0.0F, 1.0F, 0.0F);
+        glTranslatef(-0.5F, -0.5F, -0.5F);
+        float lidangle = tile.prevLidAngle + (tile.lidAngle - tile.prevLidAngle) * partialTick;
+        lidangle = 1.0F - lidangle;
+        lidangle = 1.0F - lidangle * lidangle * lidangle;
+        model.chestLid.rotateAngleX = -((lidangle * 3.141593F) / 2.0F);
+        // Render the chest itself
+        model.renderAll();
+        glDisable(32826 /* GL_RESCALE_NORMAL_EXT */);
+        glPopMatrix();
+        glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    @Override
-    public void renderTileEntityAt(TileEntity par1TileEntity, double par2,
-	    double par4, double par6, float par8) {
-	this.renderTileEntityAntChestAt((TileEntityAntChest) par1TileEntity,
-		par2, par4, par6, par8);
+    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float partialTick)
+    {
+        render((TileEntityAntChest) tileentity, x, y, z, partialTick);
     }
 
+    private ModelChest model;
 }

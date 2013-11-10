@@ -3,14 +3,18 @@ package vivadaylight3.myrmecology.common.item;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.entity.EntityAnt;
+import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -45,6 +49,21 @@ public class ItemMyrmopaedia extends Item {
 
 	MyrmopaediaProperties.initiateMyrmopaedia(par1ItemStack);
 
+    }
+    
+    @Override
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target, EntityLivingBase player)
+    {
+
+	if(target instanceof EntityAnt && player instanceof EntityPlayer){
+	    
+	    ((EntityAnt) target).sendBehaviourErrorMessage((EntityPlayer) player);
+	  
+	  return true;
+	    
+	}
+	
+	return false;
     }
 
     @Override

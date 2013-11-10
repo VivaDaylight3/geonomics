@@ -35,6 +35,8 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     boolean hasGoneTo = false;
 
     public TileEntity homeBlockTileEntity;
+    
+    public String behaviourErrorMessage = "Hello sir";
 
     public int ticksPassed;
 
@@ -50,6 +52,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
 	this.homeBlockTileEntity = par1World.getBlockTileEntity(
 		(int) this.posX, (int) this.posY - 1, (int) this.posZ);
+	this.setAIMoveSpeed(0.5f);
 
     }
 
@@ -85,7 +88,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     @Override
     public void moveEntityTo(int x, int y, int z) {
 
-	this.getNavigator().tryMoveToXYZ(x, y, z, 1f/*
+	this.getNavigator().tryMoveToXYZ(x, y, z, this.moveForward/*
 						     * SharedMonsterAttributes.
 						     * movementSpeed
 						     * .getDefaultValue()
@@ -227,6 +230,25 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
 	moveEntityTo((int) posX, (int) posY, (int) posZ);
 
+    }
+    
+    @Override
+    public void sendBehaviourErrorMessage(EntityPlayer player){
+	
+	if(!this.worldObj.isRemote){
+	
+	if(behaviourErrorMessage != null){
+	
+	    player.addChatMessage(behaviourErrorMessage);
+	
+	}else{
+	    
+	    player.addChatMessage("Don't mind me sir, I'm just minding my own business");
+	    
+	}
+	
+	}
+	
     }
 
 }

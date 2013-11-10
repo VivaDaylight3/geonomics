@@ -33,7 +33,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class ItemAnt extends Item {
-    
+
     /**
      * Holds the ant's icons
      */

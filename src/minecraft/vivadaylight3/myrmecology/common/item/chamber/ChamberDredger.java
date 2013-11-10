@@ -22,12 +22,12 @@ public class ChamberDredger extends ItemBreedingChamber {
 	return Register.antDredger;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.pickaxeStone);
-	
+
     }
 
     @Override

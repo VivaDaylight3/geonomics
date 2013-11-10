@@ -11,9 +11,9 @@ import net.minecraft.util.Icon;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 
 public class Variables {
-    
-    public static ArrayList listToArrayList(List list){
-	
+
+    public static ArrayList listToArrayList(List list) {
+
 	ArrayList result = new ArrayList();
 
 	for (int k = 0; k < list.size(); k++) {
@@ -23,7 +23,7 @@ public class Variables {
 	}
 
 	return result;
-	
+
     }
 
     public static ItemAnt getAntFromItemStack(ItemStack item) {

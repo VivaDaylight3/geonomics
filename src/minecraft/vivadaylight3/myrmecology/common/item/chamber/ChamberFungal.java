@@ -29,12 +29,12 @@ public class ChamberFungal extends ItemBreedingChamber {
 	return "Fungal Ant ";
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Block.mushroomBrown);
-	
+
     }
 
     public boolean usesColourRendering() {

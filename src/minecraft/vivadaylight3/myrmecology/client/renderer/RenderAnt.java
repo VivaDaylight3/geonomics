@@ -7,11 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import vivadaylight3.myrmecology.common.entity.EntityAnt;
 
 public class RenderAnt extends RenderLiving {
-    
-    public RenderAnt(ResourceLocation parResLoc, ModelBase par1ModelBase, float par2) {
+
+    public RenderAnt(ResourceLocation parResLoc, ModelBase par1ModelBase,
+	    float par2) {
 	super(par1ModelBase, par2);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
 

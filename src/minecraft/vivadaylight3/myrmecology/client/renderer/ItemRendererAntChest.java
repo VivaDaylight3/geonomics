@@ -9,9 +9,9 @@ import net.minecraftforge.client.IItemRenderer;
 public class ItemRendererAntChest implements IItemRenderer {
 
     private ModelChest modelChest;
-    
+
     public ItemRendererAntChest() {
-	
+
 	modelChest = new ModelChest();
     }
 
@@ -30,9 +30,10 @@ public class ItemRendererAntChest implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-	
-	TileEntityRenderer.instance.renderTileEntityAt(new TileEntityAntChest(), 0.0, 0.0, 0.0, 0.0f);
-	
+
+	TileEntityRenderer.instance.renderTileEntityAt(
+		new TileEntityAntChest(), 0.0, 0.0, 0.0, 0.0f);
+
     }
 
 }

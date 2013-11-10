@@ -312,40 +312,39 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 
 	Item input = this.getContents()[ContainerIncubator.getFoodSlot()]
 		.getItem();
-	
-	for(int k = 0; k < Metadata.breedingItems.length; k++){
-	    
-	    if(input == Metadata.breedingItems[k]){
-		
+
+	for (int k = 0; k < Metadata.breedingItems.length; k++) {
+
+	    if (input == Metadata.breedingItems[k]) {
+
 		return k;
-		
+
 	    }
-	    
+
 	}
-	
+
 	return -1;
-	
+
 	/*
-
-	if (input == Item.stick.itemID) {
-
-	    return Metadata.getMetaDrone();
-
-	} else if (input == Register.blockFungi.blockID) {
-
-	    return Metadata.getMetaWorker();
-
-	} else if (input == Item.goldNugget.itemID) {
-
-	    return Metadata.getMetaQueen();
-
-	} else {
-
-	    return -1;
-
-	}
-	
-	*/
+	 * 
+	 * if (input == Item.stick.itemID) {
+	 * 
+	 * return Metadata.getMetaDrone();
+	 * 
+	 * } else if (input == Register.blockFungi.blockID) {
+	 * 
+	 * return Metadata.getMetaWorker();
+	 * 
+	 * } else if (input == Item.goldNugget.itemID) {
+	 * 
+	 * return Metadata.getMetaQueen();
+	 * 
+	 * } else {
+	 * 
+	 * return -1;
+	 * 
+	 * }
+	 */
 
     }
 

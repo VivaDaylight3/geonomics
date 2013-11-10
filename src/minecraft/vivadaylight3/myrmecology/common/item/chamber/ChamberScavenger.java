@@ -22,12 +22,12 @@ public class ChamberScavenger extends ItemBreedingChamber {
 	return Register.antScavenger;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.bone);
-	
+
     }
 
     @Override

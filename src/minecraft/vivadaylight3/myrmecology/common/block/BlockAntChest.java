@@ -16,8 +16,9 @@ import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 
 public class BlockAntChest extends BlockChest {
-    
-    public static final String tileName = Reference.MOD_ID.toLowerCase()+".antChestDouble";
+
+    public static final String tileName = Reference.MOD_ID.toLowerCase()
+	    + ".antChestDouble";
 
     public BlockAntChest(int par1) {
 	super(par1, 2);
@@ -26,7 +27,8 @@ public class BlockAntChest extends BlockChest {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-	this.blockIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX+Reference.BLOCK_ANTCHEST_NAME);
+	this.blockIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
+		+ Reference.BLOCK_ANTCHEST_NAME);
     }
 
     @Override
@@ -52,64 +54,65 @@ public class BlockAntChest extends BlockChest {
 	    return true;
 	}
     }
-    
+
     @Override
-    public IInventory getInventory(World par1World, int par2, int par3, int par4)
-    {
-        Object object = (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4);
+    public IInventory getInventory(World par1World, int par2, int par3, int par4) {
+	Object object = (TileEntityChest) par1World.getBlockTileEntity(par2,
+		par3, par4);
 
-        if (object == null)
-        {
-            return null;
-        }
-        else if (par1World.isBlockSolidOnSide(par2, par3 + 1, par4, DOWN))
-        {
-            return null;
-        }
-        else if (isOcelotBlockingChest(par1World, par2, par3, par4))
-        {
-            return null;
-        }
-        else if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 - 1, par3 + 1, par4, DOWN) || isOcelotBlockingChest(par1World, par2 - 1, par3, par4)))
-        {
-            return null;
-        }
-        else if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 + 1, par3 + 1, par4, DOWN) || isOcelotBlockingChest(par1World, par2 + 1, par3, par4)))
-        {
-            return null;
-        }
-        else if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 - 1, DOWN) || isOcelotBlockingChest(par1World, par2, par3, par4 - 1)))
-        {
-            return null;
-        }
-        else if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 + 1, DOWN) || isOcelotBlockingChest(par1World, par2, par3, par4 + 1)))
-        {
-            return null;
-        }
-        else
-        {
-            if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID)
-            {
-                object = new InventoryLargeChest(tileName, (TileEntityChest)par1World.getBlockTileEntity(par2 - 1, par3, par4), (IInventory)object);
-            }
+	if (object == null) {
+	    return null;
+	} else if (par1World.isBlockSolidOnSide(par2, par3 + 1, par4, DOWN)) {
+	    return null;
+	} else if (isOcelotBlockingChest(par1World, par2, par3, par4)) {
+	    return null;
+	} else if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID
+		&& (par1World
+			.isBlockSolidOnSide(par2 - 1, par3 + 1, par4, DOWN) || isOcelotBlockingChest(
+			par1World, par2 - 1, par3, par4))) {
+	    return null;
+	} else if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID
+		&& (par1World
+			.isBlockSolidOnSide(par2 + 1, par3 + 1, par4, DOWN) || isOcelotBlockingChest(
+			par1World, par2 + 1, par3, par4))) {
+	    return null;
+	} else if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID
+		&& (par1World
+			.isBlockSolidOnSide(par2, par3 + 1, par4 - 1, DOWN) || isOcelotBlockingChest(
+			par1World, par2, par3, par4 - 1))) {
+	    return null;
+	} else if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID
+		&& (par1World
+			.isBlockSolidOnSide(par2, par3 + 1, par4 + 1, DOWN) || isOcelotBlockingChest(
+			par1World, par2, par3, par4 + 1))) {
+	    return null;
+	} else {
+	    if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID) {
+		object = new InventoryLargeChest(tileName,
+			(TileEntityChest) par1World.getBlockTileEntity(
+				par2 - 1, par3, par4), (IInventory) object);
+	    }
 
-            if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID)
-            {
-                object = new InventoryLargeChest(tileName, (IInventory)object, (TileEntityChest)par1World.getBlockTileEntity(par2 + 1, par3, par4));
-            }
+	    if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID) {
+		object = new InventoryLargeChest(tileName, (IInventory) object,
+			(TileEntityChest) par1World.getBlockTileEntity(
+				par2 + 1, par3, par4));
+	    }
 
-            if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID)
-            {
-                object = new InventoryLargeChest(tileName, (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4 - 1), (IInventory)object);
-            }
+	    if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID) {
+		object = new InventoryLargeChest(tileName,
+			(TileEntityChest) par1World.getBlockTileEntity(par2,
+				par3, par4 - 1), (IInventory) object);
+	    }
 
-            if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID)
-            {
-                object = new InventoryLargeChest(tileName, (IInventory)object, (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4 + 1));
-            }
+	    if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID) {
+		object = new InventoryLargeChest(tileName, (IInventory) object,
+			(TileEntityChest) par1World.getBlockTileEntity(par2,
+				par3, par4 + 1));
+	    }
 
-            return (IInventory)object;
-        }
+	    return (IInventory) object;
+	}
     }
 
 }

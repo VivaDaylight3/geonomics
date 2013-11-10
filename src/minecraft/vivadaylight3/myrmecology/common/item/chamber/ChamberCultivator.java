@@ -22,12 +22,12 @@ public class ChamberCultivator extends ItemBreedingChamber {
 	return Register.antCultivator;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.seeds);
-	
+
     }
 
     @Override

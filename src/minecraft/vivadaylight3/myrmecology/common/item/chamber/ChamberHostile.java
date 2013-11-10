@@ -22,12 +22,12 @@ public class ChamberHostile extends ItemBreedingChamber {
 	return Register.antHostile;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.swordStone);
-	
+
     }
 
     @Override

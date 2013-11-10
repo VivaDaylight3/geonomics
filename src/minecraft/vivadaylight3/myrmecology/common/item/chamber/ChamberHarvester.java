@@ -22,12 +22,12 @@ public class ChamberHarvester extends ItemBreedingChamber {
 	return Register.antHarvester;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.hoeStone);
-	
+
     }
 
     @Override

@@ -16,8 +16,6 @@ public class ConnectionHandler implements IConnectionHandler {
     @Override
     public void playerLoggedIn(Player player, NetHandler netHandler,
 	    INetworkManager manager) {
-	
-	
 
 	Url url = new Url(Reference.VERSION_CHECK_URL);
 

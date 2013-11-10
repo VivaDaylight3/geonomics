@@ -28,41 +28,42 @@ public class ItemAntBook extends Item {
 	setMaxStackSize(1);
 	setUnlocalizedName(Reference.ITEM_ANTBOOK_NAME);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
 	this.itemIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_ANTBOOK_NAME);
     }
-    
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
-    {
-	par3List.add("This book holds the secrets to "+Reference.MOD_ID);
+
+    public void addInformation(ItemStack par1ItemStack,
+	    EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+	par3List.add("This book holds the secrets to " + Reference.MOD_ID);
     }
-    
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
-	par3EntityPlayer.openGui(Myrmecology.instance, Register.GUI_ID_ANTBOOK, par2World, (int)par3EntityPlayer.posX, (int)par3EntityPlayer.posY,(int) par3EntityPlayer.posZ);
-        return par1ItemStack;
+
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
+	    EntityPlayer par3EntityPlayer) {
+	par3EntityPlayer.openGui(Myrmecology.instance, Register.GUI_ID_ANTBOOK,
+		par2World, (int) par3EntityPlayer.posX,
+		(int) par3EntityPlayer.posY, (int) par3EntityPlayer.posZ);
+	return par1ItemStack;
     }
-    
+
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player,
 	    World world, int x, int y, int z, int par7, float par8, float par9,
 	    float par10) {
 
-	player.openGui(Myrmecology.instance, Register.GUI_ID_ANTBOOK,
-		world, x, y, z);
+	player.openGui(Myrmecology.instance, Register.GUI_ID_ANTBOOK, world, x,
+		y, z);
 
 	return false;
 
     }
-    
+
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack par1ItemStack)
-    {
-        return false;
+    public boolean hasEffect(ItemStack par1ItemStack) {
+	return false;
     }
 
 }

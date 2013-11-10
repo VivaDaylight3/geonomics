@@ -22,12 +22,12 @@ public class ChamberOdourous extends ItemBreedingChamber {
 	return Register.antOdourous;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.fermentedSpiderEye);
-	
+
     }
 
     @Override

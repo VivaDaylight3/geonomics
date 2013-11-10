@@ -49,7 +49,7 @@ public class Myrmecology {
 		event.getSuggestedConfigurationFile());
 
 	Register.setConfig(config);
-	
+
 	Register.checkAntBook();
 
 	Log.info("Getting version check URL");
@@ -91,13 +91,13 @@ public class Myrmecology {
 
 	Log.info("Registering entities");
 	Register.registerEntities();
-	
+
 	Log.info("Registering key bindings");
 	Register.registerKeyBindings();
-	
+
 	Log.info("Registering achievements");
 	Register.registerAchievements();
-	
+
 	Log.info("Registering tree dictionary");
 	Register.registerTreeDictionary();
 

@@ -22,12 +22,12 @@ public class ChamberMound extends ItemBreedingChamber {
 	return Register.antMound;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.wheat);
-	
+
     }
 
     @Override

@@ -21,13 +21,13 @@ public class ChamberPlentiful extends ItemBreedingChamber {
 
 	return Register.antPlentiful;
 
-    }    
-    
+    }
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.silk);
-	
+
     }
 
     @Override

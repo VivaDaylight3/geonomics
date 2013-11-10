@@ -13,7 +13,7 @@ import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 
 public class AntBehaviourScavenger extends EntityAIAntBehaviour {
-    
+
     private String state = "none";
     private EntityItem targetItem;
     private TileEntity targetChest;
@@ -26,177 +26,189 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 
     @Override
     public boolean shouldExecute() {
-		
-	targetChest = Environment.getNearestTileEntityFrom(Environment.getTileEntitiesInRadius(world, getPosX(), getPosY(), getPosZ(), 10), (Entity) this.theAnt, getPosX(), getPosY(), getPosZ());
-		
-	if(state.equalsIgnoreCase("none") && nearestItemExists(searchForNearestItem())){
-	    	    	    
+
+	targetChest = Environment.getNearestTileEntityFrom(Environment
+		.getTileEntitiesInRadius(world, getPosX(), getPosY(),
+			getPosZ(), 10), (Entity) this.theAnt, getPosX(),
+		getPosY(), getPosZ());
+
+	if (state.equalsIgnoreCase("none")
+		&& nearestItemExists(searchForNearestItem())) {
+
 	    targetItem = (EntityItem) searchForNearestItem();
-	    
+
 	    flag = "flag:itemPickup";
-	    
+
 	    state = "itemPickup";
-	    
+
 	    return true;
-	    
-	}else if(state.equalsIgnoreCase("itemPickup") && targetItem != null){
-	    	    
+
+	} else if (state.equalsIgnoreCase("itemPickup") && targetItem != null) {
+
 	    flag = "flag:itemPickup";
-	    
+
 	    return true;
-	    
-	}else if(state.equalsIgnoreCase("itemDropOff") && antChestExists(targetChest)){
-	    	    
+
+	} else if (state.equalsIgnoreCase("itemDropOff")
+		&& antChestExists(targetChest)) {
+
 	    flag = "flag:itemDropOff";
-	    
+
 	    return true;
-	    
-	}else{
-	    
+
+	} else {
+
 	    return false;
-	    
+
 	}
 
     }
 
     @Override
     public void updateTask() {
-	
-	if(flag.equalsIgnoreCase("flag:itemPickup")){
-	    	    
+
+	if (flag.equalsIgnoreCase("flag:itemPickup")) {
+
 	    pickUpItem();
-	    
-	}else if(flag.equalsIgnoreCase("flag:itemDropOff") || state.equalsIgnoreCase("itemDropOff")){
-	    	    	    
+
+	} else if (flag.equalsIgnoreCase("flag:itemDropOff")
+		|| state.equalsIgnoreCase("itemDropOff")) {
+
 	    dropOffItem();
-	    
+
 	}
-	
+
     }
 
     @Override
     public void startExecuting() {
-	
+
 	this.updateTask();
-	
+
     }
-    
-    private Entity searchForNearestItem(){
-		
-	List list = Environment.getEntityItemsInRadius(world, this.getPosX(), this.getPosY(), this.getPosZ(), 20);
-	
-	return Environment.getNearestEntityFrom(list, this.getPosX(), this.getPosY(), this.getPosZ(), 20);
-	
+
+    private Entity searchForNearestItem() {
+
+	List list = Environment.getEntityItemsInRadius(world, this.getPosX(),
+		this.getPosY(), this.getPosZ(), 20);
+
+	return Environment.getNearestEntityFrom(list, this.getPosX(),
+		this.getPosY(), this.getPosZ(), 20);
+
     }
-    
-    private boolean nearestItemExists(Entity entity){
-		
-	if(entity != null){
-	    	    
-	    if(entity instanceof EntityItem){
-				
-		if(!entity.isDead){
-		    		
+
+    private boolean nearestItemExists(Entity entity) {
+
+	if (entity != null) {
+
+	    if (entity instanceof EntityItem) {
+
+		if (!entity.isDead) {
+
 		    return true;
-		
+
 		}
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
-    
-    private void pickUpItem(){
-			
-	if(Environment.inventoryCanHold(targetItem.getEntityItem(), this.theAnt.inventory, 64)){
-	    	    	
-	    this.theAnt.moveEntityTo(targetItem.posX, targetItem.posY, targetItem.posZ);
-	    
-	    int itemX = (int) Math.ceil(targetItem.posX), itemY = (int) Math.ceil(targetItem.posY), itemZ  = (int) Math.ceil(targetItem.posZ);
-	    
-	    if(targetItem.posX > getPosX()){
-				
+
+    private void pickUpItem() {
+
+	if (Environment.inventoryCanHold(targetItem.getEntityItem(),
+		this.theAnt.inventory, 64)) {
+
+	    this.theAnt.moveEntityTo(targetItem.posX, targetItem.posY,
+		    targetItem.posZ);
+
+	    int itemX = (int) Math.ceil(targetItem.posX), itemY = (int) Math
+		    .ceil(targetItem.posY), itemZ = (int) Math
+		    .ceil(targetItem.posZ);
+
+	    if (targetItem.posX > getPosX()) {
+
 		itemY = (int) Math.floor(targetItem.posX);
-		
+
 	    }
-	    
-	    if(targetItem.posY > getPosY()){
-		
+
+	    if (targetItem.posY > getPosY()) {
+
 		itemY = (int) Math.floor(targetItem.posY);
-		
+
 	    }
-	    
-	    if(targetItem.posY > getPosZ()){
-		
+
+	    if (targetItem.posY > getPosZ()) {
+
 		itemZ = (int) Math.floor(targetItem.posZ);
-		
+
 	    }
-	    
-	    if(Environment.coordinateIsCloseTo(itemX, itemY, itemZ, getPosX(), getPosY(), getPosZ(), 2)){
-								
-		Environment.addItemStackToInventory(targetItem.getEntityItem(), this.theAnt.inventory, 64, null);
-				
+
+	    if (Environment.coordinateIsCloseTo(itemX, itemY, itemZ, getPosX(),
+		    getPosY(), getPosZ(), 2)) {
+
+		Environment.addItemStackToInventory(targetItem.getEntityItem(),
+			this.theAnt.inventory, 64, null);
+
 		targetItem.setDead();
-				
+
 		state = "itemDropOff";
-		
+
 		flag = "flag:itemDropOff";
-		
+
 	    }
-	    
+
 	}
-	
+
     }
-    
-    private void dropOffItem(){
-				
-	this.
-	theAnt
-	.moveEntityTo(
-		targetChest.
-		xCoord, 
-		targetChest.
-		yCoord, 
-		targetChest.
-		zCoord);
-	
-	if(Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(), targetChest.xCoord, targetChest.yCoord, targetChest.zCoord, 1)){
-	    	    
-	    if(Environment.inventoryCanHold(this.theAnt.inventory[0], this.theAnt.inventory, 64)){
-				
+
+    private void dropOffItem() {
+
+	this.theAnt.moveEntityTo(targetChest.xCoord, targetChest.yCoord,
+		targetChest.zCoord);
+
+	if (Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(),
+		targetChest.xCoord, targetChest.yCoord, targetChest.zCoord, 1)) {
+
+	    if (Environment.inventoryCanHold(this.theAnt.inventory[0],
+		    this.theAnt.inventory, 64)) {
+
 		((TileEntityAntChest) this.targetChest).getContents()[0] = this.theAnt.inventory[0];
-		
-		Environment.addItemStackToInventory(this.theAnt.inventory[0], ((TileEntityAntChest) this.targetChest).getContents(), 64, targetChest);
-				
-		//Environment.spawnItem(this.theAnt.inventory[0], world, getPosX(), getPosY(), getPosZ());
-		
+
+		Environment.addItemStackToInventory(this.theAnt.inventory[0],
+			((TileEntityAntChest) this.targetChest).getContents(),
+			64, targetChest);
+
+		// Environment.spawnItem(this.theAnt.inventory[0], world,
+		// getPosX(), getPosY(), getPosZ());
+
 		this.state = "none";
-		
+
 		flag = "flag:none";
-		
+
 	    }
-	    
+
 	}
-	
+
     }
-    
-    public boolean antChestExists(TileEntity te){
-	
-	if(te != null){
-	    
-	    if(te instanceof TileEntityAntChest){
-		
+
+    public boolean antChestExists(TileEntity te) {
+
+	if (te != null) {
+
+	    if (te instanceof TileEntityAntChest) {
+
 		return true;
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
-	
+
 }

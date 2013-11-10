@@ -11,7 +11,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public class ClientProxy extends CommonProxy {
 
     static ArrayList<Class<? extends EntityLiving>> entityClassList = new ArrayList<Class<? extends EntityLiving>>();
-    static  ArrayList<RenderLiving> renderClassList = new ArrayList<RenderLiving>();
+    static ArrayList<RenderLiving> renderClassList = new ArrayList<RenderLiving>();
 
     public static void addAntRenderer(Class<? extends EntityLiving> parClass,
 	    RenderLiving render) {
@@ -30,7 +30,7 @@ public class ClientProxy extends CommonProxy {
 		    renderClassList.get(k));
 
 	}
-	
+
     }
 
     public static String getCurrentLanguage() {

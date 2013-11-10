@@ -52,7 +52,7 @@ public class GuiIncubator extends GuiContainer {
 	this.world = parWorld;
 	this.tile = tileEntity;
 	this.players.add(parPlayer);
-	
+
 	parPlayer.addStat(Register.achieveIncubateAnts, 1);
     }
 

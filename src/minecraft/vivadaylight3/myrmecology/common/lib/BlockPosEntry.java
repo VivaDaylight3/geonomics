@@ -17,57 +17,57 @@ public class BlockPosEntry {
 	metadata = meta;
 
     }
-    
-    public BlockPosEntry clone(){
-	
+
+    public BlockPosEntry clone() {
+
 	return this;
-	
+
     }
-    
-    public BlockIDEntry toBlockIDEntry(){
-	
+
+    public BlockIDEntry toBlockIDEntry() {
+
 	return new BlockIDEntry(ID, metadata);
-	
+
     }
 
     public int getxCoord() {
-        return xCoord;
+	return xCoord;
     }
 
     public void setxCoord(int xCoord) {
-        this.xCoord = xCoord;
+	this.xCoord = xCoord;
     }
 
     public int getyCoord() {
-        return yCoord;
+	return yCoord;
     }
 
     public void setyCoord(int yCoord) {
-        this.yCoord = yCoord;
+	this.yCoord = yCoord;
     }
 
     public int getzCoord() {
-        return zCoord;
+	return zCoord;
     }
 
     public void setzCoord(int zCoord) {
-        this.zCoord = zCoord;
+	this.zCoord = zCoord;
     }
 
     public int getID() {
-        return ID;
+	return ID;
     }
 
     public void setID(int iD) {
-        ID = iD;
+	ID = iD;
     }
 
     public int getMetadata() {
-        return metadata;
+	return metadata;
     }
 
     public void setMetadata(int metadata) {
-        this.metadata = metadata;
+	this.metadata = metadata;
     }
 
 }

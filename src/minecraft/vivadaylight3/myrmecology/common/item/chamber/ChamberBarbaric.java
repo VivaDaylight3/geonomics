@@ -20,12 +20,12 @@ public class ChamberBarbaric extends ItemBreedingChamber {
 	return Register.antBarbaric;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.flint);
-	
+
     }
 
     @Override

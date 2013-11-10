@@ -35,9 +35,9 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     boolean hasGoneTo = false;
 
     public TileEntity homeBlockTileEntity;
-    
+
     public int ticksPassed;
-        
+
     public EntityAnt(World par1World) {
 	super(par1World);
 	this.setSize(0.5F, 0.5F);
@@ -47,8 +47,9 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	this.tasks.addTask(5, new EntityAIWatchClosest(this,
 		EntityPlayer.class, 8.0F));
 	this.tasks.addTask(6, new EntityAILookIdle(this));
-	
-	this.homeBlockTileEntity = par1World.getBlockTileEntity((int)this.posX, (int)this.posY - 1, (int)this.posZ); 
+
+	this.homeBlockTileEntity = par1World.getBlockTileEntity(
+		(int) this.posX, (int) this.posY - 1, (int) this.posZ);
 
     }
 
@@ -84,7 +85,11 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     @Override
     public void moveEntityTo(int x, int y, int z) {
 
-	this.getNavigator().tryMoveToXYZ(x, y, z, 1f/*SharedMonsterAttributes.movementSpeed.getDefaultValue()*/);
+	this.getNavigator().tryMoveToXYZ(x, y, z, 1f/*
+						     * SharedMonsterAttributes.
+						     * movementSpeed
+						     * .getDefaultValue()
+						     */);
 
     }
 
@@ -139,92 +144,88 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	return "ant." + this.getAnt().getSpeciesSubName() + ".death";
     }
 
-    
     @Override
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
-	
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+
 	par1NBTTagCompound.setFloat("HealF", this.getHealth());
-        par1NBTTagCompound.setShort("Health", (short)((int)Math.ceil((double)this.getHealth())));
-        par1NBTTagCompound.setShort("HurtTime", (short)this.hurtTime);
-        par1NBTTagCompound.setShort("DeathTime", (short)this.deathTime);
-        par1NBTTagCompound.setShort("AttackTime", (short)this.attackTime);
-        par1NBTTagCompound.setFloat("AbsorptionAmount", this.getAbsorptionAmount());
-        ItemStack[] aitemstack = this.getLastActiveItems();
-        int i = aitemstack.length;
-        int j;
-        ItemStack itemstack;
+	par1NBTTagCompound.setShort("Health",
+		(short) ((int) Math.ceil((double) this.getHealth())));
+	par1NBTTagCompound.setShort("HurtTime", (short) this.hurtTime);
+	par1NBTTagCompound.setShort("DeathTime", (short) this.deathTime);
+	par1NBTTagCompound.setShort("AttackTime", (short) this.attackTime);
+	par1NBTTagCompound.setFloat("AbsorptionAmount",
+		this.getAbsorptionAmount());
+	ItemStack[] aitemstack = this.getLastActiveItems();
+	int i = aitemstack.length;
+	int j;
+	ItemStack itemstack;
 
-        for (j = 0; j < i; ++j)
-        {
-            itemstack = aitemstack[j];
-        }
+	for (j = 0; j < i; ++j) {
+	    itemstack = aitemstack[j];
+	}
 
-        par1NBTTagCompound.setTag("Attributes", SharedMonsterAttributes.func_111257_a(this.getAttributeMap()));
-        aitemstack = this.getLastActiveItems();
-        i = aitemstack.length;
+	par1NBTTagCompound.setTag("Attributes",
+		SharedMonsterAttributes.func_111257_a(this.getAttributeMap()));
+	aitemstack = this.getLastActiveItems();
+	i = aitemstack.length;
 
-        for (j = 0; j < i; ++j)
-        {
-            itemstack = aitemstack[j];
-        }
+	for (j = 0; j < i; ++j) {
+	    itemstack = aitemstack[j];
+	}
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        this.setAbsorptionAmount(par1NBTTagCompound.getFloat("AbsorptionAmount"));
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+	this.setAbsorptionAmount(par1NBTTagCompound
+		.getFloat("AbsorptionAmount"));
 
-        if (par1NBTTagCompound.hasKey("Attributes") && this.worldObj != null && !this.worldObj.isRemote)
-        {
-            SharedMonsterAttributes.func_111260_a(this.getAttributeMap(), par1NBTTagCompound.getTagList("Attributes"), this.worldObj == null ? null : this.worldObj.getWorldLogAgent());
-        }
+	if (par1NBTTagCompound.hasKey("Attributes") && this.worldObj != null
+		&& !this.worldObj.isRemote) {
+	    SharedMonsterAttributes.func_111260_a(
+		    this.getAttributeMap(),
+		    par1NBTTagCompound.getTagList("Attributes"),
+		    this.worldObj == null ? null : this.worldObj
+			    .getWorldLogAgent());
+	}
 
-        if (par1NBTTagCompound.hasKey("ActiveEffects"))
-        {
-            NBTTagList nbttaglist = par1NBTTagCompound.getTagList("ActiveEffects");
+	if (par1NBTTagCompound.hasKey("ActiveEffects")) {
+	    NBTTagList nbttaglist = par1NBTTagCompound
+		    .getTagList("ActiveEffects");
 
-            for (int i = 0; i < nbttaglist.tagCount(); ++i)
-            {
-                NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
-                PotionEffect potioneffect = PotionEffect.readCustomPotionEffectFromNBT(nbttagcompound1);
-            }
-        }
+	    for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+		NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			.tagAt(i);
+		PotionEffect potioneffect = PotionEffect
+			.readCustomPotionEffectFromNBT(nbttagcompound1);
+	    }
+	}
 
-        if (par1NBTTagCompound.hasKey("HealF"))
-        {
-            this.setHealth(par1NBTTagCompound.getFloat("HealF"));
-        }
-        else
-        {
-            NBTBase nbtbase = par1NBTTagCompound.getTag("Health");
+	if (par1NBTTagCompound.hasKey("HealF")) {
+	    this.setHealth(par1NBTTagCompound.getFloat("HealF"));
+	} else {
+	    NBTBase nbtbase = par1NBTTagCompound.getTag("Health");
 
-            if (nbtbase == null)
-            {
-                this.setHealth(this.getMaxHealth());
-            }
-            else if (nbtbase.getId() == 5)
-            {
-                this.setHealth(((NBTTagFloat)nbtbase).data);
-            }
-            else if (nbtbase.getId() == 2)
-            {
-                this.setHealth((float)((NBTTagShort)nbtbase).data);
-            }
-        }
+	    if (nbtbase == null) {
+		this.setHealth(this.getMaxHealth());
+	    } else if (nbtbase.getId() == 5) {
+		this.setHealth(((NBTTagFloat) nbtbase).data);
+	    } else if (nbtbase.getId() == 2) {
+		this.setHealth((float) ((NBTTagShort) nbtbase).data);
+	    }
+	}
 
-        this.hurtTime = par1NBTTagCompound.getShort("HurtTime");
-        this.deathTime = par1NBTTagCompound.getShort("DeathTime");
-        this.attackTime = par1NBTTagCompound.getShort("AttackTime");
+	this.hurtTime = par1NBTTagCompound.getShort("HurtTime");
+	this.deathTime = par1NBTTagCompound.getShort("DeathTime");
+	this.attackTime = par1NBTTagCompound.getShort("AttackTime");
     }
 
     @Override
     public void moveEntityTo(double posX, double posY, double posZ) {
-	
+
 	moveEntityTo((int) posX, (int) posY, (int) posZ);
-	
+
     }
 
 }

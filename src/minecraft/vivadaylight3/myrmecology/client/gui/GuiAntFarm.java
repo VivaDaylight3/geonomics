@@ -20,8 +20,8 @@ public class GuiAntFarm extends GuiContainer {
 
     public TileEntityAntFarm tile;
 
-    public GuiAntFarm(EntityPlayer player,
-	    TileEntityAntFarm tileEntity, World world, int x, int y, int z) {
+    public GuiAntFarm(EntityPlayer player, TileEntityAntFarm tileEntity,
+	    World world, int x, int y, int z) {
 	super(new ContainerAntFarm(player.inventory, tileEntity));
 	this.tile = tileEntity;
 	player.addStat(Register.achieveBreedAnts, 1);

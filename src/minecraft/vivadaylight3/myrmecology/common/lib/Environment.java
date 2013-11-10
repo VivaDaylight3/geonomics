@@ -3,6 +3,8 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
+import vivadaylight3.myrmecology.common.Log;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -18,90 +20,138 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class Environment {
-    
-    public static Entity getNearestEntityFrom(List list, double x, double y, double z, int distance){
-	
+
+    public static Entity getNearestEntityFrom(List list, double x, double y,
+	    double z, int distance) {
+
 	return getNearestEntityFrom(list, (int) x, (int) y, (int) z, distance);
-	
+
     }
-    
-    public static Entity getNearestEntityFrom(List list, int x, int y, int z, int distance){
-	
+
+    public static Entity getNearestEntityFrom(List list, int x, int y, int z,
+	    int distance) {
+
 	double d4 = -1.0D;
-        Entity entity = null;
-        
-        if(list.size() <= 0 || list == null){
-            
-            return null;
-            
-        }
+	Entity entity = null;
 
-        for (int i = 0; i < list.size(); ++i)
-        {
-            Entity entity1 = (Entity)list.get(i);
-            double d5 = entity1.getDistanceSq(x, y, z);
+	if (list.size() <= 0 || list == null) {
 
-            if ((distance < 0.0D || d5 < distance * distance) && (d4 == -1.0D || d5 < d4))
-            {
-                d4 = d5;
-                entity = entity1;
-            }
-        }
+	    return null;
 
-        return entity;
-	
+	}
+
+	for (int i = 0; i < list.size(); ++i) {
+	    Entity entity1 = (Entity) list.get(i);
+	    double d5 = entity1.getDistanceSq(x, y, z);
+
+	    if ((distance < 0.0D || d5 < distance * distance)
+		    && (d4 == -1.0D || d5 < d4)) {
+		d4 = d5;
+		entity = entity1;
+	    }
+	}
+
+	return entity;
+
     }
-    
-    public static TileEntity getNearestTileEntityFrom(ArrayList<TileEntity> list, Entity entity, double x, double y, double z){
-	
+
+    public static TileEntity getNearestTileEntityFrom(
+	    ArrayList<TileEntity> list, Entity entity, double x, double y,
+	    double z) {
+
 	TileEntity nearest = null;
-	
-	if(list == null || list.size() < 1){
-	    
+
+	if (list == null || list.size() < 1) {
+
 	    return null;
-	    
+
 	}
-	
+
 	nearest = list.get(0);
-	
-	for(TileEntity tile : list){
-	    
-	    if(entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity.getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)){
-		
+
+	for (TileEntity tile : list) {
+
+	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
+		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)) {
+
 		nearest = tile;
-		
+
 	    }
-	    
+
 	}
-	
+
 	return nearest;
-	
+
     }
     
-    public static BlockPosEntry getNearestBlockFrom(ArrayList<BlockPosEntry> list, Entity entity, double x, double y, double z){
-	
+    public static BlockPosEntry getNearestTreeEntryFrom(
+	    ArrayList<BlockPosEntry> list, Entity entity, double x, double y,
+	    double z) {
+
 	BlockPosEntry nearest = null;
-	
-	if(list == null || list.size() < 1){
+
+	if (list == null || list.size() < 1) {
 	    
+	    Log.debug("getNearest == null or < 1");
+
 	    return null;
+
+	}else{
+	    
+	    Log.debug("geTnearest != null");
 	    
 	}
-	
+
 	nearest = list.get(0);
-	
-	for(BlockPosEntry tile : list){
-	    
-	    if(entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity.getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)){
-		
+
+	for (BlockPosEntry tile : list) {
+
+	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
+		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord) && TreeDictionary.getTreeEntryFromLog(tile.toBlockIDEntry()) != null) {
+
 		nearest = tile;
-		
+
 	    }
+
+	}
+
+	return nearest;
+
+    }
+
+    public static BlockPosEntry getNearestBlockFrom(
+	    ArrayList<BlockPosEntry> list, Entity entity, double x, double y,
+	    double z) {
+
+	BlockPosEntry nearest = null;
+
+	if (list == null || list.size() < 1) {
+	    
+	    Log.debug("getNearest == null or < 1");
+
+	    return null;
+
+	}else{
+	    
+	    Log.debug("geTnearest != null");
 	    
 	}
-	
+
+	nearest = list.get(0);
+
+	for (BlockPosEntry tile : list) {
+
+	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
+		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)) {
+
+		nearest = tile;
+
+	    }
+
+	}
+
 	return nearest;
-	
+
     }
 
     public static Entity spawnEntity(World par0World, Entity entity,
@@ -123,22 +173,22 @@ public class Environment {
 	return entity;
 
     }
-    
-    public static boolean coordinateIsCloseTo(double x, double y, double z, int x2,
-	    int y2, int z2, int distance){
-	
-	return coordinateIsCloseTo((int)x, (int)y, (int)z, x2,
-		    y2, z2, distance);
-	
+
+    public static boolean coordinateIsCloseTo(double x, double y, double z,
+	    int x2, int y2, int z2, int distance) {
+
+	return coordinateIsCloseTo((int) x, (int) y, (int) z, x2, y2, z2,
+		distance);
+
     }
 
-    public static boolean coordinateIsCloseTo(double x, double y, double z, double x2,
-	    double y2, double z2, int distance) {
-	
-	return coordinateIsCloseTo((int) x, (int) y, (int) z, x2,
-		    y2, z2, distance);
+    public static boolean coordinateIsCloseTo(double x, double y, double z,
+	    double x2, double y2, double z2, int distance) {
+
+	return coordinateIsCloseTo((int) x, (int) y, (int) z, x2, y2, z2,
+		distance);
     }
-    
+
     public static boolean coordinateIsCloseTo(int x, int y, int z, int x2,
 	    int y2, int z2, int distance) {
 
@@ -156,26 +206,28 @@ public class Environment {
 
     }
 
-    public static List getEntityItemsInRadius(World world,
-	    double x, double y, double z, int radius) {
+    public static List getEntityItemsInRadius(World world, double x, double y,
+	    double z, int radius) {
 
-	List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(x-radius, y-radius, z-radius, x + radius, y + radius, z + radius));
+	List list = world.getEntitiesWithinAABB(
+		EntityItem.class,
+		AxisAlignedBB.getAABBPool().getAABB(x - radius, y - radius,
+			z - radius, x + radius, y + radius, z + radius));
 
 	return list;
 
     }
-    
+
     public static ArrayList<TileEntity> getTileEntitiesInRadius(World world,
 	    double x, double y, double z, int radius) {
-	
-	return getTileEntitiesInRadius(world,
-		    (int) x, (int) y, (int) z, radius);
-	
+
+	return getTileEntitiesInRadius(world, (int) x, (int) y, (int) z, radius);
+
     }
-    
+
     public static ArrayList<TileEntity> getTileEntitiesInRadius(World world,
 	    int x, int y, int z, int radius) {
-	
+
 	ArrayList<TileEntity> result = new ArrayList<TileEntity>();
 
 	for (int newX = -1 * radius; newX <= radius; newX++) {
@@ -187,9 +239,11 @@ public class Environment {
 		    if (newX * newX + newY * newY + newZ * newZ <= radius
 			    * radius) {
 
-			if (world.getBlockTileEntity(newX + x, newY + y, newZ + z) != null) {
+			if (world.getBlockTileEntity(newX + x, newY + y, newZ
+				+ z) != null) {
 
-			    result.add(world.getBlockTileEntity(newX + x, newY + y, newZ + z));
+			    result.add(world.getBlockTileEntity(newX + x, newY
+				    + y, newZ + z));
 
 			}
 
@@ -202,7 +256,7 @@ public class Environment {
 	}
 
 	return result;
-	
+
     }
 
     public static ArrayList<EntityPlayer> getEntitiesInRadius(World world,
@@ -343,9 +397,9 @@ public class Environment {
 	return result;
 
     }
-    
-    public static ArrayList<BlockPosEntry> getBlockIDsInRadius(World world, int x,
-	    int y, int z, int radius) {
+
+    public static ArrayList<BlockPosEntry> getBlockIDsInRadius(World world,
+	    int x, int y, int z, int radius) {
 
 	ArrayList<BlockPosEntry> result = new ArrayList<BlockPosEntry>();
 
@@ -358,8 +412,9 @@ public class Environment {
 		    if (newX * newX + newY * newY + newZ * newZ <= radius
 			    * radius) {
 
-			    result.add(new BlockPosEntry(newX + x, newY + y, newZ
-				    + z, world.getBlockId(x, y, z), world.getBlockMetadata(newX + x, newY + y, newZ + z)));
+			result.add(new BlockPosEntry(newX + x, newY + y, newZ
+				+ z, world.getBlockId(x, y, z), world
+				.getBlockMetadata(newX + x, newY + y, newZ + z)));
 
 		    }
 
@@ -372,17 +427,16 @@ public class Environment {
 	return result;
 
     }
-    
-    public static ArrayList<BlockPosEntry> getBlocksInRadius(World world, double x,
-	    double y, double z, int radius) {
-	
-	 return getBlocksInRadius(world, (int) x,
-		 (int) y, (int) z, radius);
-	
+
+    public static ArrayList<BlockPosEntry> getBlocksInRadius(World world,
+	    double x, double y, double z, int radius) {
+
+	return getBlocksInRadius(world, (int) x, (int) y, (int) z, radius);
+
     }
 
-    public static ArrayList<BlockPosEntry> getBlocksInRadius(World world, int x,
-	    int y, int z, int radius) {
+    public static ArrayList<BlockPosEntry> getBlocksInRadius(World world,
+	    int x, int y, int z, int radius) {
 
 	ArrayList<BlockPosEntry> result = new ArrayList<BlockPosEntry>();
 
@@ -394,10 +448,15 @@ public class Environment {
 
 		    if (newX * newX + newY * newY + newZ * newZ <= radius
 			    * radius) {
+			
+			if(world.getBlockId(newX + x, newY + y, newZ + z) > 0){
 
 			    result.add(new BlockPosEntry(newX + x, newY + y, newZ
-				    + z, world.getBlockId(newX + x, newY + y, newZ
-				    + z), world.getBlockMetadata(newX + x, newY + y, newZ + z)));
+				+ z, world.getBlockId(newX + x, newY + y, newZ
+				+ z), world.getBlockMetadata(newX + x,
+				newY + y, newZ + z)));
+			
+			}
 
 		    }
 
@@ -696,7 +755,7 @@ public class Environment {
 	int amount = item.stackSize;
 
 	for (int k = 0; k < inventory.length; k++) {
-	    
+
 	    if (amount > 0) {
 
 		if (inventory[k] == null) {
@@ -718,7 +777,7 @@ public class Environment {
 				item.getItemDamage());
 
 			amount = 0;
-			
+
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}

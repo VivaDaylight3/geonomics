@@ -40,11 +40,11 @@ public class ItemBreedingChamber extends Item {
 	return true;
 
     }
-    
-    public ItemStack getCraftingIngredient(){
-	
+
+    public ItemStack getCraftingIngredient() {
+
 	return null;
-	
+
     }
 
     public Icon getIconFromDamageForRenderPass(int par1, int par2) {

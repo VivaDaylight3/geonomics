@@ -22,12 +22,12 @@ public class ChamberSprouter extends ItemBreedingChamber {
 	return Register.antSprouter;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.melonSeeds);
-	
+
     }
 
     @Override

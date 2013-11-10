@@ -84,7 +84,7 @@ public class BlockAntHill extends Block {
 	if (tool != null) {
 
 	    if (tool.getItem() instanceof ToolExtractor) {
-		
+
 		player.addStat(Register.achieveExtractAnts, 1);
 
 		return true;

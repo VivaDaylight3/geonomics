@@ -24,12 +24,12 @@ public class ChamberCommon extends ItemBreedingChamber {
 	return Register.antCommon;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.clay);
-	
+
     }
 
     @Override

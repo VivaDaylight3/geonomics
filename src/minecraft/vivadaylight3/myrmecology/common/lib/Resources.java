@@ -33,9 +33,11 @@ public class Resources {
 	    + "antScavenger.png");
     public static final ResourceLocation ENTITY_ANT_DREDGER = getResourceLocation(ENTITY_LOCATION
 	    + "antDredger.png");
-    
-    public static final ResourceLocation BLOCK_ANTCHEST = getResourceLocation(MODEL_LOCATION + Reference.BLOCK_ANTCHEST_NAME+".png");
-    public static final ResourceLocation BLOCK_ANTCHEST_DOUBLE = getResourceLocation(MODEL_LOCATION + Reference.BLOCK_ANTCHEST_NAME+"_double.png");
+
+    public static final ResourceLocation BLOCK_ANTCHEST = getResourceLocation(MODEL_LOCATION
+	    + Reference.BLOCK_ANTCHEST_NAME + ".png");
+    public static final ResourceLocation BLOCK_ANTCHEST_DOUBLE = getResourceLocation(MODEL_LOCATION
+	    + Reference.BLOCK_ANTCHEST_NAME + "_double.png");
 
     public static final ResourceLocation GUI_ANTFARM = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_ANTFARM_NAME + FORMAT);
@@ -48,7 +50,7 @@ public class Resources {
 
     public static final ResourceLocation GUI_ANTCHEST = getResourceLocation(GUI_LOCATION
 	    + Reference.BLOCK_ANTCHEST_NAME + FORMAT);
-    
+
     public static final ResourceLocation GUI_ANTBOOK = getResourceLocation(GUI_LOCATION
 	    + Reference.ITEM_ANTBOOK_NAME + FORMAT);
 

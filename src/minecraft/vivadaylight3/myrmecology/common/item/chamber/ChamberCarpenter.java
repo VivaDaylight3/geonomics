@@ -22,12 +22,12 @@ public class ChamberCarpenter extends ItemBreedingChamber {
 	return Register.antCarpenter;
 
     }
-    
+
     @Override
-    public ItemStack getCraftingIngredient(){
-	
+    public ItemStack getCraftingIngredient() {
+
 	return new ItemStack(Item.axeStone);
-	
+
     }
 
     @Override

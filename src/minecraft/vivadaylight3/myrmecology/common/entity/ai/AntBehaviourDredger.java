@@ -11,7 +11,5 @@ public class AntBehaviourDredger extends EntityAIAntBehaviour {
 	    PathNavigate parPathFinder) {
 	super(parEntityAnt, parWorld, parPathFinder);
     }
-    
-    
 
 }

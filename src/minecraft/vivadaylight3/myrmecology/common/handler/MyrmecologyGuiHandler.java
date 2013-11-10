@@ -61,8 +61,8 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 	switch (ID) {
 
 	case Register.GUI_ID_ANTFARM:
-	    return new GuiAntFarm(player,
-		    (TileEntityAntFarm) tileEntity, world, x, y, z);
+	    return new GuiAntFarm(player, (TileEntityAntFarm) tileEntity,
+		    world, x, y, z);
 
 	case Register.GUI_ID_INCUBATOR:
 	    return new GuiIncubator(player, player.inventory,
@@ -78,7 +78,7 @@ public class MyrmecologyGuiHandler implements IGuiHandler {
 	case Register.GUI_ID_ANTCHEST:
 	    return new GuiAntChest(player.inventory,
 		    (TileEntityAntChest) tileEntity);
-	    
+
 	case Register.GUI_ID_ANTBOOK:
 	    return new GuiAntBook();
 

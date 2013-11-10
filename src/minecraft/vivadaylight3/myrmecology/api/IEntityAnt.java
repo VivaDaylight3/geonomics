@@ -6,9 +6,9 @@ import net.minecraft.tileentity.TileEntity;
 public interface IEntityAnt {
 
     ItemStack[] inventory = new ItemStack[1];
-        
+
     TileEntity homeBlockTileEntity = null;
-    
+
     double getPosX();
 
     double getPosY();

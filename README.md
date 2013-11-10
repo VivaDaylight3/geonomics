@@ -8,6 +8,11 @@ Downloads
 
 All downloads are located under the 'releases' tab, here's a link if you can't find it: https://github.com/VivaDaylight3/myrmecology/releases
 
+Installation
+============
+
+To install Myrmecology, make sure that you have the right MinecraftForge version installed and then place the downloaded mod jar into your "mods" folder inside your minecraft directory.
+
 Bugs
 ====
 

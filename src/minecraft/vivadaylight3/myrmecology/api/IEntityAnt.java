@@ -1,9 +1,12 @@
 package vivadaylight3.myrmecology.api;
 
+import vivadaylight3.myrmecology.api.item.ItemAnt;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public interface IEntityAnt {
+    
+    ItemAnt getAnt();
 
     ItemStack[] inventory = new ItemStack[1];
 

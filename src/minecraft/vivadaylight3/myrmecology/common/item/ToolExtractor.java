@@ -2,13 +2,17 @@ package vivadaylight3.myrmecology.common.item;
 
 import java.util.List;
 
+import vivadaylight3.myrmecology.api.IEntityAnt;
+import vivadaylight3.myrmecology.common.entity.EntityAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
@@ -44,6 +48,23 @@ public class ToolExtractor extends ItemTool {
     @Override
     public Icon getIconFromDamage(int par1) {
 	return this.itemIcon;
+    }
+    
+    @Override
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
+    {
+
+	if(par2EntityLivingBase instanceof IEntityAnt){
+	    
+	    Environment.spawnItem(new ItemStack(((EntityAnt) par2EntityLivingBase).getAnt()), par2EntityLivingBase.worldObj, par2EntityLivingBase.serverPosX, par2EntityLivingBase.serverPosY, par2EntityLivingBase.serverPosZ);
+		
+	    par2EntityLivingBase.setDead();
+		
+	    return true;
+	    
+	}
+	
+	return false;
     }
 
 }

@@ -7,12 +7,17 @@ import net.minecraft.entity.EntityLiving;
 import vivadaylight3.myrmecology.common.CommonProxy;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
 
     static ArrayList<Class<? extends EntityLiving>> entityClassList = new ArrayList<Class<? extends EntityLiving>>();
+    
+    @SideOnly(Side.CLIENT)
     static ArrayList<RenderLiving> renderClassList = new ArrayList<RenderLiving>();
 
+    @SideOnly(Side.CLIENT)
     public static void addAntRenderer(Class<? extends EntityLiving> parClass,
 	    RenderLiving render) {
 
@@ -20,7 +25,8 @@ public class ClientProxy extends CommonProxy {
 	renderClassList.add(render);
 
     }
-
+    
+    @SideOnly(Side.CLIENT)
     public static void registerRenderers() {
 
 	for (int k = 0; k < entityClassList.size(); k++) {

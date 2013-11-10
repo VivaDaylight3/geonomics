@@ -93,8 +93,9 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
     }
 
+    @Override
     public ItemAnt getAnt() {
-	return Register.antForest;
+	return null;
     }
 
     @Override

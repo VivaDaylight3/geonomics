@@ -132,6 +132,7 @@ public class GuiIncubator extends GuiContainer {
 
     }
 
+    @SideOnly(Side.CLIENT)
     private void sendResultAntMetaPacket(int meta) {
 
 	ByteArrayOutputStream bos = new ByteArrayOutputStream(8);

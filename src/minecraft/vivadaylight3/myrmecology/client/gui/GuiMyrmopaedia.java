@@ -23,6 +23,8 @@ import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Strings;
 import vivadaylight3.myrmecology.common.lib.Time;
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class GuiMyrmopaedia extends GuiContainer {
 
@@ -222,6 +224,7 @@ public class GuiMyrmopaedia extends GuiContainer {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void updateScreen() {
 
 	super.updateScreen();

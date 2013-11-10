@@ -16,6 +16,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Handles packet interaction
@@ -43,7 +44,7 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	return FMLCommonHandler.instance().getEffectiveSide();
 
     }
-
+@SideOnly(Side.CLIENT)
     public static EntityPlayer getSidedPlayer(Player parPlayer) {
 
 	Side side = getSide();

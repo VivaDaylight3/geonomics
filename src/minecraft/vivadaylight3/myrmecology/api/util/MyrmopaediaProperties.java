@@ -14,6 +14,7 @@ import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Handles Myrmopaedia properties
@@ -86,7 +87,7 @@ public class MyrmopaediaProperties {
 	myrmopaediaIDs[id] = null;
 
     }
-
+    @SideOnly(Side.CLIENT)
     public static void addAntToMyrmopaedia(ItemStack itemstack, ItemAnt ant,
 	    Player parPlayer) {
 

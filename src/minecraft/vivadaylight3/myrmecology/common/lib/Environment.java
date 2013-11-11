@@ -13,6 +13,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -73,6 +74,39 @@ public class Environment {
 
 	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
 		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)) {
+
+		nearest = tile;
+
+	    }
+
+	}
+
+	return nearest;
+
+    }
+    
+    public static TileEntity getNearestAntChestFrom(
+	    ArrayList<TileEntity> list, Entity entity, double x, double y,
+	    double z) {
+
+	TileEntity nearest = null;
+
+	if (list == null || list.size() < 1) {
+
+	    return null;
+
+	}
+	
+	if(list.get(0) instanceof TileEntityAntChest){
+
+	    nearest = list.get(0);
+	
+	}
+
+	for (TileEntity tile : list) {
+
+	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
+		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord) && tile instanceof TileEntityAntChest) {
 
 		nearest = tile;
 
@@ -180,13 +214,6 @@ public class Environment {
 	return coordinateIsCloseTo((int) x, (int) y, (int) z, x2, y2, z2,
 		distance);
 
-    }
-
-    public static boolean coordinateIsCloseTo(double x, double y, double z,
-	    double x2, double y2, double z2, int distance) {
-
-	return coordinateIsCloseTo((int) x, (int) y, (int) z, x2, y2, z2,
-		distance);
     }
 
     public static boolean coordinateIsCloseTo(int x, int y, int z, int x2,
@@ -753,9 +780,9 @@ public class Environment {
 	int amount = item.stackSize;
 
 	for (int k = 0; k < inventory.length; k++) {
-
-	    if (amount > 0) {
-
+	    
+	    while(amount > 0){
+		
 		if (inventory[k] == null) {
 
 		    if (amount > max) {
@@ -779,7 +806,6 @@ public class Environment {
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
-			break;
 
 		    }
 
@@ -795,13 +821,14 @@ public class Environment {
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
-			break;
 
 		    }
 
 		}
 
 	    }
+	    
+	    
 
 	}
 

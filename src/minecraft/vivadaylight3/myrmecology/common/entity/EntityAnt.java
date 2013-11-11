@@ -52,7 +52,6 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
 	this.homeBlockTileEntity = par1World.getBlockTileEntity(
 		(int) this.posX, (int) this.posY - 1, (int) this.posZ);
-	this.setAIMoveSpeed(0.5f);
 
     }
 
@@ -88,11 +87,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     @Override
     public void moveEntityTo(int x, int y, int z) {
 
-	this.getNavigator().tryMoveToXYZ(x, y, z, this.moveForward/*
-						     * SharedMonsterAttributes.
-						     * movementSpeed
-						     * .getDefaultValue()
-						     */);
+	this.getNavigator().tryMoveToXYZ(x, y, z, this.moveForward);
 
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
+import vivadaylight3.myrmecology.common.Log;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 
@@ -27,7 +28,7 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     @Override
     public boolean shouldExecute() {
 
-	targetChest = Environment.getNearestTileEntityFrom(Environment
+	targetChest = Environment.getNearestAntChestFrom(Environment
 		.getTileEntitiesInRadius(world, getPosX(), getPosY(),
 			getPosZ(), 10), (Entity) this.theAnt, getPosX(),
 		getPosY(), getPosZ());
@@ -147,8 +148,8 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 
 	    }
 
-	    if (Environment.coordinateIsCloseTo(itemX, itemY, itemZ, getPosX(),
-		    getPosY(), getPosZ(), 2)) {
+	    if (Environment.coordinateIsCloseTo(itemX, itemY, itemZ, (int)getPosX(),
+		    (int)getPosY(), (int)getPosZ(), 2)) {
 
 		Environment.addItemStackToInventory(targetItem.getEntityItem(),
 			this.theAnt.inventory, 64, null);
@@ -174,16 +175,15 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 		targetChest.xCoord, targetChest.yCoord, targetChest.zCoord, 1)) {
 
 	    if (Environment.inventoryCanHold(this.theAnt.inventory[0],
-		    this.theAnt.inventory, 64)) {
-
-		((TileEntityAntChest) this.targetChest).getContents()[0] = this.theAnt.inventory[0];
+		    ((TileEntityAntChest) this.targetChest).getContents(), 64) && this.theAnt.inventory[0] != null) {
+		
+		//((TileEntityAntChest) this.targetChest).getContents()[0] = this.theAnt.inventory[0];
 
 		Environment.addItemStackToInventory(this.theAnt.inventory[0],
 			((TileEntityAntChest) this.targetChest).getContents(),
 			64, targetChest);
-
-		// Environment.spawnItem(this.theAnt.inventory[0], world,
-		// getPosX(), getPosY(), getPosZ());
+		
+		this.theAnt.inventory[0] = null;
 
 		this.state = "none";
 

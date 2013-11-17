@@ -3,22 +3,22 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-import vivadaylight3.myrmecology.common.Log;
-
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import vivadaylight3.myrmecology.common.Log;
+import vivadaylight3.myrmecology.common.entity.ai.ExList;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 
 public class Environment {
 
@@ -286,7 +286,7 @@ public class Environment {
 
     }
 
-    public static ArrayList<EntityPlayer> getEntitiesInRadius(World world,
+    public static ArrayList<Entity> getEntitiesInRadius(World world,
 	    double x, double y, double z, int radius) {
 
 	AxisAlignedBB axisalignedbb = AxisAlignedBB
@@ -297,11 +297,62 @@ public class Environment {
 	List list = world.getEntitiesWithinAABB(EntityPlayer.class,
 		axisalignedbb);
 
-	ArrayList<EntityPlayer> result = new ArrayList<EntityPlayer>();
+	ArrayList<Entity> result = new ArrayList<Entity>();
 
 	for (int k = 0; k < list.size(); k++) {
 
-	    result.add((EntityPlayer) list.get(k));
+	    result.add((Entity) list.get(k));
+
+	}
+	return result;
+    }
+    
+    public static ArrayList<Entity> getAnimalsInRadius(World world, Entity excluding,
+	    double x, double y, double z, int radius) {
+
+	AxisAlignedBB axisalignedbb = AxisAlignedBB
+		.getAABBPool()
+		.getAABB(x, y, z, (double) (x + 1), (double) (y + 1),
+			(double) (z + 1)).expand(radius, radius, radius);
+	axisalignedbb.maxY = (double) world.getHeight();
+	List list = world.getEntitiesWithinAABB(Entity.class,
+		axisalignedbb);
+
+	ArrayList<Entity> result = new ArrayList<Entity>();
+
+	for (int k = 0; k < list.size(); k++) {
+	    
+	    if(list.get(k) != excluding){
+
+		result.add((Entity) list.get(k));
+	    
+	    }
+
+	}
+		
+	return result;
+    }
+    
+    public static ArrayList<EntityAnimal> getAnimalsInRadius(World world, Entity excluding, Class<?extends Entity> class1,
+	    double x, double y, double z, int radius) {
+
+	AxisAlignedBB axisalignedbb = AxisAlignedBB
+		.getAABBPool()
+		.getAABB(x, y, z, (double) (x + 1), (double) (y + 1),
+			(double) (z + 1)).expand(radius, radius, radius);
+	axisalignedbb.maxY = (double) world.getHeight();
+	List list = world.getEntitiesWithinAABB(class1,
+		axisalignedbb);
+
+	ArrayList<EntityAnimal> result = new ArrayList<EntityAnimal>();
+
+	for (int k = 0; k < list.size(); k++) {
+	    
+	    if(list.get(k) != excluding){
+
+		result.add((EntityAnimal) list.get(k));
+	    
+	    }
 
 	}
 	return result;
@@ -771,6 +822,74 @@ public class Environment {
 	}
 
 	return 0;
+
+    }
+    
+    public static boolean inventoryHas(ItemStack item, ItemStack[] inventory){
+	
+	for(int k = 0; k < inventory.length; k++){
+	    
+	    if(inventory[k] != null){
+		
+		if(inventory[k].getItem() == item.getItem()){
+		    
+		    if(inventory[k].stackSize >= item.stackSize){
+			
+			return true;
+			
+		    }
+		    
+		}
+		
+	    }
+	    
+	}
+	
+	return false;
+	
+    }
+    
+    public static void removeItemStackFromIventory(ItemStack item,
+	    ItemStack[] inventory, TileEntity tileEntity) {
+
+	int amount = item.stackSize;
+
+	for (int k = 0; k < inventory.length; k++) {
+	    
+	    while(amount > 0){
+		
+		if (inventory[k].getItem() == item.getItem() && inventory[k].getItemDamage() == item.getItemDamage()) {
+
+		    if (amount > inventory[k].stackSize) {
+
+			amount -= inventory[k].stackSize;
+
+			inventory[k] = null;
+
+			if (tileEntity != null) {
+			    tileEntity.onInventoryChanged();
+			}
+
+		    } else if (amount <= inventory[k].stackSize) {
+
+			inventory[k] = new ItemStack(item.getItem(), inventory[k].stackSize - amount,
+				item.getItemDamage());
+
+			amount = 0;
+
+			if (tileEntity != null) {
+			    tileEntity.onInventoryChanged();
+			}
+
+		    }
+
+		}
+
+	    }
+	    
+	    
+
+	}
 
     }
 

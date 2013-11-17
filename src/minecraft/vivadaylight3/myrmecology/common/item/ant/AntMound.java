@@ -1,9 +1,11 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntMound;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntMound extends ItemAnt {
@@ -17,6 +19,13 @@ public class AntMound extends ItemAnt {
 
 	return "Mound Ant";
 
+    }
+    
+    @Override
+    public Entity getNewEntity(World world){
+	
+	return new EntityAntMound(world);
+	
     }
 
     @Override

@@ -59,9 +59,17 @@ public class ToolExtractor extends ItemTool {
 	    
 	    ItemStack ant = new ItemStack(((EntityAnt) target).getAnt(), 1, Metadata.getMetaWorker());
 	    
+	    ItemStack items = ((EntityAnt) target).inventory[0];
+	    
 	    Environment.addItemStackToInventory(ant, ((EntityPlayer)player).inventory.mainInventory, 64, null);
 	    		
 	    target.setDead();
+	    
+	    if(items != null){
+		
+		Environment.spawnItem(items, target.worldObj, (int)((EntityAnt) target).getPosX(), (int)((EntityAnt) target).getPosY(), (int)((EntityAnt) target).getPosY());
+		
+	    }
 		
 	    return false;
 	    

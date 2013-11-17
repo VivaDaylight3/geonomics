@@ -14,6 +14,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
@@ -44,8 +45,12 @@ import vivadaylight3.myrmecology.common.block.anthill.AntHillStone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillSwamp;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillWater;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntCarpenter;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntDredger;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntFungal;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntMound;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntSprouter;
 import vivadaylight3.myrmecology.common.handler.KeyBindingHandler;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
 import vivadaylight3.myrmecology.common.handler.PlayerTickHandler;
@@ -136,6 +141,10 @@ public class Register {
     public static int entityAntCarpenterID;
     public static int entityAntOdourousID;
     public static int entityAntScavengerID;
+    private static int entityAntDredgerID;
+    private static int entityAntFungalID;
+    private static int entityAntMoundID;
+    private static int entityAntSprouterID;
 
     public static final int GUI_ID_ANTFARM = 1;
     public static final int GUI_ID_MYRMOPAEDIA = 2;
@@ -151,9 +160,10 @@ public class Register {
     public static Block blockIncubator;
     public static Block blockFungi;
     public static Block blockAntChest;
+    public static Block blockPheromone;
+    
     // TODO
     public static ToolExtractor itemExtractor;
-
     public static ItemMyrmopaedia itemAntopedia;
     public static ItemBreedingChamber itemBreedingChamber;
     public static ItemAntBook itemAntBook;
@@ -415,7 +425,7 @@ public class Register {
     public static void registerItems() {
 
 	config.load();
-
+	
 	itemAntBook = new ItemAntBook(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ITEM_ANTBOOK_NAME, getNewItemID()).getInt());
 
@@ -551,14 +561,14 @@ public class Register {
 	config.save();
 
 	// TODO
-
+		
 	addItem(itemAntBook, Reference.ANTBOOK_TITLE,
 		Reference.ITEM_ANTBOOK_NAME);
 
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
-
+	
 	addItem(itemAntopedia, "Myrmopaedia", Reference.ITEM_MYRMOPAEDIA_NAME);
-
+	
 	addItem(itemBreedingChamber, "Breeding Chamber",
 		Reference.ITEM_CHAMBER_NAME);
 
@@ -757,6 +767,34 @@ public class Register {
 	
 	addAntRenderer(EntityAntOdourous.class,new RenderAnt(Resources.ENTITY_ANT_ODOUROUS,
 		new ModelAnt(), 0.5f));
+	
+	addEntityAnt(EntityAntDredger.class,
+		antDredger.getSpeciesName(), entityAntDredgerID, 100, 20,
+		true);
+	
+	addAntRenderer(EntityAntDredger.class, new RenderAnt(Resources.ENTITY_ANT_DREDGER,
+		new ModelAnt(), 0.5f));
+	
+	addEntityAnt(EntityAntFungal.class,
+		antFungal.getSpeciesName(), entityAntFungalID, 100, 20,
+		true);
+	
+	addAntRenderer(EntityAntFungal.class, new RenderAnt(Resources.ENTITY_ANT_FUNGAL,
+		new ModelAnt(), 0.5f));
+	
+	addEntityAnt(EntityAntMound.class,
+		antMound.getSpeciesName(), entityAntMoundID, 100, 20,
+		true);
+	
+	addAntRenderer(EntityAntMound.class, new RenderAnt(Resources.ENTITY_ANT_MOUND,
+		new ModelAnt(), 0.5f));
+	
+	addEntityAnt(EntityAntSprouter.class,
+		antSprouter.getSpeciesName(), entityAntSprouterID, 100, 20,
+		true);
+	
+	addAntRenderer(EntityAntSprouter.class, new RenderAnt(Resources.ENTITY_ANT_SPROUTER,
+		new ModelAnt(), 0.5f));
 
     }
 
@@ -904,7 +942,6 @@ public class Register {
 
     }
     
-    @SideOnly(Side.CLIENT)
     public static void addAntRenderer(Class<?extends EntityLiving> class1, RenderLiving renderer){
 	
 	ClientProxy.addAntRenderer(class1, renderer);

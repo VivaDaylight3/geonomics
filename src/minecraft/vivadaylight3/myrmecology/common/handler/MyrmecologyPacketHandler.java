@@ -48,7 +48,7 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	return FMLCommonHandler.instance().getEffectiveSide();
 
     }
-    
+
     @SideOnly(Side.CLIENT)
     public static EntityPlayer getSidedPlayer(Player parPlayer) {
 

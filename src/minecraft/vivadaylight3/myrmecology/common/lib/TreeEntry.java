@@ -65,7 +65,7 @@ public class TreeEntry {
 	}
 
 	result = result + "]";
-	
+
 	return result;
 
     }

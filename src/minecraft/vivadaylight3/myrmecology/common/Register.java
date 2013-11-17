@@ -2,36 +2,23 @@ package vivadaylight3.myrmecology.common;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.EnumSet;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
-
-import org.lwjgl.input.Keyboard;
-
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.block.BlockAntHill;
 import vivadaylight3.myrmecology.api.breeding.Breeding;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
 import vivadaylight3.myrmecology.api.util.Metadata;
-import vivadaylight3.myrmecology.client.ClientProxy;
-import vivadaylight3.myrmecology.client.model.ModelAnt;
-import vivadaylight3.myrmecology.client.renderer.ItemRendererAntChest;
-import vivadaylight3.myrmecology.client.renderer.RenderAnt;
-import vivadaylight3.myrmecology.client.renderer.RendererAntChest;
 import vivadaylight3.myrmecology.common.block.BlockAntChest;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
@@ -51,9 +38,7 @@ import vivadaylight3.myrmecology.common.entity.ant.EntityAntMound;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntSprouter;
-import vivadaylight3.myrmecology.common.handler.KeyBindingHandler;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
-import vivadaylight3.myrmecology.common.handler.PlayerTickHandler;
 import vivadaylight3.myrmecology.common.item.ItemAntBook;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
@@ -97,15 +82,9 @@ import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
-import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class Register {
 
@@ -126,7 +105,7 @@ public class Register {
     public static String language;
 
     public static final int ID_BLOCK = 600; // 12
-    public static final int ID_ITEM = 3853; // 23
+    public static final int ID_ITEM = 3000; // 23
 
     static int id = 1;
 
@@ -161,7 +140,7 @@ public class Register {
     public static Block blockFungi;
     public static Block blockAntChest;
     public static Block blockPheromone;
-    
+
     // TODO
     public static ToolExtractor itemExtractor;
     public static ItemMyrmopaedia itemAntopedia;
@@ -221,7 +200,7 @@ public class Register {
 	config = parConfig;
 
     }
-
+    
     public static int getNewItemID() {
 
 	latestItemID += 1;
@@ -267,8 +246,9 @@ public class Register {
 			+ " and make it do your bidding", -2, 2,
 		achieveBreedAnts,
 		new ItemStack(antForest, 1, Metadata.getMetaWorker()));
-	 achieveAntDimension = addAchievement(32, "Holiday Destination",
-	 "CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(blockAntChest));
+	achieveAntDimension = addAchievement(32, "Holiday Destination",
+		"CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(
+			blockAntChest));
 	achievementPage = new AchievementPage("Myrmecology", achieveGetBook);
 
 	for (int k = 0; k < achievementList.size(); k++) {
@@ -282,21 +262,6 @@ public class Register {
 	}
 
 	AchievementPage.registerAchievementPage(achievementPage);
-
-    }
-
-    public static void registerKeyBindings() {
-
-	KeyBinding[] key = { new KeyBinding("Receive "
-		+ Reference.ANTBOOK_TITLE, Keyboard.KEY_L) };
-	boolean[] repeat = { false };
-	KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler("Receive "
-		+ Reference.ANTBOOK_TITLE, key, repeat));
-
-	TickRegistry
-		.registerTickHandler(
-			new PlayerTickHandler(EnumSet.of(TickType.PLAYER)),
-			Side.SERVER);
 
     }
 
@@ -323,9 +288,9 @@ public class Register {
 	config.load();
 
 	blockAntChest = new BlockAntChest(config.get(
-	  Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTCHEST_NAME,
-	  getNewBlockID()).getInt());
-	 
+		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTCHEST_NAME,
+		getNewBlockID()).getInt());
+
 	blockFungi = new BlockFungi(config.get(Configuration.CATEGORY_BLOCK,
 		Reference.BLOCK_FUNGI_NAME, getNewBlockID()).getInt(),
 		Reference.BLOCK_FUNGI_NAME);
@@ -368,10 +333,10 @@ public class Register {
 		Material.ground);
 
 	config.save();
-	
+
 	addBlock(blockAntChest, "Scavenging Chest",
-	  Reference.BLOCK_ANTCHEST_NAME);
-	 
+		Reference.BLOCK_ANTCHEST_NAME);
+
 	addBlock(blockFungi, "Agaricus Fungi Block", Reference.BLOCK_FUNGI_NAME);
 	addBlock(blockIncubator, "Solarium", Reference.BLOCK_INCUBATOR_NAME);
 	addBlock(blockAntFarm, "Formicarium", Reference.BLOCK_ANTFARM_NAME);
@@ -425,7 +390,7 @@ public class Register {
     public static void registerItems() {
 
 	config.load();
-	
+
 	itemAntBook = new ItemAntBook(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ITEM_ANTBOOK_NAME, getNewItemID()).getInt());
 
@@ -561,14 +526,14 @@ public class Register {
 	config.save();
 
 	// TODO
-		
+
 	addItem(itemAntBook, Reference.ANTBOOK_TITLE,
 		Reference.ITEM_ANTBOOK_NAME);
 
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
-	
+
 	addItem(itemAntopedia, "Myrmopaedia", Reference.ITEM_MYRMOPAEDIA_NAME);
-	
+
 	addItem(itemBreedingChamber, "Breeding Chamber",
 		Reference.ITEM_CHAMBER_NAME);
 
@@ -732,69 +697,29 @@ public class Register {
 
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void registerRenderers() {
-	  ClientProxy.registerRenderers();
-	  
-	  ClientRegistry.bindTileEntitySpecialRenderer
-	  (TileEntityAntChest.class, new RendererAntChest());
-	  MinecraftForgeClient
-	  .registerItemRenderer(Register.blockAntChest.blockID, new
-	  ItemRendererAntChest());
-	 
-    }
-
     // TODO
     public static void registerEntities() {
 
-	addEntityAnt(EntityAntScavenger.class,
-		antScavenger.getSpeciesName(), entityAntScavengerID, 100, 20,
-		true);
-	
-	addAntRenderer(EntityAntScavenger.class, new RenderAnt(Resources.ENTITY_ANT_SCAVENGER,
-		new ModelAnt(), 0.5f));
+	addEntityAnt(EntityAntScavenger.class, antScavenger.getSpeciesName(),
+		entityAntScavengerID, 100, 20, true);
+	//
+	addEntityAnt(EntityAntCarpenter.class, antCarpenter.getSpeciesName(),
+		entityAntCarpenterID, 100, 20, true);
+	//
+	addEntityAnt(EntityAntOdourous.class, antOdourous.getSpeciesName(),
+		entityAntOdourousID, 100, 20, true);
 
-	addEntityAnt(EntityAntCarpenter.class,
-		antCarpenter.getSpeciesName(), entityAntCarpenterID, 100, 20,
-		true);
-	
-	addAntRenderer(EntityAntCarpenter.class,new RenderAnt(Resources.ENTITY_ANT_CARPENTER,
-		new ModelAnt(), 0.5f));
+	addEntityAnt(EntityAntDredger.class, antDredger.getSpeciesName(),
+		entityAntDredgerID, 100, 20, true);
 
-	addEntityAnt(EntityAntOdourous.class,
-		antOdourous.getSpeciesName(), entityAntOdourousID, 100, 20,
-		true);
-	
-	addAntRenderer(EntityAntOdourous.class,new RenderAnt(Resources.ENTITY_ANT_ODOUROUS,
-		new ModelAnt(), 0.5f));
-	
-	addEntityAnt(EntityAntDredger.class,
-		antDredger.getSpeciesName(), entityAntDredgerID, 100, 20,
-		true);
-	
-	addAntRenderer(EntityAntDredger.class, new RenderAnt(Resources.ENTITY_ANT_DREDGER,
-		new ModelAnt(), 0.5f));
-	
-	addEntityAnt(EntityAntFungal.class,
-		antFungal.getSpeciesName(), entityAntFungalID, 100, 20,
-		true);
-	
-	addAntRenderer(EntityAntFungal.class, new RenderAnt(Resources.ENTITY_ANT_FUNGAL,
-		new ModelAnt(), 0.5f));
-	
-	addEntityAnt(EntityAntMound.class,
-		antMound.getSpeciesName(), entityAntMoundID, 100, 20,
-		true);
-	
-	addAntRenderer(EntityAntMound.class, new RenderAnt(Resources.ENTITY_ANT_MOUND,
-		new ModelAnt(), 0.5f));
-	
-	addEntityAnt(EntityAntSprouter.class,
-		antSprouter.getSpeciesName(), entityAntSprouterID, 100, 20,
-		true);
-	
-	addAntRenderer(EntityAntSprouter.class, new RenderAnt(Resources.ENTITY_ANT_SPROUTER,
-		new ModelAnt(), 0.5f));
+	addEntityAnt(EntityAntFungal.class, antFungal.getSpeciesName(),
+		entityAntFungalID, 100, 20, true);
+
+	addEntityAnt(EntityAntMound.class, antMound.getSpeciesName(),
+		entityAntMoundID, 100, 20, true);
+
+	addEntityAnt(EntityAntSprouter.class, antSprouter.getSpeciesName(),
+		entityAntSprouterID, 100, 20, true);
 
     }
 
@@ -814,8 +739,8 @@ public class Register {
 		new ItemStack(Block.cloth));
 
 	GameRegistry.addRecipe(new ItemStack(itemAntopedia, 1), "ggg", "rir",
-		"ggg", 'g', new ItemStack(Block.thinGlass),'i', new ItemStack(Item.dyePowder),
-		'r', new ItemStack(Item.redstone));
+		"ggg", 'g', new ItemStack(Block.thinGlass), 'i', new ItemStack(
+			Item.dyePowder), 'r', new ItemStack(Item.redstone));
 
 	GameRegistry.addRecipe(new ItemStack(itemExtractor), " s ", "did",
 		" d ", 's', new ItemStack(Item.shovelIron), 'd', new ItemStack(
@@ -846,9 +771,9 @@ public class Register {
 	GameRegistry.registerTileEntity(TileEntityIncubator.class,
 		Reference.BLOCK_INCUBATOR_NAME);
 
-	  GameRegistry.registerTileEntity(TileEntityAntChest.class,
-	  Reference.BLOCK_ANTCHEST_NAME);
-	 
+	GameRegistry.registerTileEntity(TileEntityAntChest.class,
+		Reference.BLOCK_ANTCHEST_NAME);
+
 	// TODO
 
     }
@@ -941,18 +866,10 @@ public class Register {
 	getHillList().add(hill);
 
     }
-    
-    public static void addAntRenderer(Class<?extends EntityLiving> class1, RenderLiving renderer){
-	
-	ClientProxy.addAntRenderer(class1, renderer);
-	
-    }
 
-    public static void addEntityAnt(Class<? extends EntityLiving> class1, String antName, int ID,
-	    int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
-
-	// int iD = EntityRegistry.findGlobalUniqueEntityId();
-	// ID = iD;
+    public static void addEntityAnt(Class<? extends EntityLiving> class1,
+	    String antName, int ID, int trackingRange, int updateFrequency,
+	    boolean sendsVelocityUpdates) {
 
 	getEntityAntList().add((Class<? extends IEntityAnt>) class1);
 

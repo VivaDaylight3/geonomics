@@ -20,12 +20,12 @@ public class BlockIDEntry {
 	blockMeta = 0;
 
     }
-    
+
     @Override
-    public String toString(){
-	
-	return this.getBlockID() + ":" + this.getBlockMeta()+",";
-	
+    public String toString() {
+
+	return this.getBlockID() + ":" + this.getBlockMeta() + ",";
+
     }
 
     public int getBlockID() {

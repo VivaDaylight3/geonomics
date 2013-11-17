@@ -81,12 +81,12 @@ public class AntHostile extends ItemAnt {
 	// TODO Auto-generated method stub
 	return "Formicadae Infestus";
     }
-    
+
     @Override
-    public Entity getNewEntity(World world){
-	
+    public Entity getNewEntity(World world) {
+
 	return new EntityAntHostile(world);
-	
+
     }
 
     @Override

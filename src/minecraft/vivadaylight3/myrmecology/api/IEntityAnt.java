@@ -6,13 +6,13 @@ import net.minecraft.tileentity.TileEntity;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 
 public interface IEntityAnt {
-    
+
     ItemAnt getAnt();
 
     ItemStack[] inventory = new ItemStack[1];
 
     TileEntity homeBlockTileEntity = null;
-    
+
     void sendBehaviourErrorMessage(EntityPlayer player);
 
     double getPosX();

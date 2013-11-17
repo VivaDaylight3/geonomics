@@ -35,7 +35,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     boolean hasGoneTo = false;
 
     public TileEntity homeBlockTileEntity;
-    
+
     public String behaviourErrorMessage = "Hello sir";
 
     public int ticksPassed;
@@ -130,7 +130,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 
     @Override
     protected String getLivingSound() {
-	return "ant." + this.getAnt().getSpeciesSubName() + ".say";
+	return "";
     }
 
     @Override
@@ -226,24 +226,24 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	moveEntityTo((int) posX, (int) posY, (int) posZ);
 
     }
-    
+
     @Override
-    public void sendBehaviourErrorMessage(EntityPlayer player){
-	
-	if(!this.worldObj.isRemote){
-	
-	if(behaviourErrorMessage != null){
-	
-	    player.addChatMessage(behaviourErrorMessage);
-	
-	}else{
-	    
-	    player.addChatMessage("Don't mind me sir, I'm just minding my own business");
-	    
+    public void sendBehaviourErrorMessage(EntityPlayer player) {
+
+	if (!this.worldObj.isRemote) {
+
+	    if (behaviourErrorMessage != null) {
+
+		player.addChatMessage(behaviourErrorMessage);
+
+	    } else {
+
+		player.addChatMessage("Don't mind me sir, I'm just minding my own business");
+
+	    }
+
 	}
-	
-	}
-	
+
     }
 
 }

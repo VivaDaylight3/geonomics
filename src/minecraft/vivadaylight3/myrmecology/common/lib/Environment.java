@@ -17,7 +17,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.common.Log;
-import vivadaylight3.myrmecology.common.entity.ai.ExList;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 
 public class Environment {
@@ -84,10 +83,9 @@ public class Environment {
 	return nearest;
 
     }
-    
-    public static TileEntity getNearestAntChestFrom(
-	    ArrayList<TileEntity> list, Entity entity, double x, double y,
-	    double z) {
+
+    public static TileEntity getNearestAntChestFrom(ArrayList<TileEntity> list,
+	    Entity entity, double x, double y, double z) {
 
 	TileEntity nearest = null;
 
@@ -96,17 +94,18 @@ public class Environment {
 	    return null;
 
 	}
-	
-	if(list.get(0) instanceof TileEntityAntChest){
+
+	if (list.get(0) instanceof TileEntityAntChest) {
 
 	    nearest = list.get(0);
-	
+
 	}
 
 	for (TileEntity tile : list) {
 
 	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
-		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord) && tile instanceof TileEntityAntChest) {
+		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)
+		    && tile instanceof TileEntityAntChest) {
 
 		nearest = tile;
 
@@ -117,7 +116,7 @@ public class Environment {
 	return nearest;
 
     }
-    
+
     public static BlockPosEntry getNearestTreeEntryFrom(
 	    ArrayList<BlockPosEntry> list, Entity entity, double x, double y,
 	    double z) {
@@ -125,15 +124,15 @@ public class Environment {
 	BlockPosEntry nearest = null;
 
 	if (list == null || list.size() < 1) {
-	    
+
 	    Log.debug("getNearest == null or < 1");
 
 	    return null;
 
-	}else{
-	    
+	} else {
+
 	    Log.debug("geTnearest != null");
-	    
+
 	}
 
 	nearest = list.get(0);
@@ -141,7 +140,9 @@ public class Environment {
 	for (BlockPosEntry tile : list) {
 
 	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
-		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord) && TreeDictionary.getTreeEntryFromLog(tile.toBlockIDEntry()) != null) {
+		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)
+		    && TreeDictionary
+			    .getTreeEntryFromLog(tile.toBlockIDEntry()) != null) {
 
 		nearest = tile;
 
@@ -160,15 +161,15 @@ public class Environment {
 	BlockPosEntry nearest = null;
 
 	if (list == null || list.size() < 1) {
-	    
+
 	    Log.debug("getNearest == null or < 1");
 
 	    return null;
 
-	}else{
-	    
+	} else {
+
 	    Log.debug("geTnearest != null");
-	    
+
 	}
 
 	nearest = list.get(0);
@@ -286,8 +287,8 @@ public class Environment {
 
     }
 
-    public static ArrayList<Entity> getEntitiesInRadius(World world,
-	    double x, double y, double z, int radius) {
+    public static ArrayList<Entity> getEntitiesInRadius(World world, double x,
+	    double y, double z, int radius) {
 
 	AxisAlignedBB axisalignedbb = AxisAlignedBB
 		.getAABBPool()
@@ -306,52 +307,51 @@ public class Environment {
 	}
 	return result;
     }
-    
-    public static ArrayList<Entity> getAnimalsInRadius(World world, Entity excluding,
-	    double x, double y, double z, int radius) {
+
+    public static ArrayList<Entity> getAnimalsInRadius(World world,
+	    Entity excluding, double x, double y, double z, int radius) {
 
 	AxisAlignedBB axisalignedbb = AxisAlignedBB
 		.getAABBPool()
 		.getAABB(x, y, z, (double) (x + 1), (double) (y + 1),
 			(double) (z + 1)).expand(radius, radius, radius);
 	axisalignedbb.maxY = (double) world.getHeight();
-	List list = world.getEntitiesWithinAABB(Entity.class,
-		axisalignedbb);
+	List list = world.getEntitiesWithinAABB(Entity.class, axisalignedbb);
 
 	ArrayList<Entity> result = new ArrayList<Entity>();
 
 	for (int k = 0; k < list.size(); k++) {
-	    
-	    if(list.get(k) != excluding){
+
+	    if (list.get(k) != excluding) {
 
 		result.add((Entity) list.get(k));
-	    
+
 	    }
 
 	}
-		
+
 	return result;
     }
-    
-    public static ArrayList<EntityAnimal> getAnimalsInRadius(World world, Entity excluding, Class<?extends Entity> class1,
-	    double x, double y, double z, int radius) {
+
+    public static ArrayList<EntityAnimal> getAnimalsInRadius(World world,
+	    Entity excluding, Class<? extends Entity> class1, double x,
+	    double y, double z, int radius) {
 
 	AxisAlignedBB axisalignedbb = AxisAlignedBB
 		.getAABBPool()
 		.getAABB(x, y, z, (double) (x + 1), (double) (y + 1),
 			(double) (z + 1)).expand(radius, radius, radius);
 	axisalignedbb.maxY = (double) world.getHeight();
-	List list = world.getEntitiesWithinAABB(class1,
-		axisalignedbb);
+	List list = world.getEntitiesWithinAABB(class1, axisalignedbb);
 
 	ArrayList<EntityAnimal> result = new ArrayList<EntityAnimal>();
 
 	for (int k = 0; k < list.size(); k++) {
-	    
-	    if(list.get(k) != excluding){
+
+	    if (list.get(k) != excluding) {
 
 		result.add((EntityAnimal) list.get(k));
-	    
+
 	    }
 
 	}
@@ -526,14 +526,15 @@ public class Environment {
 
 		    if (newX * newX + newY * newY + newZ * newZ <= radius
 			    * radius) {
-			
-			if(world.getBlockId(newX + x, newY + y, newZ + z) > 0){
 
-			    result.add(new BlockPosEntry(newX + x, newY + y, newZ
-				+ z, world.getBlockId(newX + x, newY + y, newZ
-				+ z), world.getBlockMetadata(newX + x,
-				newY + y, newZ + z)));
-			
+			if (world.getBlockId(newX + x, newY + y, newZ + z) > 0) {
+
+			    result.add(new BlockPosEntry(newX + x, newY + y,
+				    newZ + z, world.getBlockId(newX + x, newY
+					    + y, newZ + z), world
+					    .getBlockMetadata(newX + x, newY
+						    + y, newZ + z)));
+
 			}
 
 		    }
@@ -824,41 +825,42 @@ public class Environment {
 	return 0;
 
     }
-    
-    public static boolean inventoryHas(ItemStack item, ItemStack[] inventory){
-	
-	for(int k = 0; k < inventory.length; k++){
-	    
-	    if(inventory[k] != null){
-		
-		if(inventory[k].getItem() == item.getItem()){
-		    
-		    if(inventory[k].stackSize >= item.stackSize){
-			
+
+    public static boolean inventoryHas(ItemStack item, ItemStack[] inventory) {
+
+	for (int k = 0; k < inventory.length; k++) {
+
+	    if (inventory[k] != null) {
+
+		if (inventory[k].getItem() == item.getItem()) {
+
+		    if (inventory[k].stackSize >= item.stackSize) {
+
 			return true;
-			
+
 		    }
-		    
+
 		}
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
-    
+
     public static void removeItemStackFromIventory(ItemStack item,
 	    ItemStack[] inventory, TileEntity tileEntity) {
 
 	int amount = item.stackSize;
 
 	for (int k = 0; k < inventory.length; k++) {
-	    
-	    while(amount > 0){
-		
-		if (inventory[k].getItem() == item.getItem() && inventory[k].getItemDamage() == item.getItemDamage()) {
+
+	    while (amount > 0) {
+
+		if (inventory[k].getItem() == item.getItem()
+			&& inventory[k].getItemDamage() == item.getItemDamage()) {
 
 		    if (amount > inventory[k].stackSize) {
 
@@ -872,7 +874,8 @@ public class Environment {
 
 		    } else if (amount <= inventory[k].stackSize) {
 
-			inventory[k] = new ItemStack(item.getItem(), inventory[k].stackSize - amount,
+			inventory[k] = new ItemStack(item.getItem(),
+				inventory[k].stackSize - amount,
 				item.getItemDamage());
 
 			amount = 0;
@@ -886,8 +889,6 @@ public class Environment {
 		}
 
 	    }
-	    
-	    
 
 	}
 
@@ -899,9 +900,9 @@ public class Environment {
 	int amount = item.stackSize;
 
 	for (int k = 0; k < inventory.length; k++) {
-	    
-	    while(amount > 0){
-		
+
+	    while (amount > 0) {
+
 		if (inventory[k] == null) {
 
 		    if (amount > max) {
@@ -946,8 +947,6 @@ public class Environment {
 		}
 
 	    }
-	    
-	    
 
 	}
 

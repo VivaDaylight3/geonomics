@@ -87,6 +87,7 @@ public class MyrmopaediaProperties {
 	myrmopaediaIDs[id] = null;
 
     }
+
     @SideOnly(Side.CLIENT)
     public static void addAntToMyrmopaedia(ItemStack itemstack, ItemAnt ant,
 	    Player parPlayer) {

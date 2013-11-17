@@ -50,19 +50,20 @@ public class ItemMyrmopaedia extends Item {
 	MyrmopaediaProperties.initiateMyrmopaedia(par1ItemStack);
 
     }
-    
-    @Override
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target, EntityLivingBase player)
-    {
 
-	if(target instanceof EntityAnt && player instanceof EntityPlayer){
-	    
-	    ((EntityAnt) target).sendBehaviourErrorMessage((EntityPlayer) player);
-	  
-	  return true;
-	    
+    @Override
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target,
+	    EntityLivingBase player) {
+
+	if (target instanceof EntityAnt && player instanceof EntityPlayer) {
+
+	    ((EntityAnt) target)
+		    .sendBehaviourErrorMessage((EntityPlayer) player);
+
+	    return true;
+
 	}
-	
+
 	return false;
     }
 

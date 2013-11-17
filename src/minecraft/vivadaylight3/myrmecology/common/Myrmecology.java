@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.common;
 import java.util.Arrays;
 
 import net.minecraftforge.common.Configuration;
+import vivadaylight3.myrmecology.client.ClientProxy;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyGuiHandler;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
 import vivadaylight3.myrmecology.common.lib.Resources;
@@ -19,7 +20,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 /**
  * Myrmecology main class
@@ -93,9 +93,6 @@ public class Myrmecology {
 	Log.info("Registering entities");
 	Register.registerEntities();
 
-	Log.info("Registering key bindings");
-	Register.registerKeyBindings();
-
 	Log.info("Registering achievements");
 	Register.registerAchievements();
 
@@ -106,8 +103,12 @@ public class Myrmecology {
 
     @EventHandler
     public void mainInit(FMLInitializationEvent event) {
-
-	Register.registerRenderers();
+	
+	Log.info("Registering renderers");
+	proxy.registerRenderers();
+	
+	Log.info("Registering key bindings");
+	proxy.registerKeyBindings();
 
 	meta.modId = Reference.MOD_ID;
 	meta.name = Reference.MOD_ID;

@@ -12,19 +12,16 @@ public class EntityAntMound extends EntityAnt {
 
     public EntityAntMound(World par1World) {
 	super(par1World);
-	this.tasks.addTask(1,  new AntBehaviourMound(this, this.worldObj, this.getNavigator()));
+	this.tasks
+		.addTask(
+			1,
+			new AntBehaviourMound(this, this.worldObj, this
+				.getNavigator()));
     }
-    
+
     @Override
     public ItemAnt getAnt() {
 	return Register.antMound;
-    }
-
-    @Override
-    public ResourceLocation getResource() {
-
-	return Resources.ENTITY_ANT_MOUND;
-
     }
 
     @Override

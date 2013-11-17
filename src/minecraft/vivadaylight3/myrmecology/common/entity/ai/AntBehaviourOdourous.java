@@ -30,11 +30,12 @@ public class AntBehaviourOdourous extends EntityAIAntBehaviour {
 
 	for (int k = 0; k < list.size(); k++) {
 
-	    if(list.get(k) instanceof EntityLivingBase){
-	    
-		((EntityLivingBase) list.get(k)).addPotionEffect(
-		    new PotionEffect(Potion.poison.id, 60, 1, true));
-	    
+	    if (list.get(k) instanceof EntityLivingBase) {
+
+		((EntityLivingBase) list.get(k))
+			.addPotionEffect(new PotionEffect(Potion.poison.id, 60,
+				1, true));
+
 	    }
 
 	}

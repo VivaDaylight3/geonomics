@@ -20,12 +20,12 @@ public class AntMound extends ItemAnt {
 	return "Mound Ant";
 
     }
-    
+
     @Override
-    public Entity getNewEntity(World world){
-	
+    public Entity getNewEntity(World world) {
+
 	return new EntityAntMound(world);
-	
+
     }
 
     @Override

@@ -50,31 +50,36 @@ public class ToolExtractor extends ItemTool {
     public Icon getIconFromDamage(int par1) {
 	return this.itemIcon;
     }
-    
-    @Override
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target, EntityLivingBase player)
-    {
 
-	if(target instanceof EntityAnt){
-	    
-	    ItemStack ant = new ItemStack(((EntityAnt) target).getAnt(), 1, Metadata.getMetaWorker());
-	    
+    @Override
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target,
+	    EntityLivingBase player) {
+
+	if (target instanceof EntityAnt) {
+
+	    ItemStack ant = new ItemStack(((EntityAnt) target).getAnt(), 1,
+		    Metadata.getMetaWorker());
+
 	    ItemStack items = ((EntityAnt) target).inventory[0];
-	    
-	    Environment.addItemStackToInventory(ant, ((EntityPlayer)player).inventory.mainInventory, 64, null);
-	    		
+
+	    Environment.addItemStackToInventory(ant,
+		    ((EntityPlayer) player).inventory.mainInventory, 64, null);
+
 	    target.setDead();
-	    
-	    if(items != null){
-		
-		Environment.spawnItem(items, target.worldObj, (int)((EntityAnt) target).getPosX(), (int)((EntityAnt) target).getPosY(), (int)((EntityAnt) target).getPosY());
-		
+
+	    if (items != null) {
+
+		Environment.spawnItem(items, target.worldObj,
+			(int) ((EntityAnt) target).getPosX(),
+			(int) ((EntityAnt) target).getPosY(),
+			(int) ((EntityAnt) target).getPosY());
+
 	    }
-		
+
 	    return false;
-	    
+
 	}
-	
+
 	return false;
     }
 

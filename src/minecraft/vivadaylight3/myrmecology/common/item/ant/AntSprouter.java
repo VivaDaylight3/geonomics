@@ -21,12 +21,12 @@ public class AntSprouter extends ItemAnt {
 	return "Sprouter Ant";
 
     }
-    
+
     @Override
-    public Entity getNewEntity(World world){
-	
+    public Entity getNewEntity(World world) {
+
 	return new EntityAntSprouter(world);
-	
+
     }
 
     @Override

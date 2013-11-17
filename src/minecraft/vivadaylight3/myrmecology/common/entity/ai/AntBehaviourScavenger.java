@@ -148,8 +148,8 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 
 	    }
 
-	    if (Environment.coordinateIsCloseTo(itemX, itemY, itemZ, (int)getPosX(),
-		    (int)getPosY(), (int)getPosZ(), 2)) {
+	    if (Environment.coordinateIsCloseTo(itemX, itemY, itemZ,
+		    (int) getPosX(), (int) getPosY(), (int) getPosZ(), 2)) {
 
 		Environment.addItemStackToInventory(targetItem.getEntityItem(),
 			this.theAnt.inventory, 64, null);
@@ -175,14 +175,16 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 		targetChest.xCoord, targetChest.yCoord, targetChest.zCoord, 1)) {
 
 	    if (Environment.inventoryCanHold(this.theAnt.inventory[0],
-		    ((TileEntityAntChest) this.targetChest).getContents(), 64) && this.theAnt.inventory[0] != null) {
-		
-		//((TileEntityAntChest) this.targetChest).getContents()[0] = this.theAnt.inventory[0];
+		    ((TileEntityAntChest) this.targetChest).getContents(), 64)
+		    && this.theAnt.inventory[0] != null) {
+
+		// ((TileEntityAntChest) this.targetChest).getContents()[0] =
+		// this.theAnt.inventory[0];
 
 		Environment.addItemStackToInventory(this.theAnt.inventory[0],
 			((TileEntityAntChest) this.targetChest).getContents(),
 			64, targetChest);
-		
+
 		this.theAnt.inventory[0] = null;
 
 		this.state = "none";

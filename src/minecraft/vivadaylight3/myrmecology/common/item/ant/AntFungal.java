@@ -78,11 +78,10 @@ public class AntFungal extends ItemAnt {
 	return false;
 
     }
-    
+
     @Override
-    public Entity getNewEntity(World world){
-	
-	
+    public Entity getNewEntity(World world) {
+
 	return new EntityAntFungal(world);
     }
 

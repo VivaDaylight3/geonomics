@@ -11,12 +11,13 @@ public class ItemPheromone extends Item {
 	super(par1);
 	setCreativeTab(Register.tabMyrmecology);
     }
-    
+
     @Override
-    public void registerIcons(IconRegister register){
-	
-	this.itemIcon = register.registerIcon(Resources.TEXTURE_PREFIX+"pheromone.png");
-	
+    public void registerIcons(IconRegister register) {
+
+	this.itemIcon = register.registerIcon(Resources.TEXTURE_PREFIX
+		+ "pheromone.png");
+
     }
 
 }

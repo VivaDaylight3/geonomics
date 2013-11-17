@@ -15,6 +15,8 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author samueltebbs
  */
 public class TreeDictionary {
+    
+    public static final int treeWidth = 5;
 
     private static ArrayList<TreeEntry> treeEntries = new ArrayList<TreeEntry>();
 
@@ -36,7 +38,7 @@ public class TreeDictionary {
 	String result = "";
 
 	for (TreeEntry entry : treeEntries) {
-	    
+
 	    result = result + entry.toString();
 
 	}
@@ -102,9 +104,9 @@ public class TreeDictionary {
     public static TreeEntry getTreeEntryFromLog(BlockIDEntry entry) {
 
 	for (TreeEntry check : treeEntries) {
-	    
+
 	    for (BlockIDEntry block : check.getLogIDs()) {
-		
+
 		if (block.equals(entry)) {
 
 		    return check;

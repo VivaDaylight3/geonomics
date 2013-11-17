@@ -11,6 +11,7 @@ public class Resources {
 	    + ":";
 
     public static final String TEXTURE_LOCATION = "textures/";
+    public static final String SOUND_LOCATION = "sound/";
     public static final String LANG_LOCATION = "lang/";
 
     public static final String MODEL_LOCATION = TEXTURE_LOCATION + "models/";
@@ -20,6 +21,8 @@ public class Resources {
     public static final String ENTITY_LOCATION = TEXTURE_LOCATION + "entity/";
     public static final String ANT_LOCATION = "ant/";
     public static final String LOGO_PATH = TEXTURE_LOCATION + "logo/logo.png";
+    
+    public static final ResourceLocation SOUND_ANT_LIVING = getResourceLocation(SOUND_LOCATION + "antLiving.ogg");
 
     public static final ResourceLocation ENTITY_ANT_FOREST = getResourceLocation(ENTITY_LOCATION
 	    + "antForest.png");
@@ -33,12 +36,15 @@ public class Resources {
 	    + "antScavenger.png");
     public static final ResourceLocation ENTITY_ANT_DREDGER = getResourceLocation(ENTITY_LOCATION
 	    + "antDredger.png");
-    
-    public static final ResourceLocation ENTITY_ANT_FUNGAL = getResourceLocation(ENTITY_LOCATION + Reference.ANT_FUNGAL_NAME + FORMAT);
 
-    public static final ResourceLocation ENTITY_ANT_MOUND = getResourceLocation(ENTITY_LOCATION + Reference.ANT_MOUND_NAME + FORMAT);
+    public static final ResourceLocation ENTITY_ANT_FUNGAL = getResourceLocation(ENTITY_LOCATION
+	    + Reference.ANT_FUNGAL_NAME + FORMAT);
 
-    public static final ResourceLocation ENTITY_ANT_SPROUTER  = getResourceLocation(ENTITY_LOCATION + Reference.ANT_SPROUTER_NAME + FORMAT);
+    public static final ResourceLocation ENTITY_ANT_MOUND = getResourceLocation(ENTITY_LOCATION
+	    + "antMound.png");
+
+    public static final ResourceLocation ENTITY_ANT_SPROUTER = getResourceLocation(ENTITY_LOCATION
+	    + Reference.ANT_SPROUTER_NAME + FORMAT);
 
     public static final ResourceLocation BLOCK_ANTCHEST = getResourceLocation(MODEL_LOCATION
 	    + Reference.BLOCK_ANTCHEST_NAME + ".png");

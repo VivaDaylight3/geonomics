@@ -34,7 +34,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     boolean shouldGoTo = false;
     boolean hasGoneTo = false;
 
-    public TileEntity homeBlockTileEntity;
+    public TileEntity homeTileEntity;
 
     public String behaviourErrorMessage = "Hello sir";
 
@@ -50,7 +50,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 		EntityPlayer.class, 8.0F));
 	this.tasks.addTask(6, new EntityAILookIdle(this));
 
-	this.homeBlockTileEntity = par1World.getBlockTileEntity(
+	this.homeTileEntity = par1World.getBlockTileEntity(
 		(int) this.posX, (int) this.posY - 1, (int) this.posZ);
 
     }

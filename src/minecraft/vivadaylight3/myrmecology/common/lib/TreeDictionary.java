@@ -17,6 +17,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class TreeDictionary {
     
     public static final int treeWidth = 5;
+    public static final int treeHeight = 10;
 
     private static ArrayList<TreeEntry> treeEntries = new ArrayList<TreeEntry>();
 
@@ -31,6 +32,12 @@ public class TreeDictionary {
 	addTreeEntry(new TreeEntry(new BlockIDEntry(Block.wood.blockID, 3),
 		new BlockIDEntry(Block.leaves.blockID, 3)));
 
+    }
+    
+    public static boolean contains(BlockIDEntry entry){
+	
+	return treeEntries.contains(entry);
+	
     }
 
     public static String convertToString() {

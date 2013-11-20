@@ -1,13 +1,17 @@
 package vivadaylight3.myrmecology.common.entity.ai;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
+import vivadaylight3.myrmecology.common.Log;
+import vivadaylight3.myrmecology.common.lib.BlockIDEntry;
 import vivadaylight3.myrmecology.common.lib.BlockPosEntry;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.TreeDictionary;
@@ -27,10 +31,26 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 
     @Override
     public boolean shouldExecute() {
+	
+	Log.debug("");
+	
+	Log.debug("should");
 
 	block = Environment.getNearestTreeEntryFrom(Environment.getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(), radius), (Entity) this.theAnt, getPosX(), getPosY(), getPosZ());
 
 	if(state.equals("none") && block != null){
+	    
+	    Log.debug("should : state == none");
+	    
+	    state = "moveTo";
+	    
+	    return true;
+	    
+	}else if(state.equals("treeChop")){
+	    
+	    return true;
+	    
+	}else if(state.endsWith("moveTo") && (Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(), this.block.getxCoord(), this.block.getyCoord(), this.block.getzCoord(), 1))){
 	    
 	    state = "treeChop";
 	    
@@ -52,34 +72,69 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     @Override
     public void updateTask() {
 	
+	Log.debug("");
+	
+	Log.debug("update");
+	
 	if(state.equals("treeChop")){
 	    
+	    Log.debug("update : state == treeChop");
+	    
 	    this.chopTree();
+	    
+	}else if(state.equals("moveTo")){
+	    
+	    Log.debug("update : state ==  moveTo");
+	    
+	    this.moveTo();
 	    
 	}
 
     }
     
-    private void chopTree(){
-	
-	ArrayList<BlockPosEntry> logs = new ArrayList<BlockPosEntry>();
+    private void moveTo(){
 	
 	this.block = getBottomLog();
 	
-	if(this.block != null){
+	Log.debug("moveTo : getBottom");
+	
+	if(block != null){
 	    
 	    this.theAnt.moveEntityTo(this.block.getxCoord(), this.block.getyCoord(), this.block.getzCoord());
 	    
-	    if(Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(), this.block.getxCoord(), this.block.getyCoord(), this.block.getzCoord(), 1)){
+	    Log.debug("moveTo : block != null");
+	    
+	}
+	
+    }
+    
+    private void chopTree(){
+	
+	Log.debug("");
+	
+	this.block = getBottomLog();
+	
+	if(block != null){
+	    
+	    Log.debug("chopTree : block != null");
+	    
+	    ArrayList<BlockPosEntry> logs = getAllLogs();
+	    
+	    if(logs.size() > 0){
 		
-		logs = getAllLogs();
+		Log.debug("chopTree : size > 0");
 		
-		for(int k = 0; k < logs.size(); k++){
+		for(BlockPosEntry entry : logs){
 		    
-		    Environment.spawnItem(new ItemStack(logs.get(k).getID(), 1, logs.get(k).getMetadata()), world, logs.get(k).getxCoord(), logs.get(k).getyCoord(), logs.get(k).getzCoord());
-		    world.setBlockToAir(logs.get(k).getxCoord(), logs.get(k).getyCoord(), logs.get(k).getyCoord());
+		    Log.debug("log");
+		    		    
+		    world.setBlock(entry.xCoord, entry.yCoord, entry.yCoord, 1);
 		    
-		    state = "none";
+		    Environment.spawnItem(new ItemStack(
+			    Block.blocksList[entry.ID].idDropped(entry.metadata, new Random(), 0), 
+			    Block.blocksList[entry.ID].quantityDropped(entry.metadata, 0, new Random()), 
+			    Block.blocksList[entry.ID].damageDropped(entry.metadata)), world, getPosX(), 
+			    getPosY(), getPosZ());
 		    
 		}
 		
@@ -91,37 +146,37 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     
     private ArrayList<BlockPosEntry> getAllLogs(){
 	
-	ArrayList<BlockPosEntry> result = new ArrayList<BlockPosEntry>();
-	
 	BlockPosEntry entry = block;
+	ArrayList<BlockPosEntry> list = new ArrayList<BlockPosEntry>();
 	
-	while(TreeDictionary.getTreeEntryFromLog(entry.toBlockIDEntry()) != null){
+	int mod = 0;
+	
+	do{
 	    
-	    BlockPosEntry log = entry;
+	    list.add(entry);
 	    
-	    for(int x = -1 * TreeDictionary.treeWidth; x <= TreeDictionary.treeWidth; x++){
-		
-		log.setxCoord(log.getxCoord() + x);
-		
-		for(int z = -1 * TreeDictionary.treeWidth; z <= TreeDictionary.treeWidth; z++){
-		    
-		    log.setxCoord(log.getzCoord() + z);
-		    
-		    if(TreeDictionary.getTreeEntryFromLog(log.toBlockIDEntry()) != null){
+	    for(int x = -1; x <= 1; x++){
+				    
+		for(int z = -1; z <= 1; z++){
 			
-			result.add(log);
-			
+		    if(TreeDictionary.contains(new BlockIDEntry(world.getBlockId(entry.xCoord + x, entry.yCoord, entry.zCoord + z),
+			    world.getBlockMetadata(entry.xCoord + x, entry.yCoord, entry.xCoord + z)))){
+			    
+			    list.add(entry);
+			    			    
 		    }
-		    
-		    entry.setyCoord(entry.getyCoord() + 1);
-		    
+					    
 		}
 		
 	    }
 	    
-	}
+	    entry.setyCoord(entry.getyCoord() + 1);
+	    
+	    mod++;
+	    
+	}while(mod <= TreeDictionary.treeHeight);
 	
-	return null;
+	return list;
 	
     }
     
@@ -136,14 +191,22 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 	    
 	}
 	
-	while(TreeDictionary.getTreeEntryFromLog(entry.toBlockIDEntry()) != null){
+	for(int k = 0; k < TreeDictionary.treeHeight; k++){
 	    
-	    entry.setyCoord(entry.getyCoord() - 1);
+	    if(TreeDictionary.contains(entry.toBlockIDEntry())){
+		
+		entry.setyCoord(entry.getyCoord() - 1);
+		
+	    }else{
+		
+		return entry;
+		
+	    }
 	    
 	}
 	
-	return entry;
+	return block;
 	
-    }
+    } 
 
 }

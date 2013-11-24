@@ -36,11 +36,22 @@ public class TreeDictionary {
     
     public static boolean contains(BlockIDEntry entry){
 	
-	return treeEntries.contains(entry);
+	for(TreeEntry log : treeEntries){
+	    
+	    if(log.equals(entry)){
+		
+		return true;
+		
+	    }
+	    
+	}
+	
+	return false;
 	
     }
 
-    public static String convertToString() {
+    @Override
+    public String toString() {
 
 	String result = "";
 

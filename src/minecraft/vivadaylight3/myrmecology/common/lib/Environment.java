@@ -141,8 +141,7 @@ public class Environment {
 
 	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
 		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)
-		    && TreeDictionary
-			    .getTreeEntryFromLog(tile.toBlockIDEntry()) != null) {
+		    && TreeDictionary.contains(tile.toBlockIDEntry())) {
 
 		nearest = tile;
 

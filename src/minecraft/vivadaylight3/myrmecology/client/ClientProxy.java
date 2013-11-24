@@ -15,6 +15,8 @@ import vivadaylight3.myrmecology.client.model.ModelAnt;
 import vivadaylight3.myrmecology.client.renderer.ItemRendererAntChest;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
 import vivadaylight3.myrmecology.client.renderer.RendererAntChest;
+import vivadaylight3.myrmecology.client.renderer.RendererIncubator;
+import vivadaylight3.myrmecology.client.renderer.RendererIncubator2;
 import vivadaylight3.myrmecology.common.CommonProxy;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
@@ -29,6 +31,7 @@ import vivadaylight3.myrmecology.common.handler.KeyBindingHandler;
 import vivadaylight3.myrmecology.common.handler.PlayerTickHandler;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -39,17 +42,17 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
-
-    static ArrayList<Class<? extends EntityLiving>> entityClassList = new ArrayList<Class<? extends EntityLiving>>();
-
-    static ArrayList<RenderLiving> renderClassList = new ArrayList<RenderLiving>();
+    
+    public static int incubatorRenderID;
+    public static int incubatorRenderPass;
 
     @Override
     public void addAntRenderer(Class<? extends EntityLiving> parClass,
 	    RenderLiving render) {
 
-	entityClassList.add(parClass);
-	renderClassList.add(render);
+	RenderingRegistry.registerEntityRenderingHandler(
+		    (Class<? extends Entity>) parClass,
+		    render);
 
     }
     
@@ -92,17 +95,14 @@ public class ClientProxy extends CommonProxy {
 	
 	addAntRenderer(EntityAntSprouter.class, new RenderAnt(
 		Resources.ENTITY_ANT_SPROUTER, new ModelAnt(), 0.5f));
-
-	for (int k = 0; k < entityClassList.size(); k++) {
-
-	    RenderingRegistry.registerEntityRenderingHandler(
-		    (Class<? extends Entity>) entityClassList.get(k),
-		    renderClassList.get(k));
-
-	}
 	
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAntChest.class,
 		new RendererAntChest());
+	MinecraftForgeClient.registerItemRenderer(
+		Register.blockAntChest.blockID, new ItemRendererAntChest());
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncubator.class,
+		new RendererIncubator());
 	MinecraftForgeClient.registerItemRenderer(
 		Register.blockAntChest.blockID, new ItemRendererAntChest());
 

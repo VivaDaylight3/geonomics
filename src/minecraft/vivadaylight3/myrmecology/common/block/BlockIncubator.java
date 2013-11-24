@@ -23,8 +23,9 @@ public class BlockIncubator extends BlockContainer {
     private String name;
 
     private Icon iconTop;
-    private Icon iconSideOn;
-    private Icon iconSideOff;
+    private Icon iconFrontOn;
+    private Icon iconFrontOff;
+    private Icon iconSide;
 
     public static final int POWERED_META = 1;
     public static final int UNPOWERED_META = 0;
@@ -46,24 +47,57 @@ public class BlockIncubator extends BlockContainer {
     public void registerIcons(IconRegister iconRegister) {
 
 	iconTop = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_Top");
-	iconSideOn = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_Side_On");
-	iconSideOff = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_Side_Off");
+		+ Reference.BLOCK_INCUBATOR_NAME + "_top");
+	iconFrontOn = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
+		+ Reference.BLOCK_INCUBATOR_NAME + "_front_on");
+	iconFrontOff = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
+		+ Reference.BLOCK_INCUBATOR_NAME + "_front_off");
+	iconSide = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
+		+ Reference.BLOCK_INCUBATOR_NAME + "_side");
     }
 
     @Override
     public Icon getIcon(int side, int metadata) {
+	
 	if (side == 0 || side == 1) {
+	    
 	    return iconTop;
-	} else {
-	    if (metadata == POWERED_META) {
-		return iconSideOn;
-	    } else {
-		return iconSideOff;
+	    
+	}else{
+	    
+	    if(Environment.getBlockSide(side, metadata, metadata) == "front"){
+		
+		if(metadata == POWERED_META){
+		    
+		    return iconFrontOn;
+		    
+		}else{
+		    
+		    return iconFrontOff;
+		    
+		}
+		
+	    }else{
+		
+		return iconSide;
+		
 	    }
+	    
 	}
+    }
+    
+    @Override
+    public boolean isOpaqueCube() {
+
+	return false;
+
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+
+	return true;
+
     }
 
     @Override
@@ -127,18 +161,10 @@ public class BlockIncubator extends BlockContainer {
 
 	    TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-	    // if(tileEntity != null){
-
-	    // if(tileEntity instanceof TileEntityIncubator){
-
 	    player.openGui(Myrmecology.instance, Register.GUI_ID_INCUBATOR,
 		    world, x, y, z);
 
 	    return true;
-
-	    // }
-
-	    // }
 
 	}
 

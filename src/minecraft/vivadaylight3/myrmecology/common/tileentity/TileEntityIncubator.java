@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.AntProperties;
 import vivadaylight3.myrmecology.api.util.Metadata;
+import vivadaylight3.myrmecology.common.Log;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
@@ -61,6 +62,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 	    if (this.getMaturingTimeComplete() < this.getMaturingTime()) {
 
 		this.increaseMaturingTime();
+		Log.debug("Increasing mature time");
 
 	    } else if (this.getMaturingTimeComplete() >= this.getMaturingTime()) {
 
@@ -143,6 +145,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 
     // turns the larvae into a mature ant
     private void finishIncubation() {
+	Log.debug("finishing maturation");
 	ItemStack result = new ItemStack(this.getLarva().getItem(),
 		((ItemAnt) this.getLarva().getItem()).getFertility(),
 		this.getResultAntMeta());

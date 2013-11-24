@@ -3,6 +3,7 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,6 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.common.Log;
+import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 
 public class Environment {
@@ -116,6 +118,22 @@ public class Environment {
 	return nearest;
 
     }
+    
+    public static boolean hasPheromoneBlockInRadius(ArrayList<BlockPosEntry> list, Entity entity, int distance){
+		
+	for(BlockPosEntry entry : list){
+	    
+	    if(entity.getDistance(entry.xCoord, entry.yCoord, entry.zCoord) <= distance && entry.ID == Register.blockPheromone.blockID){
+		
+		return true;
+		
+	    }
+	    
+	}
+	
+	return false;
+	
+    }
 
     public static BlockPosEntry getNearestTreeEntryFrom(
 	    ArrayList<BlockPosEntry> list, Entity entity, double x, double y,
@@ -125,13 +143,9 @@ public class Environment {
 
 	if (list == null || list.size() < 1) {
 
-	    Log.debug("getNearest == null or < 1");
-
 	    return null;
 
 	} else {
-
-	    Log.debug("geTnearest != null");
 
 	}
 
@@ -161,13 +175,9 @@ public class Environment {
 
 	if (list == null || list.size() < 1) {
 
-	    Log.debug("getNearest == null or < 1");
-
 	    return null;
 
 	} else {
-
-	    Log.debug("geTnearest != null");
 
 	}
 
@@ -353,18 +363,6 @@ public class Environment {
 
 	}
 	return result;
-    }
-
-    public static boolean blockIsPowered(World world, int x, int y, int z) {
-
-	if (world.getBlockPowerInput(x, y, z) > 0) {
-
-	    return true;
-
-	}
-
-	return false;
-
     }
 
     public static boolean blockIsPowered(IBlockAccess world, int x, int y, int z) {
@@ -585,15 +583,8 @@ public class Environment {
     public static void spawnItem(ItemStack item, World world, int x, int y,
 	    int z) {
 
-	if (world.isRemote) {
-	    float f = 0.7F;
-	    double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-	    double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-	    double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 	    EntityItem entityitem = new EntityItem(world, x, y, z, item);
-	    entityitem.delayBeforeCanPickup = 10;
 	    world.spawnEntityInWorld(entityitem);
-	}
 
     }
 

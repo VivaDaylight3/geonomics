@@ -1,7 +1,6 @@
 package vivadaylight3.myrmecology.common.entity.ai;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -12,8 +11,6 @@ import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
 import vivadaylight3.myrmecology.api.entity.ai.EnumAntAIType;
 import vivadaylight3.myrmecology.common.Log;
-import vivadaylight3.myrmecology.common.entity.EntityAnt;
-import vivadaylight3.myrmecology.common.lib.BlockIDEntry;
 import vivadaylight3.myrmecology.common.lib.BlockPosEntry;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.TreeDictionary;
@@ -47,24 +44,20 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 
 	ticks++;
 	
-	if(this.block != null && this.theAnt instanceof EntityAnt){
+	if(Environment.hasPheromoneBlockInRadius(Environment.getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(), 5), (Entity) this.theAnt, 5)){
+	    	    
+	    return false;
 	    
-	   ((EntityAnt) this.theAnt).behaviourErrorMessage = "State = " + state + " : block = " + block.toString() + " : bottom = " + bottom.toString();  
+	}if(state.equals("finished") || Environment.getNearestTreeEntryFrom(Environment
+		    .getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(),
+			    radius), (Entity) this.theAnt, getPosX(),
+		    getPosY(), getPosZ()) == null || (block != null && block.yCoord < 1)){
+	    	    	    
+	    reset();
 	    
 	}
 	
-	if(state.equals("finished")
-		|| Environment.getNearestTreeEntryFrom(Environment
-		    .getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(),
-			    radius), (Entity) this.theAnt, getPosX(),
-		    getPosY(), getPosZ()) == null 
-		    || (block != null && block.yCoord < 1)){
-	    
-	    reset();
-	    
-	    return false;
-	    
-	}else if (state.equals("none")) {
+	if(state.equals("none")){
 
 	    block = Environment.getNearestTreeEntryFrom(Environment
 		    .getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(),
@@ -144,13 +137,15 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 	    for (BlockPosEntry entry : logs) {
 
 		if (entry != null) {
-
-		    world.setBlockToAir(entry.xCoord, entry.yCoord, entry.zCoord);
 		    
-		    ItemStack stack = new ItemStack(Block.blocksList[entry.ID].idDropped(entry.metadata, world.rand, 0), Block.blocksList[entry.ID].quantityDropped(world.rand), Block.blocksList[entry.ID].damageDropped(entry.metadata));
+			world.setBlockToAir(entry.xCoord, entry.yCoord, entry.zCoord);
 		    
-		    Environment.spawnItem(stack, world, entry.xCoord, entry.yCoord, entry.zCoord);
-
+			//ItemStack stack = new ItemStack(Block.blocksList[entry.ID].idDropped(entry.metadata, world.rand, 0), Block.blocksList[entry.ID].quantityDropped(world.rand), Block.blocksList[entry.ID].damageDropped(entry.metadata));
+		    
+			ItemStack stack = new ItemStack(entry.ID, 1, entry.metadata);
+			
+			Environment.spawnItem(stack, world, entry.xCoord, entry.yCoord, entry.zCoord);
+		    
 		}else{
 		    
 		    reset();

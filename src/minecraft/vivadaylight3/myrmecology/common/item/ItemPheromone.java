@@ -10,6 +10,7 @@ public class ItemPheromone extends Item {
     public ItemPheromone(int par1) {
 	super(par1);
 	setCreativeTab(Register.tabMyrmecology);
+	setMaxStackSize(64);
     }
 
     @Override

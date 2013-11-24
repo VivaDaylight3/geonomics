@@ -24,6 +24,7 @@ import vivadaylight3.myrmecology.common.block.BlockAntChest;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
+import vivadaylight3.myrmecology.common.block.BlockPheromone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillDesert;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillForest;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillJungle;
@@ -42,6 +43,7 @@ import vivadaylight3.myrmecology.common.entity.ant.EntityAntSprouter;
 import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
 import vivadaylight3.myrmecology.common.item.ItemAntBook;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
+import vivadaylight3.myrmecology.common.item.ItemPheromone;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.item.ant.AntBarbaric;
 import vivadaylight3.myrmecology.common.item.ant.AntCarpenter;
@@ -290,6 +292,8 @@ public class Register {
 
 	config.load();
 
+	blockPheromone = new BlockPheromone(config.get(Configuration.CATEGORY_BLOCK, "pheromone", getNewBlockID()).getInt());
+	
 	blockAntChest = new BlockAntChest(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTCHEST_NAME,
 		getNewBlockID()).getInt());
@@ -337,6 +341,8 @@ public class Register {
 
 	config.save();
 
+	addBlock(blockPheromone, "Pheromone Block", "blockPheromone");
+	
 	addBlock(blockAntChest, "Scavenging Chest",
 		Reference.BLOCK_ANTCHEST_NAME);
 
@@ -528,7 +534,7 @@ public class Register {
 	config.save();
 
 	// TODO
-
+	
 	addItem(itemAntBook, Reference.ANTBOOK_TITLE,
 		Reference.ITEM_ANTBOOK_NAME);
 

@@ -14,6 +14,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
+import vivadaylight3.myrmecology.api.entity.ai.EnumAntAIType;
 import vivadaylight3.myrmecology.common.Log;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
@@ -36,6 +37,13 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 
     EntityAnimal entity = null;
 
+    @Override
+    public EnumAntAIType getAIType(){
+	
+	return EnumAntAIType.FARMING;
+	
+    }
+    
     @Override
     public boolean shouldExecute() {
 

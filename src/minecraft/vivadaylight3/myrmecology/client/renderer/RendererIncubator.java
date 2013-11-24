@@ -16,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.Metadata;
+import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -52,7 +53,7 @@ public class RendererIncubator extends TileEntitySpecialRenderer implements
 
 	ItemStack itemstack = ((TileEntityIncubator) tileentity).getContents()[0];
 
-	if (itemstack != null) {
+	if (itemstack != null && tileentity.getDistanceFrom(this.tileEntityRenderer.playerX, this.tileEntityRenderer.playerY, this.tileEntityRenderer.playerZ) <= Register.incubatorLarvaRenderDistance) {
 
 	    if (itemstack.getItem() instanceof ItemAnt
 		    && itemstack.getItemDamage() == Metadata.getMetaLarva()) {

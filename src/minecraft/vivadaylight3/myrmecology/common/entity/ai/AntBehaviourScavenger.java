@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
+import vivadaylight3.myrmecology.api.entity.ai.EnumAntAIType;
 import vivadaylight3.myrmecology.common.Log;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
@@ -23,6 +24,13 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     public AntBehaviourScavenger(IEntityAnt parEntityAnt, World parWorld,
 	    PathNavigate parPathFinder) {
 	super(parEntityAnt, parWorld, parPathFinder);
+    }
+    
+    @Override
+    public EnumAntAIType getAIType(){
+	
+	return EnumAntAIType.SCAVENGING;
+	
     }
 
     @Override

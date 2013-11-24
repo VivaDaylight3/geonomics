@@ -4,6 +4,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
+import vivadaylight3.myrmecology.api.entity.ai.EnumAntAIType;
 
 public class AntBehaviourDredger extends EntityAIAntBehaviour {
 
@@ -12,4 +13,11 @@ public class AntBehaviourDredger extends EntityAIAntBehaviour {
 	super(parEntityAnt, parWorld, parPathFinder);
     }
 
+    @Override
+    public EnumAntAIType getAIType(){
+	
+	return EnumAntAIType.DESTRUCTION;
+	
+    }
+    
 }

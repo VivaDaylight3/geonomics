@@ -51,7 +51,7 @@ public class Myrmecology {
 
 	Register.setConfig(config);
 
-	Register.checkAntBook();
+	Register.getConfigSettings();
 
 	Log.info("Getting version check URL");
 	Url url = new Url(Reference.VERSION_CHECK_URL);

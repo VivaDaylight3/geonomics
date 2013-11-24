@@ -219,16 +219,14 @@ public class Environment {
     public static boolean coordinateIsCloseTo(int x, int y, int z, int x2,
 	    int y2, int z2, int distance) {
 
-	for (int k = -distance; k <= distance; k++) {
-
-	    if (x + k == x2 || y + k == y2 || z + k == z2) {
-
-		return true;
-
-	    }
-
+	if(Math.max(x, x2) - Math.min(x2, x) <= distance
+		&& Math.max(y, y2) - Math.min(y2, y) <= distance
+		&& Math.max(z, z2) - Math.min(z2, z) <= distance){
+	    
+	    return true;
+	    
 	}
-
+	
 	return false;
 
     }

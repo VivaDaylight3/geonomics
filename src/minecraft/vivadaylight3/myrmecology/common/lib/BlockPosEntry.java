@@ -17,11 +17,39 @@ public class BlockPosEntry {
 	metadata = meta;
 
     }
+    
+    @Override
+    public boolean equals(Object entry){
+	
+	if(entry instanceof BlockPosEntry){
+	    
+	    if(this.xCoord == ((BlockPosEntry) entry).xCoord 
+		    && this.yCoord == ((BlockPosEntry) entry).yCoord 
+		    && this.zCoord == ((BlockPosEntry) entry).zCoord 
+		    && this.ID == ((BlockPosEntry) entry).ID 
+		    && this.metadata == ((BlockPosEntry) entry).metadata){
+		
+		return true;
+		
+	    }
+	    
+	}
+	
+	return false;
+	
+    }
 
     public BlockPosEntry clone() {
 
 	return this;
 
+    }
+    
+    @Override
+    public String toString(){
+	
+	return this.xCoord + ", " + this.yCoord + ", " + this.zCoord;
+	
     }
 
     public BlockIDEntry toBlockIDEntry() {

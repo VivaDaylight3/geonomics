@@ -1,6 +1,5 @@
 package vivadaylight3.myrmecology.client;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -16,7 +15,6 @@ import vivadaylight3.myrmecology.client.renderer.ItemRendererAntChest;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
 import vivadaylight3.myrmecology.client.renderer.RendererAntChest;
 import vivadaylight3.myrmecology.client.renderer.RendererIncubator;
-import vivadaylight3.myrmecology.client.renderer.RendererIncubator2;
 import vivadaylight3.myrmecology.common.CommonProxy;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
@@ -39,7 +37,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
 

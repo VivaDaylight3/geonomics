@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
 
 public class EntityAnt extends EntityCreature implements IEntityAnt {
 
@@ -87,7 +88,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     @Override
     public void moveEntityTo(int x, int y, int z) {
 
-	this.getNavigator().tryMoveToXYZ(x, y, z, this.moveForward);
+	this.getNavigator().tryMoveToXYZ(x, y, z, 1.0D);
 
     }
 

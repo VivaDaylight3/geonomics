@@ -27,6 +27,12 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 	this.setMutexBits(26);
 
     }
+    
+    public EnumAntAIType getAIType(){
+	
+	return null;
+	
+    }
 
     @Override
     public boolean shouldExecute() {

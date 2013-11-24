@@ -16,6 +16,7 @@ import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.block.BlockAntHill;
 import vivadaylight3.myrmecology.api.breeding.Breeding;
+import vivadaylight3.myrmecology.api.entity.ai.EnumAntAIType;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
 import vivadaylight3.myrmecology.api.util.Metadata;
@@ -88,7 +89,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Register {
 
-    private static Configuration config;
+    public static Configuration config;
 
     public static CreativeTabs tabMyrmecology;
     public static final Material antHill = new Material(MapColor.dirtColor);
@@ -100,7 +101,9 @@ public class Register {
     private static ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
 
     public static boolean checkForUpdates = true;
-    public static boolean receiveAntBookOnJoin = true;
+    public static int incubatorLarvaRenderDistance = 10;
+    
+    EnumAntAIType type;
 
     public static String language;
 
@@ -375,16 +378,15 @@ public class Register {
 	}
 
     }
-
-    public static void checkAntBook() {
-
+    
+    public static void getConfigSettings(){
+	
 	config.load();
-
-	receiveAntBookOnJoin = config.get(Configuration.CATEGORY_GENERAL,
-		"receive ant book on join", true).getBoolean(true);
-
+	
+	incubatorLarvaRenderDistance = config.get(Configuration.CATEGORY_GENERAL, "Render solarium larva within", 10).getInt();
+	
 	config.save();
-
+	
     }
 
     public static void registerItems() {

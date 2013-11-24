@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.entity.EntityLivingBase;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
+import vivadaylight3.myrmecology.api.entity.ai.EnumAntAIType;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.lib.Environment;
 
@@ -40,6 +41,13 @@ public class AntBehaviourOdourous extends EntityAIAntBehaviour {
 
 	}
 
+    }
+    
+    @Override
+    public EnumAntAIType getAIType(){
+	
+	return EnumAntAIType.DAMAGE;
+	
     }
 
     @Override

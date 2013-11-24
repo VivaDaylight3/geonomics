@@ -42,7 +42,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
-    
+
     public static int incubatorRenderID;
     public static int incubatorRenderPass;
 
@@ -51,11 +51,10 @@ public class ClientProxy extends CommonProxy {
 	    RenderLiving render) {
 
 	RenderingRegistry.registerEntityRenderingHandler(
-		    (Class<? extends Entity>) parClass,
-		    render);
+		(Class<? extends Entity>) parClass, render);
 
     }
-    
+
     @Override
     public void registerKeyBindings() {
 
@@ -74,33 +73,33 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-	
+
 	addAntRenderer(EntityAntScavenger.class, new RenderAnt(
 		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
-	
+
 	addAntRenderer(EntityAntCarpenter.class, new RenderAnt(
 		Resources.ENTITY_ANT_CARPENTER, new ModelAnt(), 0.5f));
-	
+
 	addAntRenderer(EntityAntOdourous.class, new RenderAnt(
 		Resources.ENTITY_ANT_ODOUROUS, new ModelAnt(), 0.5f));
-	
+
 	addAntRenderer(EntityAntDredger.class, new RenderAnt(
 		Resources.ENTITY_ANT_DREDGER, new ModelAnt(), 0.5f));
-	
+
 	addAntRenderer(EntityAntFungal.class, new RenderAnt(
 		Resources.ENTITY_ANT_FUNGAL, new ModelAnt(), 0.5f));
-	
+
 	addAntRenderer(EntityAntMound.class, new RenderAnt(
 		Resources.ENTITY_ANT_MOUND, new ModelAnt(), 0.5f));
-	
+
 	addAntRenderer(EntityAntSprouter.class, new RenderAnt(
 		Resources.ENTITY_ANT_SPROUTER, new ModelAnt(), 0.5f));
-	
+
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAntChest.class,
 		new RendererAntChest());
 	MinecraftForgeClient.registerItemRenderer(
 		Register.blockAntChest.blockID, new ItemRendererAntChest());
-	
+
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncubator.class,
 		new RendererIncubator());
 	MinecraftForgeClient.registerItemRenderer(

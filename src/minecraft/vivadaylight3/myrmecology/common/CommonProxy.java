@@ -38,12 +38,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class CommonProxy {
-    
+
     public void addAntRenderer(Class<? extends EntityLiving> parClass,
 	    RenderLiving render) {
 
     }
-    
+
     public void registerKeyBindings() {
 
     }
@@ -53,7 +53,7 @@ public class CommonProxy {
     }
 
     public String getCurrentLanguage() {
-	
+
 	return null;
 
     }

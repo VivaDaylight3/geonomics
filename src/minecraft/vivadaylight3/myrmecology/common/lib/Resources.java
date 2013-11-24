@@ -21,8 +21,9 @@ public class Resources {
     public static final String ENTITY_LOCATION = TEXTURE_LOCATION + "entity/";
     public static final String ANT_LOCATION = "ant/";
     public static final String LOGO_PATH = TEXTURE_LOCATION + "logo/logo.png";
-    
-    public static final ResourceLocation SOUND_ANT_LIVING = getResourceLocation(SOUND_LOCATION + "antLiving.ogg");
+
+    public static final ResourceLocation SOUND_ANT_LIVING = getResourceLocation(SOUND_LOCATION
+	    + "antLiving.ogg");
 
     public static final ResourceLocation ENTITY_ANT_FOREST = getResourceLocation(ENTITY_LOCATION
 	    + "antForest.png");

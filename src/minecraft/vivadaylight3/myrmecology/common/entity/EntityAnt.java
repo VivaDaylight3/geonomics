@@ -50,8 +50,8 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 		EntityPlayer.class, 8.0F));
 	this.tasks.addTask(6, new EntityAILookIdle(this));
 
-	this.homeTileEntity = par1World.getBlockTileEntity(
-		(int) this.posX, (int) this.posY - 1, (int) this.posZ);
+	this.homeTileEntity = par1World.getBlockTileEntity((int) this.posX,
+		(int) this.posY - 1, (int) this.posZ);
 
     }
 

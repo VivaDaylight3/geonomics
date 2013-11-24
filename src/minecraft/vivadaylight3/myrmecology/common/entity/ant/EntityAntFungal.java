@@ -24,5 +24,5 @@ public class EntityAntFungal extends EntityAnt {
 	return Resources.ENTITY_ANT_FUNGAL;
 
     }
-    
+
 }

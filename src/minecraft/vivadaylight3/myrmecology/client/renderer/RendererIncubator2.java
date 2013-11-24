@@ -13,30 +13,29 @@ public class RendererIncubator2 implements ISimpleBlockRenderingHandler {
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID,
 	    RenderBlocks renderer) {
-	
-	
+
     }
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 	    Block block, int modelId, RenderBlocks renderer) {
-	
-	if(ClientProxy.incubatorRenderPass == 0){
-	    
+
+	if (ClientProxy.incubatorRenderPass == 0) {
+
 	    drawDiamond(Block.blockDiamond, x, y, z);
-	    
-	}else{
-	    
+
+	} else {
+
 	    renderer.renderStandardBlock(Block.glass, x, y, z);
-	    
+
 	}
-	
+
 	return true;
     }
 
     @Override
     public boolean shouldRender3DInInventory() {
-	
+
 	return false;
     }
 
@@ -44,10 +43,9 @@ public class RendererIncubator2 implements ISimpleBlockRenderingHandler {
     public int getRenderId() {
 	return ClientProxy.incubatorRenderID;
     }
-    
-    public void drawDiamond(Block par1Block, int x, int y, int z)
-    {
-                
+
+    public void drawDiamond(Block par1Block, int x, int y, int z) {
+
     }
 
 }

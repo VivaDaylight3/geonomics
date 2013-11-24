@@ -576,12 +576,12 @@ public class Environment {
 	}
 
     }
-    
-    public static void spawnItem(ItemStack item, World world, double x, double y,
-	    double z) {
-	
-	spawnItem(item, world, (int)x, (int)y, (int)z);
-	
+
+    public static void spawnItem(ItemStack item, World world, double x,
+	    double y, double z) {
+
+	spawnItem(item, world, (int) x, (int) y, (int) z);
+
     }
 
     public static void spawnItem(ItemStack item, World world, int x, int y,

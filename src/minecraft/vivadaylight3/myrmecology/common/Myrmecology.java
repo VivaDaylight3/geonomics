@@ -103,10 +103,10 @@ public class Myrmecology {
 
     @EventHandler
     public void mainInit(FMLInitializationEvent event) {
-	
+
 	Log.info("Registering renderers");
 	proxy.registerRenderers();
-	
+
 	Log.info("Registering key bindings");
 	proxy.registerKeyBindings();
 

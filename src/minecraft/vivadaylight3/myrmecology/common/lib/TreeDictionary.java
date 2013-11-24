@@ -15,7 +15,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author samueltebbs
  */
 public class TreeDictionary {
-    
+
     public static final int treeWidth = 5;
     public static final int treeHeight = 10;
 
@@ -33,21 +33,21 @@ public class TreeDictionary {
 		new BlockIDEntry(Block.leaves.blockID, 3)));
 
     }
-    
-    public static boolean contains(BlockIDEntry entry){
-	
-	for(TreeEntry log : treeEntries){
-	    
-	    if(log.equals(entry)){
-		
+
+    public static boolean contains(BlockIDEntry entry) {
+
+	for (TreeEntry log : treeEntries) {
+
+	    if (log.equals(entry)) {
+
 		return true;
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
 
     @Override

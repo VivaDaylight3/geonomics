@@ -58,34 +58,34 @@ public class BlockIncubator extends BlockContainer {
 
     @Override
     public Icon getIcon(int side, int metadata) {
-	
+
 	if (side == 0 || side == 1) {
-	    
+
 	    return iconTop;
-	    
-	}else{
-	    
-	    if(Environment.getBlockSide(side, metadata, metadata) == "front"){
-		
-		if(metadata == POWERED_META){
-		    
+
+	} else {
+
+	    if (Environment.getBlockSide(side, metadata, metadata) == "front") {
+
+		if (metadata == POWERED_META) {
+
 		    return iconFrontOn;
-		    
-		}else{
-		    
+
+		} else {
+
 		    return iconFrontOff;
-		    
+
 		}
-		
-	    }else{
-		
+
+	    } else {
+
 		return iconSide;
-		
+
 	    }
-	    
+
 	}
     }
-    
+
     @Override
     public boolean isOpaqueCube() {
 

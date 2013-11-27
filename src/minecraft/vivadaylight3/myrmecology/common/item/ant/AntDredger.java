@@ -1,8 +1,11 @@
 package vivadaylight3.myrmecology.common.item.ant;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.entity.ant.EntityAntDredger;
 import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntDredger extends ItemAnt {
@@ -100,6 +103,13 @@ public class AntDredger extends ItemAnt {
 
 	return new int[] { 0x63584c, 0xc7b299 };
 
+    }
+    
+    @Override
+    public Entity getNewEntity(World world){
+	
+	return new EntityAntDredger(world);
+	
     }
 
 }

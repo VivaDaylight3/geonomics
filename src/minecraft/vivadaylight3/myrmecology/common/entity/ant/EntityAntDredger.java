@@ -20,6 +20,13 @@ public class EntityAntDredger extends EntityAnt {
     public ItemAnt getAnt() {
 	return Register.antDredger;
     }
+    
+    @Override
+    public boolean isAIEnabled(){
+	
+	return true;
+	
+    }
 
     @Override
     public ResourceLocation getResource() {

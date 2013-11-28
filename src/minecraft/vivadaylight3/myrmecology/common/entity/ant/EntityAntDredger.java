@@ -24,7 +24,7 @@ public class EntityAntDredger extends EntityAnt {
     @Override
     public boolean isAIEnabled(){
 	
-	return true;
+	return false;
 	
     }
 

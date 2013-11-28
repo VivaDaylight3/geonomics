@@ -91,9 +91,11 @@ public class AntBehaviourDredger extends EntityAIAntBehaviour {
 		    return true;
 
 		}
+		
+		return true;
 
 	    }
-	    
+	    	    	    
 	}
 	
 	return false;

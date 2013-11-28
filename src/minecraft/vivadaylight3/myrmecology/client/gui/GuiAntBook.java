@@ -92,6 +92,7 @@ public class GuiAntBook extends GuiScreen {
 		b0 + 16 + 16, 116, 0);
 
 	super.drawScreen(par1, par2, par3);
+	
     }
 
 }

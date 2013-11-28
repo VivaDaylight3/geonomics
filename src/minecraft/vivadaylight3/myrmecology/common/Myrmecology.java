@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import net.minecraftforge.common.Configuration;
 import vivadaylight3.myrmecology.client.ClientProxy;
-import vivadaylight3.myrmecology.common.handler.MyrmecologyGuiHandler;
-import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
+import vivadaylight3.myrmecology.common.handler.GuiHandler;
+import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
@@ -28,7 +28,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
  */
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_ID, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
-@NetworkMod(channels = { Reference.MOD_CHANNEL, Reference.MOD_CHANNEL_INCUBATOR }, clientSideRequired = true, serverSideRequired = false, packetHandler = MyrmecologyPacketHandler.class)
+@NetworkMod(channels = { Reference.MOD_CHANNEL, Reference.MOD_CHANNEL_INCUBATOR }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class Myrmecology {
 
     @SidedProxy(clientSide = "vivadaylight3.myrmecology.client.ClientProxy", serverSide = "vivadaylight3.myrmecology.common.CommonProxy")
@@ -79,10 +79,10 @@ public class Myrmecology {
 	Log.info("Registering world gen");
 	Register.registerWorldGen();
 
-	MyrmecologyGuiHandler guiHandler = new MyrmecologyGuiHandler();
+	GuiHandler guiHandler = new GuiHandler();
 	NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
 
-	MyrmecologyPacketHandler packetHandler = new MyrmecologyPacketHandler();
+	PacketHandler packetHandler = new PacketHandler();
 	NetworkRegistry.instance().registerChannel(packetHandler,
 		Reference.MOD_CHANNEL);
 

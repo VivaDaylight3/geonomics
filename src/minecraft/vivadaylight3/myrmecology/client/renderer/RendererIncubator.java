@@ -20,8 +20,7 @@ import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class RendererIncubator extends TileEntitySpecialRenderer implements
-	ISimpleBlockRenderingHandler {
+public class RendererIncubator extends TileEntitySpecialRenderer {
 
     private ModelChest model;
     private Random rand;
@@ -46,10 +45,34 @@ public class RendererIncubator extends TileEntitySpecialRenderer implements
 	renderI.setRenderManager(RenderManager.instance);
 
     }
+    
+    private void renderBottom(double x, double y, double z){
+	
+	GL11.glPushMatrix();
+	GL11.glDisable(2896 /* GL_LIGHTING */);
+	GL11.glTranslatef((float) x, (float) y, (float) z);
+	GL11.glTranslatef(0f, 0.35f, 0f);
+	
+	GL11.glBegin(GL11.GL_QUADS);
+	GL11.glColor3f(0, 0, 0.5f);
+	GL11.glVertex3f(1, 0, 1);
+	GL11.glVertex3f(1, 0, 0);
+	GL11.glVertex3f(0, 0, 0);
+	GL11.glVertex3f(0, 0, 1);
+	GL11.glEnd();
+	
+	GL11.glEnable(2896 /* GL_LIGHTING */);
+	GL11.glPopMatrix();
+		
+    }
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double x, double y,
 	    double z, float f) {
+	
+	renderBottom(x, y, z);
+	
+	if(tileentity != null){
 
 	ItemStack itemstack = ((TileEntityIncubator) tileentity).getContents()[0];
 
@@ -57,7 +80,7 @@ public class RendererIncubator extends TileEntitySpecialRenderer implements
 
 	    if (itemstack.getItem() instanceof ItemAnt
 		    && itemstack.getItemDamage() == Metadata.getMetaLarva()) {
-
+		
 		EntityItem item = new EntityItem(tileentity.worldObj);
 		item.setEntityItemStack(itemstack);
 		item.hoverStart = 0f;
@@ -80,37 +103,13 @@ public class RendererIncubator extends TileEntitySpecialRenderer implements
 		GL11.glPopMatrix();
 
 	    }
+	    
+	}
 
 	} else {
 
 	}
 
-    }
-
-    @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID,
-	    RenderBlocks renderer) {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
-	    Block block, int modelId, RenderBlocks renderer) {
-	// TODO Auto-generated method stub
-	return false;
-    }
-
-    @Override
-    public boolean shouldRender3DInInventory() {
-	// TODO Auto-generated method stub
-	return false;
-    }
-
-    @Override
-    public int getRenderId() {
-	// TODO Auto-generated method stub
-	return 0;
     }
 
 }

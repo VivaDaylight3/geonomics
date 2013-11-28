@@ -9,13 +9,20 @@ import java.io.IOException;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
+import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.lib.Nbt;
-import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -29,7 +36,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
-public class MyrmecologyPacketHandler implements IPacketHandler {
+public class PacketHandler implements IPacketHandler {
 
     @Override
     public void onPacketData(INetworkManager manager,
@@ -39,8 +46,84 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 
 	    handleNBTPacket(packet, player);
 
+	}else if(packet.channel.equals(Reference.MOD_CHANNEL_INCUBATOR)){
+	    
+	    handleTileEntityPacket(packet, player);
+	    
 	}
 
+    }
+
+    public static Packet getTileEntityPacket(TileEntity te){
+	
+	ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
+        DataOutputStream dos = new DataOutputStream(bos);
+        
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        
+        int x = te.xCoord;
+        int y = te.yCoord;
+        int z = te.zCoord;
+        
+        try {
+	    dos.writeInt(x);
+	    dos.writeInt(y);
+	    dos.writeInt(z);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+		
+	if(te instanceof TileEntityIncubator){
+	    	    
+	    for(int k = 0; k < ((TileEntityIncubator) te).getContents().length; k++){
+		
+		try {
+		    packet.writeItemStack(((TileEntityIncubator) te).getContents()[k], dos);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	    }
+	    
+	}
+	
+	packet.channel = Reference.MOD_CHANNEL_INCUBATOR;
+	packet.data = bos.toByteArray();
+	packet.length = bos.size();
+	packet.isChunkDataPacket = true;
+	
+	return packet;
+	
+    }
+    
+    private void handleTileEntityPacket(Packet250CustomPayload packet,
+	    Player player) {
+	
+	ByteArrayDataInput data = ByteStreams.newDataInput(packet.data);
+	int x = data.readInt();
+	int y = data.readInt();
+	int z = data.readInt();
+	
+	TileEntity te = Myrmecology.proxy.getClientWorld().getBlockTileEntity(x, y, z);
+	
+	if(te instanceof TileEntityIncubator){
+	
+	    ItemStack[] stacks = new ItemStack[((TileEntityIncubator) te).getContents().length];
+	
+	    for(int k = 0; k < ((TileEntityIncubator) te).getContents().length; k++){
+		
+		try {
+		    stacks[k] = packet.readItemStack(data);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	    }
+	    
+	    ((TileEntityIncubator) te).handlePacket(stacks);
+	    
+	}
+	
     }
 
     public static Side getSide() {
@@ -94,7 +177,7 @@ public class MyrmecologyPacketHandler implements IPacketHandler {
 	}
 
     }
-
+    
     public void handleNBTPacket(Packet250CustomPayload packet, Player player) {
 
 	if (packet != null) {

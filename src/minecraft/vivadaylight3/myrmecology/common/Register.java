@@ -40,7 +40,7 @@ import vivadaylight3.myrmecology.common.entity.ant.EntityAntMound;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntSprouter;
-import vivadaylight3.myrmecology.common.handler.MyrmecologyWorldGen;
+import vivadaylight3.myrmecology.common.handler.WorldGen;
 import vivadaylight3.myrmecology.common.item.ItemAntBook;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
 import vivadaylight3.myrmecology.common.item.ItemPheromone;
@@ -788,7 +788,7 @@ public class Register {
 
     public static void registerWorldGen() {
 
-	MyrmecologyWorldGen worldGen = new MyrmecologyWorldGen();
+	WorldGen worldGen = new WorldGen();
 
 	GameRegistry.registerWorldGenerator(worldGen);
 

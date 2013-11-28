@@ -13,7 +13,7 @@ import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Maths;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class MyrmecologyWorldGen implements IWorldGenerator {
+public class WorldGen implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,

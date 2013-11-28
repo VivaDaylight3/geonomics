@@ -10,7 +10,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
+import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
@@ -69,16 +69,18 @@ public class MyrmopaediaProperties {
     }
 
     public static ItemStack getMyrmopaediaFromID(int id) {
+	
+	if(id >= 0){
+	
+	    if (myrmopaediaIDs[id] != null) {
 
-	if (myrmopaediaIDs[id] != null) {
+		return myrmopaediaIDs[id];
 
-	    return myrmopaediaIDs[id];
-
-	} else {
-
-	    return null;
-
+	    }
+	    
 	}
+	
+	return null;
 
     }
 
@@ -116,9 +118,9 @@ public class MyrmopaediaProperties {
 	packet.data = bos.toByteArray();
 	packet.length = bos.size();
 
-	if (MyrmecologyPacketHandler.getSide() == Side.CLIENT) {
+	if (PacketHandler.getSide() == Side.CLIENT) {
 
-	    EntityClientPlayerMP player = (EntityClientPlayerMP) MyrmecologyPacketHandler
+	    EntityClientPlayerMP player = (EntityClientPlayerMP) PacketHandler
 		    .getSidedPlayer(parPlayer);
 	    player.sendQueue.addToSendQueue(packet);
 

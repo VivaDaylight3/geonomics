@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.handler.MyrmecologyPacketHandler;
+import vivadaylight3.myrmecology.common.handler.PacketHandler;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

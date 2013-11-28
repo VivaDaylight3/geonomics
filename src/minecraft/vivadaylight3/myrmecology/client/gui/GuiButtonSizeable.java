@@ -23,5 +23,29 @@ public class GuiButtonSizeable extends GuiButton {
 	    String par6Str) {
 	super(par1, par2, par3, par4, par5, par6Str);
     }
+    
+    public int getWidth(){
+	
+	return this.width;
+	
+    }
+    
+    public void setWidth(int par){
+	
+	this.width = par;
+	
+    }
+    
+    public int getHeight(){
+	
+	return this.height;
+	
+    }
+    
+    public void setHeight(int par){
+	
+	this.height = par;
+	
+    }
 
 }

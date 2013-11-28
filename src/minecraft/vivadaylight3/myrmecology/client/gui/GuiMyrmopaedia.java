@@ -17,6 +17,7 @@ import vivadaylight3.myrmecology.api.breeding.BreedingRecipe;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
+import vivadaylight3.myrmecology.client.gui.content.AntBookText;
 import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
 import vivadaylight3.myrmecology.common.lib.Resources;
@@ -38,20 +39,32 @@ public class GuiMyrmopaedia extends GuiContainer {
 
     private static final EnumChatFormatting KEY_CHAT_FORMAT = EnumChatFormatting.BLUE;
     private static final EnumChatFormatting VALUE_CHAT_FORMAT = EnumChatFormatting.WHITE;
+    
+    private int infoButtonWidth = 45;
+    private int infoButtonHeight = 15;
 
     private GuiButtonSizeable button1Names;
     private GuiButtonSizeable button2Info;
     private GuiButtonSizeable button3Breeding;
     private GuiButtonSizeable button4Ants;
+    
+    private GuiButtonSizeable portfolio1;
+    private GuiButtonSizeable portfolio2;
+    private GuiButtonSizeable portfolio3;
+    private GuiButtonSizeable portfolio4;
+    private GuiButtonSizeable portfolio5;
+    private GuiButtonSizeable portfolio6;
+    private GuiButtonSizeable portfolio7;
+    
+    private GuiButtonSizeable buttonSectionPortfolio;
+    private GuiButtonSizeable buttonSectionAntInfo;
 
     private String selectedScreen = "ants";
+    private String selectedSection = "info";
 
     // TODO
     private int buttonXOffset;
     private int buttonYOffset;
-
-    private int infoButtonWidth = 45;
-    private int infoButtonHeight = 15;
 
     private int buttonID;
 
@@ -78,19 +91,9 @@ public class GuiMyrmopaedia extends GuiContainer {
     @Override
     public void initGui() {
 	super.initGui();
-
-	this.buttonList.clear();
-	this.buttonList.add(this.button1Names = new GuiButtonSizeable(0,
-		this.width / 2 - 85, this.height / 2 + 20, "Names",
-		infoButtonWidth - 4, infoButtonHeight));
-	this.buttonList.add(this.button2Info = new GuiButtonSizeable(1,
-		this.width / 2 - 40, this.height / 2 + 20, "Info",
-		infoButtonWidth - 10, infoButtonHeight));
-	this.buttonList.add(this.button3Breeding = new GuiButtonSizeable(2,
-		this.width / 2, this.height / 2 + 20, "Breeding",
-		infoButtonWidth + 8, infoButtonHeight));
-
-	this.buttonID = 2;
+	
+	this.displayButtons();
+	this.displayButtons();
 
     }
 
@@ -113,6 +116,42 @@ public class GuiMyrmopaedia extends GuiContainer {
 
 	    this.selectedAnt = ((GuiButtonAnt) par1GuiButton).getAnt();
 
+	}else if(par1GuiButton == buttonSectionAntInfo){
+	    
+	    this.selectedSection = "info";
+	    
+	}else if(par1GuiButton == buttonSectionPortfolio){
+	    
+	    this.selectedSection = "portfolio";
+	    
+	}else if(par1GuiButton == portfolio1){
+	    
+	    this.selectedScreen = "1";
+	    
+	}else if(par1GuiButton == portfolio2){
+	    
+	    this.selectedScreen = "2";
+	    
+	}else if(par1GuiButton == portfolio3){
+	    
+	    this.selectedScreen = "3";
+	    
+	}else if(par1GuiButton == portfolio4){
+	    
+	    this.selectedScreen = "4";
+	    
+	}else if(par1GuiButton == portfolio5){
+	    
+	    this.selectedScreen = "5";
+	    
+	}else if(par1GuiButton == portfolio6){
+	    
+	    this.selectedScreen = "6";
+	    
+	}else if(par1GuiButton == portfolio7){
+	    
+	    this.selectedScreen = "7";
+	    
 	}
 
     }
@@ -126,7 +165,16 @@ public class GuiMyrmopaedia extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 
 	printKeyAndValue(EnumChatFormatting.AQUA + "Selected Screen: ",
-		this.selectedScreen, 15);
+		this.selectedScreen, 13);
+	
+	int a = (this.width - 610) / 2;
+	
+	if(this.selectedScreen != "names" && this.selectedScreen != "info" && this.selectedScreen != "breeding" && this.selectedScreen != "ants"){
+	    
+	    this.fontRenderer.drawSplitString(VALUE_CHAT_FORMAT + new AntBookText().getContent()[Integer.valueOf(selectedScreen) - 1], a,
+			24, 116, 4210752);
+	    
+	}
 
 	if (this.selectedScreen == "names" && this.selectedAnt != null) {
 
@@ -222,12 +270,83 @@ public class GuiMyrmopaedia extends GuiContainer {
 	}
 
     }
+    
+    private void displayButtons(){
+	
+	this.buttonList.clear();
+	
+	if(this.selectedSection.equals("info")){
+	    
+	    this.buttonList.add(this.button1Names = new GuiButtonSizeable(0,
+		this.width / 2 - 85, this.height / 2 + 20, "Names",
+		infoButtonWidth - 4, infoButtonHeight));
+	    this.buttonList.add(this.button2Info = new GuiButtonSizeable(1,
+		this.width / 2 - 40, this.height / 2 + 20, "Info",
+		infoButtonWidth - 10, infoButtonHeight));
+	    this.buttonList.add(this.button3Breeding = new GuiButtonSizeable(2,
+		this.width / 2, this.height / 2 + 20, "Breeding",
+		infoButtonWidth + 8, infoButtonHeight));
+
+	    this.buttonID = 2;
+	
+	}else if(this.selectedSection.equals("portfolio")){
+	    //TODO
+	    this.buttonList.add(this.portfolio1 = new GuiButtonSizeable(5,
+		this.width / 2 - 85, this.height / 2 + 20, "1",
+		infoButtonWidth / 2 - 3, infoButtonHeight));
+	    
+	    this.buttonList.add(this.portfolio2 = new GuiButtonSizeable(6,
+		this.width / 2 - 66, this.height / 2 + 20, "2",
+		infoButtonWidth / 2 - 3, infoButtonHeight));
+	    
+	    this.buttonList.add(this.portfolio3 = new GuiButtonSizeable(7,
+		this.width / 2 - 47, this.height / 2 + 20, "3",
+		infoButtonWidth / 2 - 3, infoButtonHeight));
+	    
+	    this.buttonList.add(this.portfolio4 = new GuiButtonSizeable(8,
+		this.width / 2 - 28, this.height / 2 + 20, "4",
+		infoButtonWidth / 2 - 3, infoButtonHeight));
+	    
+	    this.buttonList.add(this.portfolio5 = new GuiButtonSizeable(9,
+		this.width / 2 - 9, this.height / 2 + 20, "5",
+		infoButtonWidth / 2 - 3, infoButtonHeight));
+	    
+	    this.buttonList.add(this.portfolio6 = new GuiButtonSizeable(10,
+		this.width / 2 + 10, this.height / 2 + 20, "6",
+		infoButtonWidth / 2 - 3, infoButtonHeight));
+	    
+	    this.buttonList.add(this.portfolio7 = new GuiButtonSizeable(10,
+		this.width / 2 + 29, this.height / 2 + 20, "7",
+		infoButtonWidth / 2 - 3, infoButtonHeight));
+	    
+	}
+		/*
+	if(this.selectedScreen.equals("portfolio")){
+	    
+	    this.buttonSectionPortfolio.setWidth(this.buttonSectionPortfolio.getWidth() + 3);
+	    this.buttonSectionPortfolio.xPosition = this.buttonSectionPortfolio.xPosition - 3;
+	    
+	}else if(this.selectedScreen.equals("info")){
+	    
+	    this.buttonSectionAntInfo.setWidth(this.buttonSectionAntInfo.getWidth() + 3);
+	    this.buttonSectionAntInfo.xPosition = this.buttonSectionAntInfo.xPosition - 3;
+	    
+	}*/
+	
+	this.buttonList.add(buttonSectionPortfolio = new GuiButtonSizeable(3, (this.width / 2) + 73,
+		    (this.height / 2) - 120, "Portfolio", infoButtonWidth + 12, infoButtonHeight));
+	this.buttonList.add(buttonSectionAntInfo = new GuiButtonSizeable(4, (this.width / 2) + 73,
+		    (this.height / 2) - 104, "Ant Info", infoButtonWidth + 12, infoButtonHeight));
+	
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void updateScreen() {
 
 	super.updateScreen();
+	this.displayButtons();
+	this.displayButtons();
 
 	if (this.selectedAnt != null) {
 

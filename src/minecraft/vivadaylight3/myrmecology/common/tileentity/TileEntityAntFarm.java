@@ -529,7 +529,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 			this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
-    private static int getDroneSlot() {
+    public static int getDroneSlot() {
 	return 0;
     }
 

@@ -8,7 +8,7 @@ public class TextContent {
 
     }
 
-    protected String newBookPage(boolean newLines, String... strings) {
+    protected static String newBookPage(boolean newLines, String... strings) {
 
 	String result = "";
 	for (int k = 0; k < strings.length; k++) {
@@ -27,7 +27,7 @@ public class TextContent {
 
     }
 
-    protected String getNewLine(String string) {
+    protected static String getNewLine(String string) {
 
 	double div = 0;
 	double dec = 0;

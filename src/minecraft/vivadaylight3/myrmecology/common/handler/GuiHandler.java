@@ -19,7 +19,7 @@ import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.network.IGuiHandler;
 
-public class MyrmecologyGuiHandler implements IGuiHandler {
+public class GuiHandler implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,

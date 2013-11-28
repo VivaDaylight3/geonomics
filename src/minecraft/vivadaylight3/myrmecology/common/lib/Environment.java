@@ -892,29 +892,46 @@ public class Environment {
     public static void addItemStackToInventory(ItemStack item,
 	    ItemStack[] inventory, int max, TileEntity tileEntity) {
 
+	Log.debug("");
+	Log.debug("adding to inv");
+	
 	int amount = item.stackSize;
 
 	for (int k = 0; k < inventory.length; k++) {
+	    
+	    Log.debug("k: " + k);
 
-	    while (amount > 0) {
+	    while (getAvailableSlot(item, inventory, max) == k) {
+		
+		Log.debug("getAvail == " + k);
 
 		if (inventory[k] == null) {
+		    
+		    Log.debug("inv[k] == null");
 
 		    if (amount > max) {
+			
+			Log.debug("amount > max");
 
 			amount -= max;
 
 			inventory[k] = new ItemStack(item.getItem(), max,
 				item.getItemDamage());
 
+			Log.debug("inventory[k] == itemstack");
+			
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
 
 		    } else if (amount < max) {
+			
+			Log.debug("amount < max");
 
 			inventory[k] = new ItemStack(item.getItem(), amount,
 				item.getItemDamage());
+			
+			Log.debug("inventory[k] == itemstack");
 
 			amount = 0;
 
@@ -925,11 +942,17 @@ public class Environment {
 		    }
 
 		} else if (inventory[k] == item) {
+		    
+		    Log.debug("inv[k] == item");
 
 		    if (inventory[k].stackSize + item.stackSize <= max) {
+			
+			Log.debug("stackSize + item.stacksize <= max");
 
 			inventory[k] = new ItemStack(item.getItem(), max,
 				item.getItemDamage());
+			
+			Log.debug("inventory[k] == itemstack");
 
 			amount = max - inventory[k].stackSize;
 

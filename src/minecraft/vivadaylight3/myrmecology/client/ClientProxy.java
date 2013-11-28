@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import org.lwjgl.input.Keyboard;
@@ -30,6 +31,7 @@ import vivadaylight3.myrmecology.common.handler.PlayerTickHandler;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -42,6 +44,12 @@ public class ClientProxy extends CommonProxy {
 
     public static int incubatorRenderID;
     public static int incubatorRenderPass;
+    
+    @Override
+    public World getClientWorld()
+    {
+        return FMLClientHandler.instance().getClient().theWorld;
+    }
 
     @Override
     public void addAntRenderer(Class<? extends EntityLiving> parClass,

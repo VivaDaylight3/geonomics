@@ -9,6 +9,7 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.Metadata;
+import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -46,10 +48,19 @@ public class RendererIncubator extends TileEntitySpecialRenderer {
 
     }
     
-    private void renderBottom(double x, double y, double z){
+    private void renderSides(TileEntity tileentity, double x, double y, double z){
 	
 	GL11.glPushMatrix();
 	GL11.glDisable(2896 /* GL_LIGHTING */);
+	GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
+	renderB.renderFaceYNeg(Register.blockIncubator, x, y, z, Register.blockIncubator.getIcon(0, Myrmecology.proxy.getClientWorld().getBlockMetadata(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord)));
+	GL11.glEnable(2896 /* GL_LIGHTING */);
+	GL11.glPopMatrix();
+	
+	//renderB.renderFaceYNeg(Register.blockIncubator, x, y, z, Register.blockIncubator.getIcon(0, Myrmecology.proxy.getClientWorld().getBlockMetadata(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord)));
+	/*
+	GL11.glPushMatrix();
+	GL11.glDisable(2896 /* GL_LIGHTING );
 	GL11.glTranslatef((float) x, (float) y, (float) z);
 	GL11.glTranslatef(0f, 0.35f, 0f);
 	
@@ -61,8 +72,9 @@ public class RendererIncubator extends TileEntitySpecialRenderer {
 	GL11.glVertex3f(0, 0, 1);
 	GL11.glEnd();
 	
-	GL11.glEnable(2896 /* GL_LIGHTING */);
+	GL11.glEnable(2896 /* GL_LIGHTING );
 	GL11.glPopMatrix();
+	*/
 		
     }
 
@@ -70,7 +82,7 @@ public class RendererIncubator extends TileEntitySpecialRenderer {
     public void renderTileEntityAt(TileEntity tileentity, double x, double y,
 	    double z, float f) {
 	
-	renderBottom(x, y, z);
+	//renderSides(tileentity, x, y, z);
 	
 	if(tileentity != null){
 
@@ -79,7 +91,7 @@ public class RendererIncubator extends TileEntitySpecialRenderer {
 	if (itemstack != null && tileentity.getDistanceFrom(this.tileEntityRenderer.playerX, this.tileEntityRenderer.playerY, this.tileEntityRenderer.playerZ) <= Register.incubatorLarvaRenderDistance) {
 
 	    if (itemstack.getItem() instanceof ItemAnt
-		    && itemstack.getItemDamage() == Metadata.getMetaLarva()) {
+		    && itemstack.getItemDamage() == Metadata.getMetaLarva() && tileentity.worldObj.isAirBlock(tileentity.xCoord, tileentity.yCoord + 1, tileentity.zCoord)) {
 		
 		EntityItem item = new EntityItem(tileentity.worldObj);
 		item.setEntityItemStack(itemstack);
@@ -91,9 +103,9 @@ public class RendererIncubator extends TileEntitySpecialRenderer {
 
 		GL11.glPushMatrix();
 		GL11.glDisable(2896 /* GL_LIGHTING */);
-		GL11.glTranslatef((float) x, (float) y, (float) z);
+		GL11.glTranslatef((float) x, (float) y + 1, (float) z);
 
-		GL11.glTranslatef(0.5f, 0.5f, 0.5f);
+		GL11.glTranslatef(0.5f, 0.1f, 0.5f);
 		GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 		GL11.glScalef(blockScale, blockScale, blockScale);
 

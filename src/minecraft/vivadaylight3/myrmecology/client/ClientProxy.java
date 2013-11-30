@@ -114,7 +114,7 @@ public class ClientProxy extends CommonProxy {
 
     public String getCurrentLanguage() {
 
-	return FMLCommonHandler.instance().getCurrentLanguage();
+	return FMLClientHandler.instance().getCurrentLanguage();
 
     }
 

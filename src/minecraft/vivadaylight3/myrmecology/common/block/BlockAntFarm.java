@@ -1,31 +1,26 @@
 package vivadaylight3.myrmecology.common.block;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.common.Myrmecology;
-import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 
 public class BlockAntFarm extends BlockContainer {
 
@@ -90,7 +85,49 @@ public class BlockAntFarm extends BlockContainer {
 	return blockIcon;
 
     }
+    
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+	
+	float minX = 0, minY = 0, minZ = 0, maxX = 0, maxY = 0, maxZ = 0;
+	
+	switch(world.getBlockMetadata(x, y, z)){
+	
+	case 1:
+	case 3:
+	    minX = 0.35F;
+	    minZ = 0.1F;
+	    maxX = 0.65f;
+	    maxY = 0.9f;
+	    maxZ = 0.9f;
+	    break;
+	
+	case 0:
+	case 2:
+	    minX = 0.1F;
+	    minZ = 0.35F;
+	    maxX = 1f;
+	    maxY = 0.9f;
+	    maxZ = 0.65f;
+	    break;
+	
+	}
+	
+	this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 
+    }
+    
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack par6ItemStack) {
+        
+        int metadata = world.getBlockMetadata(x, y, z);
+        int angle = MathHelper.floor_double((entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        
+        world.setBlockMetadataWithNotify(x, y, z, angle, 2);
+        this.updateTick(world, x, y, z, new Random());
+        
+    }
+   
     @Override
     public boolean isOpaqueCube() {
 

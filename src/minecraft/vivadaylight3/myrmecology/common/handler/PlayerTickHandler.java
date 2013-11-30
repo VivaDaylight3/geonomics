@@ -49,18 +49,10 @@ public class PlayerTickHandler implements ITickHandler {
 
     public static void playerTick(EntityPlayer player) {
 
-	if (KeyBindingHandler.keyPressed) {
-
-	    player.inventory.addItemStackToInventory(new ItemStack(
-		    Register.itemAntBook));
-	    player.addStat(Register.achieveGetBook, 1);
-	    KeyBindingHandler.keyPressed = false;
-
-	}
-
 	if (ticks % tickInterval == 0) {
 
 	    TreeDictionary.updateTreesFromOreDict();
+	    tickInterval = 1000000000;
 
 	}
 

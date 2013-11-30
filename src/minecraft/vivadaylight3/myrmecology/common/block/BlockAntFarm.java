@@ -85,14 +85,15 @@ public class BlockAntFarm extends BlockContainer {
 	return blockIcon;
 
     }
-    
+
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-	
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
+	    int z) {
+
 	float minX = 0, minY = 0, minZ = 0, maxX = 0, maxY = 0, maxZ = 0;
-	
-	switch(world.getBlockMetadata(x, y, z)){
-	
+
+	switch (world.getBlockMetadata(x, y, z)) {
+
 	case 1:
 	case 3:
 	    minX = 0.35F;
@@ -101,7 +102,7 @@ public class BlockAntFarm extends BlockContainer {
 	    maxY = 0.9f;
 	    maxZ = 0.9f;
 	    break;
-	
+
 	case 0:
 	case 2:
 	    minX = 0.1F;
@@ -110,24 +111,26 @@ public class BlockAntFarm extends BlockContainer {
 	    maxY = 0.9f;
 	    maxZ = 0.65f;
 	    break;
-	
+
 	}
-	
+
 	this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 
     }
-    
+
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack par6ItemStack) {
-        
-        int metadata = world.getBlockMetadata(x, y, z);
-        int angle = MathHelper.floor_double((entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-        
-        world.setBlockMetadataWithNotify(x, y, z, angle, 2);
-        this.updateTick(world, x, y, z, new Random());
-        
+    public void onBlockPlacedBy(World world, int x, int y, int z,
+	    EntityLivingBase entity, ItemStack par6ItemStack) {
+
+	int metadata = world.getBlockMetadata(x, y, z);
+	int angle = MathHelper
+		.floor_double((entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+	world.setBlockMetadataWithNotify(x, y, z, angle, 2);
+	this.updateTick(world, x, y, z, new Random());
+
     }
-   
+
     @Override
     public boolean isOpaqueCube() {
 

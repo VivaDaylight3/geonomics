@@ -54,21 +54,20 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 	return this.resultAntMeta;
 
     }
-    
+
     @Override
-    public Packet getDescriptionPacket()
-    {
-        return PacketHandler.getTileEntityPacket(this);
+    public Packet getDescriptionPacket() {
+	return PacketHandler.getTileEntityPacket(this);
     }
-    
-    public void handlePacket(ItemStack[] stacks){
-	
-	for(int k = 0; k < stacks.length; k++){
-	    
+
+    public void handlePacket(ItemStack[] stacks) {
+
+	for (int k = 0; k < stacks.length; k++) {
+
 	    this.contents[k] = stacks[k];
-	    
+
 	}
-	
+
     }
 
     @Override
@@ -161,19 +160,18 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 
     // turns the larvae into a mature ant
     private void finishIncubation() {
-	
+
 	ItemStack result = new ItemStack(this.getLarva().getItem(),
 		((ItemAnt) this.getLarva().getItem()).getFertility(),
 		this.getResultAntMeta());
 
 	Environment.addItemStackToInventory(result, getContents(),
 		getMaxStackSize(), this);
-	
+
 	this.decrStackSize(ContainerIncubator.getLarvaSlot(), 1);
 	this.decrStackSize(ContainerIncubator.getFoodSlot(), 1);
 
 	this.setResultAntMeta(-1);
-	
 
     }
 
@@ -243,7 +241,7 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
     }
 
     public String getInvName() {
-	return "Ant Incubator";
+	return "Solarium";
     }
 
     public boolean isInvNameLocalized() {

@@ -38,12 +38,12 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
     EntityAnimal entity = null;
 
     @Override
-    public EnumAntAIType getAIType(){
-	
+    public EnumAntAIType getAIType() {
+
 	return EnumAntAIType.FARMING;
-	
+
     }
-    
+
     @Override
     public boolean shouldExecute() {
 

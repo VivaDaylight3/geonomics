@@ -8,12 +8,26 @@ import vivadaylight3.myrmecology.api.item.ItemAnt;
 
 public interface IEntityAnt {
 
+    /**
+     * Gets the ItemAnt associated with this entity
+     * @return ItemAnt
+     */
     ItemAnt getAnt();
 
+    /**
+     * Holds the ant entity's inventory
+     */
     ItemStack[] inventory = new ItemStack[1];
 
+    /**
+     * Holds the home block tile entity for the ant, usually used for AIs and getting items
+     */
     TileEntity homeBlockTileEntity = null;
-    
+
+    /**
+     * Sends a message to the player when left clicking with a myrmopaedia
+     * @param player
+     */
     void sendBehaviourErrorMessage(EntityPlayer player);
 
     double getPosX();
@@ -22,11 +36,23 @@ public interface IEntityAnt {
 
     double getPosZ();
 
-    void moveEntityTo(int x, int y, int z);
-
+    /**
+     * Gets the number of passed ticks
+     * @return
+     */
     int getTicks();
 
+    /**
+     * Drops an itemStack
+     * @param stack
+     */
     void dropItemStack(ItemStack stack);
 
+    /**
+     * Moves the entity to the x, y and z
+     * @param x
+     * @param y
+     * @param z
+     */
     void moveEntityTo(double posX, double posY, double posZ);
 }

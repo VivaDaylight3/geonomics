@@ -114,7 +114,7 @@ public class ItemAnt extends Item {
 	    if (par3World.isRemote
 		    || par1ItemStack.getItemDamage() != Metadata
 			    .getMetaWorker()) {
-		return true;
+		return false;
 	    }
 
 	    par4 += Facing.offsetsXForSide[par7];

@@ -27,11 +27,15 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 	this.setMutexBits(26);
 
     }
-    
-    public EnumAntAIType getAIType(){
-	
+
+    /**
+     * Returns the type of ant behaviour
+     * @return EnumAntAIType
+     */
+    public EnumAntAIType getAIType() {
+
 	return null;
-	
+
     }
 
     @Override

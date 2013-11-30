@@ -25,10 +25,9 @@ public class CommonProxy {
 	return null;
 
     }
-    
-    public World getClientWorld()
-    {
-        return null;
+
+    public World getClientWorld() {
+	return null;
     }
 
 }

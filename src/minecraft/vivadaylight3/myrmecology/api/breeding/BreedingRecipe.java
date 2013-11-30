@@ -26,18 +26,30 @@ public class BreedingRecipe {
 
     }
 
+    /**
+     * Gets the first ant input
+     * @return ItemAnt
+     */ 
     public ItemAnt getAnt1() {
 
 	return this.ant1;
 
     }
 
+    /**
+     * Gets the second two ant input
+     * @return ItemAnt
+     */ 
     public ItemAnt getAnt2() {
 
 	return this.ant2;
 
     }
 
+    /**
+     * Gets this breeding recipe's ant ourput
+     * @return ItemAnt
+     */
     public ItemAnt getAntOutput() {
 
 	return this.antOutput;

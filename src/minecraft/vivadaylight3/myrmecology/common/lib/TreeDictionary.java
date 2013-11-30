@@ -38,14 +38,14 @@ public class TreeDictionary {
 
 	for (TreeEntry log : treeEntries) {
 
-	    for(BlockIDEntry block : log.getLogIDs()){
-		
-		if(block.equals(entry)){
-		    
+	    for (BlockIDEntry block : log.getLogIDs()) {
+
+		if (block.equals(entry)) {
+
 		    return true;
-		    
+
 		}
-		
+
 	    }
 
 	}

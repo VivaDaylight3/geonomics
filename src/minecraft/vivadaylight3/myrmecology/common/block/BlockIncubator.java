@@ -64,53 +64,51 @@ public class BlockIncubator extends BlockContainer {
 
     @Override
     public Icon getIcon(int side, int metadata) {
-	
+
 	int base = 0;
-	
-	if(metadata >= POWERED_META){
-	    
+
+	if (metadata >= POWERED_META) {
+
 	    base = POWERED_META;
-	    
+
 	}
 
 	if (side == 0 || side == 1) {
 
-	    if(metadata >= POWERED_META){
-		
+	    if (metadata >= POWERED_META) {
+
 		return iconTopOn;
-		
-	    }else{
-		
+
+	    } else {
+
 		return iconTopOff;
-		
+
 	    }
 
 	} else if (Environment.getBlockSide(side, metadata, base) == "front") {
 
-		if (metadata >= POWERED_META) {
+	    if (metadata >= POWERED_META) {
 
-		    return iconFrontOn;
-
-		} else {
-
-		    return iconFrontOff;
-
-		}
+		return iconFrontOn;
 
 	    } else {
 
-		return iconSide;
+		return iconFrontOff;
 
-	    
+	    }
+
+	} else {
+
+	    return iconSide;
 
 	}
     }
-    
+
     @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z){
-	
+    public int getLightValue(IBlockAccess world, int x, int y, int z) {
+
 	return this.isPowered(world.getBlockMetadata(x, y, z)) ? 10 : 0;
-	
+
     }
 
     @Override
@@ -126,70 +124,72 @@ public class BlockIncubator extends BlockContainer {
 	return true;
 
     }
-    
-    private boolean isPowered(int meta){
-	
-	if(meta >= POWERED_META){
-	    
+
+    private boolean isPowered(int meta) {
+
+	if (meta >= POWERED_META) {
+
 	    return true;
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
-    
-    private void updateMeta(World world, int x, int y, int z){
-	
+
+    private void updateMeta(World world, int x, int y, int z) {
+
 	int meta = 0;
-	
+
 	if (!world.isRemote && Environment.blockIsPowered(world, x, y, z)) {
-	    
-	    if(world.getBlockMetadata(x, y, z) < POWERED_META){
-		
+
+	    if (world.getBlockMetadata(x, y, z) < POWERED_META) {
+
 		meta += world.getBlockMetadata(x, y, z) + POWERED_META;
-		
-	    }else{
-		
+
+	    } else {
+
 		meta = world.getBlockMetadata(x, y, z);
-		
+
 	    }
 
 	    world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 
 	} else {
-	    
-	    if(world.getBlockMetadata(x, y, z) < POWERED_META){
-		
+
+	    if (world.getBlockMetadata(x, y, z) < POWERED_META) {
+
 		meta += world.getBlockMetadata(x, y, z);
-		
-	    }else{
-		
+
+	    } else {
+
 		meta = world.getBlockMetadata(x, y, z) - POWERED_META;
-		
+
 	    }
 
 	}
-	
+
 	world.setBlockMetadataWithNotify(x, y, z, meta, 2);
-	
+
     }
 
     @Override
     public void updateTick(World world, int x, int y, int z, Random par5Random) {
-	
+
 	this.updateMeta(world, x, y, z);
 
     }
-    
+
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack par6ItemStack) {
-        
-        int metadata = world.getBlockMetadata(x, y, z);
-        int angle = MathHelper.floor_double((entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-        
-        world.setBlockMetadataWithNotify(x, y, z, angle, 2);
-        
+    public void onBlockPlacedBy(World world, int x, int y, int z,
+	    EntityLivingBase entity, ItemStack par6ItemStack) {
+
+	int metadata = world.getBlockMetadata(x, y, z);
+	int angle = MathHelper
+		.floor_double((entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+	world.setBlockMetadataWithNotify(x, y, z, angle, 2);
+
     }
 
     @Override
@@ -204,7 +204,7 @@ public class BlockIncubator extends BlockContainer {
 	    int par4, int par5) {
 	if (!par1World.isRemote) {
 	    this.updateMeta(par1World, par2, par3, par4);
-	    
+
 	}
     }
 

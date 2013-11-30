@@ -69,17 +69,17 @@ public class MyrmopaediaProperties {
     }
 
     public static ItemStack getMyrmopaediaFromID(int id) {
-	
-	if(id >= 0){
-	
+
+	if (id >= 0) {
+
 	    if (myrmopaediaIDs[id] != null) {
 
 		return myrmopaediaIDs[id];
 
 	    }
-	    
+
 	}
-	
+
 	return null;
 
     }
@@ -128,6 +128,12 @@ public class MyrmopaediaProperties {
 
     }
 
+    /**
+     * Gets all ants registered in the myrmopaedia (WIP)
+     * @param itemStack
+     * @return ArrayList<ItemAnt>
+     */
+    @Deprecated
     public static ArrayList<ItemAnt> getMyrmopaediaAnts(ItemStack itemStack) {
 
 	ArrayList<ItemAnt> result = new ArrayList<ItemAnt>();

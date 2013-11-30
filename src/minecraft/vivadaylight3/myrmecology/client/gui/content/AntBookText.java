@@ -7,7 +7,7 @@ import net.minecraft.util.EnumChatFormatting;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
 
-public class AntBookText extends TextContent {
+public class AntBookText {
 
     private BufferedImage image;
 
@@ -39,12 +39,64 @@ public class AntBookText extends TextContent {
 	String s25 = "Each ant except ants you extract from ant hills and common ants can be put to work. "
 		+ "Mature an ant larva into a worker ant and then spawn it by right-clicking with it on the ground. If the ant's species has a behaviour it will begin its work.";
 
-	return new String[] {
-		newBookPage(false, s10, s11),
-		newBookPage(false, s12, s13, s14, s15), newBookPage(false, s16),
-		newBookPage(false, s17, s18),
+	return new String[] { newBookPage(false, s10, s11),
+		newBookPage(false, s12, s13, s14, s15),
+		newBookPage(false, s16), newBookPage(false, s17, s18),
 		newBookPage(false, s19, s20, s21, s22, s23),
 		newBookPage(false, s24), newBookPage(false, s25) };
+
+    }
+    
+    protected static String newBookPage(boolean newLines, String... strings) {
+
+        String result = "";
+        for (int k = 0; k < strings.length; k++) {
+
+            result += strings[k];
+
+            if (newLines) {
+
+                result += getNewLine(strings[k]);
+
+            }
+
+        }
+
+        return result;
+
+    }
+
+    protected static String getNewLine(String string) {
+
+        double div = 0;
+        double dec = 0;
+
+        int length;
+
+        if (string.length() > 22) {
+
+            div = string.length() / 22;
+            dec = div - Math.ceil(div);
+
+            length = (int) Math.ceil(22 * dec);
+
+        } else {
+
+            length = string.length();
+
+        }
+
+        String result = "";
+
+        int count = 23 - length;
+
+        for (int k = 0; k < count; k++) {
+
+            result += " ";
+
+        }
+
+        return result;
 
     }
 

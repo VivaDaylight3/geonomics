@@ -44,14 +44,16 @@ public class ClientProxy extends CommonProxy {
 
     public static int incubatorRenderID;
     public static int incubatorRenderPass;
-    
+
     @Override
-    public World getClientWorld()
-    {
-        return FMLClientHandler.instance().getClient().theWorld;
+    public World getClientWorld() {
+	return FMLClientHandler.instance().getClient().theWorld;
     }
 
     @Override
+    /**
+     * Registers an entity renderer
+     */
     public void addAntRenderer(Class<? extends EntityLiving> parClass,
 	    RenderLiving render) {
 
@@ -95,7 +97,7 @@ public class ClientProxy extends CommonProxy {
 		Resources.ENTITY_ANT_FUNGAL, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntMound.class, new RenderAnt(
-		Resources.ENTITY_ANT_MOUND, new ModelAnt(), 0.5f));
+		Resources.ENTITY_ANT_CARPENTER, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntSprouter.class, new RenderAnt(
 		Resources.ENTITY_ANT_SPROUTER, new ModelAnt(), 0.5f));

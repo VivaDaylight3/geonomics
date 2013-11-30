@@ -104,12 +104,12 @@ public class AntDredger extends ItemAnt {
 	return new int[] { 0x63584c, 0xc7b299 };
 
     }
-    
+
     @Override
-    public Entity getNewEntity(World world){
-	
+    public Entity getNewEntity(World world) {
+
 	return new EntityAntDredger(world);
-	
+
     }
 
 }

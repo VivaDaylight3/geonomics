@@ -105,11 +105,16 @@ public class Environment {
 
 	for (TileEntity tile : list) {
 
-	    if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
-		    .getDistance(nearest.xCoord, nearest.yCoord, nearest.zCoord)
-		    && tile instanceof TileEntityAntChest) {
+	    if (nearest != null) {
 
-		nearest = tile;
+		if (entity.getDistance(tile.xCoord, tile.yCoord, tile.zCoord) < entity
+			.getDistance(nearest.xCoord, nearest.yCoord,
+				nearest.zCoord)
+			&& tile instanceof TileEntityAntChest) {
+
+		    nearest = tile;
+
+		}
 
 	    }
 
@@ -118,21 +123,23 @@ public class Environment {
 	return nearest;
 
     }
-    
-    public static boolean hasPheromoneBlockInRadius(ArrayList<BlockPosEntry> list, Entity entity, int distance){
-		
-	for(BlockPosEntry entry : list){
-	    
-	    if(entity.getDistance(entry.xCoord, entry.yCoord, entry.zCoord) <= distance && entry.ID == Register.blockPheromone.blockID){
-		
+
+    public static boolean hasPheromoneBlockInRadius(
+	    ArrayList<BlockPosEntry> list, Entity entity, int distance) {
+
+	for (BlockPosEntry entry : list) {
+
+	    if (entity.getDistance(entry.xCoord, entry.yCoord, entry.zCoord) <= distance
+		    && entry.ID == Register.blockPheromone.blockID) {
+
 		return true;
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
 
     public static BlockPosEntry getNearestTreeEntryFrom(
@@ -201,7 +208,6 @@ public class Environment {
     public static Entity spawnEntity(World par0World, Entity entity,
 	    double par2, double par4, double par6) {
 
-	for (int j = 0; j < 1; ++j) {
 	    if (entity != null && entity instanceof EntityLivingBase) {
 		EntityLiving entityliving = (EntityLiving) entity;
 		entity.setLocationAndAngles(par2, par4, par6,
@@ -209,10 +215,10 @@ public class Environment {
 				.nextFloat() * 360.0F), 0.0F);
 		entityliving.rotationYawHead = entityliving.rotationYaw;
 		entityliving.renderYawOffset = entityliving.rotationYaw;
+		entity.setPosition(par2, par4, par6);
 		par0World.spawnEntityInWorld(entity);
 		entityliving.playLivingSound();
 	    }
-	}
 
 	return entity;
 
@@ -229,14 +235,14 @@ public class Environment {
     public static boolean coordinateIsCloseTo(int x, int y, int z, int x2,
 	    int y2, int z2, int distance) {
 
-	if(Math.max(x, x2) - Math.min(x2, x) <= distance
+	if (Math.max(x, x2) - Math.min(x2, x) <= distance
 		&& Math.max(y, y2) - Math.min(y2, y) <= distance
-		&& Math.max(z, z2) - Math.min(z2, z) <= distance){
-	    
+		&& Math.max(z, z2) - Math.min(z2, z) <= distance) {
+
 	    return true;
-	    
+
 	}
-	
+
 	return false;
 
     }
@@ -583,8 +589,8 @@ public class Environment {
     public static void spawnItem(ItemStack item, World world, int x, int y,
 	    int z) {
 
-	    EntityItem entityitem = new EntityItem(world, x, y, z, item);
-	    world.spawnEntityInWorld(entityitem);
+	EntityItem entityitem = new EntityItem(world, x, y, z, item);
+	world.spawnEntityInWorld(entityitem);
 
     }
 
@@ -894,23 +900,23 @@ public class Environment {
 
 	Log.debug("");
 	Log.debug("adding to inv");
-	
+
 	int amount = item.stackSize;
 
 	for (int k = 0; k < inventory.length; k++) {
-	    
+
 	    Log.debug("k: " + k);
 
 	    while (getAvailableSlot(item, inventory, max) == k) {
-		
+
 		Log.debug("getAvail == " + k);
 
 		if (inventory[k] == null) {
-		    
+
 		    Log.debug("inv[k] == null");
 
 		    if (amount > max) {
-			
+
 			Log.debug("amount > max");
 
 			amount -= max;
@@ -919,18 +925,18 @@ public class Environment {
 				item.getItemDamage());
 
 			Log.debug("inventory[k] == itemstack");
-			
+
 			if (tileEntity != null) {
 			    tileEntity.onInventoryChanged();
 			}
 
 		    } else if (amount < max) {
-			
+
 			Log.debug("amount < max");
 
 			inventory[k] = new ItemStack(item.getItem(), amount,
 				item.getItemDamage());
-			
+
 			Log.debug("inventory[k] == itemstack");
 
 			amount = 0;
@@ -942,16 +948,16 @@ public class Environment {
 		    }
 
 		} else if (inventory[k] == item) {
-		    
+
 		    Log.debug("inv[k] == item");
 
 		    if (inventory[k].stackSize + item.stackSize <= max) {
-			
+
 			Log.debug("stackSize + item.stacksize <= max");
 
 			inventory[k] = new ItemStack(item.getItem(), max,
 				item.getItemDamage());
-			
+
 			Log.debug("inventory[k] == itemstack");
 
 			amount = max - inventory[k].stackSize;

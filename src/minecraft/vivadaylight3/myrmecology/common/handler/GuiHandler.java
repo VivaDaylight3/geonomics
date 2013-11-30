@@ -3,7 +3,6 @@ package vivadaylight3.myrmecology.common.handler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.client.gui.GuiAntBook;
 import vivadaylight3.myrmecology.client.gui.GuiAntChest;
 import vivadaylight3.myrmecology.client.gui.GuiAntFarm;
 import vivadaylight3.myrmecology.client.gui.GuiIncubator;
@@ -78,9 +77,6 @@ public class GuiHandler implements IGuiHandler {
 	case Register.GUI_ID_ANTCHEST:
 	    return new GuiAntChest(player.inventory,
 		    (TileEntityAntChest) tileEntity);
-
-	case Register.GUI_ID_ANTBOOK:
-	    return new GuiAntBook();
 
 	}
 

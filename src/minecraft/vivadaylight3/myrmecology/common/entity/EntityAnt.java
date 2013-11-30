@@ -86,7 +86,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     }
 
     @Override
-    public void moveEntityTo(int x, int y, int z) {
+    public void moveEntityTo(double x, double y, double z) {
 
 	this.getNavigator().tryMoveToXYZ(x, y, z, 1.0D);
 
@@ -219,13 +219,6 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 	this.hurtTime = par1NBTTagCompound.getShort("HurtTime");
 	this.deathTime = par1NBTTagCompound.getShort("DeathTime");
 	this.attackTime = par1NBTTagCompound.getShort("AttackTime");
-    }
-
-    @Override
-    public void moveEntityTo(double posX, double posY, double posZ) {
-
-	moveEntityTo((int) posX, (int) posY, (int) posZ);
-
     }
 
     @Override

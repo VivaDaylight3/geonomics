@@ -84,6 +84,7 @@ public class ItemMyrmopaedia extends Item {
 
 	player.openGui(Myrmecology.instance, Register.GUI_ID_MYRMOPAEDIA,
 		world, x, y, z);
+	player.addStat(Register.achieveReadBook, 1);
 
 	return false;
 

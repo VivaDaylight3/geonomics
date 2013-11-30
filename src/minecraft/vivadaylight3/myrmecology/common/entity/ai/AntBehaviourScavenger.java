@@ -25,12 +25,12 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	    PathNavigate parPathFinder) {
 	super(parEntityAnt, parWorld, parPathFinder);
     }
-    
+
     @Override
-    public EnumAntAIType getAIType(){
-	
+    public EnumAntAIType getAIType() {
+
 	return EnumAntAIType.SCAVENGING;
-	
+
     }
 
     @Override

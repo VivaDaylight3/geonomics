@@ -25,7 +25,7 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     private int ticks = 0;
 
     int timeToWait = 0;
-    
+
     BlockPosEntry bottom;
 
     public AntBehaviourCarpenter(IEntityAnt parEntityAnt, World parWorld,
@@ -34,31 +34,36 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 	super(parEntityAnt, parWorld, parPathFinder);
 
     }
-    
+
     @Override
-    public EnumAntAIType getAIType(){
-	
+    public EnumAntAIType getAIType() {
+
 	return EnumAntAIType.DESTRUCTION;
-	
+
     }
 
     @Override
     public boolean shouldExecute() {
-	
-	if(Environment.hasPheromoneBlockInRadius(Environment.getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(), 5), (Entity) this.theAnt, 5)){
-	    	    
+
+	if (Environment.hasPheromoneBlockInRadius(Environment
+		.getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(), 5),
+		(Entity) this.theAnt, 5)) {
+
 	    return false;
-	    
-	}if(state.equals("finished") || Environment.getNearestTreeEntryFrom(Environment
-		    .getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(),
-			    radius), (Entity) this.theAnt, getPosX(),
-		    getPosY(), getPosZ()) == null || (block != null && block.yCoord < 1)){
-	    	    	    
-	    reset();
-	    
+
 	}
-	
-	if(state.equals("none")){
+	if (state.equals("finished")
+		|| Environment.getNearestTreeEntryFrom(Environment
+			.getBlocksInRadius(world, getPosX(), getPosY(),
+				getPosZ(), radius), (Entity) this.theAnt,
+			getPosX(), getPosY(), getPosZ()) == null
+		|| (block != null && block.yCoord < 1)) {
+
+	    reset();
+
+	}
+
+	if (state.equals("none")) {
 
 	    block = Environment.getNearestTreeEntryFrom(Environment
 		    .getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(),
@@ -73,15 +78,16 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 
 	    }
 
-	}else if (state.equals("moveTo")) {
+	} else if (state.equals("moveTo")) {
 
 	    if (block != null) {
 
 		if (Environment.coordinateIsCloseTo(getPosX(), getPosY(),
-			getPosZ(), block.xCoord, block.yCoord, block.zCoord, 1) || isNearBottom()) {
+			getPosZ(), block.xCoord, block.yCoord, block.zCoord, 1)
+			|| isNearBottom()) {
 
 		    timeToWait = getTimeToWait();
-		    
+
 		    state = "chopTree";
 
 		}
@@ -90,7 +96,7 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 
 	    return true;
 
-	}else if (state.equals("chopTree")) {
+	} else if (state.equals("chopTree")) {
 
 	    if (bottom != null) {
 
@@ -110,83 +116,88 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 	if (state.equals("moveTo")) {
 
 	    Log.debug("update : state == moveTo");
-	    
+
 	    this.moveTo();
 
 	} else if (state.equals("chopTree")) {
-	    
+
 	    ticks++;
-	    
-	    Log.debug(ticks+"/"+timeToWait);
-	    
-	    if(ticks >= timeToWait){
-	    
+
+	    Log.debug(ticks + "/" + timeToWait);
+
+	    if (ticks >= timeToWait) {
+
 		Log.debug("update : state == chopTree");
 
 		this.chopTree();
-	    
+
 	    }
 
-	}else if(state.equals("finished")){
-	    
+	} else if (state.equals("finished")) {
+
 	    reset();
-	    
-	}else{
-	    
+
+	} else {
+
 	    reset();
-	    
+
 	}
 
     }
 
     private void chopTree() {
-	
+
 	timeToWait = 0;
 
 	if (this.logs != null) {
-	    
+
 	    for (BlockPosEntry entry : logs) {
 
 		if (entry != null) {
-		    
-		    ArrayList<ItemStack> stacks = Block.blocksList[entry.ID].getBlockDropped(world, entry.xCoord, entry.yCoord, entry.zCoord, entry.metadata, 0);
-		    
-			world.setBlockToAir(entry.xCoord, entry.yCoord, entry.zCoord);
-		    		    
-			//ItemStack stack = new ItemStack(entry.ID, 1, entry.metadata);
-			
-			for(ItemStack item : stacks){
-			
-			    Environment.spawnItem(item, world, entry.xCoord, entry.yCoord, entry.zCoord);
-			
-			}
-		    
-		}else{
-		    
+
+		    ArrayList<ItemStack> stacks = Block.blocksList[entry.ID]
+			    .getBlockDropped(world, entry.xCoord, entry.yCoord,
+				    entry.zCoord, entry.metadata, 0);
+
+		    world.setBlockToAir(entry.xCoord, entry.yCoord,
+			    entry.zCoord);
+
+		    // ItemStack stack = new ItemStack(entry.ID, 1,
+		    // entry.metadata);
+
+		    for (ItemStack item : stacks) {
+
+			Environment.spawnItem(item, world, entry.xCoord,
+				entry.yCoord, entry.zCoord);
+
+		    }
+
+		} else {
+
 		    reset();
-		    
+
 		}
 
 	    }
-	    
-	}else{
-	    
+
+	} else {
+
 	    reset();
-	    
+
 	}
-	
+
 	reset();
 
     }
-    
-    private void reset(){
-	
+
+    private void reset() {
+
 	state = "none";
 	bottom = null;
 	block = null;
 	ticks = 0;
 	this.logs.clear();
-	
+
     }
 
     private void moveTo() {
@@ -198,15 +209,15 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 	    Log.debug("moveTo : bottom == null");
 
 	    bottom = getBottomLog(block);
-	    
-	    if(bottom == null){
-		
+
+	    if (bottom == null) {
+
 		reset();
-		
+
 	    }
 
 	} else {
-	    
+
 	    logs = getAllLogs(bottom);
 
 	    Log.debug("moveTo : bottom != null");
@@ -217,58 +228,67 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 	}
 
     }
-    
-    private int getTimeToWait(){
-	
+
+    private int getTimeToWait() {
+
 	float hardness = 0;
-	    
-	for(BlockPosEntry entry : logs){
-		
-	    if(entry != null){
-		    
-		hardness += Block.blocksList[entry.ID].getBlockHardness(world, entry.xCoord, entry.yCoord, entry.zCoord);
-		    
+
+	for (BlockPosEntry entry : logs) {
+
+	    if (entry != null) {
+
+		hardness += Block.blocksList[entry.ID].getBlockHardness(world,
+			entry.xCoord, entry.yCoord, entry.zCoord);
+
 	    }
-		
+
 	}
-	
+
 	return (int) Math.floor(hardness / 7) * 20;
-	
+
     }
 
     private ArrayList<BlockPosEntry> getAllLogs(BlockPosEntry block) {
-	
+
 	ArrayList<BlockPosEntry> result = new ArrayList<BlockPosEntry>();
 	result.add(block);
 	BlockPosEntry newLog;
 	int k = 0;
-	
-	while(k < result.size()){
-	    	    	    
+
+	while (k < result.size()) {
+
 	    BlockPosEntry current = result.get(k);
-	    
-	    for(int x = -1 * TreeDictionary.treeWidth; x <= TreeDictionary.treeWidth; x++){
-		
-		for(int y = -1; y <= 1; y++){
-		    
-		    for(int z = -1 * TreeDictionary.treeWidth; z <= TreeDictionary.treeWidth; z++){
-			
-			newLog = new BlockPosEntry(current.xCoord + x, current.yCoord + y, current.zCoord + z, world.getBlockId(current.xCoord + x, current.yCoord + y, current.zCoord + z), world.getBlockMetadata(current.xCoord + x, current.yCoord + y, current.zCoord + z));
-			
-			if(TreeDictionary.contains(newLog.toBlockIDEntry()) && !logIsSet(result, newLog)){
-			    
+
+	    for (int x = -1 * TreeDictionary.treeWidth; x <= TreeDictionary.treeWidth; x++) {
+
+		for (int y = -1; y <= 1; y++) {
+
+		    for (int z = -1 * TreeDictionary.treeWidth; z <= TreeDictionary.treeWidth; z++) {
+
+			newLog = new BlockPosEntry(
+				current.xCoord + x,
+				current.yCoord + y,
+				current.zCoord + z,
+				world.getBlockId(current.xCoord + x,
+					current.yCoord + y, current.zCoord + z),
+				world.getBlockMetadata(current.xCoord + x,
+					current.yCoord + y, current.zCoord + z));
+
+			if (TreeDictionary.contains(newLog.toBlockIDEntry())
+				&& !logIsSet(result, newLog)) {
+
 			    result.add(newLog);
-			    
+
 			}
-			
+
 		    }
-		    
+
 		}
-		
+
 	    }
-	    
+
 	    k++;
-	    	    
+
 	}
 
 	return result;
@@ -276,21 +296,21 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     }
 
     private BlockPosEntry getBottomLog(BlockPosEntry block) {
-	
+
 	ArrayList<BlockPosEntry> list = getAllLogs(block);
 
 	BlockPosEntry lowest = null;
 
 	if (list.size() > 0) {
-	    
+
 	    lowest = list.get(0);
 
 	    for (BlockPosEntry entry : list) {
-		
-		if(lowest == null){
-		    
+
+		if (lowest == null) {
+
 		    lowest = entry;
-		    
+
 		}
 
 		if (entry.yCoord < lowest.yCoord) {
@@ -306,45 +326,47 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 	return lowest;
 
     }
-    
-    private boolean logIsSet(ArrayList<BlockPosEntry> list, BlockPosEntry entry){
-	
-	for(BlockPosEntry log : list){
-	    
-	    if(log.equals(entry)){
-		
+
+    private boolean logIsSet(ArrayList<BlockPosEntry> list, BlockPosEntry entry) {
+
+	for (BlockPosEntry log : list) {
+
+	    if (log.equals(entry)) {
+
 		return true;
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
-    
-    private boolean isNearBottom(){
-	
-	if(this.bottom != null){
-	    
-	    for(BlockPosEntry entry : logs){
-		
-		if(entry.yCoord == bottom.yCoord){
-		    
-		    if(Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(), entry.xCoord, entry.yCoord, entry.zCoord, 1)){
-			
+
+    private boolean isNearBottom() {
+
+	if (this.bottom != null) {
+
+	    for (BlockPosEntry entry : logs) {
+
+		if (entry.yCoord == bottom.yCoord) {
+
+		    if (Environment.coordinateIsCloseTo(getPosX(), getPosY(),
+			    getPosZ(), entry.xCoord, entry.yCoord,
+			    entry.zCoord, 1)) {
+
 			return true;
-			
+
 		    }
-		    
+
 		}
-		
+
 	    }
-	    
+
 	}
-	
+
 	return false;
-	
+
     }
 
 }

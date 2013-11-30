@@ -465,7 +465,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 
     @Override
     public String getInvName() {
-	return "Ant Farm";
+	return "Formicarium";
     }
 
     @Override

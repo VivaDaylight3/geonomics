@@ -41,9 +41,7 @@ import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntSprouter;
 import vivadaylight3.myrmecology.common.handler.WorldGen;
-import vivadaylight3.myrmecology.common.item.ItemAntBook;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
-import vivadaylight3.myrmecology.common.item.ItemPheromone;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.item.ant.AntBarbaric;
 import vivadaylight3.myrmecology.common.item.ant.AntCarpenter;
@@ -104,7 +102,7 @@ public class Register {
 
     public static boolean checkForUpdates = true;
     public static int incubatorLarvaRenderDistance = 10;
-    
+
     EnumAntAIType type;
 
     public static String language;
@@ -114,7 +112,7 @@ public class Register {
 
     static int id = 1;
 
-    public static Achievement achieveGetBook;
+    public static Achievement achieveReadBook;
     public static Achievement achieveExtractAnts;
     public static Achievement achieveIncubateAnts;
     public static Achievement achieveBreedAnts;
@@ -134,7 +132,6 @@ public class Register {
     public static final int GUI_ID_MYRMOPAEDIA = 2;
     public static final int GUI_ID_INCUBATOR = 3;
     public static final int GUI_ID_ANTCHEST = 4;
-    public static final int GUI_ID_ANTBOOK = 5;
 
     public static int latestItemID = 0;
     public static int latestBlockID = 0;
@@ -150,7 +147,6 @@ public class Register {
     public static ToolExtractor itemExtractor;
     public static ItemMyrmopaedia itemAntopedia;
     public static ItemBreedingChamber itemBreedingChamber;
-    public static ItemAntBook itemAntBook;
 
     public static ChamberCommon chamberCommon;
     public static ChamberHarvester chamberHarvester;
@@ -231,11 +227,10 @@ public class Register {
 
     public static void registerAchievements() {
 
-	achieveGetBook = addAchievement(27, "Myrmecologist", "Get "
-		+ Reference.ANTBOOK_TITLE + "!", 0, 0, null, new ItemStack(
-		itemAntBook));
+	achieveReadBook = addAchievement(27, "Myrmecologist", "Read an myrmopaedia", 0, 0, null, new ItemStack(
+		itemAntopedia));
 	achieveExtractAnts = addAchievement(28, "Extraction Completion",
-		"Extract some ants from an ant hill!", 2, 0, achieveGetBook,
+		"Extract some ants from an ant hill!", 2, 0, achieveReadBook,
 		new ItemStack(itemExtractor));
 	achieveIncubateAnts = addAchievement(29, "Nature or Nurture?",
 		"Start incubating some ants!", 2, 2, achieveExtractAnts,
@@ -254,11 +249,11 @@ public class Register {
 	achieveAntDimension = addAchievement(32, "Holiday Destination",
 		"CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(
 			blockAntChest));
-	achievementPage = new AchievementPage("Myrmecology", achieveGetBook);
+	achievementPage = new AchievementPage("Myrmecology", achieveReadBook);
 
 	for (int k = 0; k < achievementList.size(); k++) {
 
-	    if (achievementList.get(k) != achieveGetBook) {
+	    if (achievementList.get(k) != achieveReadBook) {
 
 		achievementPage.getAchievements().add(achievementList.get(k));
 
@@ -292,8 +287,10 @@ public class Register {
 
 	config.load();
 
-	blockPheromone = new BlockPheromone(config.get(Configuration.CATEGORY_BLOCK, "pheromone", getNewBlockID()).getInt());
-	
+	blockPheromone = new BlockPheromone(config.get(
+		Configuration.CATEGORY_BLOCK, "pheromone", getNewBlockID())
+		.getInt());
+
 	blockAntChest = new BlockAntChest(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTCHEST_NAME,
 		getNewBlockID()).getInt());
@@ -342,7 +339,7 @@ public class Register {
 	config.save();
 
 	addBlock(blockPheromone, "Pheromone Block", "blockPheromone");
-	
+
 	addBlock(blockAntChest, "Scavenging Chest",
 		Reference.BLOCK_ANTCHEST_NAME);
 
@@ -384,23 +381,22 @@ public class Register {
 	}
 
     }
-    
-    public static void getConfigSettings(){
-	
+
+    public static void getConfigSettings() {
+
 	config.load();
-	
-	incubatorLarvaRenderDistance = config.get(Configuration.CATEGORY_GENERAL, "Render solarium larva within", 10).getInt();
-	
+
+	incubatorLarvaRenderDistance = config.get(
+		Configuration.CATEGORY_GENERAL, "Render solarium larva within",
+		10).getInt();
+
 	config.save();
-	
+
     }
 
     public static void registerItems() {
 
 	config.load();
-
-	itemAntBook = new ItemAntBook(config.get(Configuration.CATEGORY_ITEM,
-		Reference.ITEM_ANTBOOK_NAME, getNewItemID()).getInt());
 
 	itemExtractor = new ToolExtractor(config.get(
 		Configuration.CATEGORY_ITEM, Reference.ITEM_EXTRACTOR_NAME,
@@ -534,9 +530,6 @@ public class Register {
 	config.save();
 
 	// TODO
-	
-	addItem(itemAntBook, Reference.ANTBOOK_TITLE,
-		Reference.ITEM_ANTBOOK_NAME);
 
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 

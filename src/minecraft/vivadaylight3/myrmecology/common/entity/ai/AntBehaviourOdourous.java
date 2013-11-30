@@ -42,12 +42,12 @@ public class AntBehaviourOdourous extends EntityAIAntBehaviour {
 	}
 
     }
-    
+
     @Override
-    public EnumAntAIType getAIType(){
-	
+    public EnumAntAIType getAIType() {
+
 	return EnumAntAIType.DAMAGE;
-	
+
     }
 
     @Override

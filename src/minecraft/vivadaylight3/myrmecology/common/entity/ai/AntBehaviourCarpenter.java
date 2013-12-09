@@ -27,6 +27,7 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     int timeToWait = 0;
 
     BlockPosEntry bottom;
+    private boolean isMoving = false;
 
     public AntBehaviourCarpenter(IEntityAnt parEntityAnt, World parWorld,
 	    PathNavigate parPathFinder) {
@@ -44,6 +45,13 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 
     @Override
     public boolean shouldExecute() {
+	
+	if(isMoving && bottom != null && !Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(), bottom.xCoord, bottom.yCoord, bottom.zCoord, 1)){
+	    
+	    this.moveTo();
+	    return false;
+	    
+	}
 
 	if (Environment.hasPheromoneBlockInRadius(Environment
 		.getBlocksInRadius(world, getPosX(), getPosY(), getPosZ(), 5),
@@ -87,6 +95,7 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 			|| isNearBottom()) {
 
 		    timeToWait = getTimeToWait();
+		    this.isMoving = false;
 
 		    state = "chopTree";
 
@@ -201,6 +210,8 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     }
 
     private void moveTo() {
+	
+	this.isMoving  = true;
 
 	Log.debug("moveTo");
 

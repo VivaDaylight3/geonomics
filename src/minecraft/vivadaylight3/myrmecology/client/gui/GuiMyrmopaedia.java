@@ -1,12 +1,17 @@
 package vivadaylight3.myrmecology.client.gui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.MyrmecologyPacket;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 
@@ -18,8 +23,11 @@ import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.client.gui.content.AntBookText;
+import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
+import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Strings;
 import vivadaylight3.myrmecology.common.lib.Time;
@@ -271,7 +279,6 @@ public class GuiMyrmopaedia extends GuiContainer {
 		}
 
 	    }
-
 	}
 
     }
@@ -357,6 +364,8 @@ public class GuiMyrmopaedia extends GuiContainer {
 	super.updateScreen();
 	this.displayButtons();
 	this.displayButtons();
+	
+	container.update();
 
 	if (this.selectedAnt != null) {
 
@@ -473,6 +482,49 @@ public class GuiMyrmopaedia extends GuiContainer {
 
 	drawTexturedModelRectFromIcon(posX, posY, icon, 16, 16);
 
+    }
+    
+    @Override
+    public void onGuiClosed()
+    {
+	super.onGuiClosed();
+	
+	if(inventory.getStackInSlotOnClosing(0) == null){
+	    
+	    return;
+	    
+	}
+	
+	if(Environment.inventoryCanHold(inventory.getStackInSlotOnClosing(0), this.mc.thePlayer.inventory.mainInventory, 1)){
+	    
+	    Environment.addItemStackToInventory(inventory.getStackInSlotOnClosing(0), this.mc.thePlayer.inventory.mainInventory, 1, null);
+	    
+	}else{
+	    
+	    Environment.spawnItem(inventory.getStackInSlotOnClosing(0), this.mc.thePlayer.worldObj, this.mc.thePlayer.posX, this.mc.thePlayer.posY, this.mc.thePlayer.posZ);
+    
+	}
+	
+	/*
+	ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
+	DataOutputStream dos = new DataOutputStream(bos);
+
+	MyrmecologyPacket packet = new MyrmecologyPacket();
+	
+	try {
+	    packet.writeItemStack(inventory.getStackInSlotOnClosing(0), dos);
+	    packet.writeNBTTagCompound2(inventory.getStackInSlotOnClosing(0).stackTagCompound, dos);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	
+	packet.channel = "Myrmecology_Myrmopaedia";
+	packet.data = bos.toByteArray();
+	packet.length = bos.size();
+	
+	PacketHandler.handleMyrmopaediaDropPacket(packet, (EntityClientPlayerMP) player, inventory);
+	*/
+	
     }
 
     @Override

@@ -41,7 +41,7 @@ public class BlockAntFarm extends BlockContainer {
 	setHardness(1.0F);
 	setResistance(1.0F);
 	name = par2Name;
-	this.setBlockBounds(0.35F, 0.0F, 0.1F, 0.65F, 0.9F, 0.9F);
+	//this.setBlockBounds(0.35F, 0.0F, 0.1F, 0.65F, 0.9F, 0.9F);
 	// func_111022_d(Reference.MOD_ID.toLowerCase() + name);
     }
 
@@ -98,7 +98,7 @@ public class BlockAntFarm extends BlockContainer {
 	case 3:
 	    minX = 0.35F;
 	    minZ = 0.1F;
-	    maxX = 0.65f;
+	    maxX = 0.55f;
 	    maxY = 0.9f;
 	    maxZ = 0.9f;
 	    break;
@@ -107,9 +107,9 @@ public class BlockAntFarm extends BlockContainer {
 	case 2:
 	    minX = 0.1F;
 	    minZ = 0.35F;
-	    maxX = 1f;
+	    maxX = 0.9f;
 	    maxY = 0.9f;
-	    maxZ = 0.65f;
+	    maxZ = 0.55f;
 	    break;
 
 	}

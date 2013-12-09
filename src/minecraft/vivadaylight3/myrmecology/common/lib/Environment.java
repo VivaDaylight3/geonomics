@@ -589,8 +589,11 @@ public class Environment {
     public static void spawnItem(ItemStack item, World world, int x, int y,
 	    int z) {
 
-	EntityItem entityitem = new EntityItem(world, x, y, z, item);
-	world.spawnEntityInWorld(entityitem);
+	if(item != null){
+	    EntityItem entityitem = new EntityItem(world, x, y, z, item);
+	    world.spawnEntityInWorld(entityitem);
+	    
+	}
 
     }
 
@@ -631,6 +634,102 @@ public class Environment {
 
 	return change;
 
+    }
+    
+    public static int getBlockSide(String side, int metadata, int basemeta){
+	
+	if(side.equals("top")){
+	    
+	    return 1;
+	    
+	}else if(side.equals("bottom")){
+	    
+	    return 0;
+	    
+	}else if(side.equals("front")){
+	    
+	    if (metadata == basemeta){
+		
+		return 2;
+		
+	    }else if(metadata == basemeta + 1){
+		
+		return 5;
+		
+	    }else if(metadata == basemeta +2){
+		
+		return 3;
+		
+	    }else if(metadata == basemeta + 3){
+		
+		return 4;
+		
+	    }
+	    
+	}else if(side.equals("input")){
+	    
+	    if (metadata == basemeta){
+		
+		return 4;
+		
+	    }else if(metadata == basemeta + 1){
+		
+		return 2;
+		
+	    }else if(metadata == basemeta + 2){
+		
+		return 5;
+		
+	    }else if(metadata == basemeta + 3){
+		
+		return 3;
+		
+	    }
+	    
+	}else if(side.equals("output")){
+	    
+	    if (metadata == basemeta){
+		
+		return 5;
+		
+	    }else if(metadata == basemeta + 1){
+		
+		return 3;
+		
+	    }else if(metadata == basemeta + 2){
+		
+		return 4;
+		
+	    }else if(metadata == basemeta + 3){
+		
+		return 2;
+		
+	    }
+	    
+	}else if(side.equals("back")){
+	    
+	    if (metadata == basemeta){
+		
+		return 4;
+		
+	    }else if(metadata == basemeta + 1){
+		
+		return 3;
+		
+	    }else if(metadata == basemeta +2){
+		
+		return 5;
+		
+	    }else if(metadata == basemeta + 3){
+		
+		return 2;
+		
+	    }
+	    
+	}
+	
+	return -1;	
+	
     }
 
     /**
@@ -759,33 +858,80 @@ public class Environment {
      */
     public static boolean inventoryCanHold(ItemStack item,
 	    ItemStack[] inventory, int max) {
+	
+	if(item == null){
+	    
+	    return false;
+	    
+	}
 
-	int itemAmount = item.stackSize;
-
-	for (int k = 0; k < inventory.length; k++) {
-
-	    if (inventory[k] == null) {
-
-		itemAmount -= max;
-
-	    }
-
-	    if (inventory[k] == item) {
-
-		int slotSpace = max - inventory[k].stackSize;
-
-		itemAmount -= slotSpace;
-
-	    }
-
-	    if (itemAmount <= 0) {
-
+	int left = item.stackSize;
+	
+	for(int k = 0; k < item.stackSize; k++){
+	    
+	    Log.debug("");
+	    Log.debug("NEW STACK SIZE CHECK");
+	    
+	    if(left < 1){
+			    		
 		return true;
-
+		
+	    }
+	    
+	    for(int i = 0; i < inventory.length; i++){
+		
+		Log.debug("NEW SLOT CHECK");
+		 Log.debug("left == " + left);
+		
+		if(left < 1){
+		    
+		    return true;
+		    
+		}
+		
+		if(inventory[i] == null){
+		    
+		    Log.debug("inv[" + i + "] == null");
+		    
+		    if(left <= max){
+			
+			Log.debug("left <= max");
+			left -= max;
+			
+		    }
+		    
+		}else{
+		    
+		    if(inventory[i].getItem() == item.getItem() && inventory[i].getItemDamage() == item.getItemDamage()){
+						   
+			Log.debug("inv[" + i + "] == item");
+			
+			if(inventory[i].stackSize + left <= max){
+			    
+			    Log.debug("inv[" + i + "].stackSize + " + left + " <= " + max);
+			    left -= max;
+				
+			}else{
+				
+			    Log.debug("inv[" + i + "].stackSize + " + left + " > " + max);
+			    left -= (max - inventory[i].stackSize);
+				
+			}
+			    			
+		    }
+		    
+		}
+		
+	    }
+	    
+	    if(left < 1){
+		
+		return true;
+		
 	    }
 
 	}
-
+	    
 	return false;
 
     }
@@ -823,7 +969,7 @@ public class Environment {
 
 	}
 
-	return 0;
+	return -1;
 
     }
 
@@ -897,82 +1043,72 @@ public class Environment {
 
     public static void addItemStackToInventory(ItemStack item,
 	    ItemStack[] inventory, int max, TileEntity tileEntity) {
+	
+	int left = item.stackSize;
 
-	Log.debug("");
-	Log.debug("adding to inv");
-
-	int amount = item.stackSize;
-
-	for (int k = 0; k < inventory.length; k++) {
-
-	    Log.debug("k: " + k);
-
-	    while (getAvailableSlot(item, inventory, max) == k) {
-
-		Log.debug("getAvail == " + k);
-
-		if (inventory[k] == null) {
-
-		    Log.debug("inv[k] == null");
-
-		    if (amount > max) {
-
-			Log.debug("amount > max");
-
-			amount -= max;
-
-			inventory[k] = new ItemStack(item.getItem(), max,
-				item.getItemDamage());
-
-			Log.debug("inventory[k] == itemstack");
-
-			if (tileEntity != null) {
-			    tileEntity.onInventoryChanged();
-			}
-
-		    } else if (amount < max) {
-
-			Log.debug("amount < max");
-
-			inventory[k] = new ItemStack(item.getItem(), amount,
-				item.getItemDamage());
-
-			Log.debug("inventory[k] == itemstack");
-
-			amount = 0;
-
-			if (tileEntity != null) {
-			    tileEntity.onInventoryChanged();
-			}
-
-		    }
-
-		} else if (inventory[k] == item) {
-
-		    Log.debug("inv[k] == item");
-
-		    if (inventory[k].stackSize + item.stackSize <= max) {
-
-			Log.debug("stackSize + item.stacksize <= max");
-
-			inventory[k] = new ItemStack(item.getItem(), max,
-				item.getItemDamage());
-
-			Log.debug("inventory[k] == itemstack");
-
-			amount = max - inventory[k].stackSize;
-
-			if (tileEntity != null) {
-			    tileEntity.onInventoryChanged();
-			}
-
-		    }
-
-		}
-
+	for(int k = 0; k < item.stackSize; k++){
+	    
+	    if(left < 1){
+		
+		return;
+		
 	    }
+	    
+	    for(int i = 0; i < inventory.length; i++){
+		
+		if(left < 1){
+		    
+		    return;
+		    
+		}
+		
+		if(inventory[i] == null){
+		    
+		    if(left <= max){
+			
+			ItemStack stack = item.copy();
+			stack.stackSize = left;
+			inventory[i] = stack;
+			left -= max;
+			
+		    }else{
+			
+			ItemStack stack = item.copy();
+			stack.stackSize = max;
+			inventory[i] = stack;
+			left -= max;
+			
+		    }
+		    
+		}else{
+		    
+		    if(inventory[i].getItem() == item.getItem() && inventory[i].getItemDamage() == item.getItemDamage()){
+			
+			if(inventory[i].stackSize < max){
+			    
+			    if(inventory[i].stackSize + left <= max){
 
+				inventory[i].stackSize += left;
+				left -= max;
+				
+			    }else{
+				
+				left -= (max - inventory[i].stackSize);
+				inventory[i].stackSize = max;
+				
+			    }
+			    
+			}
+			
+		    }
+		    
+		}
+		
+	    }
+	    
 	}
+	
+	return;
 
     }
 

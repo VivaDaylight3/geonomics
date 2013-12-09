@@ -125,7 +125,7 @@ public class BlockIncubator extends BlockContainer {
 
     }
 
-    private boolean isPowered(int meta) {
+    public static boolean isPowered(int meta) {
 
 	if (meta >= POWERED_META) {
 

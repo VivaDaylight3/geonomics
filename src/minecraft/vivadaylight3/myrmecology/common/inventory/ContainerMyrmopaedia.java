@@ -250,6 +250,12 @@ public class ContainerMyrmopaedia extends Container {
 	// TODO Auto-generated method stub
 	return true;
     }
+    
+    public void update(){
+	
+	this.inventory.update();
+	
+    }
 
     public void writeToNBT() {
 	Nbt.setTag(containerStack);

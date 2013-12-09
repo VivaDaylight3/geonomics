@@ -10,14 +10,14 @@ import vivadaylight3.myrmecology.common.lib.Nbt;
 
 public class InventoryItem implements IInventory {
 
-    private ItemStack[] inventory = new ItemStack[1];
-
+    public ItemStack[] inventory = new ItemStack[1];
+    private ItemStack stack;
     public static String invName = "Myrmopedia";
 
     public InventoryItem(ItemStack itemStack) {
 
 	Nbt.setTag(itemStack);
-
+	stack = itemStack;
 	readFromNBT(itemStack.getTagCompound());
 
     }
@@ -160,6 +160,13 @@ public class InventoryItem implements IInventory {
 	    }
 	}
 
+    }
+    
+    public void update(){
+	
+	this.writeToNBT(stack.stackTagCompound);
+	this.readFromNBT(stack.stackTagCompound);
+	
     }
 
     public void writeToNBT(NBTTagCompound tagcompound) {

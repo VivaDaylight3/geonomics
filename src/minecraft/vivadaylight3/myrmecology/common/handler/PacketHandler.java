@@ -9,14 +9,18 @@ import java.io.IOException;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.MyrmecologyPacket;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
+import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Nbt;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 
@@ -53,7 +57,7 @@ public class PacketHandler implements IPacketHandler {
 	}
 
     }
-
+    
     public static Packet getTileEntityPacket(TileEntity te) {
 
 	ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
@@ -95,6 +99,46 @@ public class PacketHandler implements IPacketHandler {
 
 	return packet;
 
+    }
+    
+    public static void handleMyrmopaediaDropPacket(MyrmecologyPacket packet, EntityClientPlayerMP player, IInventory inv){
+	
+	ByteArrayDataInput data = ByteStreams.newDataInput(packet.data);
+	ItemStack stack = null;
+	
+	try {
+	    stack = packet.readItemStack(data);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	
+	NBTTagCompound comp = null;
+	
+	try {
+	    comp = packet.readNBTTagCompound(data);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	
+	if(stack == null){
+	    
+	    return;
+	    
+	}
+	
+	stack.setTagCompound(comp);
+	stack.readFromNBT(comp);
+	
+	if(Environment.inventoryCanHold(stack, player.inventory.mainInventory, 1)){
+	    
+	    Environment.addItemStackToInventory(stack, player.inventory.mainInventory, 1, null);
+	    
+	}else{
+	    
+	    Environment.spawnItem(stack, player.worldObj, player.posX, player.posY, player.posZ);
+    
+	}
+		
     }
 
     private void handleTileEntityPacket(Packet250CustomPayload packet,

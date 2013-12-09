@@ -15,6 +15,7 @@ import vivadaylight3.myrmecology.client.model.ModelAnt;
 import vivadaylight3.myrmecology.client.renderer.ItemRendererAntChest;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
 import vivadaylight3.myrmecology.client.renderer.RendererAntChest;
+import vivadaylight3.myrmecology.client.renderer.RendererAntFarm;
 import vivadaylight3.myrmecology.client.renderer.RendererIncubator;
 import vivadaylight3.myrmecology.common.CommonProxy;
 import vivadaylight3.myrmecology.common.Reference;
@@ -30,12 +31,12 @@ import vivadaylight3.myrmecology.common.handler.KeyBindingHandler;
 import vivadaylight3.myrmecology.common.handler.PlayerTickHandler;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityAntChest;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityAntFarm;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -85,22 +86,22 @@ public class ClientProxy extends CommonProxy {
 		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntCarpenter.class, new RenderAnt(
-		Resources.ENTITY_ANT_CARPENTER, new ModelAnt(), 0.5f));
+		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntOdourous.class, new RenderAnt(
-		Resources.ENTITY_ANT_ODOUROUS, new ModelAnt(), 0.5f));
+		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntDredger.class, new RenderAnt(
-		Resources.ENTITY_ANT_DREDGER, new ModelAnt(), 0.5f));
+		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntFungal.class, new RenderAnt(
-		Resources.ENTITY_ANT_FUNGAL, new ModelAnt(), 0.5f));
+		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntMound.class, new RenderAnt(
-		Resources.ENTITY_ANT_CARPENTER, new ModelAnt(), 0.5f));
+		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
 
 	addAntRenderer(EntityAntSprouter.class, new RenderAnt(
-		Resources.ENTITY_ANT_SPROUTER, new ModelAnt(), 0.5f));
+		Resources.ENTITY_ANT_SCAVENGER, new ModelAnt(), 0.5f));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAntChest.class,
 		new RendererAntChest());
@@ -109,8 +110,14 @@ public class ClientProxy extends CommonProxy {
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncubator.class,
 		new RendererIncubator());
-	MinecraftForgeClient.registerItemRenderer(
-		Register.blockAntChest.blockID, new ItemRendererAntChest());
+	
+	/*MinecraftForgeClient.registerItemRenderer(
+		Register.blockAntChest.blockID, new ItemRendererAntChest());*/
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAntFarm.class,
+		new RendererAntFarm());
+	/*MinecraftForgeClient.registerItemRenderer(
+		Register.blockAntFarm.blockID, new ItemRendererAntChest());*/
 
     }
 

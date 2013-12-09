@@ -19,11 +19,11 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     private String state = "none";
     private EntityItem targetItem;
     private TileEntity targetChest;
-    private String flag;
 
     public AntBehaviourScavenger(IEntityAnt parEntityAnt, World parWorld,
 	    PathNavigate parPathFinder) {
 	super(parEntityAnt, parWorld, parPathFinder);
+	this.targetChest = world.getBlockTileEntity((int)this.theAnt.getPosX(), (int)this.theAnt.getPosY() - 1, (int)this.theAnt.getPosZ());
     }
 
     @Override
@@ -35,33 +35,36 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 
     @Override
     public boolean shouldExecute() {
-
-	targetChest = Environment.getNearestAntChestFrom(Environment
-		.getTileEntitiesInRadius(world, getPosX(), getPosY(),
-			getPosZ(), 10), (Entity) this.theAnt, getPosX(),
-		getPosY(), getPosZ());
+	
+	if(targetChest == null){
+	    
+	    return false;
+	    
+	}
+	
+	Log.debug("should");
 
 	if (state.equalsIgnoreCase("none")
 		&& nearestItemExists(searchForNearestItem())) {
+	    
+	    Log.debug("should : state == none");
 
 	    targetItem = (EntityItem) searchForNearestItem();
-
-	    flag = "flag:itemPickup";
 
 	    state = "itemPickup";
 
 	    return true;
 
 	} else if (state.equalsIgnoreCase("itemPickup") && targetItem != null) {
-
-	    flag = "flag:itemPickup";
+	    
+	    Log.debug("should : state == itemPickup");
 
 	    return true;
 
 	} else if (state.equalsIgnoreCase("itemDropOff")
 		&& antChestExists(targetChest)) {
-
-	    flag = "flag:itemDropOff";
+	    
+	    Log.debug("should : state == itemDropOff");
 
 	    return true;
 
@@ -72,19 +75,33 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	}
 
     }
+    
+    private void reset(){
+	
+	state = "none";
+	targetItem = null;
+	
+    }
 
     @Override
     public void updateTask() {
 
-	if (flag.equalsIgnoreCase("flag:itemPickup")) {
+	if (state.equalsIgnoreCase("itemPickup")) {
+	    
+	    Log.debug("update : state == itemPickup");
 
 	    pickUpItem();
 
-	} else if (flag.equalsIgnoreCase("flag:itemDropOff")
-		|| state.equalsIgnoreCase("itemDropOff")) {
+	} else if (state.equalsIgnoreCase("itemDropOff")){
+	    
+	    Log.debug("update : state == itemDropOff");
 
 	    dropOffItem();
 
+	}else{
+	    
+	    reset();
+	    
 	}
 
     }
@@ -97,6 +114,8 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     }
 
     private Entity searchForNearestItem() {
+	
+	Log.debug("searchForNearest");
 
 	List list = Environment.getEntityItemsInRadius(world, this.getPosX(),
 		this.getPosY(), this.getPosZ(), 20);
@@ -107,12 +126,16 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
     }
 
     private boolean nearestItemExists(Entity entity) {
+	
+	Log.debug("nearestItemExists()");
 
 	if (entity != null) {
 
 	    if (entity instanceof EntityItem) {
 
 		if (!entity.isDead) {
+		    
+		    Log.debug("true");
 
 		    return true;
 
@@ -121,43 +144,54 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 	    }
 
 	}
+	
+	Log.debug("false");
+	reset();
 
 	return false;
 
     }
 
     private void pickUpItem() {
+	
+	Log.debug("pickUpItem()");
 
 	if (Environment.inventoryCanHold(targetItem.getEntityItem(),
 		this.theAnt.inventory, 64)) {
+	    
+	    Log.debug("pickUpItem() : canHold");
 
 	    this.theAnt.moveEntityTo(targetItem.posX, targetItem.posY,
 		    targetItem.posZ);
 
-	    int itemX = (int) Math.ceil(targetItem.posX), itemY = (int) Math
+	    double itemX = Math.ceil(targetItem.posX);
+	    
+	    double itemY = Math
 		    .ceil(targetItem.posY), itemZ = (int) Math
 		    .ceil(targetItem.posZ);
 
 	    if (targetItem.posX > getPosX()) {
 
-		itemY = (int) Math.floor(targetItem.posX);
+		itemY = Math.floor(targetItem.posX);
 
 	    }
 
 	    if (targetItem.posY > getPosY()) {
 
-		itemY = (int) Math.floor(targetItem.posY);
+		itemY = Math.floor(targetItem.posY);
 
 	    }
 
 	    if (targetItem.posY > getPosZ()) {
 
-		itemZ = (int) Math.floor(targetItem.posZ);
+		itemZ = Math.floor(targetItem.posZ);
 
 	    }
 
 	    if (Environment.coordinateIsCloseTo(itemX, itemY, itemZ,
 		    (int) getPosX(), (int) getPosY(), (int) getPosZ(), 2)) {
+		
+		Log.debug("pickUpItem() : isClose");
 
 		Environment.addItemStackToInventory(targetItem.getEntityItem(),
 			this.theAnt.inventory, 64, null);
@@ -166,28 +200,33 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 
 		state = "itemDropOff";
 
-		flag = "flag:itemDropOff";
-
 	    }
 
+	}else{
+	
+	    reset();
+	
 	}
 
     }
 
     private void dropOffItem() {
+	
+	Log.debug("dropOffItem");
 
 	this.theAnt.moveEntityTo(targetChest.xCoord, targetChest.yCoord,
 		targetChest.zCoord);
 
 	if (Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(),
 		targetChest.xCoord, targetChest.yCoord, targetChest.zCoord, 1)) {
+	    
+	    Log.debug("dropOffItem : isClose");
 
 	    if (Environment.inventoryCanHold(this.theAnt.inventory[0],
 		    ((TileEntityAntChest) this.targetChest).getContents(), 64)
 		    && this.theAnt.inventory[0] != null) {
-
-		// ((TileEntityAntChest) this.targetChest).getContents()[0] =
-		// this.theAnt.inventory[0];
+		
+		Log.debug("dropOffItem : canHold");
 
 		Environment.addItemStackToInventory(this.theAnt.inventory[0],
 			((TileEntityAntChest) this.targetChest).getContents(),
@@ -196,9 +235,6 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 		this.theAnt.inventory[0] = null;
 
 		this.state = "none";
-
-		flag = "flag:none";
-
 	    }
 
 	}
@@ -217,6 +253,8 @@ public class AntBehaviourScavenger extends EntityAIAntBehaviour {
 
 	}
 
+	reset();
+	
 	return false;
 
     }

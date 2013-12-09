@@ -20,11 +20,6 @@ public interface IEntityAnt {
     ItemStack[] inventory = new ItemStack[1];
 
     /**
-     * Holds the home block tile entity for the ant, usually used for AIs and getting items
-     */
-    TileEntity homeBlockTileEntity = null;
-
-    /**
      * Sends a message to the player when left clicking with a myrmopaedia
      * @param player
      */

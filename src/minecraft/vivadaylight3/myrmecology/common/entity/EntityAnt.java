@@ -55,6 +55,17 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 		(int) this.posY - 1, (int) this.posZ);
 
     }
+    
+    public void dropInventory(){
+	
+	if(this.inventory[0] != null){
+	
+	    this.dropItemStack(this.inventory[0]);
+	    this.inventory[0] = null;
+	
+	}
+	
+    }
 
     @Override
     public void dropItemStack(ItemStack stack) {
@@ -88,7 +99,7 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
     @Override
     public void moveEntityTo(double x, double y, double z) {
 
-	this.getNavigator().tryMoveToXYZ(x, y, z, 1.0D);
+	this.getNavigator().tryMoveToXYZ(x, y, z, 0.2D);
 
     }
 

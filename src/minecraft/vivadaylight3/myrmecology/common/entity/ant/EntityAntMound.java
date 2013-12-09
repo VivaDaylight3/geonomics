@@ -18,6 +18,13 @@ public class EntityAntMound extends EntityAnt {
 			new AntBehaviourMound(this, this.worldObj, this
 				.getNavigator()));
     }
+    
+    @Override
+    public boolean isAIEnabled() {
+
+	return false;
+
+    }
 
     @Override
     public ItemAnt getAnt() {

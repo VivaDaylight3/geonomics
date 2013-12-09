@@ -111,90 +111,6 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
     }
 
     /**
-     * Checks whether or not the ant can eat the food in the food slots
-     * 
-     * @param ItemAnt
-     * @return boolean
-     */
-    /*
-     * private boolean antCanEat(ItemAnt ant) {
-     * 
-     * for (int k = getFoodSlots()[0]; k <= getFoodSlots()[1]; k++) {
-     * 
-     * if (ant.eatsSweet()) {
-     * 
-     * System.out.println("Ant eats sweet");
-     * 
-     * for (int i = 0; i < AntProperties.getFoodSweet().length; k++) {
-     * 
-     * System.out.println("Looped Food: "+AntProperties.getFoodSweet()[i]);
-     * System.out.println("Contents: "+getContents()[k]);
-     * 
-     * if ((AntProperties.getFoodSweet()[i] == this.getContents()[k]
-     * .getItem().itemID)) {
-     * 
-     * return true;
-     * 
-     * }
-     * 
-     * }
-     * 
-     * }
-     * 
-     * if (ant.eatsSavoury()) {
-     * 
-     * System.out.println("Ant eats savoury");
-     * 
-     * for (int i = 0; i < AntProperties.getFoodSavoury().length; k++) {
-     * 
-     * if ((AntProperties.getFoodSavoury()[i] == this
-     * .getContents()[k].getItem().itemID)) {
-     * 
-     * return true;
-     * 
-     * }
-     * 
-     * }
-     * 
-     * }
-     * 
-     * if (ant.eatsMeat()) {
-     * 
-     * System.out.println("Ant eats meat");
-     * 
-     * for (int i = 0; i < AntProperties.getFoodMeat().length; k++) {
-     * 
-     * if ((AntProperties.getFoodMeat()[i] == this.getContents()[k]
-     * .getItem().itemID)) {
-     * 
-     * return true;
-     * 
-     * }
-     * 
-     * }
-     * 
-     * }
-     * 
-     * if (ant.eatsLarvae()) {
-     * 
-     * System.out.println("Ant eats larvae");
-     * 
-     * if (this.getContents()[k].getItemDamage() == 3) {
-     * 
-     * return true;
-     * 
-     * }
-     * 
-     * }
-     * 
-     * }
-     * 
-     * return false;
-     * 
-     * }
-     */
-
-    /**
      * Gets the breeding result from the ant farm's drone and queen
      * 
      * @return ItemStack
@@ -367,11 +283,11 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 		this.fertility, Metadata.getMetaLarva());
 
 	AntProperties.setProperties(result, false, 0);
+	
+	 Environment.addItemStackToInventory(result, getContents(),
+	 stackLimit, this);
 
-	// Environment.addItemStackToInventory(result, getContents(),
-	// stackLimit, this);
-
-	this.getContents()[7] = result;
+	//this.getContents()[7] = result;
 
 	this.decrStackSize(getQueenSlot(), 1);
 	this.onInventoryChanged();
@@ -518,7 +434,7 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 
     @Override
     public int getInventoryStackLimit() {
-	return 64;
+	return 1;
     }
 
     @Override

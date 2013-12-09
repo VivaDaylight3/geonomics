@@ -20,6 +20,7 @@ import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Log;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.block.BlockIncubator;
 import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Environment;
@@ -164,10 +165,10 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 	ItemStack result = new ItemStack(this.getLarva().getItem(),
 		((ItemAnt) this.getLarva().getItem()).getFertility(),
 		this.getResultAntMeta());
-
-	Environment.addItemStackToInventory(result, getContents(),
+	
+	    Environment.addItemStackToInventory(result, getContents(),
 		getMaxStackSize(), this);
-
+	
 	this.decrStackSize(ContainerIncubator.getLarvaSlot(), 1);
 	this.decrStackSize(ContainerIncubator.getFoodSlot(), 1);
 

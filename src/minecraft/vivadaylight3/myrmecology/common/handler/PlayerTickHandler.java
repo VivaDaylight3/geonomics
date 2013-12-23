@@ -49,13 +49,6 @@ public class PlayerTickHandler implements ITickHandler {
 
     public static void playerTick(EntityPlayer player) {
 
-	if (ticks % tickInterval == 0) {
-
-	    TreeDictionary.updateTreesFromOreDict();
-	    tickInterval = 1000000000;
-
-	}
-
     }
 
 }

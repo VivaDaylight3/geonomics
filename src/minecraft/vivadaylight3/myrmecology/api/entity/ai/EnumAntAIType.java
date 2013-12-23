@@ -8,8 +8,9 @@ import vivadaylight3.myrmecology.common.Register;
 
 /**
  * Each ant AI must be designated to an AI type
+ * 
  * @author samueltebbs
- *
+ * 
  */
 public enum EnumAntAIType {
 

@@ -27,6 +27,7 @@ public class Log {
 
     /**
      * Logs with the INFO level
+     * 
      * @param text
      */
     public static void info(String text) {
@@ -37,6 +38,7 @@ public class Log {
 
     /**
      * Logs with the SEVERER level
+     * 
      * @param text
      */
     public void severe(String text) {
@@ -47,6 +49,7 @@ public class Log {
 
     /**
      * Logs with the WARNING level
+     * 
      * @param text
      */
     public void warning(String text) {
@@ -57,6 +60,7 @@ public class Log {
 
     /**
      * Logs with the prefix DEBUG
+     * 
      * @param text
      */
     public static void debug(String text) {

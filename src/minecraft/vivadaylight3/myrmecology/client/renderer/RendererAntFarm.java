@@ -98,7 +98,8 @@ public class RendererAntFarm extends TileEntitySpecialRenderer {
 		if (itemstack.getItem() instanceof ItemAnt
 			&& itemstack.getItemDamage() == Metadata.getMetaQueen()
 			&& tileentity.worldObj.isAirBlock(tileentity.xCoord,
-				tileentity.yCoord + 1, tileentity.zCoord) && AntProperties.getMated(itemstack)) {
+				tileentity.yCoord + 1, tileentity.zCoord)
+			&& AntProperties.getMated(itemstack)) {
 
 		    EntityItem item = new EntityItem(tileentity.worldObj);
 		    item.setEntityItemStack(itemstack);

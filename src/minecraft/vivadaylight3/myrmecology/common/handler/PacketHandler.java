@@ -57,7 +57,7 @@ public class PacketHandler implements IPacketHandler {
 	}
 
     }
-    
+
     public static Packet getTileEntityPacket(TileEntity te) {
 
 	ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
@@ -100,45 +100,49 @@ public class PacketHandler implements IPacketHandler {
 	return packet;
 
     }
-    
-    public static void handleMyrmopaediaDropPacket(MyrmecologyPacket packet, EntityClientPlayerMP player, IInventory inv){
-	
+
+    public static void handleMyrmopaediaDropPacket(MyrmecologyPacket packet,
+	    EntityClientPlayerMP player, IInventory inv) {
+
 	ByteArrayDataInput data = ByteStreams.newDataInput(packet.data);
 	ItemStack stack = null;
-	
+
 	try {
 	    stack = packet.readItemStack(data);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	
+
 	NBTTagCompound comp = null;
-	
+
 	try {
 	    comp = packet.readNBTTagCompound(data);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	
-	if(stack == null){
-	    
+
+	if (stack == null) {
+
 	    return;
-	    
+
 	}
-	
+
 	stack.setTagCompound(comp);
 	stack.readFromNBT(comp);
-	
-	if(Environment.inventoryCanHold(stack, player.inventory.mainInventory, 1)){
-	    
-	    Environment.addItemStackToInventory(stack, player.inventory.mainInventory, 1, null);
-	    
-	}else{
-	    
-	    Environment.spawnItem(stack, player.worldObj, player.posX, player.posY, player.posZ);
-    
+
+	if (Environment.inventoryCanHold(stack, player.inventory.mainInventory,
+		1)) {
+
+	    Environment.addItemStackToInventory(stack,
+		    player.inventory.mainInventory, 1, null);
+
+	} else {
+
+	    Environment.spawnItem(stack, player.worldObj, player.posX,
+		    player.posY, player.posZ);
+
 	}
-		
+
     }
 
     private void handleTileEntityPacket(Packet250CustomPayload packet,

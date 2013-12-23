@@ -44,6 +44,7 @@ public class AntProperties {
 
     /**
      * Returns the completed lifetime in ticks
+     * 
      * @param itemStack
      * @return int
      */
@@ -54,9 +55,10 @@ public class AntProperties {
 	return Nbt.getInt(itemStack, LIFETIME_COMPLETE_KEY);
 
     }
-    
+
     /**
      * Sets the completed lifetime int ticks
+     * 
      * @param item
      * @param value
      */
@@ -70,6 +72,7 @@ public class AntProperties {
 
     /**
      * Sets whether or not the ant has been mated
+     * 
      * @param item
      * @param value
      */
@@ -83,6 +86,7 @@ public class AntProperties {
 
     /**
      * Gets whether or not the ant has mated
+     * 
      * @param itemStack
      * @return boolean
      */
@@ -96,6 +100,7 @@ public class AntProperties {
 
     /**
      * Sets the total maturing time
+     * 
      * @param itemStack
      * @param value
      */
@@ -109,6 +114,7 @@ public class AntProperties {
 
     /**
      * Gets the completed maturing time in ticks
+     * 
      * @param itemStack
      * @return int
      */

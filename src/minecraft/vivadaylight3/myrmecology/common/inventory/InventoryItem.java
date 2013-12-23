@@ -161,12 +161,12 @@ public class InventoryItem implements IInventory {
 	}
 
     }
-    
-    public void update(){
-	
+
+    public void update() {
+
 	this.writeToNBT(stack.stackTagCompound);
 	this.readFromNBT(stack.stackTagCompound);
-	
+
     }
 
     public void writeToNBT(NBTTagCompound tagcompound) {

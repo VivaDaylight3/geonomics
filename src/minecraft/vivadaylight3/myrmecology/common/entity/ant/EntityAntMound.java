@@ -18,7 +18,7 @@ public class EntityAntMound extends EntityAnt {
 			new AntBehaviourMound(this, this.worldObj, this
 				.getNavigator()));
     }
-    
+
     @Override
     public boolean isAIEnabled() {
 

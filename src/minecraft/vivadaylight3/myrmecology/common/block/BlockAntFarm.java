@@ -41,7 +41,7 @@ public class BlockAntFarm extends BlockContainer {
 	setHardness(1.0F);
 	setResistance(1.0F);
 	name = par2Name;
-	//this.setBlockBounds(0.35F, 0.0F, 0.1F, 0.65F, 0.9F, 0.9F);
+	// this.setBlockBounds(0.35F, 0.0F, 0.1F, 0.65F, 0.9F, 0.9F);
 	// func_111022_d(Reference.MOD_ID.toLowerCase() + name);
     }
 

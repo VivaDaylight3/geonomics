@@ -1,9 +1,6 @@
 package vivadaylight3.myrmecology.common.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,52 +12,42 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.common.Myrmecology;
-import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.EnumBlockSide;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Resources;
-import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
+import vivadaylight3.myrmecology.common.tileentity.TileEntityInfuser;
 
-public class BlockIncubator extends BlockContainer {
+public class BlockInfuser extends Block {
 
-    private String name;
+    String name;
+    Icon[] icons = new Icon[3];
 
-    private Icon iconTopOn;
-    private Icon iconTopOff;
-    private Icon iconFrontOn;
-    private Icon iconFrontOff;
-    private Icon iconSide;
-
-    public static final int POWERED_META = 4;
     public static final int UNPOWERED_META = 0;
+    public static final int POWERED_META = 4;
 
-    public float blockLightValue = 0.5f;
-
-    public BlockIncubator(int par1, String par2Name) {
-	super(par1, Material.wood);
-	setStepSound(Block.soundWoodFootstep);
-	setUnlocalizedName(par2Name);
+    public BlockInfuser(int par1, String name) {
+	super(par1, Material.iron);
 	setCreativeTab(Register.tabMyrmecology);
-	setHardness(1.0F);
-	setResistance(1.0F);
-	name = par2Name;
-	// func_111022_d(Reference.MOD_ID.toLowerCase() + name);
+	setUnlocalizedName(name);
+	this.name = name;
     }
 
     @Override
-    public void registerIcons(IconRegister iconRegister) {
+    public void registerIcons(IconRegister reg) {
 
-	iconTopOn = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_top_on");
-	iconTopOff = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_top_off");
-	iconFrontOn = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_front_on");
-	iconFrontOff = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_front_off");
-	iconSide = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
-		+ Reference.BLOCK_INCUBATOR_NAME + "_side");
+	icons[0] = reg.registerIcon(Resources.TEXTURE_PREFIX + name + "_top");
+	icons[1] = reg.registerIcon(Resources.TEXTURE_PREFIX + name + "_side");
+	icons[2] = reg.registerIcon(Resources.TEXTURE_PREFIX + name + "_front");
+	// icons[3] = reg.registerIcon(Resources.TEXTURE_PREFIX+name+"_bottom");
+
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, int meta) {
+
+	return new TileEntityInfuser();
+
     }
 
     @Override
@@ -76,53 +63,17 @@ public class BlockIncubator extends BlockContainer {
 
 	if (side == 0 || side == 1) {
 
-	    if (metadata >= POWERED_META) {
-
-		return iconTopOn;
-
-	    } else {
-
-		return iconTopOff;
-
-	    }
+	    return icons[0];
 
 	} else if (Environment.getBlockSide(side, metadata, base) == EnumBlockSide.FRONT) {
 
-	    if (metadata >= POWERED_META) {
-
-		return iconFrontOn;
-
-	    } else {
-
-		return iconFrontOff;
-
-	    }
+	    return icons[2];
 
 	} else {
 
-	    return iconSide;
+	    return icons[1];
 
 	}
-    }
-
-    @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z) {
-
-	return this.isPowered(world.getBlockMetadata(x, y, z)) ? 10 : 0;
-
-    }
-
-    @Override
-    public boolean isOpaqueCube() {
-
-	return false;
-
-    }
-
-    @Override
-    public boolean renderAsNormalBlock() {
-
-	return true;
 
     }
 
@@ -175,13 +126,6 @@ public class BlockIncubator extends BlockContainer {
     }
 
     @Override
-    public void updateTick(World world, int x, int y, int z, Random par5Random) {
-
-	this.updateMeta(world, x, y, z);
-
-    }
-
-    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z,
 	    EntityLivingBase entity, ItemStack par6ItemStack) {
 
@@ -216,11 +160,6 @@ public class BlockIncubator extends BlockContainer {
     }
 
     @Override
-    public int idDropped(int par1, Random par2Random, int par3) {
-	return Register.blockIncubator.blockID;
-    }
-
-    @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
 	    EntityPlayer player, int par6, float par7, float par8, float par9) {
 
@@ -228,7 +167,7 @@ public class BlockIncubator extends BlockContainer {
 
 	    TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-	    player.openGui(Myrmecology.instance, Register.GUI_ID_INCUBATOR,
+	    player.openGui(Myrmecology.instance, Register.GUI_ID_INFUSER,
 		    world, x, y, z);
 
 	    return true;
@@ -239,8 +178,4 @@ public class BlockIncubator extends BlockContainer {
 
     }
 
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-	return new TileEntityIncubator();
-    }
 }

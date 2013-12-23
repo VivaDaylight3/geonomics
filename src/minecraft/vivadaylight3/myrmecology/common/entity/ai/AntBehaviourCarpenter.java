@@ -45,12 +45,16 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
 
     @Override
     public boolean shouldExecute() {
-	
-	if(isMoving && bottom != null && !Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(), bottom.xCoord, bottom.yCoord, bottom.zCoord, 1)){
-	    
+
+	if (isMoving
+		&& bottom != null
+		&& !Environment.coordinateIsCloseTo(getPosX(), getPosY(),
+			getPosZ(), bottom.xCoord, bottom.yCoord, bottom.zCoord,
+			1)) {
+
 	    this.moveTo();
 	    return false;
-	    
+
 	}
 
 	if (Environment.hasPheromoneBlockInRadius(Environment
@@ -210,8 +214,8 @@ public class AntBehaviourCarpenter extends EntityAIAntBehaviour {
     }
 
     private void moveTo() {
-	
-	this.isMoving  = true;
+
+	this.isMoving = true;
 
 	Log.debug("moveTo");
 

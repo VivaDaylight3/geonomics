@@ -3,7 +3,6 @@ package vivadaylight3.myrmecology.common.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -208,17 +207,17 @@ public class Environment {
     public static Entity spawnEntity(World par0World, Entity entity,
 	    double par2, double par4, double par6) {
 
-	    if (entity != null && entity instanceof EntityLivingBase) {
-		EntityLiving entityliving = (EntityLiving) entity;
-		entity.setLocationAndAngles(par2, par4, par6,
-			MathHelper.wrapAngleTo180_float(par0World.rand
-				.nextFloat() * 360.0F), 0.0F);
-		entityliving.rotationYawHead = entityliving.rotationYaw;
-		entityliving.renderYawOffset = entityliving.rotationYaw;
-		entity.setPosition(par2, par4, par6);
-		par0World.spawnEntityInWorld(entity);
-		entityliving.playLivingSound();
-	    }
+	if (entity != null && entity instanceof EntityLivingBase) {
+	    EntityLiving entityliving = (EntityLiving) entity;
+	    entity.setLocationAndAngles(par2, par4, par6, MathHelper
+		    .wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F),
+		    0.0F);
+	    entityliving.rotationYawHead = entityliving.rotationYaw;
+	    entityliving.renderYawOffset = entityliving.rotationYaw;
+	    entity.setPosition(par2, par4, par6);
+	    par0World.spawnEntityInWorld(entity);
+	    entityliving.playLivingSound();
+	}
 
 	return entity;
 
@@ -589,10 +588,10 @@ public class Environment {
     public static void spawnItem(ItemStack item, World world, int x, int y,
 	    int z) {
 
-	if(item != null){
+	if (item != null) {
 	    EntityItem entityitem = new EntityItem(world, x, y, z, item);
 	    world.spawnEntityInWorld(entityitem);
-	    
+
 	}
 
     }
@@ -635,101 +634,101 @@ public class Environment {
 	return change;
 
     }
-    
-    public static int getBlockSide(String side, int metadata, int basemeta){
-	
-	if(side.equals("top")){
-	    
+
+    public static int getBlockSide(String side, int metadata, int basemeta) {
+
+	if (side.equals("top")) {
+
 	    return 1;
-	    
-	}else if(side.equals("bottom")){
-	    
+
+	} else if (side.equals("bottom")) {
+
 	    return 0;
-	    
-	}else if(side.equals("front")){
-	    
-	    if (metadata == basemeta){
-		
+
+	} else if (side.equals("front")) {
+
+	    if (metadata == basemeta) {
+
 		return 2;
-		
-	    }else if(metadata == basemeta + 1){
-		
+
+	    } else if (metadata == basemeta + 1) {
+
 		return 5;
-		
-	    }else if(metadata == basemeta +2){
-		
+
+	    } else if (metadata == basemeta + 2) {
+
 		return 3;
-		
-	    }else if(metadata == basemeta + 3){
-		
+
+	    } else if (metadata == basemeta + 3) {
+
 		return 4;
-		
+
 	    }
-	    
-	}else if(side.equals("input")){
-	    
-	    if (metadata == basemeta){
-		
+
+	} else if (side.equals("input")) {
+
+	    if (metadata == basemeta) {
+
 		return 4;
-		
-	    }else if(metadata == basemeta + 1){
-		
+
+	    } else if (metadata == basemeta + 1) {
+
 		return 2;
-		
-	    }else if(metadata == basemeta + 2){
-		
+
+	    } else if (metadata == basemeta + 2) {
+
 		return 5;
-		
-	    }else if(metadata == basemeta + 3){
-		
+
+	    } else if (metadata == basemeta + 3) {
+
 		return 3;
-		
+
 	    }
-	    
-	}else if(side.equals("output")){
-	    
-	    if (metadata == basemeta){
-		
+
+	} else if (side.equals("output")) {
+
+	    if (metadata == basemeta) {
+
 		return 5;
-		
-	    }else if(metadata == basemeta + 1){
-		
+
+	    } else if (metadata == basemeta + 1) {
+
 		return 3;
-		
-	    }else if(metadata == basemeta + 2){
-		
+
+	    } else if (metadata == basemeta + 2) {
+
 		return 4;
-		
-	    }else if(metadata == basemeta + 3){
-		
+
+	    } else if (metadata == basemeta + 3) {
+
 		return 2;
-		
+
 	    }
-	    
-	}else if(side.equals("back")){
-	    
-	    if (metadata == basemeta){
-		
+
+	} else if (side.equals("back")) {
+
+	    if (metadata == basemeta) {
+
 		return 4;
-		
-	    }else if(metadata == basemeta + 1){
-		
+
+	    } else if (metadata == basemeta + 1) {
+
 		return 3;
-		
-	    }else if(metadata == basemeta +2){
-		
+
+	    } else if (metadata == basemeta + 2) {
+
 		return 5;
-		
-	    }else if(metadata == basemeta + 3){
-		
+
+	    } else if (metadata == basemeta + 3) {
+
 		return 2;
-		
+
 	    }
-	    
+
 	}
-	
-	return -1;	
-	
+
+	return -1;
+
     }
 
     /**
@@ -742,7 +741,8 @@ public class Environment {
      * @return String 'top', 'bottom', 'front', 'input', 'output' or 'back'
      */
 
-    public static String getBlockSide(int side, int metadata, int basemeta) {
+    public static EnumBlockSide getBlockSide(int side, int metadata,
+	    int basemeta) {
 
 	int meta1 = basemeta;
 	int meta2 = basemeta + 1;
@@ -751,37 +751,37 @@ public class Environment {
 
 	if (side == 1) {
 
-	    return "top";
+	    return EnumBlockSide.TOP;
 
 	}
 	if (side == 0) {
 
-	    return "bottom";
+	    return EnumBlockSide.BOTTOM;
 
 	} else if ((metadata == meta1 && side == 2)
 		|| (metadata == meta2 && side == 5)
 		|| (metadata == meta3 && side == 3)
 		|| (metadata == meta4 && side == 4)) {
 
-	    return "front";
+	    return EnumBlockSide.FRONT;
 
 	} else if ((metadata == meta1 && side == 4)
 		|| (metadata == meta2 && side == 2)
 		|| (metadata == meta3 && side == 5)
 		|| (metadata == meta4 && side == 3)) {
 
-	    return "input";
+	    return EnumBlockSide.LEFT;
 
 	} else if ((metadata == meta1 && side == 5)
 		|| (metadata == meta2 && side == 3)
 		|| (metadata == meta3 && side == 4)
 		|| (metadata == meta4 && side == 2)) {
 
-	    return "output";
+	    return EnumBlockSide.RIGHT;
 
 	} else {
 
-	    return "back";
+	    return EnumBlockSide.BACK;
 
 	}
 
@@ -858,80 +858,84 @@ public class Environment {
      */
     public static boolean inventoryCanHold(ItemStack item,
 	    ItemStack[] inventory, int max) {
-	
-	if(item == null){
-	    
+
+	if (item == null) {
+
 	    return false;
-	    
+
 	}
 
 	int left = item.stackSize;
-	
-	for(int k = 0; k < item.stackSize; k++){
-	    
+
+	for (int k = 0; k < item.stackSize; k++) {
+
 	    Log.debug("");
 	    Log.debug("NEW STACK SIZE CHECK");
-	    
-	    if(left < 1){
-			    		
+
+	    if (left < 1) {
+
 		return true;
-		
+
 	    }
-	    
-	    for(int i = 0; i < inventory.length; i++){
-		
+
+	    for (int i = 0; i < inventory.length; i++) {
+
 		Log.debug("NEW SLOT CHECK");
-		 Log.debug("left == " + left);
-		
-		if(left < 1){
-		    
+		Log.debug("left == " + left);
+
+		if (left < 1) {
+
 		    return true;
-		    
+
 		}
-		
-		if(inventory[i] == null){
-		    
+
+		if (inventory[i] == null) {
+
 		    Log.debug("inv[" + i + "] == null");
-		    
-		    if(left <= max){
-			
+
+		    if (left <= max) {
+
 			Log.debug("left <= max");
 			left -= max;
-			
+
 		    }
-		    
-		}else{
-		    
-		    if(inventory[i].getItem() == item.getItem() && inventory[i].getItemDamage() == item.getItemDamage()){
-						   
+
+		} else {
+
+		    if (inventory[i].getItem() == item.getItem()
+			    && inventory[i].getItemDamage() == item
+				    .getItemDamage()) {
+
 			Log.debug("inv[" + i + "] == item");
-			
-			if(inventory[i].stackSize + left <= max){
-			    
-			    Log.debug("inv[" + i + "].stackSize + " + left + " <= " + max);
+
+			if (inventory[i].stackSize + left <= max) {
+
+			    Log.debug("inv[" + i + "].stackSize + " + left
+				    + " <= " + max);
 			    left -= max;
-				
-			}else{
-				
-			    Log.debug("inv[" + i + "].stackSize + " + left + " > " + max);
+
+			} else {
+
+			    Log.debug("inv[" + i + "].stackSize + " + left
+				    + " > " + max);
 			    left -= (max - inventory[i].stackSize);
-				
+
 			}
-			    			
+
 		    }
-		    
+
 		}
-		
+
 	    }
-	    
-	    if(left < 1){
-		
+
+	    if (left < 1) {
+
 		return true;
-		
+
 	    }
 
 	}
-	    
+
 	return false;
 
     }
@@ -1043,71 +1047,80 @@ public class Environment {
 
     public static void addItemStackToInventory(ItemStack item,
 	    ItemStack[] inventory, int max, TileEntity tileEntity) {
-	
+
+	addItemStackToInventory(item, inventory, max, tileEntity, 0);
+
+    }
+
+    public static void addItemStackToInventory(ItemStack item,
+	    ItemStack[] inventory, int max, TileEntity tileEntity, int startSlot) {
+
 	int left = item.stackSize;
 
-	for(int k = 0; k < item.stackSize; k++){
-	    
-	    if(left < 1){
-		
+	for (int k = 0; k < item.stackSize; k++) {
+
+	    if (left < 1) {
+
 		return;
-		
+
 	    }
-	    
-	    for(int i = 0; i < inventory.length; i++){
-		
-		if(left < 1){
-		    
+
+	    for (int i = startSlot; i < inventory.length; i++) {
+
+		if (left < 1) {
+
 		    return;
-		    
+
 		}
-		
-		if(inventory[i] == null){
-		    
-		    if(left <= max){
-			
+
+		if (inventory[i] == null) {
+
+		    if (left <= max) {
+
 			ItemStack stack = item.copy();
 			stack.stackSize = left;
 			inventory[i] = stack;
 			left -= max;
-			
-		    }else{
-			
+
+		    } else {
+
 			ItemStack stack = item.copy();
 			stack.stackSize = max;
 			inventory[i] = stack;
 			left -= max;
-			
+
 		    }
-		    
-		}else{
-		    
-		    if(inventory[i].getItem() == item.getItem() && inventory[i].getItemDamage() == item.getItemDamage()){
-			
-			if(inventory[i].stackSize < max){
-			    
-			    if(inventory[i].stackSize + left <= max){
+
+		} else {
+
+		    if (inventory[i].getItem() == item.getItem()
+			    && inventory[i].getItemDamage() == item
+				    .getItemDamage()) {
+
+			if (inventory[i].stackSize < max) {
+
+			    if (inventory[i].stackSize + left <= max) {
 
 				inventory[i].stackSize += left;
 				left -= max;
-				
-			    }else{
-				
+
+			    } else {
+
 				left -= (max - inventory[i].stackSize);
 				inventory[i].stackSize = max;
-				
+
 			    }
-			    
+
 			}
-			
+
 		    }
-		    
+
 		}
-		
+
 	    }
-	    
+
 	}
-	
+
 	return;
 
     }

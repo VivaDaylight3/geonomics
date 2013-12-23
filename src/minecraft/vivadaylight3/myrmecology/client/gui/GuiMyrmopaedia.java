@@ -1,19 +1,16 @@
 package vivadaylight3.myrmecology.client.gui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.MyrmecologyPacket;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -22,9 +19,7 @@ import vivadaylight3.myrmecology.api.breeding.BreedingRecipe;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
-import vivadaylight3.myrmecology.client.gui.content.AntBookText;
-import vivadaylight3.myrmecology.common.Reference;
-import vivadaylight3.myrmecology.common.handler.PacketHandler;
+import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
 import vivadaylight3.myrmecology.common.lib.Environment;
@@ -167,6 +162,21 @@ public class GuiMyrmopaedia extends GuiContainer {
     @Override
     public void drawScreen(int par1, int par2, float par3) {
 	super.drawScreen(par1, par2, par3);
+
+	if (this.selectedScreen != "names" && this.selectedScreen != "info"
+		&& this.selectedScreen != "breeding"
+		&& this.selectedScreen != "ants") {
+
+	    if (Myrmecology.proxy.myrmopaedia.pages[Integer
+		    .valueOf(selectedScreen)].getIconItemStacks().length > 0) {
+
+		this.drawImage(Myrmecology.proxy.myrmopaedia.pages[Integer
+			.valueOf(selectedScreen)].getIconItemStacks()[0], 290,
+			120, 48, 48);
+
+	    }
+
+	}
     }
 
     @Override
@@ -183,9 +193,9 @@ public class GuiMyrmopaedia extends GuiContainer {
 
 	    this.fontRenderer.drawSplitString(
 		    VALUE_CHAT_FORMAT
-			    + new AntBookText().getContent()[Integer
-				    .valueOf(selectedScreen) - 1], a, 24, 116,
-		    4210752);
+			    + Myrmecology.proxy.myrmopaedia.pages[Integer
+				    .valueOf(selectedScreen)].getText()[0], a,
+		    24, 116, 4210752);
 
 	}
 
@@ -364,7 +374,7 @@ public class GuiMyrmopaedia extends GuiContainer {
 	super.updateScreen();
 	this.displayButtons();
 	this.displayButtons();
-	
+
 	container.update();
 
 	if (this.selectedAnt != null) {
@@ -483,48 +493,51 @@ public class GuiMyrmopaedia extends GuiContainer {
 	drawTexturedModelRectFromIcon(posX, posY, icon, 16, 16);
 
     }
-    
-    @Override
-    public void onGuiClosed()
-    {
-	super.onGuiClosed();
-	
-	if(inventory.getStackInSlotOnClosing(0) == null){
-	    
-	    return;
-	    
-	}
-	
-	if(Environment.inventoryCanHold(inventory.getStackInSlotOnClosing(0), this.mc.thePlayer.inventory.mainInventory, 1)){
-	    
-	    Environment.addItemStackToInventory(inventory.getStackInSlotOnClosing(0), this.mc.thePlayer.inventory.mainInventory, 1, null);
-	    
-	}else{
-	    
-	    Environment.spawnItem(inventory.getStackInSlotOnClosing(0), this.mc.thePlayer.worldObj, this.mc.thePlayer.posX, this.mc.thePlayer.posY, this.mc.thePlayer.posZ);
-    
-	}
-	
-	/*
-	ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
-	DataOutputStream dos = new DataOutputStream(bos);
 
-	MyrmecologyPacket packet = new MyrmecologyPacket();
-	
-	try {
-	    packet.writeItemStack(inventory.getStackInSlotOnClosing(0), dos);
-	    packet.writeNBTTagCompound2(inventory.getStackInSlotOnClosing(0).stackTagCompound, dos);
-	} catch (IOException e) {
-	    e.printStackTrace();
+    @Override
+    public void onGuiClosed() {
+	super.onGuiClosed();
+
+	if (inventory.getStackInSlotOnClosing(0) == null) {
+
+	    return;
+
 	}
-	
-	packet.channel = "Myrmecology_Myrmopaedia";
-	packet.data = bos.toByteArray();
-	packet.length = bos.size();
-	
-	PacketHandler.handleMyrmopaediaDropPacket(packet, (EntityClientPlayerMP) player, inventory);
-	*/
-	
+
+	if (Environment.inventoryCanHold(inventory.getStackInSlotOnClosing(0),
+		this.mc.thePlayer.inventory.mainInventory, 1)) {
+
+	    Environment.addItemStackToInventory(
+		    inventory.getStackInSlotOnClosing(0),
+		    this.mc.thePlayer.inventory.mainInventory, 1, null);
+
+	} else {
+
+	    Environment.spawnItem(inventory.getStackInSlotOnClosing(0),
+		    this.mc.thePlayer.worldObj, this.mc.thePlayer.posX,
+		    this.mc.thePlayer.posY, this.mc.thePlayer.posZ);
+
+	}
+
+	/*
+	 * ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
+	 * DataOutputStream dos = new DataOutputStream(bos);
+	 * 
+	 * MyrmecologyPacket packet = new MyrmecologyPacket();
+	 * 
+	 * try { packet.writeItemStack(inventory.getStackInSlotOnClosing(0),
+	 * dos);
+	 * packet.writeNBTTagCompound2(inventory.getStackInSlotOnClosing(0)
+	 * .stackTagCompound, dos); } catch (IOException e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * packet.channel = "Myrmecology_Myrmopaedia"; packet.data =
+	 * bos.toByteArray(); packet.length = bos.size();
+	 * 
+	 * PacketHandler.handleMyrmopaediaDropPacket(packet,
+	 * (EntityClientPlayerMP) player, inventory);
+	 */
+
     }
 
     @Override
@@ -536,6 +549,24 @@ public class GuiMyrmopaedia extends GuiContainer {
 	int l = (this.height - this.ySize) / 2;
 	this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 	int i1;
+
+    }
+
+    private void drawImage(ResourceLocation path, int x, int y, int x2, int y2) {
+
+	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	this.mc.getTextureManager().bindTexture(path);
+	Tessellator tessellator = Tessellator.instance;
+	tessellator.startDrawingQuads();
+	tessellator.addVertexWithUV(x + 0, y + y2, this.zLevel, 0, 1);// Bottom
+								      // left
+	tessellator.addVertexWithUV(x + x2, y + y2, this.zLevel, 1, 1);// Bottom
+								       // right
+	tessellator.addVertexWithUV(x + x2, y + 0, this.zLevel, 1, 0);// Top
+								      // right
+	tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, 0, 0); // Top
+								      // left
+	tessellator.draw();
 
     }
 

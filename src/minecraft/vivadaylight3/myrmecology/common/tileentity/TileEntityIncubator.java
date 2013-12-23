@@ -24,6 +24,7 @@ import vivadaylight3.myrmecology.common.block.BlockIncubator;
 import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Environment;
+import vivadaylight3.myrmecology.common.item.ItemUpgrade;
 
 import com.google.common.io.ByteArrayDataInput;
 
@@ -39,10 +40,8 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 
     private static final String RESULT_ANT_META_KEY = "ResultAntMeta";
 
-    // Will be changeable via a gui button, one for each ant type but larvae
     private int resultAntMeta = -1;
 
-    // Called in GuiIncubator.actionPerformed()
     public void setResultAntMeta(int meta) {
 
 	this.resultAntMeta = meta;
@@ -100,13 +99,31 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 
     }
 
+    public int getUpgradeSlot() {
+
+	return 17;
+
+    }
+
     private int getMaturingTime() {
 
 	if (this.getLarva() != null) {
 
 	    if (this.getLarva().getItem() instanceof ItemAnt) {
 
-		return ((ItemAnt) this.getLarva().getItem()).getMaturingTime();
+		int time = ((ItemAnt) this.getLarva().getItem())
+			.getMaturingTime();
+
+		if (this.getStackInSlot(this.getUpgradeSlot()) != null
+			&& this.getStackInSlot(this.getUpgradeSlot()).getItem() instanceof ItemUpgrade
+			&& this.getStackInSlot(this.getUpgradeSlot())
+				.getItemDamage() == 0) {
+
+		    return time / 2;
+
+		}
+
+		return time;
 
 	    }
 
@@ -165,10 +182,10 @@ public class TileEntityIncubator extends TileEntity implements IInventory,
 	ItemStack result = new ItemStack(this.getLarva().getItem(),
 		((ItemAnt) this.getLarva().getItem()).getFertility(),
 		this.getResultAntMeta());
-	
-	    Environment.addItemStackToInventory(result, getContents(),
+
+	Environment.addItemStackToInventory(result, getContents(),
 		getMaxStackSize(), this);
-	
+
 	this.decrStackSize(ContainerIncubator.getLarvaSlot(), 1);
 	this.decrStackSize(ContainerIncubator.getFoodSlot(), 1);
 

@@ -10,9 +10,12 @@ public class Resources {
     public static final String TEXTURE_PREFIX = Reference.MOD_ID.toLowerCase()
 	    + ":";
 
+    public static final String ASSETS_LOCATION = "assets/"
+	    + Reference.MOD_ID.toLowerCase() + "/";
     public static final String TEXTURE_LOCATION = "textures/";
     public static final String SOUND_LOCATION = "sound/";
     public static final String LANG_LOCATION = "lang/";
+    public static final String BOOK_LOCATION = "/" + ASSETS_LOCATION + "book/";
 
     public static final String MODEL_LOCATION = TEXTURE_LOCATION + "models/";
     public static final String ARMOUR_LOCATION = TEXTURE_LOCATION + "armour/";
@@ -66,6 +69,9 @@ public class Resources {
 
     public static final ResourceLocation GUI_ANTBOOK = getResourceLocation(GUI_LOCATION
 	    + Reference.ITEM_ANTBOOK_NAME + FORMAT);
+
+    public static final ResourceLocation GUI_INFUSER = getResourceLocation(GUI_LOCATION
+	    + Reference.BLOCK_INFUSER_NAME + FORMAT);
 
     private static ResourceLocation getResourceLocation(String path) {
 

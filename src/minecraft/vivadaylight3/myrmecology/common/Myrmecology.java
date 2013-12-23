@@ -7,6 +7,7 @@ import vivadaylight3.myrmecology.client.ClientProxy;
 import vivadaylight3.myrmecology.common.handler.GuiHandler;
 import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.lib.Resources;
+import vivadaylight3.myrmecology.common.lib.TreeDictionary;
 import vivadaylight3.myrmecology.common.lib.Url;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.Mod;
@@ -99,6 +100,8 @@ public class Myrmecology {
 	Log.info("Registering tree dictionary");
 	Register.registerTreeDictionary();
 
+	proxy.readBooks();
+
     }
 
     @EventHandler
@@ -126,6 +129,8 @@ public class Myrmecology {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+
+	TreeDictionary.updateTreesFromOreDict();
 
     }
 

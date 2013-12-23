@@ -24,6 +24,7 @@ import vivadaylight3.myrmecology.common.block.BlockAntChest;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
+import vivadaylight3.myrmecology.common.block.BlockInfuser;
 import vivadaylight3.myrmecology.common.block.BlockPheromone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillDesert;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillForest;
@@ -41,7 +42,10 @@ import vivadaylight3.myrmecology.common.entity.ant.EntityAntOdourous;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntScavenger;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntSprouter;
 import vivadaylight3.myrmecology.common.handler.WorldGen;
+import vivadaylight3.myrmecology.common.item.ItemAntBag;
 import vivadaylight3.myrmecology.common.item.ItemMyrmopaedia;
+import vivadaylight3.myrmecology.common.item.ItemPheromone;
+import vivadaylight3.myrmecology.common.item.ItemUpgrade;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
 import vivadaylight3.myrmecology.common.item.ant.AntBarbaric;
 import vivadaylight3.myrmecology.common.item.ant.AntCarpenter;
@@ -77,6 +81,8 @@ import vivadaylight3.myrmecology.common.item.chamber.ChamberOdourous;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberPlentiful;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberScavenger;
 import vivadaylight3.myrmecology.common.item.chamber.ChamberSprouter;
+import vivadaylight3.myrmecology.common.lib.InfuserRecipe;
+import vivadaylight3.myrmecology.common.lib.InfuserRecipeRegistry;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.TreeDictionary;
 import vivadaylight3.myrmecology.common.lib.Url;
@@ -92,6 +98,7 @@ public class Register {
     public static Configuration config;
 
     public static CreativeTabs tabMyrmecology;
+    public static CreativeTabs tabAnts;
     public static final Material antHill = new Material(MapColor.dirtColor);
 
     private static ArrayList<ItemAnt> antList = new ArrayList<ItemAnt>();
@@ -118,6 +125,8 @@ public class Register {
     public static Achievement achieveBreedAnts;
     public static Achievement achieveSpawnAnts;
     public static Achievement achieveAntDimension;
+    public static Achievement achieveUpgrade;
+    public static Achievement achieveInfuser;
 
     public static int entityAntForestID;
     public static int entityAntCarpenterID;
@@ -132,6 +141,7 @@ public class Register {
     public static final int GUI_ID_MYRMOPAEDIA = 2;
     public static final int GUI_ID_INCUBATOR = 3;
     public static final int GUI_ID_ANTCHEST = 4;
+    public static final int GUI_ID_INFUSER = 5;
 
     public static int latestItemID = 0;
     public static int latestBlockID = 0;
@@ -142,11 +152,15 @@ public class Register {
     public static Block blockFungi;
     public static Block blockAntChest;
     public static Block blockPheromone;
+    public static Block blockInfuser;
 
     // TODO
     public static ToolExtractor itemExtractor;
     public static ItemMyrmopaedia itemAntopedia;
     public static ItemBreedingChamber itemBreedingChamber;
+    public static ItemPheromone itemPheromoneBottle;
+    public static ItemUpgrade itemUpgrade;
+    public static ItemAntBag itemAntBag;
 
     public static ChamberCommon chamberCommon;
     public static ChamberHarvester chamberHarvester;
@@ -227,8 +241,8 @@ public class Register {
 
     public static void registerAchievements() {
 
-	achieveReadBook = addAchievement(27, "Myrmecologist", "Read an myrmopaedia", 0, 0, null, new ItemStack(
-		itemAntopedia));
+	achieveReadBook = addAchievement(27, "Myrmecologist",
+		"Read an myrmopaedia", 0, 0, null, new ItemStack(itemAntopedia));
 	achieveExtractAnts = addAchievement(28, "Extraction Completion",
 		"Extract some ants from an ant hill!", 2, 0, achieveReadBook,
 		new ItemStack(itemExtractor));
@@ -246,6 +260,15 @@ public class Register {
 			+ " and make it do your bidding", -2, 2,
 		achieveBreedAnts,
 		new ItemStack(antForest, 1, Metadata.getMetaWorker()));
+
+	achieveUpgrade = addAchievement(33, "Myrmecological Upgrades",
+		"Place and use a formicarium or solarium upgrade", 2, 4,
+		achieveIncubateAnts, new ItemStack(itemUpgrade, 1, 0));
+	
+	achieveInfuser = addAchievement(34, "Pheromonic Infuser",
+		"Place and use a pheromonic infuser", 0, 4, achieveBreedAnts,
+		new ItemStack(blockInfuser));
+
 	achieveAntDimension = addAchievement(32, "Holiday Destination",
 		"CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(
 			blockAntChest));
@@ -307,6 +330,10 @@ public class Register {
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INCUBATOR_NAME,
 		getNewBlockID()).getInt(), Reference.BLOCK_INCUBATOR_NAME);
 
+	blockInfuser = new BlockInfuser(config.get(
+		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INFUSER_NAME,
+		getNewBlockID()).getInt(), Reference.BLOCK_INFUSER_NAME);
+
 	hillForest = new AntHillForest(config.get(Configuration.CATEGORY_BLOCK,
 		Reference.HILL_FOREST_NAME, getNewBlockID()).getInt());
 
@@ -337,6 +364,9 @@ public class Register {
 		Material.ground);
 
 	config.save();
+
+	addBlock(blockInfuser, "Pheromonic Infuser",
+		Reference.BLOCK_INFUSER_NAME);
 
 	addBlock(blockPheromone, "Pheromone Block", "blockPheromone");
 
@@ -527,9 +557,22 @@ public class Register {
 	antFungal = new AntFungal(config.get(Configuration.CATEGORY_ITEM,
 		Reference.ANT_FUNGAL_NAME, getNewItemID()).getInt());
 
+	itemPheromoneBottle = new ItemPheromone(config.get(
+		Configuration.CATEGORY_ITEM, Reference.ITEM_PHEROMONE_NAME,
+		getNewItemID()).getInt(), Reference.ITEM_PHEROMONE_NAME);
+
+	itemUpgrade = new ItemUpgrade(config.get(Configuration.CATEGORY_ITEM,
+		Reference.ITEM_UPGRADE_NAME, getNewItemID()).getInt(),
+		Reference.ITEM_UPGRADE_NAME);
+
+	itemAntBag = new ItemAntBag(config.get(Configuration.CATEGORY_ITEM,
+		Reference.ITEM_ANTBAG_NAME, getNewItemID()).getInt(),
+		Reference.ITEM_ANTBAG_NAME);
+
 	config.save();
 
 	// TODO
+	addItem(itemAntBag, "Ant Canister", Reference.ITEM_ANTBAG_NAME);
 
 	addItem(itemExtractor, "Ant Extractor", Reference.ITEM_EXTRACTOR_NAME);
 
@@ -653,6 +696,10 @@ public class Register {
 	addItem(antFungal, antFungal.getNames(),
 		Reference.MOD_ID + antFungal.getSpeciesSubName());
 
+	addItem(itemUpgrade, new String[] { "Solarium Upgrade",
+		"Formicarium Upgrade" }, Reference.MOD_ID
+		+ Reference.ITEM_UPGRADE_NAME);
+
     }
 
     // TODO
@@ -687,7 +734,7 @@ public class Register {
 	tabMyrmecology = new CreativeTabs("tab" + Reference.MOD_ID) {
 
 	    public ItemStack getIconItemStack() {
-		return new ItemStack(antForest, 1, 0);
+		return new ItemStack(itemAntopedia, 1, 0);
 	    }
 
 	};
@@ -695,6 +742,18 @@ public class Register {
 	LanguageRegistry.instance().addStringLocalization(
 		"itemGroup." + "tab" + Reference.MOD_ID, "en_US",
 		Reference.MOD_ID);
+
+	tabAnts = new CreativeTabs("tab" + Reference.MOD_ID + "Ants") {
+
+	    public ItemStack getIconItemStack() {
+		return new ItemStack(antForest, 1, 0);
+	    }
+
+	};
+
+	LanguageRegistry.instance().addStringLocalization(
+		"itemGroup." + "tab" + Reference.MOD_ID + "Ants", "en_US",
+		Reference.MOD_ID + " Ants");
 
     }
 
@@ -726,6 +785,11 @@ public class Register {
 
     public static void registerRecipes() {
 
+	InfuserRecipeRegistry
+		.addRecipe(new InfuserRecipe(new ItemStack(blockInfuser), true,
+			new ItemStack[] { new ItemStack(itemPheromoneBottle),
+				new ItemStack(Block.dirt) }));
+
 	GameRegistry.addRecipe(new ItemStack(blockIncubator, 1), "wgw", "g g",
 		"wrw", 'w', new ItemStack(Block.woodSingleSlab), 'g',
 		new ItemStack(Block.glass), 'r', new ItemStack(
@@ -747,6 +811,16 @@ public class Register {
 		" d ", 's', new ItemStack(Item.shovelIron), 'd', new ItemStack(
 			Item.dyePowder, 1, 2), 'i', new ItemStack(
 			Item.ingotIron));
+
+	GameRegistry
+		.addRecipe(new ItemStack(itemUpgrade, 1, 0), "rgr", "gpg",
+			"rgr", 'r', Item.redstone, 'g', Item.ingotGold, 'p',
+			Item.paper);
+	GameRegistry.addRecipe(new ItemStack(itemUpgrade, 1, 1), "sgs", "gpg",
+		"sgs", 's', Item.sugar, 'g', Item.ingotGold, 'p', Item.paper);
+
+	GameRegistry.addShapelessRecipe(new ItemStack(blockPheromone),
+		itemPheromoneBottle, Block.dirt);
 
 	for (int k = 0; k < chamberList.size(); k++) {
 

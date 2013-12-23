@@ -53,12 +53,15 @@ public class ContainerAntFarm extends Container {
 	    }
 	}
 
+	slotID++;
+	addSlotToContainer(new Slot(tileEntity, slotID, 6, 17 + 18));
+
 	bindPlayerInventory(inventoryPlayer);
     }
 
     public static int getInventorySize() {
 
-	return numRows * numColumns + 3;
+	return numRows * numColumns + 4;
 
     }
 

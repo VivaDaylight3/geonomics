@@ -30,6 +30,7 @@ public class EntityAIAntBehaviour extends EntityAIBase {
 
     /**
      * Returns the type of ant behaviour
+     * 
      * @return EnumAntAIType
      */
     public EnumAntAIType getAIType() {

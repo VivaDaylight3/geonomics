@@ -64,7 +64,7 @@ public class ToolExtractor extends ItemTool {
 
 	    Environment.addItemStackToInventory(ant,
 		    ((EntityPlayer) player).inventory.mainInventory, 1, null);
-	    
+
 	    ((EntityAnt) target).dropInventory();
 
 	    target.setDead();

@@ -17,7 +17,7 @@ public class ContainerIncubator extends Container {
     private static int numRows = 3;
     private static int numColumns = 5;
 
-    private static int inventorySize = numRows * numColumns + 2;
+    private static int inventorySize = numRows * numColumns + 3;
     public static final int stackLimit = 64;
 
     public ContainerIncubator(InventoryPlayer inventoryPlayer,
@@ -42,6 +42,9 @@ public class ContainerIncubator extends Container {
 
 	    }
 	}
+
+	slotID++;
+	addSlotToContainer(new SlotSizeable(this.tileEntity, slotID, 8, 17, 1));
 
 	bindPlayerInventory(inventoryPlayer);
     }

@@ -1,6 +1,10 @@
 package vivadaylight3.myrmecology.client;
 
+import java.io.InputStream;
 import java.util.EnumSet;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.settings.KeyBinding;
@@ -10,7 +14,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import org.lwjgl.input.Keyboard;
+import org.w3c.dom.Document;
 
+import vivadaylight3.myrmecology.client.gui.content.Book;
 import vivadaylight3.myrmecology.client.model.ModelAnt;
 import vivadaylight3.myrmecology.client.renderer.ItemRendererAntChest;
 import vivadaylight3.myrmecology.client.renderer.RenderAnt;
@@ -18,6 +24,7 @@ import vivadaylight3.myrmecology.client.renderer.RendererAntChest;
 import vivadaylight3.myrmecology.client.renderer.RendererAntFarm;
 import vivadaylight3.myrmecology.client.renderer.RendererIncubator;
 import vivadaylight3.myrmecology.common.CommonProxy;
+import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.entity.ant.EntityAntCarpenter;
@@ -65,12 +72,13 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerKeyBindings() {
-
-	KeyBinding[] key = { new KeyBinding("Receive "
-		+ Reference.ANTBOOK_TITLE, Keyboard.KEY_L) };
-	boolean[] repeat = { false };
-	KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler("Receive "
-		+ Reference.ANTBOOK_TITLE, key, repeat));
+	/*
+	 * KeyBinding[] key = { new KeyBinding("Receive " +
+	 * Reference.ANTBOOK_TITLE, Keyboard.KEY_L) }; boolean[] repeat = {
+	 * false }; KeyBindingRegistry.registerKeyBinding(new
+	 * KeyBindingHandler("Receive " + Reference.ANTBOOK_TITLE, key,
+	 * repeat));
+	 */
 
 	TickRegistry
 		.registerTickHandler(
@@ -110,20 +118,50 @@ public class ClientProxy extends CommonProxy {
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncubator.class,
 		new RendererIncubator());
-	
-	/*MinecraftForgeClient.registerItemRenderer(
-		Register.blockAntChest.blockID, new ItemRendererAntChest());*/
-	
+
+	/*
+	 * MinecraftForgeClient.registerItemRenderer(
+	 * Register.blockAntChest.blockID, new ItemRendererAntChest());
+	 */
+
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAntFarm.class,
 		new RendererAntFarm());
-	/*MinecraftForgeClient.registerItemRenderer(
-		Register.blockAntFarm.blockID, new ItemRendererAntChest());*/
+	/*
+	 * MinecraftForgeClient.registerItemRenderer(
+	 * Register.blockAntFarm.blockID, new ItemRendererAntChest());
+	 */
 
     }
 
     public String getCurrentLanguage() {
 
 	return FMLClientHandler.instance().getCurrentLanguage();
+
+    }
+
+    @Override
+    public void readBooks() {
+
+	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	Book.initIcons();
+	this.myrmopaedia = new Book(readDocument(Resources.BOOK_LOCATION
+		+ "myrmopaedia.xml", dbf));
+
+    }
+
+    private Document readDocument(String path, DocumentBuilderFactory dbf) {
+
+	InputStream in = Myrmecology.class.getResourceAsStream(path);
+	try {
+	    DocumentBuilder db = dbf.newDocumentBuilder();
+	    Document doc = db.parse(in);
+	    doc.getDocumentElement().normalize();
+	    return doc;
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+
+	return null;
 
     }
 

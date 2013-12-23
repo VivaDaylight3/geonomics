@@ -1,6 +1,7 @@
 package vivadaylight3.myrmecology.common.tileentity;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import net.minecraft.block.BlockChest;
@@ -15,7 +16,9 @@ import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.item.ItemBreedingChamber;
 import vivadaylight3.myrmecology.api.util.AntProperties;
 import vivadaylight3.myrmecology.api.util.Metadata;
+import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.inventory.ContainerAntFarm;
+import vivadaylight3.myrmecology.common.item.ItemUpgrade;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Time;
 
@@ -283,11 +286,23 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 		this.fertility, Metadata.getMetaLarva());
 
 	AntProperties.setProperties(result, false, 0);
-	
-	 Environment.addItemStackToInventory(result, getContents(),
-	 stackLimit, this);
 
-	//this.getContents()[7] = result;
+	Environment.addItemStackToInventory(result, getContents(), stackLimit,
+		this);
+
+	int num = new Random().nextInt(((ItemAnt) result.getItem())
+		.getFertility() * 3);
+	ItemStack stack = new ItemStack(Register.itemPheromoneBottle, num);
+
+	if (Environment.inventoryCanHold(stack, getContents(), stackLimit)
+		&& stack.stackSize > 0) {
+
+	    Environment.addItemStackToInventory(stack, getContents(),
+		    stackLimit, this);
+
+	}
+
+	stack = null;
 
 	this.decrStackSize(getQueenSlot(), 1);
 	this.onInventoryChanged();
@@ -316,8 +331,23 @@ public class TileEntityAntFarm extends TileEntity implements IInventory {
 
     private int getLifetimeTotal() {
 
-	return ((ItemAnt) this.getQueen().getItem()).getLifetime();
+	int time = ((ItemAnt) this.getQueen().getItem()).getLifetime();
 
+	if (this.getStackInSlot(this.getUpgradeSlot()) != null
+		&& this.getStackInSlot(this.getUpgradeSlot()).getItem() instanceof ItemUpgrade
+		&& this.getStackInSlot(this.getUpgradeSlot()).getItemDamage() == 1) {
+
+	    return time / 2;
+
+	}
+
+	return time;
+
+    }
+
+    private int getUpgradeSlot() {
+	// TODO Auto-generated method stub
+	return 18;
     }
 
     public int getMaxStackSize() {

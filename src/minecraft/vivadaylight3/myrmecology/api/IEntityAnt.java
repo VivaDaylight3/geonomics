@@ -10,6 +10,7 @@ public interface IEntityAnt {
 
     /**
      * Gets the ItemAnt associated with this entity
+     * 
      * @return ItemAnt
      */
     ItemAnt getAnt();
@@ -21,6 +22,7 @@ public interface IEntityAnt {
 
     /**
      * Sends a message to the player when left clicking with a myrmopaedia
+     * 
      * @param player
      */
     void sendBehaviourErrorMessage(EntityPlayer player);
@@ -33,18 +35,21 @@ public interface IEntityAnt {
 
     /**
      * Gets the number of passed ticks
+     * 
      * @return
      */
     int getTicks();
 
     /**
      * Drops an itemStack
+     * 
      * @param stack
      */
     void dropItemStack(ItemStack stack);
 
     /**
      * Moves the entity to the x, y and z
+     * 
      * @param x
      * @param y
      * @param z

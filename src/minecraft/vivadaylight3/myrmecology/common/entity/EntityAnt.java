@@ -55,16 +55,16 @@ public class EntityAnt extends EntityCreature implements IEntityAnt {
 		(int) this.posY - 1, (int) this.posZ);
 
     }
-    
-    public void dropInventory(){
-	
-	if(this.inventory[0] != null){
-	
+
+    public void dropInventory() {
+
+	if (this.inventory[0] != null) {
+
 	    this.dropItemStack(this.inventory[0]);
 	    this.inventory[0] = null;
-	
+
 	}
-	
+
     }
 
     @Override

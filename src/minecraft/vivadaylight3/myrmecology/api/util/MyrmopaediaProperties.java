@@ -130,6 +130,7 @@ public class MyrmopaediaProperties {
 
     /**
      * Gets all ants registered in the myrmopaedia (WIP)
+     * 
      * @param itemStack
      * @return ArrayList<ItemAnt>
      */

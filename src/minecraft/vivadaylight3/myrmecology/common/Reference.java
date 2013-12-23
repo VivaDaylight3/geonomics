@@ -22,7 +22,7 @@ public class Reference {
     public static final String MOD_URL = "@MOD_URL@";
     public static final String MOD_DESC = "@MOD_DESC@";
 
-    public static final boolean LOG_DEBUG = true;
+    public static final boolean LOG_DEBUG = false;
 
     public static final String MOD_CHANNEL_INCUBATOR = MOD_CHANNEL + "2";
     public static final String MOD_VERSION = VERSION_MAJOR + "."
@@ -44,6 +44,7 @@ public class Reference {
     public static final String BLOCK_INCUBATOR_NAME = "incubator";
     public static final String BLOCK_FUNGI_NAME = "fungi";
     public static final String BLOCK_ANTCHEST_NAME = "antChest";
+    public static final String BLOCK_INFUSER_NAME = "infuser";
 
     // Items
     public static final String ITEM_EXTRACTOR_NAME = "extractor";
@@ -51,8 +52,9 @@ public class Reference {
     public static final String ITEM_SPAWNEGG_NAME = "spawnEgg";
     public static final String ITEM_CHAMBER_NAME = "breedingChamber";
     public static final String ITEM_ANTBOOK_NAME = "antBook";
-
-    public static final String ANTBOOK_TITLE = "The book of " + MOD_ID;
+    public static final String ITEM_PHEROMONE_NAME = "pheromone";
+    public static final String ITEM_UPGRADE_NAME = "upgrade";
+    public static final String ITEM_ANTBAG_NAME = "antBag";
 
     // Breeding Chambers
     public static final String CHAMBER_BARBARIC_NAME = "chamberBarbaric";

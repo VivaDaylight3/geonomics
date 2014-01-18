@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.block.BlockAntHill;
 import vivadaylight3.myrmecology.api.breeding.Breeding;
@@ -265,10 +266,6 @@ public class Register {
 		"Place and use a formicarium or solarium upgrade", 2, 4,
 		achieveIncubateAnts, new ItemStack(itemUpgrade, 1, 0));
 
-	achieveInfuser = addAchievement(34, "Pheromonic Infuser",
-		"Place and use a pheromonic infuser", 0, 4, achieveBreedAnts,
-		new ItemStack(blockInfuser));
-
 	achieveAntDimension = addAchievement(32, "Holiday Destination",
 		"CLASSIFIED", -2, 0, achieveSpawnAnts, new ItemStack(
 			blockAntChest));
@@ -361,9 +358,6 @@ public class Register {
 
 	config.save();
 
-	addBlock(blockInfuser, "Pheromonic Infuser",
-		Reference.BLOCK_INFUSER_NAME);
-
 	addBlock(blockPheromone, "Pheromone Block", "blockPheromone");
 
 	addBlock(blockAntChest, "Scavenging Chest",
@@ -412,11 +406,15 @@ public class Register {
 
 	config.load();
 
-	incubatorLarvaRenderDistance = config.get(
+	Property ilrd = config.get(
 		Configuration.CATEGORY_GENERAL, "Render solarium larva within",
-		10).getInt();
+		10);
+	ilrd.comment = "The distance within which to render ant larvae above solariums and ant queens above formicariums.";
+	incubatorLarvaRenderDistance = ilrd.getInt();
 	
-	hillSpawnRate = config.get(Configuration.CATEGORY_GENERAL, "Ant hill spawn rate", 5).getInt();
+	Property hsr = config.get(Configuration.CATEGORY_GENERAL, "Ant hill spawn rate", 5);
+	hsr.comment = "Sets the ant hill spawn rate. For example, 10 would mean that there's a 1 in 10 chance that a hill will spawn in a chunk";
+	hillSpawnRate = hsr.getInt();
 
 	config.save();
 
@@ -782,11 +780,6 @@ public class Register {
     }
 
     public static void registerRecipes() {
-
-	InfuserRecipeRegistry
-		.addRecipe(new InfuserRecipe(new ItemStack(blockInfuser), true,
-			new ItemStack[] { new ItemStack(itemPheromoneBottle),
-				new ItemStack(Block.dirt) }));
 
 	GameRegistry.addRecipe(new ItemStack(blockIncubator, 1), "wgw", "g g",
 		"wrw", 'w', new ItemStack(Block.woodSingleSlab), 'g',

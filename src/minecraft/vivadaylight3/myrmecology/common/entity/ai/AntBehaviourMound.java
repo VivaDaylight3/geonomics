@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.entity.ai.EntityAIAntBehaviour;
@@ -47,23 +48,35 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
     @Override
     public boolean shouldExecute() {
 
-	// Log.debug("should");
+	Log.debug("should");
 
 	entityList = Environment.getAnimalsInRadius(world, null, getPosX(),
 		getPosY(), getPosX(), radius);
+	
+	ArrayList<TileEntity> tileList = Environment
+		.getTileEntitiesInRadius(world, getPosX(), getPosY(),
+			getPosZ(), radius);
+	
+	if(tileList == null || tileList.get(0) == null){
+	    
+	    Log.debug("list is null");
+	    
+	}
+	
+	if(state.equalsIgnoreCase("none")){
+	    
+	    Log.debug("state = none");
+	    
+	}
 
 	if (state.equalsIgnoreCase("none")
-		&& Environment.getNearestAntChestFrom(Environment
-			.getTileEntitiesInRadius(world, getPosX(), getPosY(),
-				getPosZ(), radius), (Entity) this.theAnt,
+		&& Environment.getNearestAntChestFrom(tileList, (Entity) this.theAnt,
 			getPosX(), getPosY(), getPosZ()) != null) {
 
-	    // Log.debug("should : state == none");
+	    Log.debug("should : state == none");
 
 	    targetChest = (TileEntityAntChest) Environment
-		    .getNearestAntChestFrom(Environment
-			    .getTileEntitiesInRadius(world, getPosX(),
-				    getPosY(), getPosZ(), radius),
+		    .getNearestAntChestFrom(tileList,
 			    (Entity) this.theAnt, getPosX(), getPosY(),
 			    getPosZ());
 
@@ -73,7 +86,7 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 
 	} else if (state.equalsIgnoreCase("itemPickup") && sortAnimals()) {
 
-	    // Log.debug("should : state == itemPickup");
+	    Log.debug("should : state == itemPickup");
 
 	    state = "animalCare";
 
@@ -88,17 +101,17 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
     @Override
     public void updateTask() {
 
-	// Log.debug("update");
+	Log.debug("update");
 
 	if (state.equalsIgnoreCase("itemPickup")) {
 
-	    // Log.debug("update : state == itemPickup");
+	    Log.debug("update : state == itemPickup");
 
 	    pickupFood();
 
 	} else if (state.equalsIgnoreCase("animalCare")) {
 
-	    // Log.debug("update : state == animalCare");
+	    Log.debug("update : state == animalCare");
 
 	    breedAnimal();
 
@@ -115,7 +128,7 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 
     private void pickupFood() {
 
-	// Log.debug("pickupFood");
+	Log.debug("pickupFood");
 
 	this.theAnt.moveEntityTo(targetChest.xCoord, targetChest.yCoord,
 		targetChest.zCoord);
@@ -123,12 +136,12 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 	if (Environment.coordinateIsCloseTo(getPosX(), getPosY(), getPosZ(),
 		targetChest.xCoord, targetChest.yCoord, targetChest.zCoord, 1)) {
 
-	    // Log.debug("pickupFood : isClose");
+	    Log.debug("pickupFood : isClose");
 
 	    if (Environment.inventoryHas(new ItemStack(Item.wheat, 2),
 		    targetChest.chestContents)) {
 
-		// Log.debug("pickupFood : has");
+		Log.debug("pickupFood : has");
 
 		Environment.addItemStackToInventory(
 			new ItemStack(Item.wheat, 2), this.theAnt.inventory,
@@ -151,17 +164,17 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 
 	if (targetEntity != null && targetEntity2 != null) {
 
-	    // Log.debug("breed");
+	    Log.debug("breed");
 
 	    if (flag == 1) {
 
-		// Log.debug("breed : flag == 1");
+		Log.debug("breed : flag == 1");
 
 		entity = targetEntity;
 
 	    } else if (flag == 1) {
 
-		// Log.debug("breed : flag == 2");
+		Log.debug("breed : flag == 2");
 
 		entity = targetEntity2;
 
@@ -174,15 +187,15 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 		    getPosZ(), entity.serverPosX, entity.serverPosY,
 		    entity.serverPosZ, 1)) {
 
-		// Log.debug("breed : isClose");
+		Log.debug("breed : isClose");
 
 		if (entity.getGrowingAge() == 0) {
 
-		    // Log.debug("breed : age == 0");
+		    Log.debug("breed : age == 0");
 
 		    if (flag == 1) {
 
-			// Log.debug("breed : age == 0 : flag == 1");
+			Log.debug("breed : age == 0 : flag == 1");
 
 			Environment.removeItemStackFromIventory(new ItemStack(
 				Item.wheat, 1), this.theAnt.inventory, null);
@@ -194,7 +207,7 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 		    }
 		    if (flag == 2) {
 
-			// Log.debug("breed : age == 0 : flag == 2");
+			Log.debug("breed : age == 0 : flag == 2");
 
 			Environment.removeItemStackFromIventory(new ItemStack(
 				Item.wheat, 1), this.theAnt.inventory, null);
@@ -219,7 +232,7 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 
 	Log.debug("sortAnimals");
 
-	entityList = Environment.getEntitiesInRadius(world, getPosX(),
+	ArrayList<Entity> animalList = Environment.getEntitiesInRadius(world, getPosX(),
 		getPosY(), getPosX(), radius);
 
 	int chickenCount = 0;
@@ -227,29 +240,29 @@ public class AntBehaviourMound extends EntityAIAntBehaviour {
 	int pigCount = 0;
 	int sheepCount = 0;
 
-	Log.debug("sortAnimals : size = " + entityList.size());
+	Log.debug("sortAnimals : size = " + animalList.size());
 
-	for (int k = 0; k < entityList.size(); k++) {
+	for (int k = 0; k < animalList.size(); k++) {
 
-	    if (entityList.get(k) instanceof EntityChicken) {
+	    if (animalList.get(k) instanceof EntityChicken) {
 
 		Log.debug("chicken++");
 
 		chickenCount++;
 
-	    } else if (entityList.get(k) instanceof EntityCow) {
+	    } else if (animalList.get(k) instanceof EntityCow) {
 
 		Log.debug("cow++");
 
 		cowCount++;
 
-	    } else if (entityList.get(k) instanceof EntityPig) {
+	    } else if (animalList.get(k) instanceof EntityPig) {
 
 		Log.debug("pig++");
 
 		pigCount++;
 
-	    } else if (entityList.get(k) instanceof EntitySheep) {
+	    } else if (animalList.get(k) instanceof EntitySheep) {
 
 		Log.debug("sheep++");
 

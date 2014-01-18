@@ -22,7 +22,7 @@ public class EntityAntMound extends EntityAnt {
     @Override
     public boolean isAIEnabled() {
 
-	return false;
+	return true;
 
     }
 

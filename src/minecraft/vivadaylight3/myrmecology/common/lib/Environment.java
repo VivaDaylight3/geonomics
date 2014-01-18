@@ -307,7 +307,7 @@ public class Environment {
 		.getAABB(x, y, z, (double) (x + 1), (double) (y + 1),
 			(double) (z + 1)).expand(radius, radius, radius);
 	axisalignedbb.maxY = (double) world.getHeight();
-	List list = world.getEntitiesWithinAABB(EntityPlayer.class,
+	List list = world.getEntitiesWithinAABB(Entity.class,
 		axisalignedbb);
 
 	ArrayList<Entity> result = new ArrayList<Entity>();

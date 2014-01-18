@@ -48,9 +48,7 @@ public class BlockAntFarm extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
 	    EntityPlayer parPlayer, int par6, float par7, float par8, float par9) {
-
-	// TODO
-
+	
 	if (!parPlayer.isSneaking() && !world.isRemote) {
 
 	    parPlayer.openGui(Myrmecology.instance, Register.GUI_ID_ANTFARM,
@@ -141,7 +139,7 @@ public class BlockAntFarm extends BlockContainer {
     @Override
     public boolean renderAsNormalBlock() {
 
-	return true;
+	return false;
 
     }
 

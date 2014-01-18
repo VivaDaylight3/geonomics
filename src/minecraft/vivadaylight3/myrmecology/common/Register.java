@@ -24,7 +24,6 @@ import vivadaylight3.myrmecology.common.block.BlockAntChest;
 import vivadaylight3.myrmecology.common.block.BlockAntFarm;
 import vivadaylight3.myrmecology.common.block.BlockFungi;
 import vivadaylight3.myrmecology.common.block.BlockIncubator;
-import vivadaylight3.myrmecology.common.block.BlockInfuser;
 import vivadaylight3.myrmecology.common.block.BlockPheromone;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillDesert;
 import vivadaylight3.myrmecology.common.block.anthill.AntHillForest;
@@ -111,6 +110,7 @@ public class Register {
     public static int incubatorLarvaRenderDistance = 10;
 
     EnumAntAIType type;
+    public static int hillSpawnRate;
 
     public static String language;
 
@@ -264,7 +264,7 @@ public class Register {
 	achieveUpgrade = addAchievement(33, "Myrmecological Upgrades",
 		"Place and use a formicarium or solarium upgrade", 2, 4,
 		achieveIncubateAnts, new ItemStack(itemUpgrade, 1, 0));
-	
+
 	achieveInfuser = addAchievement(34, "Pheromonic Infuser",
 		"Place and use a pheromonic infuser", 0, 4, achieveBreedAnts,
 		new ItemStack(blockInfuser));
@@ -329,10 +329,6 @@ public class Register {
 	blockIncubator = new BlockIncubator(config.get(
 		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INCUBATOR_NAME,
 		getNewBlockID()).getInt(), Reference.BLOCK_INCUBATOR_NAME);
-
-	blockInfuser = new BlockInfuser(config.get(
-		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INFUSER_NAME,
-		getNewBlockID()).getInt(), Reference.BLOCK_INFUSER_NAME);
 
 	hillForest = new AntHillForest(config.get(Configuration.CATEGORY_BLOCK,
 		Reference.HILL_FOREST_NAME, getNewBlockID()).getInt());
@@ -419,6 +415,8 @@ public class Register {
 	incubatorLarvaRenderDistance = config.get(
 		Configuration.CATEGORY_GENERAL, "Render solarium larva within",
 		10).getInt();
+	
+	hillSpawnRate = config.get(Configuration.CATEGORY_GENERAL, "Ant hill spawn rate", 5).getInt();
 
 	config.save();
 

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class InfuserRecipeRegistry {
 
-    private static ArrayList<InfuserRecipe> recipes;
+    private static ArrayList<InfuserRecipe> recipes = new ArrayList<InfuserRecipe>();
 
     public static void addRecipe(InfuserRecipe recipe) {
 

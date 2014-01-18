@@ -41,7 +41,15 @@ public class WorldGen implements IWorldGenerator {
 
     private void generateOverworld(World world, Random random, int i, int j) {
 
-	generateAntHill(world, random, i, j);
+	Random rand = new Random();
+	
+	int chance = rand.nextInt(Register.hillSpawnRate)+1;
+	
+	if(chance == 1){
+	
+	    generateAntHill(world, random, i, j);
+	
+	}
 
 	int blockX = i + random.nextInt(16);
 	int blockZ = j + random.nextInt(16);

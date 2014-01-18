@@ -1,13 +1,11 @@
 package vivadaylight3.myrmecology.common.lib;
 
-import vivadaylight3.myrmecology.common.inventory.ContainerInfuser;
 import net.minecraft.item.ItemStack;
 
 public class InfuserRecipe {
 
     private ItemStack result;
-    private ItemStack[] ingredients = new ItemStack[ContainerInfuser.INVENTORY_SIZE
-	    - (ContainerInfuser.numCols * ContainerInfuser.numCols)];
+    private ItemStack[] ingredients = new ItemStack[9];
     private boolean shapeless;
 
     public InfuserRecipe(ItemStack output, boolean shapeless,

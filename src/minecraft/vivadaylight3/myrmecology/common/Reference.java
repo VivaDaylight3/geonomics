@@ -54,7 +54,7 @@ public class Reference {
     public static final String ITEM_ANTBOOK_NAME = "antBook";
     public static final String ITEM_PHEROMONE_NAME = "pheromone";
     public static final String ITEM_UPGRADE_NAME = "upgrade";
-    public static final String ITEM_ANTBAG_NAME = "antBag";
+    public static final String ITEM_ANTBAG_NAME = "canister";
 
     // Breeding Chambers
     public static final String CHAMBER_BARBARIC_NAME = "chamberBarbaric";

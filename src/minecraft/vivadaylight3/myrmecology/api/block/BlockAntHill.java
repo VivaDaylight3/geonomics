@@ -1,20 +1,22 @@
 package vivadaylight3.myrmecology.api.block;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.Icon;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.item.ToolExtractor;
-import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Maths;
 import vivadaylight3.myrmecology.common.lib.Resources;
 
@@ -27,30 +29,34 @@ import vivadaylight3.myrmecology.common.lib.Resources;
  */
 public class BlockAntHill extends Block {
 
-    private Icon icon;
+    private IIcon icon;
 
-    public BlockAntHill(int par1, Material material) {
-	super(par1, Register.antHill);
+    public BlockAntHill(Material material) {
+	super(Register.antHill);
 
 	prepareBlock();
 
 	Register.addHill(this);
 
     }
+    
+    public BlockAntHill(){
+    	this(Material.ground);
+    }
 
     private void prepareBlock() {
 
-	setUnlocalizedName(this.getHillSubName());
+	setBlockName(this.getHillSubName());
 	setCreativeTab(Register.tabMyrmecology);
-	setStepSound(Block.soundGrassFootstep);
+	setStepSound(Block.soundTypeGlass);
 	setHardness(1.0F);
 	setResistance(1.0F);
 	// func_111022_d(Resources.TEXTURE_PREFIX + this.getHillSubName());
 
     }
-
+    
     @Override
-    public void registerIcons(IconRegister register) {
+    public void registerBlockIcons(IIconRegister register) {
 
 	this.icon = register.registerIcon(Resources.TEXTURE_PREFIX
 		+ this.getHillSubName());
@@ -58,7 +64,7 @@ public class BlockAntHill extends Block {
     }
 
     @Override
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
 	return this.icon;
     }
 
@@ -97,10 +103,12 @@ public class BlockAntHill extends Block {
     }
 
     @Override
-    public int idDropped(int par1, Random par2Random, int par3) {
-
-	return this.getAnt().itemID;
-
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+    {
+    	ArrayList<ItemStack> res = new ArrayList<ItemStack>();
+    	res.add(new ItemStack(this.getItemDropped(0, new Random(), 0)));
+    	return res;
+    
     }
 
     @Override
@@ -215,9 +223,9 @@ public class BlockAntHill extends Block {
 
 	    int[] blocks = new int[radius];
 
-	    if (world.getBlockId(x, y - 1, z) != Block.ice.blockID
-		    && world.getBlockId(x, y - 1, z) != Block.waterStill.blockID
-		    && world.getBlockId(x, y - 1, z) != Block.waterMoving.blockID) {
+	    if (world.getBlock(x, y - 1, z) != Block.blockRegistry.getObject("ice")
+		    && world.getBlock(x, y - 1, z) != Block.blockRegistry.getObject("water")
+		    && world.getBlock(x, y - 1, z) != Block.blockRegistry.getObject("flowing_water")) {
 
 		for (int k = 0; k < this.getHillBiomes().length; k++) {
 

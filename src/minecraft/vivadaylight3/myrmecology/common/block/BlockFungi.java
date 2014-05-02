@@ -1,15 +1,8 @@
 package vivadaylight3.myrmecology.common.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 
@@ -17,11 +10,11 @@ public class BlockFungi extends BlockMushroom {
 
     private String name;
 
-    public BlockFungi(int par1, String par2Name) {
-	super(par1);
-	setUnlocalizedName(par2Name);
+    public BlockFungi(String par2Name) {
+	super();
+	setBlockName(par2Name);
 	setCreativeTab(Register.tabMyrmecology);
-	setStepSound(Block.soundGrassFootstep);
+	setStepSound(Block.soundTypeGrass);
 	this.name = par2Name;
 	setHardness(0.2F);
 	setResistance(1.0F);
@@ -32,16 +25,10 @@ public class BlockFungi extends BlockMushroom {
     }
 
     @Override
-    public void registerIcons(IconRegister register) {
+    public void registerBlockIcons(IIconRegister register) {
 
 	this.blockIcon = register.registerIcon(Resources.TEXTURE_PREFIX + name);
 
-    }
-
-    @Override
-    public boolean fertilizeMushroom(World par1World, int par2, int par3,
-	    int par4, Random par5Random) {
-	return false;
     }
     /*
      * @Override public ItemStack getPickBlock(MovingObjectPosition target,

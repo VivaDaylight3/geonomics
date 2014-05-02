@@ -13,8 +13,8 @@ import vivadaylight3.myrmecology.common.lib.Maths;
 
 public class AntHillWater extends BlockAntHill {
 
-    public AntHillWater(int par1, Material material) {
-	super(par1, material);
+    public AntHillWater() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 
@@ -71,11 +71,11 @@ public class AntHillWater extends BlockAntHill {
 
 	    if (k != blocks.length - 1) {
 
-		int blockUnder = world.getBlockId(x, currentHeight - k - 1, z);
+		Block blockUnder = world.getBlock(x, currentHeight - k - 1, z);
 
-		if (blockUnder == Block.dirt.blockID
-			|| blockUnder == Block.sand.blockID
-			|| blockUnder == Block.blockClay.blockID) {
+		if (blockUnder == Block.blockRegistry.getObject("dirt")
+			|| blockUnder == Block.blockRegistry.getObject("sand")
+			|| blockUnder == Block.blockRegistry.getObject("clay")) {
 
 		    return k;
 

@@ -1,18 +1,21 @@
 package vivadaylight3.myrmecology.common.block;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.Icon;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
@@ -28,16 +31,16 @@ public class BlockAntFarm extends BlockContainer {
 
     private String name;
 
-    private Icon blockIcon;
-    private Icon topIcon;
+    private IIcon blockIcon;
+    private IIcon topIcon;
 
     private final Random random = new Random();
 
-    public BlockAntFarm(int par1, String par2Name) {
-	super(par1, Material.iron);
-	setUnlocalizedName(par2Name);
+    public BlockAntFarm(String par2Name) {
+	super(Material.iron);
+	setBlockName(par2Name);
 	setCreativeTab(Register.tabMyrmecology);
-	setStepSound(Block.soundMetalFootstep);
+	setStepSound(Block.soundTypeMetal);
 	setHardness(1.0F);
 	setResistance(1.0F);
 	name = par2Name;
@@ -63,7 +66,7 @@ public class BlockAntFarm extends BlockContainer {
     }
 
     @Override
-    public void registerIcons(IconRegister iconRegister) {
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
 	blockIcon = iconRegister.registerIcon(Resources.TEXTURE_PREFIX + name);
 	topIcon = iconRegister.registerIcon(Resources.TEXTURE_PREFIX + name
@@ -72,7 +75,7 @@ public class BlockAntFarm extends BlockContainer {
     }
 
     @Override
-    public Icon getIcon(int side, int metadata) {
+    public IIcon getIcon(int side, int metadata) {
 
 	if (side == 1 || side == 0) {
 
@@ -152,22 +155,19 @@ public class BlockAntFarm extends BlockContainer {
     }
 
     @Override
-    public int idDropped(int par1, Random random, int zero) {
-
-	return Register.blockAntFarm.blockID;
-
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World par1World) {
-	return new TileEntityAntFarm();
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+    {
+    	ArrayList<ItemStack> res = new ArrayList<ItemStack>();
+    	res.add(new ItemStack(this.getItemDropped(0, new Random(), 0)));
+    	return res;
+    
     }
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-	    int par5, int par6) {
+	    Block par5, int par6) {
 	TileEntityAntFarm tileEntity = (TileEntityAntFarm) par1World
-		.getBlockTileEntity(par2, par3, par4);
+		.getTileEntity(par2, par3, par4);
 
 	if (tileEntity != null) {
 	    for (int j1 = 0; j1 < tileEntity.getSizeInventory(); ++j1) {
@@ -189,8 +189,7 @@ public class BlockAntFarm extends BlockContainer {
 			itemstack.stackSize -= k1;
 			entityitem = new EntityItem(par1World, par2 + f, par3
 				+ f1, par4 + f2,
-				new ItemStack(itemstack.itemID, k1,
-					itemstack.getItemDamage()));
+				itemstack);
 			float f3 = 0.05F;
 			entityitem.motionX = (float) this.random.nextGaussian()
 				* f3;
@@ -208,10 +207,15 @@ public class BlockAntFarm extends BlockContainer {
 		}
 	    }
 
-	    par1World.func_96440_m(par2, par3, par4, par5);
+	    //TODO this is an old function name: par1World.func_96440_m(par2, par3, par4, par5);
 	}
 
 	super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2) {
+		return new TileEntityAntFarm();
+	}
 
 }

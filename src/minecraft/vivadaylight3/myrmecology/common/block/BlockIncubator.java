@@ -1,16 +1,19 @@
 package vivadaylight3.myrmecology.common.block;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.Icon;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,21 +29,21 @@ public class BlockIncubator extends BlockContainer {
 
     private String name;
 
-    private Icon iconTopOn;
-    private Icon iconTopOff;
-    private Icon iconFrontOn;
-    private Icon iconFrontOff;
-    private Icon iconSide;
+    private IIcon iconTopOn;
+    private IIcon iconTopOff;
+    private IIcon iconFrontOn;
+    private IIcon iconFrontOff;
+    private IIcon iconSide;
 
     public static final int POWERED_META = 4;
     public static final int UNPOWERED_META = 0;
 
     public float blockLightValue = 0.5f;
 
-    public BlockIncubator(int par1, String par2Name) {
-	super(par1, Material.wood);
-	setStepSound(Block.soundWoodFootstep);
-	setUnlocalizedName(par2Name);
+    public BlockIncubator(String par2Name) {
+	super(Material.wood);
+	setStepSound(Block.soundTypeWood);
+	setBlockName(par2Name);
 	setCreativeTab(Register.tabMyrmecology);
 	setHardness(1.0F);
 	setResistance(1.0F);
@@ -49,7 +52,7 @@ public class BlockIncubator extends BlockContainer {
     }
 
     @Override
-    public void registerIcons(IconRegister iconRegister) {
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
 	iconTopOn = iconRegister.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.BLOCK_INCUBATOR_NAME + "_top_on");
@@ -64,7 +67,7 @@ public class BlockIncubator extends BlockContainer {
     }
 
     @Override
-    public Icon getIcon(int side, int metadata) {
+    public IIcon getIcon(int side, int metadata) {
 
 	int base = 0;
 
@@ -202,7 +205,7 @@ public class BlockIncubator extends BlockContainer {
 
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3,
-	    int par4, int par5) {
+	    int par4, Block par5) {
 	if (!par1World.isRemote) {
 	    this.updateMeta(par1World, par2, par3, par4);
 
@@ -216,8 +219,12 @@ public class BlockIncubator extends BlockContainer {
     }
 
     @Override
-    public int idDropped(int par1, Random par2Random, int par3) {
-	return Register.blockIncubator.blockID;
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+    {
+    	ArrayList<ItemStack> res = new ArrayList<ItemStack>();
+    	res.add(new ItemStack(this.getItemDropped(0, new Random(), 0)));
+    	return res;
+    
     }
 
     @Override
@@ -226,7 +233,7 @@ public class BlockIncubator extends BlockContainer {
 
 	if (!world.isRemote && !player.isSneaking()) {
 
-	    TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+	    TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 	    player.openGui(Myrmecology.instance, Register.GUI_ID_INCUBATOR,
 		    world, x, y, z);
@@ -239,8 +246,8 @@ public class BlockIncubator extends BlockContainer {
 
     }
 
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-	return new TileEntityIncubator();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2) {
+		return new TileEntityIncubator();
+	}
 }

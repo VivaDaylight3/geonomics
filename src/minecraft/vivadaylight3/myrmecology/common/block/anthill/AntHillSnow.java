@@ -12,8 +12,8 @@ import vivadaylight3.myrmecology.common.lib.Environment;
 
 public class AntHillSnow extends BlockAntHill {
 
-    public AntHillSnow(int par1, Material material) {
-	super(par1, material);
+    public AntHillSnow() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 

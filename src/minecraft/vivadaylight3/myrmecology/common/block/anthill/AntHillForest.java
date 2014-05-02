@@ -12,8 +12,8 @@ import vivadaylight3.myrmecology.common.lib.Environment;
 
 public class AntHillForest extends BlockAntHill {
 
-    public AntHillForest(int par1) {
-	super(par1, Material.ground);
+    public AntHillForest() {
+	super(Material.ground);
     }
 
     @Override

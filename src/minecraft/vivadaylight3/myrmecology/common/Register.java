@@ -95,8 +95,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Register {
 
-    public static Configuration config;
-
     public static CreativeTabs tabMyrmecology;
     public static CreativeTabs tabAnts;
     public static final Material antHill = new Material(MapColor.dirtColor);
@@ -210,13 +208,6 @@ public class Register {
 
     public static AchievementPage achievementPage;
 
-    // TODO
-    public static void setConfig(Configuration parConfig) {
-
-	config = parConfig;
-
-    }
-
     public static int getNewItemID() {
 
 	latestItemID += 1;
@@ -305,58 +296,32 @@ public class Register {
 
     public static void registerBlocks() {
 
-	config.load();
+	blockPheromone = new BlockPheromone();
 
-	blockPheromone = new BlockPheromone(config.get(
-		Configuration.CATEGORY_BLOCK, "pheromone", getNewBlockID())
-		.getInt());
+	blockAntChest = new BlockAntChest());
 
-	blockAntChest = new BlockAntChest(config.get(
-		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTCHEST_NAME,
-		getNewBlockID()).getInt());
-
-	blockFungi = new BlockFungi(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.BLOCK_FUNGI_NAME, getNewBlockID()).getInt(),
+	blockFungi = new BlockFungi(,
 		Reference.BLOCK_FUNGI_NAME);
 
-	blockAntFarm = new BlockAntFarm(config.get(
-		Configuration.CATEGORY_BLOCK, Reference.BLOCK_ANTFARM_NAME,
-		getNewBlockID()).getInt(), Reference.BLOCK_ANTFARM_NAME);
+	blockAntFarm = new BlockAntFarm( Reference.BLOCK_ANTFARM_NAME);
 
-	blockIncubator = new BlockIncubator(config.get(
-		Configuration.CATEGORY_BLOCK, Reference.BLOCK_INCUBATOR_NAME,
-		getNewBlockID()).getInt(), Reference.BLOCK_INCUBATOR_NAME);
+	blockIncubator = new BlockIncubator(Reference.BLOCK_INCUBATOR_NAME);
 
-	hillForest = new AntHillForest(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_FOREST_NAME, getNewBlockID()).getInt());
+	hillForest = new AntHillForest();
 
-	hillDesert = new AntHillDesert(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_DESERT_NAME, getNewBlockID()).getInt());
+	hillDesert = new AntHillDesert();
 
-	hillJungle = new AntHillJungle(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_JUNGLE_NAME, getNewBlockID()).getInt());
+	hillJungle = new AntHillJungle();
 
-	hillPlains = new AntHillPlains(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_PLAINS_NAME, getNewBlockID()).getInt(),
-		Material.ground);
+	hillPlains = new AntHillPlains();
 
-	hillSnow = new AntHillSnow(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_SNOW_NAME, getNewBlockID()).getInt(),
-		Material.ground);
+	hillSnow = new AntHillSnow();
 
-	hillStone = new AntHillStone(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_STONE_NAME, getNewBlockID()).getInt(),
-		Material.ground);
+	hillStone = new AntHillStone();
 
-	hillSwamp = new AntHillSwamp(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_SWAMP_NAME, getNewBlockID()).getInt(),
-		Material.ground);
+	hillSwamp = new AntHillSwamp();
 
-	hillWater = new AntHillWater(config.get(Configuration.CATEGORY_BLOCK,
-		Reference.HILL_WATER_NAME, getNewBlockID()).getInt(),
-		Material.ground);
-
-	config.save();
+	hillWater = new AntHillWater();
 
 	addBlock(blockPheromone, "Pheromone Block", "blockPheromone");
 

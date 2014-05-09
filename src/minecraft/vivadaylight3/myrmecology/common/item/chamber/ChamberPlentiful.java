@@ -11,8 +11,8 @@ import vivadaylight3.myrmecology.common.Register;
 
 public class ChamberPlentiful extends ItemBreedingChamber {
 
-    public ChamberPlentiful(int par1) {
-	super(par1);
+    public ChamberPlentiful() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 
@@ -26,7 +26,7 @@ public class ChamberPlentiful extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Item.silk);
+	return new ItemStack((Item)Item.itemRegistry.getObject("silk"));
 
     }
 

@@ -11,7 +11,6 @@ public class GuiButtonSizeable extends GuiButton {
 	this.width = parWidth;
 	this.height = parHeight;
 	this.enabled = true;
-	this.drawButton = true;
 	this.id = id;
 	this.xPosition = posX;
 	this.yPosition = posY;

@@ -8,8 +8,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntPlentiful extends ItemAnt {
 
-    public AntPlentiful(int par1) {
-	super(par1);
+    public AntPlentiful() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 

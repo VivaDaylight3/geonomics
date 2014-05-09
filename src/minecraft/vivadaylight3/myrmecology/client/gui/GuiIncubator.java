@@ -10,7 +10,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -19,12 +18,10 @@ import org.lwjgl.opengl.GL11;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.inventory.ContainerIncubator;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.tileentity.TileEntityIncubator;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -42,7 +39,7 @@ public class GuiIncubator extends GuiContainer {
 
     public TileEntityIncubator tile;
 
-    private Player player;
+    private EntityPlayer player;
 
     private ArrayList<EntityPlayer> players = new ArrayList<EntityPlayer>();
 
@@ -83,50 +80,13 @@ public class GuiIncubator extends GuiContainer {
 
 	    this.sendResultAntMetaPacket(Metadata.getMetaQueen());
 
-	    if (this.players.size() > 0) {
-
-		for (int k = 0; k < this.players.toArray().length; k++) {
-
-		    ((EntityPlayer) this.players.toArray()[k])
-			    .addChatMessage("This incubator will produce a "
-				    + Reference.standardTypeNames[tile
-					    .getResultAntMeta()]);
-
-		}
-
-	    }
-
 	} else if (par1GuiButton == this.buttonDrone) {
 
 	    this.sendResultAntMetaPacket(Metadata.getMetaDrone());
-	    if (this.players.size() > 0) {
-
-		for (int k = 0; k < this.players.toArray().length; k++) {
-
-		    ((EntityPlayer) this.players.toArray()[k])
-			    .addChatMessage("This incubator will produce a "
-				    + Reference.standardTypeNames[tile
-					    .getResultAntMeta()]);
-
-		}
-
-	    }
 
 	} else if (par1GuiButton == this.buttonWorker) {
 
 	    this.sendResultAntMetaPacket(Metadata.getMetaWorker());
-	    if (this.players.size() > 0) {
-
-		for (int k = 0; k < this.players.toArray().length; k++) {
-
-		    ((EntityPlayer) this.players.toArray()[k])
-			    .addChatMessage("This incubator will produce a "
-				    + Reference.standardTypeNames[tile
-					    .getResultAntMeta()]);
-
-		}
-
-	    }
 
 	}
 
@@ -143,7 +103,7 @@ public class GuiIncubator extends GuiContainer {
 	    ex.printStackTrace();
 	}
 
-	Packet250CustomPayload packet = new Packet250CustomPayload();
+	Packet packet = new Packet250CustomPayload();
 	packet.channel = Reference.MOD_CHANNEL_INCUBATOR;
 	packet.data = bos.toByteArray();
 	packet.length = bos.size();
@@ -154,8 +114,7 @@ public class GuiIncubator extends GuiContainer {
 	    EntityPlayerMP player2 = (EntityPlayerMP) this.player;
 	} else if (side == Side.CLIENT) {
 
-	    EntityClientPlayerMP player2 = (EntityClientPlayerMP) PacketHandler
-		    .getSidedPlayer(this.player);
+	    EntityClientPlayerMP player2 = (EntityClientPlayerMP) this.player;
 
 	    player2.sendQueue.addToSendQueue(packet);
 
@@ -172,10 +131,10 @@ public class GuiIncubator extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 	String s = this.tile.isInvNameLocalized() ? this.tile.getInvName()
 		: StatCollector.translateToLocal(this.tile.getInvName());
-	this.fontRenderer.drawString(s,
-		this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+	this.fontRendererObj.drawString(s,
+		this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
 		4210752);
-	this.fontRenderer.drawString(
+	this.fontRendererObj.drawString(
 		StatCollector.translateToLocal("container.inventory"), 8,
 		this.ySize - 96 + 2, 4210752);
     }

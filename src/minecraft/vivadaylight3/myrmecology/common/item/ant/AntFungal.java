@@ -11,8 +11,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntFungal extends ItemAnt {
 
-    public AntFungal(int par1) {
-	super(par1);
+    public AntFungal() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 

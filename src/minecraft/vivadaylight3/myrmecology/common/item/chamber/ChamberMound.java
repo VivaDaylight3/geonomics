@@ -11,8 +11,8 @@ import vivadaylight3.myrmecology.common.Register;
 
 public class ChamberMound extends ItemBreedingChamber {
 
-    public ChamberMound(int par1) {
-	super(par1);
+    public ChamberMound() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 
@@ -26,7 +26,7 @@ public class ChamberMound extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Item.wheat);
+	return new ItemStack((Item)Item.itemRegistry.getObject("wheat"));
 
     }
 

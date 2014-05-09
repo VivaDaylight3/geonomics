@@ -5,8 +5,8 @@ import vivadaylight3.myrmecology.common.Reference;
 
 public class AntCultivator extends ItemAnt {
 
-    public AntCultivator(int par1) {
-	super(par1);
+    public AntCultivator() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 

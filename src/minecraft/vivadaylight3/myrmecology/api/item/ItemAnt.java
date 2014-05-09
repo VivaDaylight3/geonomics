@@ -2,17 +2,18 @@ package vivadaylight3.myrmecology.api.item;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import javax.swing.Icon;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Facing;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import vivadaylight3.myrmecology.api.IEntityAnt;
 import vivadaylight3.myrmecology.api.util.AntProperties;
 import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.common.Reference;
@@ -37,19 +38,19 @@ public class ItemAnt extends Item {
     /**
      * Holds the ant's icons
      */
-    private Icon[] icons = new Icon[Metadata.typeMeta.length];
+    private IIcon[] icons = new IIcon[Metadata.typeMeta.length];
 
-    private Icon[] iconsBase = new Icon[Metadata.typeMeta.length];
-    private Icon[] iconsOverlay = new Icon[Metadata.typeMeta.length];
+    private IIcon[] iconsBase = new IIcon[Metadata.typeMeta.length];
+    private IIcon[] iconsOverlay = new IIcon[Metadata.typeMeta.length];
 
     /**
      * Holds the complete set of names for this ant species.
      */
     private String[] names = this.getCompleteNames();
 
-    public ItemAnt(int par1) {
+    public ItemAnt() {
 
-	super(par1);
+	super();
 
 	Register.addAnt(this);
 
@@ -80,7 +81,7 @@ public class ItemAnt extends Item {
     /**
      * Gets an icon index based on an item's damage value and the given render pass
      */
-    public Icon getIconFromDamageForRenderPass(int par1, int par2) {
+    public IIcon getIconFromDamageForRenderPass(int par1, int par2) {
 
 	if (par2 == 0) {
 
@@ -166,7 +167,7 @@ public class ItemAnt extends Item {
     }
 
     @Override
-    public void registerIcons(IconRegister register) {
+    public void registerIcons(IIconRegister register) {
 
 	if (!this.usesColourRendering()) {
 
@@ -238,11 +239,11 @@ public class ItemAnt extends Item {
     }
 
     @Override
-    public void getSubItems(int itemID, CreativeTabs tabs, List list) {
+    public void getSubItems(Item item, CreativeTabs tabs, List list) {
 
 	for (int k = 0; k < Metadata.typeMeta.length; k++) {
 
-	    list.add(new ItemStack(itemID, 1, k));
+	    list.add(new ItemStack(item, 1, k));
 
 	}
 
@@ -257,7 +258,7 @@ public class ItemAnt extends Item {
     }
 
     @Override
-    public Icon getIconFromDamage(int par1) {
+    public IIcon getIconFromDamage(int par1) {
 
 	if (!this.usesColourRendering()) {
 
@@ -269,7 +270,7 @@ public class ItemAnt extends Item {
     }
 
     @Override
-    public Icon getIcon(ItemStack stack, int pass) {
+    public IIcon getIcon(ItemStack stack, int pass) {
 
 	if (this.usesColourRendering()) {
 

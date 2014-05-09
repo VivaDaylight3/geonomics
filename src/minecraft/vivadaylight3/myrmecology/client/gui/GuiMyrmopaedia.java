@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -18,7 +18,6 @@ import vivadaylight3.myrmecology.api.breeding.Breeding;
 import vivadaylight3.myrmecology.api.breeding.BreedingRecipe;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
 import vivadaylight3.myrmecology.api.util.Metadata;
-import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.inventory.ContainerMyrmopaedia;
 import vivadaylight3.myrmecology.common.inventory.InventoryItem;
@@ -26,7 +25,6 @@ import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import vivadaylight3.myrmecology.common.lib.Strings;
 import vivadaylight3.myrmecology.common.lib.Time;
-import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,9 +35,9 @@ public class GuiMyrmopaedia extends GuiContainer {
     private ContainerMyrmopaedia container;
     private ItemStack myrmopaedia;
 
-    private Icon antIcon;
+    private IIcon antIcon;
 
-    private Player player;
+    private EntityPlayer player;
 
     private static final EnumChatFormatting KEY_CHAT_FORMAT = EnumChatFormatting.BLUE;
     private static final EnumChatFormatting VALUE_CHAT_FORMAT = EnumChatFormatting.WHITE;
@@ -80,7 +78,7 @@ public class GuiMyrmopaedia extends GuiContainer {
 	    EntityPlayer parPlayer) {
 
 	super(new ContainerMyrmopaedia(parcontainer.inventory, parPlayer));
-	this.player = (Player) parPlayer;
+	this.player = parPlayer;
 	this.inventory = parcontainer.inventory;
 	this.container = parcontainer;
 	this.myrmopaedia = parcontainer.containerStack;
@@ -192,7 +190,7 @@ public class GuiMyrmopaedia extends GuiContainer {
 		&& this.selectedScreen != "breeding"
 		&& this.selectedScreen != "ants") {
 
-	    this.fontRenderer.drawSplitString(
+	    this.fontRendererObj.drawSplitString(
 		    VALUE_CHAT_FORMAT
 			    + Myrmecology.proxy.myrmopaedia.pages[Integer
 				    .valueOf(selectedScreen)].getText()[0], a,
@@ -393,9 +391,9 @@ public class GuiMyrmopaedia extends GuiContainer {
 
 	    this.selectedAnt = this.getAnt();
 
-	    MyrmopaediaProperties.addAntToMyrmopaedia(
+	   /* MyrmopaediaProperties.addAntToMyrmopaedia(
 		    this.container.containerStack, this.selectedAnt,
-		    this.player);
+		    this.player);*/
 
 	    this.antIcon = this.getAnt().getIconFromDamage(
 		    this.inventory.getStackInSlot(0).getItemDamage());
@@ -435,14 +433,14 @@ public class GuiMyrmopaedia extends GuiContainer {
 
     private void drawString(String string, int posX, int posY) {
 
-	this.fontRenderer.drawString(string, posX, posY, 4210752);
+	this.fontRendererObj.drawString(string, posX, posY, 4210752);
 
     }
 
     private void drawString(String string, int posX, int posY, int colour,
 	    boolean shadow) {
 
-	this.fontRenderer.drawString(string, posX, posY, colour, shadow);
+	this.fontRendererObj.drawString(string, posX, posY, colour, shadow);
 
     }
 
@@ -489,7 +487,7 @@ public class GuiMyrmopaedia extends GuiContainer {
 
     }
 
-    private void drawIcon(Icon icon, int posX, int posY) {
+    private void drawIcon(IIcon icon, int posX, int posY) {
 
 	drawTexturedModelRectFromIcon(posX, posY, icon, 16, 16);
 

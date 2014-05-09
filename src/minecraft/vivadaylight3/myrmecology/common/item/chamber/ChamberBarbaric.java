@@ -10,8 +10,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChamberBarbaric extends ItemBreedingChamber {
 
-    public ChamberBarbaric(int par1) {
-	super(par1);
+    public ChamberBarbaric() {
+	super();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class ChamberBarbaric extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Item.flint);
+	return new ItemStack((Item)Item.itemRegistry.getObject("flint"));
 
     }
 

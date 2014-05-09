@@ -11,8 +11,8 @@ import vivadaylight3.myrmecology.common.Register;
 
 public class ChamberDredger extends ItemBreedingChamber {
 
-    public ChamberDredger(int par1) {
-	super(par1);
+    public ChamberDredger() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 
@@ -26,7 +26,7 @@ public class ChamberDredger extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Item.pickaxeStone);
+	return new ItemStack((Item)Item.itemRegistry.getObject("pickaxeStone"));
 
     }
 

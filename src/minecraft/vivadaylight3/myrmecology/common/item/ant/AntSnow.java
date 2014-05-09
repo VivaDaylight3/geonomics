@@ -8,8 +8,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntSnow extends ItemAnt {
 
-    public AntSnow(int par1) {
-	super(par1);
+    public AntSnow() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 

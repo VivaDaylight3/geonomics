@@ -1,39 +1,35 @@
 package vivadaylight3.myrmecology.common.item;
 
 import java.util.List;
+import java.util.Set;
 
-import vivadaylight3.myrmecology.api.IEntityAnt;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
+import net.minecraft.util.IIcon;
 import vivadaylight3.myrmecology.api.util.Metadata;
-import vivadaylight3.myrmecology.common.entity.EntityAnt;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.entity.EntityAnt;
 import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.util.Icon;
 
 public class ToolExtractor extends ItemTool {
 
-    private static final Block[] blocks = new Block[] { Block.woodDoubleSlab };
-
-    public ToolExtractor(int par1) {
-	super(par1, 1.0F, EnumToolMaterial.WOOD, blocks);
+    public ToolExtractor() {
+	super(1.0F, Item.ToolMaterial.WOOD, (Set) Block.blockRegistry.getObject("blockWoodenSlab"));
 	setCreativeTab(Register.tabMyrmecology);
-	// func_111206_d(Resources.TEXTURE_PREFIX +
-	// Reference.ITEM_EXTRACTOR_NAME);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
 	this.itemIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_EXTRACTOR_NAME);
     }
@@ -47,7 +43,7 @@ public class ToolExtractor extends ItemTool {
     }
 
     @Override
-    public Icon getIconFromDamage(int par1) {
+    public IIcon getIconFromDamage(int par1) {
 	return this.itemIcon;
     }
 

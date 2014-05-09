@@ -1,14 +1,14 @@
 package vivadaylight3.myrmecology.api.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Extend this class to create a new breeding chamber used in ant breeding
@@ -18,11 +18,11 @@ import vivadaylight3.myrmecology.common.lib.Resources;
  */
 public class ItemBreedingChamber extends Item {
 
-    private Icon iconOverlay;
-    private Icon iconBase;
+    private IIcon iconOverlay;
+    private IIcon iconBase;
 
-    public ItemBreedingChamber(int par1) {
-	super(par1);
+    public ItemBreedingChamber() {
+	super();
 	Register.addChamber(this);
 	prepareItem();
     }
@@ -47,7 +47,7 @@ public class ItemBreedingChamber extends Item {
 
     }
 
-    public Icon getIconFromDamageForRenderPass(int par1, int par2) {
+    public IIcon getIconFromDamageForRenderPass(int par1, int par2) {
 
 	if (par2 == 0) {
 
@@ -92,7 +92,7 @@ public class ItemBreedingChamber extends Item {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerIcons(IconRegister register) {
+    public void registerIcons(IIconRegister register) {
 
 	this.iconOverlay = register.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_CHAMBER_NAME + "_overlay");

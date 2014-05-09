@@ -11,8 +11,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChamberFungal extends ItemBreedingChamber {
 
-    public ChamberFungal(int par1) {
-	super(par1);
+    public ChamberFungal() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 
@@ -33,7 +33,7 @@ public class ChamberFungal extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Block.mushroomBrown);
+	return new ItemStack((Block)Block.blockRegistry.getObject("mushroomBrown"));
 
     }
 

@@ -11,8 +11,8 @@ import vivadaylight3.myrmecology.common.Register;
 
 public class ChamberCultivator extends ItemBreedingChamber {
 
-    public ChamberCultivator(int par1) {
-	super(par1);
+    public ChamberCultivator() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 
@@ -26,7 +26,7 @@ public class ChamberCultivator extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Item.seeds);
+	return new ItemStack((Item)Item.itemRegistry.getObject("seeds"));
 
     }
 

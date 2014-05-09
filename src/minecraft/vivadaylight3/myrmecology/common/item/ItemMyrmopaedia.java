@@ -2,27 +2,25 @@ package vivadaylight3.myrmecology.common.item;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.api.util.Metadata;
 import vivadaylight3.myrmecology.api.util.MyrmopaediaProperties;
 import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.entity.EntityAnt;
-import vivadaylight3.myrmecology.common.lib.Environment;
 import vivadaylight3.myrmecology.common.lib.Resources;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMyrmopaedia extends Item {
 
-    public ItemMyrmopaedia(int par1) {
-	super(par1);
+    public ItemMyrmopaedia() {
+	super();
 	setCreativeTab(Register.tabMyrmecology);
 	setMaxStackSize(1);
 	setUnlocalizedName(Reference.ITEM_MYRMOPAEDIA_NAME);
@@ -30,7 +28,7 @@ public class ItemMyrmopaedia extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
 	this.itemIcon = par1IconRegister.registerIcon(Resources.TEXTURE_PREFIX
 		+ Reference.ITEM_MYRMOPAEDIA_NAME);
     }

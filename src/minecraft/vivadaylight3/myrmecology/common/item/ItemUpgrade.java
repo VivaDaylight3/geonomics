@@ -2,32 +2,27 @@ package vivadaylight3.myrmecology.common.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import vivadaylight3.myrmecology.api.util.AntProperties;
-import vivadaylight3.myrmecology.api.util.Metadata;
-import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.lib.Resources;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.IIcon;
+import vivadaylight3.myrmecology.common.Register;
+import vivadaylight3.myrmecology.common.lib.Resources;
 
 public class ItemUpgrade extends Item {
 
     String name;
-    private Icon[] icons = new Icon[2];
+    private IIcon[] icons = new IIcon[2];
     private String[] subNames = new String[] { "Solarium", "Formicarium" };
 
     private String[] desc = new String[] {
 	    "Halves the time required to incubate a larva in a solarium",
 	    "Halves the time required for breeding an ant queen" };
 
-    public ItemUpgrade(int par1, String name) {
-	super(par1);
+    public ItemUpgrade(String name) {
+	super();
 	setHasSubtypes(true);
 	setUnlocalizedName(name);
 	this.setMaxDamage(icons.length - 1);
@@ -42,7 +37,7 @@ public class ItemUpgrade extends Item {
     }
 
     @Override
-    public void registerIcons(IconRegister reg) {
+    public void registerIcons(IIconRegister reg) {
 
 	for (int k = 0; k < icons.length; k++) {
 
@@ -53,7 +48,7 @@ public class ItemUpgrade extends Item {
     }
 
     @Override
-    public Icon getIconFromDamage(int dam) {
+    public IIcon getIconFromDamage(int dam) {
 
 	return icons[dam];
 
@@ -68,11 +63,11 @@ public class ItemUpgrade extends Item {
     }
 
     @Override
-    public void getSubItems(int itemID, CreativeTabs tabs, List list) {
+    public void getSubItems(Item item, CreativeTabs tabs, List list) {
 
 	for (int k = 0; k < icons.length; k++) {
 
-	    list.add(new ItemStack(itemID, 1, k));
+	    list.add(new ItemStack(item, 1, k));
 
 	}
 

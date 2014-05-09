@@ -11,8 +11,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChamberCarpenter extends ItemBreedingChamber {
 
-    public ChamberCarpenter(int par1) {
-	super(par1);
+    public ChamberCarpenter() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 
@@ -26,7 +26,7 @@ public class ChamberCarpenter extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Item.axeStone);
+	return new ItemStack((Item)Item.itemRegistry.getObject("axeStone"));
 
     }
 

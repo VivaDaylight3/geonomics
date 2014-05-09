@@ -10,8 +10,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntMound extends ItemAnt {
 
-    public AntMound(int par1) {
-	super(par1);
+    public AntMound() {
+	super();
     }
 
     @Override

@@ -9,8 +9,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntBarbaric extends ItemAnt {
 
-    public AntBarbaric(int par1) {
-	super(par1);
+    public AntBarbaric() {
+	super();
     }
 
     @Override

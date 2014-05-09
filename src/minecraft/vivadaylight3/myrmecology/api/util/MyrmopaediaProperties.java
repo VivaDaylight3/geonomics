@@ -1,20 +1,11 @@
 package vivadaylight3.myrmecology.api.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.ArrayList;
 
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import vivadaylight3.myrmecology.api.item.ItemAnt;
-import vivadaylight3.myrmecology.common.Reference;
 import vivadaylight3.myrmecology.common.Register;
-import vivadaylight3.myrmecology.common.handler.PacketHandler;
 import vivadaylight3.myrmecology.common.lib.Nbt;
-import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Handles Myrmopaedia properties
@@ -89,7 +80,7 @@ public class MyrmopaediaProperties {
 	myrmopaediaIDs[id] = null;
 
     }
-
+/*
     @SideOnly(Side.CLIENT)
     public static void addAntToMyrmopaedia(ItemStack itemstack, ItemAnt ant,
 	    Player parPlayer) {
@@ -126,7 +117,7 @@ public class MyrmopaediaProperties {
 
 	}
 
-    }
+    }*/
 
     /**
      * Gets all ants registered in the myrmopaedia (WIP)

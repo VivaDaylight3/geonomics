@@ -11,8 +11,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntScavenger extends ItemAnt {
 
-    public AntScavenger(int par1) {
-	super(par1);
+    public AntScavenger() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 

@@ -2,12 +2,11 @@ package vivadaylight3.myrmecology.common.item;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import vivadaylight3.myrmecology.common.Myrmecology;
 import vivadaylight3.myrmecology.common.Register;
 import vivadaylight3.myrmecology.common.lib.Resources;
 
@@ -15,15 +14,15 @@ public class ItemAntBag extends Item {
 
     String name;
 
-    public ItemAntBag(int par1, String name) {
-	super(par1);
+    public ItemAntBag(String name) {
+	super();
 	setUnlocalizedName(name);
 	setCreativeTab(Register.tabMyrmecology);
 	this.name = name;
     }
 
     @Override
-    public void registerIcons(IconRegister reg) {
+    public void registerIcons(IIconRegister reg) {
 
 	this.itemIcon = reg.registerIcon(Resources.TEXTURE_PREFIX + name);
 

@@ -10,8 +10,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntSprouter extends ItemAnt {
 
-    public AntSprouter(int par1) {
-	super(par1);
+    public AntSprouter() {
+	super();
 	// TODO Auto-generated constructor stub
     }
 

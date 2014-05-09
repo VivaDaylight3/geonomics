@@ -12,9 +12,9 @@ import vivadaylight3.myrmecology.common.item.ant.AntCommon;
 
 public class ChamberCommon extends ItemBreedingChamber {
 
-    public ChamberCommon(int par) {
+    public ChamberCommon() {
 
-	super(par);
+	super();
 
     }
 
@@ -28,7 +28,7 @@ public class ChamberCommon extends ItemBreedingChamber {
     @Override
     public ItemStack getCraftingIngredient() {
 
-	return new ItemStack(Item.clay);
+	return new ItemStack((Block) Item.itemRegistry.getObject("clay"));
 
     }
 

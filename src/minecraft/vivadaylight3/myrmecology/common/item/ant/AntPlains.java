@@ -8,8 +8,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntPlains extends ItemAnt {
 
-    public AntPlains(int par1) {
-	super(par1);
+    public AntPlains() {
+	super();
     }
 
     @Override

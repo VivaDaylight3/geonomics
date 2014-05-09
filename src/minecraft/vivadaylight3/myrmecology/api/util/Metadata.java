@@ -8,8 +8,8 @@ public class Metadata {
      * Holds the metadata values for each type of ant
      */
     public static final int[] typeMeta = new int[] { 0, 1, 2, 3 };
-    public static final Item[] breedingItems = new Item[] { Item.goldNugget,
-	    Item.bone, Item.stick };
+    public static final Item[] breedingItems = new Item[] { (Item) Item.itemRegistry.getObject("goldNugget"),
+	    (Item) Item.itemRegistry.getObject("bone"), (Item) Item.itemRegistry.getObject("stick") };
 
     /**
      * Gets the metadata value for queen ants

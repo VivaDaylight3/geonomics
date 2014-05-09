@@ -40,13 +40,11 @@ public class RendererAntChest extends TileEntitySpecialRenderer {
 	random = new Random();
 	renderBlocks = new RenderBlocks();
 	itemRenderer = new RenderItem() {
-	    @Override
 	    public byte getMiniBlockCount(ItemStack stack) {
 		return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32,
 			15) + 1);
 	    }
 
-	    @Override
 	    public byte getMiniItemCount(ItemStack stack) {
 		return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32,
 			7) + 1);

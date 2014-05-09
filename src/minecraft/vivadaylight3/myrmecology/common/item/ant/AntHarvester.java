@@ -7,11 +7,11 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntHarvester extends ItemAnt {
 
-    public AntHarvester(int par1) {
-	super(par1);
+    public AntHarvester() {
+	super();
     }
 
-    @Override
+	@Override
     public String getSpeciesName() {
 
 	return "Harvester Ant";

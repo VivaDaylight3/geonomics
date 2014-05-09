@@ -10,8 +10,8 @@ import vivadaylight3.myrmecology.common.lib.Time;
 
 public class AntDredger extends ItemAnt {
 
-    public AntDredger(int par1) {
-	super(par1);
+    public AntDredger() {
+	super();
     }
 
     @Override

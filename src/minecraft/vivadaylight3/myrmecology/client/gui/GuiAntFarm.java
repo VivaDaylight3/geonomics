@@ -35,10 +35,10 @@ public class GuiAntFarm extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 	String s = this.tile.isInvNameLocalized() ? this.tile.getInvName()
 		: StatCollector.translateToLocal(this.tile.getInvName());
-	this.fontRenderer.drawString(s,
-		this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2,
+	this.fontRendererObj.drawString(s,
+		this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2,
 		6 + 2, 4210752);
-	this.fontRenderer.drawString(
+	this.fontRendererObj.drawString(
 		StatCollector.translateToLocal("container.inventory"), 8,
 		this.ySize - 96 + 2, 4210752);
     }
